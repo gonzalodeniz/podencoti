@@ -1,0 +1,52 @@
+{
+  "sources": [
+    {
+      "nombre": "Plataforma de Contratación del Sector Público filtrada por órganos de Canarias",
+      "categoria": "Agregador estatal",
+      "estado": "MVP",
+      "descripcion": "Punto de entrada principal para detectar expedientes de órganos canarios dentro de una fuente oficial consolidada.",
+      "alcance": "Cobertura objetivo desde la primera release para el catálogo inicial.",
+      "referencia_funcional": "PB-007 · HU-07 · Refinamiento funcional"
+    },
+    {
+      "nombre": "Gobierno de Canarias",
+      "categoria": "Administración autonómica",
+      "estado": "MVP",
+      "descripcion": "Fuente prioritaria por volumen esperado y alineación directa con la propuesta de valor inicial.",
+      "alcance": "Cobertura objetivo desde la primera release para validar el MVP.",
+      "referencia_funcional": "PB-007 · HU-07 · Refinamiento funcional"
+    },
+    {
+      "nombre": "Cabildos insulares",
+      "categoria": "Administración insular",
+      "estado": "MVP",
+      "descripcion": "Cobertura insular mínima necesaria para representar el alcance canario inicial sin prometer exhaustividad total.",
+      "alcance": "Cobertura objetivo desde la primera release para ampliar muestra útil.",
+      "referencia_funcional": "PB-007 · HU-07 · Refinamiento funcional"
+    },
+    {
+      "nombre": "Ayuntamientos con perfiles del contratante propios",
+      "categoria": "Administración local",
+      "estado": "Posterior",
+      "descripcion": "Se aplaza por heterogeneidad operativa y para evitar retrasar la primera entrega del MVP.",
+      "alcance": "Planificado para una fase posterior tras validar el catálogo inicial.",
+      "referencia_funcional": "PB-007 · Roadmap Release 0"
+    },
+    {
+      "nombre": "Empresas públicas y consorcios",
+      "categoria": "Sector público instrumental",
+      "estado": "Posterior",
+      "descripcion": "Se mantiene fuera del MVP inicial hasta confirmar capacidad de ingestión y relevancia sostenida.",
+      "alcance": "Evaluación posterior según aprendizaje del MVP.",
+      "referencia_funcional": "PB-007 · Roadmap Release 1+"
+    },
+    {
+      "nombre": "Fuentes con acceso inconsistente o formato no estándar",
+      "categoria": "Cobertura pendiente",
+      "estado": "Por definir",
+      "descripcion": "Requieren validación adicional por su baja estabilidad o por no ofrecer una integración clara.",
+      "alcance": "Pendiente de decisión funcional y técnica tras observación adicional.",
+      "referencia_funcional": "PB-007 · Dependencias abiertas"
+    }
+  ]
+}
