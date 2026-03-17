@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [ ! -f .env ]; then
+SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+ENV_FILE="${SCRIPT_DIR}/.env"
+
+if [ ! -f "${ENV_FILE}" ]; then
   echo "No existe .env en el directorio actual"
   exit 1
 fi
 
 set -a
-source .env
+source "${ENV_FILE}"
 set +a
 
 if [ -z "${GITHUB_PAT:-}" ]; then
@@ -15,4 +18,4 @@ if [ -z "${GITHUB_PAT:-}" ]; then
   exit 1
 fi
 
-exec codex
+exec codex "$@"
