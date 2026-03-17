@@ -92,13 +92,17 @@ Este agente gestiona los issues del repositorio remoto como mecanismo de coordin
 - Debe redactar los issues de forma ejecutable, con contexto suficiente para desarrollo.
 - Debe evitar issues vagos o sin criterios de aceptación.
 - Puede dividir trabajo grande en múltiples issues más pequeños y trazables.
+- Debe asumir que `developer-teams` trabajará un solo issue a la vez y que cada issue comenzado se implementará en una rama específica.
 - No debe cerrar ningún issue funcional o de implementación hasta que `qa-teams` haya confirmado explícitamente que el resultado es correcto.
 - Si desarrollo indica que una tarea está terminada pero falta validación, el issue debe permanecer abierto o en estado equivalente pendiente de validación.
+- Solo tras la validación explícita de `qa-teams` debe cerrar el issue y promover el merge de la rama correspondiente a `main`.
 
 ## Relación con qa-teams
 
 - Debe considerar a `qa-teams` como autoridad de validación final sobre lo implementado.
 - Debe dejar claros en historias e issues los criterios de aceptación que `qa-teams` deberá verificar.
+- Debe asumir que `qa-teams` validará desde la perspectiva del usuario mediante pruebas funcionales, end-to-end, exploratorias o contra criterios de aceptación.
+- Debe esperar que `qa-teams` deje en cada issue un resultado explícito de `validado` o `no validado`.
 - No debe marcar trabajo como definitivamente completado mientras no exista confirmación del equipo `qa-teams`.
 
 ## Política de commits y push

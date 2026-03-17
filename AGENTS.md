@@ -35,8 +35,8 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 ### Descripcion de carpetas
 
 - `product-manager/`: documentacion de producto, vision, backlog y artefactos funcionales.
-- `developer-teams/`: espacio reservado para instrucciones, entregables y documentacion de desarrollo.
-- `qa-teams/`: espacio reservado para instrucciones, criterios y evidencia de validacion de calidad.
+- `developer-teams/`: instrucciones, entregables y documentacion del equipo de desarrollo.
+- `qa-teams/`: instrucciones, criterios y evidencia del equipo de validacion funcional y de calidad.
 
 ## Vision del producto
 
@@ -70,10 +70,25 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 - Priorizar documentos y entregables accionables frente a texto ambiguo o decorativo.
 - Hacer explicitos supuestos, riesgos, dependencias y preguntas abiertas.
 
+## Flujo de trabajo entre equipos
+
+- El equipo `product-manager` es quien crea y mantiene los issues funcionales en el repositorio remoto de GitHub.
+- El equipo `developer-teams` debe leer los issues abiertos antes de empezar a implementar.
+- `developer-teams` debe trabajar solo en una tarea cada vez para facilitar la revision de `qa-teams`.
+- Si existen issues ya empezados y todavia no validados por `qa-teams`, `developer-teams` debe priorizarlos frente a issues completamente nuevos.
+- Si todos los issues abiertos son nuevos, `developer-teams` puede decidir el orden de implementacion segun su propio criterio tecnico y de desbloqueo.
+- Antes de comenzar cualquier issue, `developer-teams` debe crear una rama nueva en git dedicada a ese trabajo.
+- `developer-teams` es responsable de los test tecnicos, como unit tests, integration tests, test de componente y test de API.
+- Una vez implementada la tarea, `developer-teams` debe actualizar el issue correspondiente con el trabajo realizado para que `qa-teams` pueda revisarlo.
+- Cada cambio implementado por `developer-teams` debe terminar con `git commit` en espanol y `git push` de la rama remota.
+- `qa-teams` revisa y valida el trabajo sobre la rama de la tarea desde la perspectiva del usuario y de los criterios de aceptacion.
+- `qa-teams` es responsable de los tests de validacion, como pruebas funcionales, end-to-end, exploratorias y contra criterios de aceptacion.
+- `qa-teams` debe dejar en la issue el resultado de la revision y finalizar con un estado explicito de `validado` o `no validado`.
+- Si el resultado es `no validado`, `qa-teams` debe explicar la razon para que `developer-teams` pueda resolverla.
+- Solo tras la validacion de `qa-teams`, `product-manager` debe cerrar el issue y promover el merge de la rama a `main`.
+
 ## Recomendaciones para evolucionar el repositorio
 
-- Crear `developer-teams/AGENTS.md` para definir estandares de arquitectura, desarrollo, testing y despliegue.
-- Crear `qa-teams/AGENTS.md` para definir estrategia de pruebas, criterios de aceptacion y politica de validacion.
 - Mantener en `product-manager/` la fuente de verdad funcional y de negocio.
 - Añadir documentacion transversal si el proyecto crece, por ejemplo `README.md`, decision records y convenciones de versionado.
 - Evitar que un rol modifique artefactos propios de otro sin dejar constancia clara del motivo.
