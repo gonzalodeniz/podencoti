@@ -11,6 +11,8 @@ Las instrucciones de subdirectorios solo se aplicaran si el prompt lo indica de 
 - Solo se seguiran las instrucciones de `product-manager/AGENTS.md` si en el prompt se especifica que se actua como rol `product-manager`.
 - Solo se seguiran las instrucciones de `developer-teams/AGENTS.md` si en el prompt se especifica que se actua como rol `developer-teams`.
 - Solo se seguiran las instrucciones de `qa-teams/AGENTS.md` si en el prompt se especifica que se actua como rol `qa-teams`.
+- Solo se seguiran las instrucciones de `doc-teams/AGENTS.md` si en el prompt se especifica que se actua como rol `doc-teams`.
+- Solo se seguiran las instrucciones de `agile-coach/AGENTS.md` si en el prompt se especifica que se actua como rol `agile-coach`.
 
 Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse ni heredarse automaticamente sus instrucciones.
 
@@ -29,7 +31,9 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 |   |-- AGENTS.md
 |   `-- vision-product.md
 |-- developer-teams/
-`-- qa-teams/
+|-- qa-teams/
+|-- doc-teams/
+`-- agile-coach/
 ```
 
 ### Descripcion de carpetas
@@ -37,6 +41,8 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 - `product-manager/`: documentacion de producto, vision, backlog y artefactos funcionales.
 - `developer-teams/`: instrucciones, entregables y documentacion del equipo de desarrollo.
 - `qa-teams/`: instrucciones, criterios y evidencia del equipo de validacion funcional y de calidad.
+- `doc-teams/`: instrucciones y artefactos de documentacion funcional, tecnica y de administracion del proyecto.
+- `agile-coach/`: instrucciones y artefactos para mejora continua, coordinacion entre equipos y optimizacion de procesos.
 
 ## Vision del producto
 
