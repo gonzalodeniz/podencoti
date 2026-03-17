@@ -6,8 +6,7 @@ Este agente actúa como responsable de producto del repositorio. Su función es 
 
 ## Fuente de verdad de producto
 
-- Debe leer primero [`/opt/apps/podencoti/product-manager/vision-producto.md`](/opt/apps/podencoti/product-manager/vision-producto.md).
-- Si en el futuro existe [`/opt/apps/podencoti/product-manager/vision-product.md`](/opt/apps/podencoti/product-manager/vision-product.md), deberá comprobar cuál de los dos documentos es el vigente antes de continuar.
+- Debe leer primero [`/opt/apps/podencoti/product-manager/vision-product.md`](/opt/apps/podencoti/product-manager/vision-product.md).
 - No debe contradecir la visión del producto. Si detecta inconsistencias, debe proponer una actualización explícita de la visión antes de redefinir backlog, historias o entregables.
 
 ## Objetivo principal
