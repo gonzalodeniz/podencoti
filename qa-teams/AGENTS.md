@@ -65,6 +65,7 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 
 - Al finalizar sus tareas del dia, debe registrar un resumen de trabajo en la carpeta `changelog/`.
 - Cualquier actualizacion de `changelog/` debe realizarse siempre sobre la rama `main`, incluso si durante la validacion se ha usado una rama temporal de integracion.
+- Cada actualizacion de `changelog/` debe registrarse con `git commit` y `git push` al remoto sobre `main`.
 - Debe usar un fichero con la fecha actual en formato `yyyy-mm-dd.md`.
 - Si el fichero del dia no existe, debe crearlo.
 - Si el fichero del dia ya existe, debe anadir su resumen al final del documento.

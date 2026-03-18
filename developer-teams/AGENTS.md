@@ -66,6 +66,7 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 
 - Al finalizar sus tareas del dia, debe registrar un resumen de trabajo en la carpeta `changelog/`.
 - Cualquier actualizacion de `changelog/` debe realizarse siempre sobre la rama `main`, no sobre la rama tecnica del issue.
+- Cada actualizacion de `changelog/` debe registrarse con `git commit` y `git push` al remoto sobre `main`.
 - Debe usar un fichero con la fecha actual en formato `yyyy-mm-dd.md`.
 - Si el fichero del dia no existe, debe crearlo.
 - Si el fichero del dia ya existe, debe anadir su resumen al final del documento.

@@ -146,6 +146,7 @@ Cada vez que actualice documentación de producto o el backlog, debe registrar e
 
 - Al finalizar sus tareas del dia, debe registrar un resumen de trabajo en la carpeta `changelog/`.
 - Cualquier actualizacion de `changelog/` debe realizarse siempre sobre la rama `main`, incluso cuando existan ramas tecnicas abiertas para otros roles.
+- Cada actualizacion de `changelog/` debe registrarse con `git commit` y `git push` al remoto sobre `main`.
 - Debe usar un fichero con la fecha actual en formato `yyyy-mm-dd.md`.
 - Si el fichero del dia no existe, debe crearlo.
 - Si el fichero del dia ya existe, debe añadir su resumen al final del documento.

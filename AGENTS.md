@@ -101,6 +101,7 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 - Hacer explicitos supuestos, riesgos, dependencias y preguntas abiertas.
 - Mantener `main` como rama de referencia para trabajo funcional, documental y de coordinacion no tecnica.
 - Mantener `main` como rama obligatoria para cualquier actualizacion de ficheros dentro de `changelog/`, independientemente del rol que la realice.
+- Cada actualizacion de `changelog/` debe terminar con `git commit` y `git push` al repositorio remoto sobre la rama `main`.
 - Limitar el numero de ramas abiertas para facilitar el seguimiento operativo del proyecto.
 - Si para ejecutar o desarrollar el proyecto en Python fuese necesaria la instalacion de librerias adicionales en el sistema o en el entorno de trabajo, debe existir y mantenerse un fichero `requirements.txt` en la raiz del repositorio con dichas dependencias.
 - Limitar lectura y escritura al directorio del proyecto `/opt/apps/podencoti`.
