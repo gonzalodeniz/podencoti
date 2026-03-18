@@ -27,22 +27,46 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 ```text
 /
 |-- AGENTS.md
+|-- Makefile
+|-- README.md
+|-- pyproject.toml
+|-- changelog/
+|-- data/
+|-- src/
+|   `-- podencoti/
+|-- tests/
 |-- product-manager/
-|   |-- AGENTS.md
-|   `-- vision-product.md
 |-- developer-teams/
 |-- qa-teams/
 |-- doc-teams/
-`-- agile-coach/
+|-- agile-coach/
+|-- rol-product-manager.sh
+|-- rol-developer-teams.sh
+|-- rol-qa-teams.sh
+|-- rol-doc-teams.sh
+|-- rol-agile-coach.sh
+`-- run-codex.sh
 ```
 
 ### Descripcion de carpetas
 
+- `src/`: codigo fuente Python de la aplicacion.
+- `tests/`: pruebas tecnicas automatizadas del proyecto.
+- `data/`: datos versionados que utiliza la aplicacion.
+- `changelog/`: registro diario de actividad por rol.
 - `product-manager/`: documentacion de producto, vision, backlog y artefactos funcionales.
 - `developer-teams/`: instrucciones, entregables y documentacion del equipo de desarrollo.
 - `qa-teams/`: instrucciones, criterios y evidencia del equipo de validacion funcional y de calidad.
 - `doc-teams/`: instrucciones y artefactos de documentacion funcional, tecnica y de administracion del proyecto.
 - `agile-coach/`: instrucciones y artefactos para mejora continua, coordinacion entre equipos y optimizacion de procesos.
+
+### Otros ficheros relevantes en raiz
+
+- `Makefile`: comandos de ejecucion local y pruebas.
+- `README.md`: descripcion general del proyecto y forma de uso.
+- `pyproject.toml`: metadatos y configuracion base del paquete Python.
+- `rol-*.sh`: scripts de entrada para ejecutar cada rol con su prompt correspondiente.
+- `run-codex.sh`: script auxiliar de ejecucion de Codex.
 
 ## Vision del producto
 

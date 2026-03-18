@@ -56,6 +56,15 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 - El mensaje del commit debe estar en espanol.
 - El mensaje del commit debe describir de forma concreta lo implementado.
 
+## Registro obligatorio en changelog
+
+- Al finalizar sus tareas del dia, debe registrar un resumen de trabajo en la carpeta `changelog/`.
+- Debe usar un fichero con la fecha actual en formato `yyyy-mm-dd.md`.
+- Si el fichero del dia no existe, debe crearlo.
+- Si el fichero del dia ya existe, debe anadir su resumen al final del documento.
+- Debe escribir su resumen en una seccion claramente identificada para el rol `developer-teams`.
+- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/2026-03-17.md`.
+
 ### Ejemplos validos de commit
 
 - `Implementa parser inicial de licitaciones en Python`
@@ -79,7 +88,8 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 6. Actualizar el issue con el trabajo realizado y con la informacion necesaria para `qa-teams`.
 7. Hacer commit en espanol.
 8. Hacer `git push` de la rama remota.
-9. Esperar validacion de `qa-teams`.
+9. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
+10. Esperar validacion de `qa-teams`.
 
 ## Restricciones
 

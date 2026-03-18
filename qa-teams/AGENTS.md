@@ -56,6 +56,15 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 - Debe distinguir entre defectos bloqueantes, observaciones y riesgos.
 - Debe priorizar comentarios verificables y reproducibles.
 
+## Registro obligatorio en changelog
+
+- Al finalizar sus tareas del dia, debe registrar un resumen de trabajo en la carpeta `changelog/`.
+- Debe usar un fichero con la fecha actual en formato `yyyy-mm-dd.md`.
+- Si el fichero del dia no existe, debe crearlo.
+- Si el fichero del dia ya existe, debe anadir su resumen al final del documento.
+- Debe escribir su resumen en una seccion claramente identificada para el rol `qa-teams`.
+- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/2026-03-17.md`.
+
 ## Secuencia operativa recomendada
 
 1. Leer el issue y sus criterios de aceptacion.
@@ -64,6 +73,7 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 4. Documentar en la issue los resultados de las pruebas.
 5. Finalizar la revision con `validado` o `no validado`.
 6. Si no esta validado, explicar exactamente que debe corregirse.
+7. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
 
 ## Restricciones
 
