@@ -23,12 +23,17 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 - Debe revisar los issues abiertos o pendientes de validacion en el repositorio remoto de GitHub.
 - Debe revisar la rama creada por `developer-teams` para el issue correspondiente.
 - Debe usar como referencia el contenido del issue, los criterios de aceptacion y la documentacion funcional disponible.
+- Puede crear una rama temporal de integracion para preparar o ejecutar las pruebas si la validacion lo requiere.
+- La rama temporal de integracion de `qa-teams` no cuenta dentro del limite de dos ramas tecnicas del proyecto, pero debe borrarse al finalizar la revision.
+- Si detecta que la rama entregada no integra limpia con `main`, debe registrarlo como bloqueo operativo o riesgo relevante segun el impacto en el flujo.
 
 ## Resultado obligatorio en la issue
 
 - Debe escribir en la issue el resultado de las pruebas realizadas.
 - El comentario de validacion debe terminar con un estado explicito de `validado` o `no validado`.
+- El comentario de validacion debe incluir de forma explicita `Rama revisada:`, `Pruebas realizadas:`, `Resultados observados:`, `Defectos bloqueantes:`, `Observaciones:`, `Riesgos:` y `Estado operativo: validado|no validado`.
 - Si el resultado es `no validado`, debe explicar con claridad la razon, el comportamiento observado, el impacto y lo que debe resolver `developer-teams`.
+- Debe confirmar expresamente si la issue puede considerarse concluida segun los criterios de aceptacion.
 
 ## Criterios de validacion
 
@@ -36,6 +41,8 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 - Verificar el comportamiento funcional esperado en escenarios principales y alternativos.
 - Detectar regresiones visibles para el usuario.
 - Identificar inconsistencias entre la implementacion y la necesidad de negocio.
+- Revisar si existe deuda tecnica relevante, soluciones fragiles o necesidad clara de refactorizacion para cumplir buenas practicas de codigo limpio.
+- Si detecta deuda tecnica o una mejora tecnica necesaria fuera del alcance inmediato de la issue, debe abrir una issue tecnica separada y dejarla enlazada en la validacion.
 
 ## Relacion con developer-teams
 
@@ -56,14 +63,40 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 - Debe distinguir entre defectos bloqueantes, observaciones y riesgos.
 - Debe priorizar comentarios verificables y reproducibles.
 
+## Registro obligatorio en changelog
+
+- Al finalizar sus tareas del dia, debe registrar un resumen de trabajo en la carpeta `changelog/`.
+- Cualquier actualizacion de `changelog/` debe realizarse siempre sobre la rama `main`, incluso si durante la validacion se ha usado una rama temporal de integracion.
+- Cada actualizacion de `changelog/` debe registrarse con `git commit` y `git push` al remoto sobre `main`.
+- Debe usar un fichero con la fecha actual en formato `yyyy-mm-dd.md`.
+- Si el fichero del dia no existe, debe crearlo.
+- Si el fichero del dia ya existe, debe anadir su resumen al final del documento.
+- Debe escribir su resumen en una seccion claramente identificada para el rol `qa-teams`.
+- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/2026-03-17.md`.
+
+## Politica de commits y push
+
+- Cualquier commit realizado por `qa-teams` debe estar en espanol.
+- El mensaje del commit debe comenzar con el prefijo `[qa-teams]`.
+- El mensaje del commit debe describir de forma concreta la validacion, ajuste o evidencia registrada.
+
+### Ejemplos validos de commit
+
+- `[qa-teams] Registra validacion funcional de PB-006 en changelog`
+- `[qa-teams] Actualiza evidencia de pruebas de integracion`
+
 ## Secuencia operativa recomendada
 
 1. Leer el issue y sus criterios de aceptacion.
 2. Revisar la rama y la entrega realizada por `developer-teams`.
-3. Ejecutar o definir las pruebas de validacion necesarias.
-4. Documentar en la issue los resultados de las pruebas.
-5. Finalizar la revision con `validado` o `no validado`.
-6. Si no esta validado, explicar exactamente que debe corregirse.
+3. Crear, solo si hace falta, una rama temporal de integracion para ejecutar la validacion.
+4. Ejecutar o definir las pruebas de validacion necesarias.
+5. Revisar criterios de aceptacion, cierre funcional de la issue y posible deuda tecnica.
+6. Documentar en la issue los resultados de las pruebas y las issues tecnicas derivadas si aplica.
+7. Finalizar la revision con `validado` o `no validado`.
+8. Si no esta validado, explicar exactamente que debe corregirse.
+9. Borrar la rama temporal de integracion si se ha creado.
+10. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
 
 ## Restricciones
 
@@ -71,3 +104,4 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 - No debe cerrar issues.
 - No debe hacer merge a `main`.
 - No debe dejar una revision ambigua sin estado final de `validado` o `no validado`.
+- No debe mantener ramas de integracion abiertas mas alla del tiempo necesario para validar una entrega.

@@ -31,17 +31,20 @@ Este agente actua como equipo de documentacion del repositorio. Su responsabilid
 - Debe apoyarse en la vision del producto y en la documentacion funcional mantenida por `product-manager`.
 - No debe redefinir requisitos de negocio por su cuenta.
 - Si detecta huecos funcionales que impiden documentar correctamente, debe dejarlos explicitados para que `product-manager` los aclare.
+- Debe asumir que `product-manager`, `doc-teams` y `agile-coach` trabajan directamente sobre `main` y no sobre ramas propias.
 
 ## Relacion con developer-teams
 
 - Debe documentar el comportamiento implementado y las necesidades tecnicas de uso, instalacion, operacion o mantenimiento.
 - Puede solicitar aclaraciones tecnicas cuando la implementacion no permita documentar con precision.
+- Debe revisar el campo `impacto documental` indicado por `developer-teams` en la entrega para priorizar su trabajo.
 - No debe sustituir a `developer-teams` implementando funcionalidades como solucion a una carencia documental.
 
 ## Relacion con qa-teams
 
 - Debe facilitar documentacion clara que pueda servir de apoyo a la validacion funcional y operativa.
 - Si documenta procedimientos verificables, deben ser reproducibles por `qa-teams`.
+- Debe priorizar cambios documentales una vez la entrega correspondiente haya quedado `validado`, salvo peticion explicita en otro sentido.
 
 ## Artefactos recomendados
 
@@ -68,13 +71,27 @@ Debe crear y mantener, cuando aplique, documentos dentro de `doc-teams/`, por ej
 
 - Cada cambio documental debe registrarse con `git add`, `git commit` y `git push`.
 - El mensaje del commit debe estar en espanol.
+- El mensaje del commit debe comenzar con el prefijo `[doc-teams]`.
 - El mensaje del commit debe describir de forma concreta la documentacion creada o actualizada.
+- No debe crear ramas de trabajo propias para cambios documentales salvo instruccion explicita que contradiga esta regla.
+- Sus cambios deben hacerse directamente sobre `main`.
+
+## Registro obligatorio en changelog
+
+- Al finalizar sus tareas del dia, debe registrar un resumen de trabajo en la carpeta `changelog/`.
+- Cualquier actualizacion de `changelog/` debe realizarse siempre sobre la rama `main`.
+- Cada actualizacion de `changelog/` debe registrarse con `git commit` y `git push` al remoto sobre `main`.
+- Debe usar un fichero con la fecha actual en formato `yyyy-mm-dd.md`.
+- Si el fichero del dia no existe, debe crearlo.
+- Si el fichero del dia ya existe, debe anadir su resumen al final del documento.
+- Debe escribir su resumen en una seccion claramente identificada para el rol `doc-teams`.
+- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/2026-03-17.md`.
 
 ### Ejemplos validos de commit
 
-- `Escribe manual de usuario inicial`
-- `Actualiza manual tecnico de arquitectura y despliegue`
-- `Añade guia de administracion y operacion`
+- `[doc-teams] Escribe manual de usuario inicial`
+- `[doc-teams] Actualiza manual tecnico de arquitectura y despliegue`
+- `[doc-teams] Añade guia de administracion y operacion`
 
 ## Secuencia operativa recomendada
 
@@ -84,8 +101,9 @@ Debe crear y mantener, cuando aplique, documentos dentro de `doc-teams/`, por ej
 4. Redactar o actualizar la documentacion necesaria en `doc-teams/`.
 5. Verificar que la documentacion sea coherente con el producto y reproducible cuando incluya procedimientos.
 6. Explicitar dudas, riesgos o dependencias abiertas si existen.
-7. Hacer commit en espanol.
+7. Hacer commit en espanol directamente sobre `main`.
 8. Hacer `git push`.
+9. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
 
 ## Restricciones
 
@@ -93,3 +111,4 @@ Debe crear y mantener, cuando aplique, documentos dentro de `doc-teams/`, por ej
 - No debe redefinir decisiones de producto sin dejar constancia explicita.
 - No debe inventar comportamiento tecnico no sustentado por el codigo o por documentacion valida.
 - No debe sustituir a `developer-teams` ni a `qa-teams` en sus responsabilidades.
+- No debe crear ramas propias para documentacion ordinaria del proyecto.

@@ -1,54 +1,30 @@
 # Manual de usuario
 
 ## Publico objetivo
-Usuario interno, stakeholder funcional o persona de negocio que necesita consultar la delimitacion visible de la cobertura inicial de fuentes del MVP.
+Usuario final, stakeholder funcional o persona de negocio que necesita entender que puede utilizar hoy en la rama `main`.
 
-## Que permite hacer el producto hoy
-La entrega actual no ofrece todavia un catalogo completo de licitaciones TI, filtros, alertas ni pipeline. El comportamiento implementado permite:
-- Consultar una vista HTML con las fuentes oficiales incluidas o planificadas para el MVP.
-- Revisar un resumen por estado de cobertura.
-- Obtener la misma informacion en formato JSON para trazabilidad tecnica o validacion.
+## Estado actual para usuario
+En la rama `main` no hay una interfaz de usuario ejecutable ni un catalogo navegable de oportunidades TI verificable desde el repositorio actual.
 
-## Requisito previo
-La aplicacion debe estar arrancada en local siguiendo [guia-instalacion.md](/opt/apps/podencoti/doc-teams/guia-instalacion.md).
+## Que si existe hoy
+- Vision de producto y alcance funcional en `product-manager/`.
+- Reglas de coordinacion del repositorio en `AGENTS.md`.
+- Documentacion operativa y tecnica en `doc-teams/`.
 
-## Acceso
-- Vista HTML: `http://127.0.0.1:8000/`
-- API JSON: `http://127.0.0.1:8000/api/fuentes`
+## Que no esta disponible hoy en `main`
+- Catalogo de oportunidades TI.
+- Ficha de detalle de licitacion.
+- Filtros por palabra clave, presupuesto, procedimiento o ubicacion.
+- Alertas tempranas.
+- Pipeline de seguimiento.
+- Vista HTML o API ejecutable de cobertura de fuentes.
 
-## Lectura de la vista principal
-La pantalla principal muestra:
-- Un encabezado que identifica la entrega como `Release 0 · PB-007`.
-- Tres metricas de resumen:
-  - `MVP`: fuentes objetivo para la primera release.
-  - `Posterior`: fuentes previstas para una fase posterior.
-  - `Por definir`: fuentes pendientes de decision funcional o tecnica.
-- Una tabla con seis columnas:
-  - `Fuente oficial`
-  - `Categoria`
-  - `Estado`
-  - `Alcance`
-  - `Justificacion funcional`
-  - `Trazabilidad`
+## Como interpretar la documentacion funcional
+Los documentos de `product-manager/` describen la vision, el backlog y el comportamiento esperado del producto a medio plazo. No deben interpretarse como funcionalidades ya disponibles para uso final en esta rama.
 
-## Interpretacion de estados
-- `MVP`: la fuente forma parte de la cobertura objetivo de la primera entrega funcional.
-- `Posterior`: la fuente no entra en la entrega actual y queda planificada para una iteracion posterior.
-- `Por definir`: la fuente requiere decision adicional antes de comprometer su inclusion.
+## Limitaciones relevantes para usuario
+- `README.md` de raiz menciona una entrega tecnica minima y rutas HTTP locales, pero ese comportamiento no es reproducible en el estado actual de `main`.
+- Si se intenta arrancar la aplicacion con `make run`, el repositorio devuelve un error porque no existe el modulo `podencoti.app` en esta rama.
 
-## Fuentes reflejadas en la version actual
-- Plataforma de Contratacion del Sector Publico filtrada por organos de Canarias.
-- Gobierno de Canarias.
-- Cabildos insulares.
-- Ayuntamientos con perfiles del contratante propios.
-- Empresas publicas y consorcios.
-- Fuentes con acceso inconsistente o formato no estandar.
-
-## Que no debe asumirse
-- La vista no representa aun un inventario exhaustivo de todas las licitaciones canarias.
-- La pagina no muestra expedientes individuales ni permite buscar, filtrar o guardar oportunidades.
-- La presencia de una fuente en estado `MVP` no implica que exista ya una integracion automatizada visible en este repositorio; solo refleja la cobertura funcional versionada para esta entrega.
-
-## Incidencias esperables
-- Si se accede a una ruta distinta de `/` o `/api/fuentes`, el sistema responde `404 No encontrado`.
-- Si el servidor no esta levantado, el navegador no podra cargar la pagina ni la API.
+## Recomendacion de uso
+Hasta que `developer-teams` vuelva a integrar una entrega ejecutable en `main`, la documentacion util para usuario o stakeholder es la de vision, backlog y roadmap, no un manual de operacion del producto.

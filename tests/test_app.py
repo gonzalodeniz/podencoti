@@ -40,6 +40,26 @@ class ApplicationTests(unittest.TestCase):
         self.assertEqual(6, len(payload["sources"]))
         self.assertEqual({"MVP": 3, "Posterior": 2, "Por definir": 1}, payload["summary"])
 
+    def test_classification_page_renders_auditable_rules(self) -> None:
+        status, headers, body = invoke_app("/clasificacion-ti")
+        html = body.decode("utf-8")
+
+        self.assertEqual("200 OK", status)
+        self.assertEqual("text/html; charset=utf-8", headers["Content-Type"])
+        self.assertIn("Clasificación TI auditable", html)
+        self.assertIn("Casos frontera", html)
+        self.assertIn("telecomunicaciones", html)
+
+    def test_classification_api_returns_rules_and_audited_examples(self) -> None:
+        status, headers, body = invoke_app("/api/clasificacion-ti")
+        payload = json.loads(body)
+
+        self.assertEqual("200 OK", status)
+        self.assertEqual("application/json; charset=utf-8", headers["Content-Type"])
+        self.assertIn("PB-006", payload["referencia_funcional"])
+        self.assertEqual(5, len(payload["ejemplos_auditados"]))
+        self.assertTrue(all(item["coincide_con_esperado"] for item in payload["ejemplos_auditados"]))
+
     def test_unknown_path_returns_404(self) -> None:
         status, headers, body = invoke_app("/desconocido")
 

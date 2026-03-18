@@ -1,105 +1,38 @@
 # Manual tecnico
 
 ## Publico objetivo
-Equipo tecnico que necesita entender la implementacion actual, sus limites y la trazabilidad con la documentacion funcional.
+Equipo tecnico que necesita conocer el estado real de `main`, sus limites y las contradicciones documentales detectadas.
 
-## Resumen de arquitectura actual
-La aplicacion es un servicio WSGI minimo en Python sin framework externo visible. Su objetivo actual es exponer la cobertura inicial de fuentes del MVP definida para `PB-007`.
+## Resumen tecnico verificable
+El repositorio contiene configuracion minima de paquete Python y documentacion de roles, pero no expone en `main` una implementacion fuente versionada de la aplicacion que describian versiones previas de este manual.
 
-## Componentes implementados
-- Punto de entrada HTTP: [src/podencoti/app.py](/opt/apps/podencoti/src/podencoti/app.py)
-- Carga y validacion de datos: [src/podencoti/source_coverage.py](/opt/apps/podencoti/src/podencoti/source_coverage.py)
-- Configuracion versionada de cobertura: [data/source_coverage.json](/opt/apps/podencoti/data/source_coverage.json)
-- Pruebas unitarias y de comportamiento HTTP basico: [tests/test_app.py](/opt/apps/podencoti/tests/test_app.py) y [tests/test_source_coverage.py](/opt/apps/podencoti/tests/test_source_coverage.py)
+## Artefactos tecnicos presentes
+- Configuracion de paquete: `pyproject.toml`
+- Automatizacion minima local: `Makefile`
+- Estructura de codigo esperada pero sin fuentes versionadas: `src/podencoti/`
+- Estructura de pruebas esperada pero sin pruebas versionadas: `tests/`
 
-## Flujo de ejecucion
-1. `podencoti.app.main()` levanta un servidor local con `wsgiref.simple_server` en `127.0.0.1:8000`.
-2. La funcion `application()` enruta segun `PATH_INFO`.
-3. La ruta `/` renderiza HTML con `_html_response()`.
-4. La ruta `/api/fuentes` devuelve un `payload` JSON con `sources` y `summary`.
-5. Ambas rutas cargan los datos desde `load_source_coverage()`.
+## Evidencia observada en esta revision
+- `git ls-files src tests` no devuelve ficheros versionados.
+- `src/podencoti/` contiene solo artefactos `__pycache__` en el arbol local.
+- No existe `data/source_coverage.json` en la rama revisada.
+- `python3 -m pip install -e .` finaliza correctamente.
+- `python3 - <<'PY' ... import podencoti ... PY` permite importar el paquete de espacio de nombres `podencoti`, pero `import podencoti.app` falla con `ModuleNotFoundError`.
+- `python3 -m unittest discover -s tests -v` termina con `NO TESTS RAN`.
+- `make test` falla por ese mismo motivo.
+- `make run` falla con `No module named podencoti.app`.
 
-## Modelo de datos
-`SourceCoverage` define estos campos:
-- `nombre`
-- `categoria`
-- `estado`
-- `descripcion`
-- `alcance`
-- `referencia_funcional`
+## Contradicciones explicitadas
+- El `README.md` de raiz describe una aplicacion HTTP local y una API JSON que no pueden ejecutarse en `main`.
+- La version anterior de este manual tecnico describia archivos como `src/podencoti/app.py`, `src/podencoti/source_coverage.py` y `data/source_coverage.json`; esos artefactos no estan presentes en la revision actual.
+- `changelog/2026-03-17.md` y parte del contexto historico mencionan una implementacion inicial visible del MVP, pero esa implementacion no es trazable desde el contenido actual de la rama revisada.
 
-Los estados validos estan restringidos a:
-- `MVP`
-- `Posterior`
-- `Por definir`
+## Implicaciones tecnicas
+- No es posible documentar contrato HTTP, arquitectura WSGI, modelo de datos ni pruebas funcionales como comportamiento vigente.
+- La rama `main` conserva la definicion funcional del producto, pero no la materializacion tecnica necesaria para ejecucion local o validacion de QA.
+- La instalacion editable del paquete no debe confundirse con disponibilidad de una aplicacion runnable.
 
-Si el JSON contiene otro estado, `load_source_coverage()` lanza `ValueError`.
-
-## Contrato HTTP actual
-### `GET /`
-- Tipo: `text/html; charset=utf-8`
-- Respuesta esperada: pagina con resumen de cobertura y tabla de fuentes.
-
-### `GET /api/fuentes`
-- Tipo: `application/json; charset=utf-8`
-- Respuesta esperada:
-
-```json
-{
-  "sources": [
-    {
-      "nombre": "string",
-      "categoria": "string",
-      "estado": "MVP | Posterior | Por definir",
-      "descripcion": "string",
-      "alcance": "string",
-      "referencia_funcional": "string"
-    }
-  ],
-  "summary": {
-    "MVP": 0,
-    "Posterior": 0,
-    "Por definir": 0
-  }
-}
-```
-
-### Otras rutas
-- Respuesta `404 Not Found`
-- Cuerpo: `No encontrado`
-
-## Trazabilidad funcional
-La implementacion esta alineada con:
-- `PB-007` y `HU-07` para hacer visible la cobertura inicial de fuentes.
-- La propuesta de cobertura indicada en [product-manager/refinamiento-funcional.md](/opt/apps/podencoti/product-manager/refinamiento-funcional.md).
-- La necesidad de evitar una promesa de exhaustividad descrita en [product-manager/roadmap.md](/opt/apps/podencoti/product-manager/roadmap.md).
-
-## Brechas explicitas entre vision y producto actual
-- La vision del producto habla de un agregador inteligente de licitaciones TI; el codigo actual solo expone una configuracion estaticamente versionada de fuentes.
-- Los artefactos funcionales `PB-001` a `PB-005` y `PB-008` siguen pendientes en la implementacion observable de este repositorio.
-- No existe actualmente integracion automatizada con portales oficiales, persistencia, autenticacion, filtros, detalle de expediente, alertas ni pipeline.
-
-## Decisiones tecnicas observables
-- Se prioriza simplicidad de entrega con libreria estandar de Python.
-- La capa de datos se apoya en un archivo JSON local en lugar de base de datos o servicio externo.
-- La salida HTML genera su contenido en una funcion unica y embebe estilos CSS en el propio documento.
-
-## Verificacion tecnica
-Comando verificado en este repositorio:
-
-```bash
-PYTHONPATH=src python3 -m unittest discover -s tests -v
-```
-
-Cobertura comprobada por las pruebas:
-- Renderizado de la ruta `/`
-- Respuesta JSON de `/api/fuentes`
-- Manejo de `404`
-- Validacion de estados soportados
-- Resumen agregado por estado
-
-## Limitaciones tecnicas
-- No hay estrategia de configuracion mediante variables de entorno.
-- No existe observabilidad estructurada ni logging dedicado.
-- `wsgiref.simple_server` es adecuado para desarrollo local, no para un despliegue productivo exigente.
-- La documentacion funcional menciona futuras capacidades cuya materializacion tecnica aun no tiene contrato de API ni estructura de datos implementada.
+## Dependencias abiertas
+- Recuperar o reintegrar en `main` la implementacion fuente correspondiente a la entrega mencionada en `README.md` y `changelog/`.
+- Reincorporar pruebas versionadas para que `make test` y `python3 -m unittest` sean reproducibles.
+- Revisar y alinear `README.md` de raiz cuando exista una fuente tecnica confirmada o, en su defecto, cuando se decida que la referencia a la app ya no debe mantenerse.

@@ -28,7 +28,7 @@ El repositorio trabaja con roles explicitamente activados mediante prompt:
 
 ## Orden de ejecucion recomendado
 
-El orden recomendado de trabajo es este:
+Este proyecto lo está construyendo de manera autónoma una series de agentes con unos roles bien definidos. Cada agente trabaja en su área de especialización. Para que el flujo de trabajo sea efectivo, se recomienda seguir este orden de ejecución:
 
 1. `product-manager`
    Define o actualiza vision, backlog, historias, casos de uso y issues ejecutables para desarrollo.
