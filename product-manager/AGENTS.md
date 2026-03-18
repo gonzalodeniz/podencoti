@@ -153,6 +153,8 @@ Cada vez que actualice documentación de producto o el backlog, debe registrar e
 - Si el fichero del dia no existe, debe crearlo.
 - Si el fichero del dia ya existe, debe añadir su resumen al final del documento.
 - Debe escribir su resumen en una sección claramente identificada para el rol `product-manager`.
+- Al comienzo de su seccion debe indicar la hora exacta de escritura.
+- Si registra actividad en dos momentos distintos del mismo dia, debe crear dos entradas separadas para `product-manager`, cada una con su propia seccion diferenciada y su propia hora.
 - Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/2026-03-17.md`.
 
 ### Ejemplos válidos de commit

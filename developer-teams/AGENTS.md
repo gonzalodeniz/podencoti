@@ -76,6 +76,8 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 - Si el fichero del dia no existe, debe crearlo.
 - Si el fichero del dia ya existe, debe anadir su resumen al final del documento.
 - Debe escribir su resumen en una seccion claramente identificada para el rol `developer-teams`.
+- Al comienzo de su seccion debe indicar la hora exacta de escritura.
+- Si registra actividad en dos momentos distintos del mismo dia, debe crear dos entradas separadas para `developer-teams`, cada una con su propia seccion diferenciada y su propia hora.
 - Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/2026-03-17.md`.
 
 ### Ejemplos validos de commit
