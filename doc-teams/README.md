@@ -13,7 +13,9 @@ Esta carpeta documenta el estado real observable de la rama `main`. En esta revi
 - Equipo tecnico: [manual-tecnico.md](manual-tecnico.md)
 - Administracion u operacion: [manual-administracion.md](manual-administracion.md)
 - Preparacion local reproducible: [guia-instalacion.md](guia-instalacion.md)
+- Despliegue y publicacion operativa: [guia-despliegue.md](guia-despliegue.md)
 - Preguntas frecuentes y contradicciones: [faq.md](faq.md)
+- Terminologia transversal del proyecto: [glosario.md](glosario.md)
 
 ## Hallazgos principales de esta revision
 - `product-manager/` describe una vision y un backlog futuros validos como fuente funcional, pero esas capacidades no estan implementadas en `main`.
@@ -24,7 +26,7 @@ Esta carpeta documenta el estado real observable de la rama `main`. En esta revi
 
 ## Dependencias y contradicciones abiertas
 - La descripcion de la entrega tecnica en `README.md` de raiz no coincide con el contenido actual observable de `main`.
-- `changelog/2026-03-17.md` y parte de la documentacion previa de `doc-teams/` hablan de una implementacion y unas pruebas que no estan presentes en esta rama en el momento de la revision.
+- `changelog/2026-03-17.md` y `changelog/2026-03-18.md` hablan de una implementacion y unas pruebas que no estan presentes en esta rama en el momento de la revision.
 - La vision del producto mantiene capacidades futuras como catalogo, filtros, alertas y pipeline, pero no deben documentarse como comportamiento disponible.
 
 ## Criterio documental aplicado

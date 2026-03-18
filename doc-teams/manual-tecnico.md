@@ -25,7 +25,7 @@ El repositorio contiene configuracion minima de paquete Python y documentacion d
 ## Contradicciones explicitadas
 - El `README.md` de raiz describe una aplicacion HTTP local y una API JSON que no pueden ejecutarse en `main`.
 - La version anterior de este manual tecnico describia archivos como `src/podencoti/app.py`, `src/podencoti/source_coverage.py` y `data/source_coverage.json`; esos artefactos no estan presentes en la revision actual.
-- `changelog/2026-03-17.md` y parte del contexto historico mencionan una implementacion inicial visible del MVP, pero esa implementacion no es trazable desde el contenido actual de la rama revisada.
+- `changelog/2026-03-17.md` y `changelog/2026-03-18.md` mencionan una implementacion inicial visible del MVP y una validacion funcional rehecha, pero esa implementacion no es trazable desde el contenido actual de la rama revisada.
 
 ## Implicaciones tecnicas
 - No es posible documentar contrato HTTP, arquitectura WSGI, modelo de datos ni pruebas funcionales como comportamiento vigente.
