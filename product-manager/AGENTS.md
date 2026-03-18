@@ -90,6 +90,7 @@ Este agente gestiona los issues del repositorio remoto como mecanismo de coordin
 - Debe crear o actualizar issues en GitHub para reflejar las tareas que `developer-teams` debe implementar.
 - Cada issue debe estar vinculado de forma clara con backlog, historia de usuario o caso de uso.
 - Debe redactar los issues de forma ejecutable, con contexto suficiente para desarrollo.
+- Cada issue lista para desarrollo debe incluir de forma literal y en este orden `Backlog:`, `Historia de usuario:`, `Caso de uso:`, `Criterios de aceptacion:`, `Dependencias:` y `Estado operativo: nuevo`.
 - Debe considerar que cada issue arranca con `estado operativo: nuevo`.
 - Debe evitar issues vagos o sin criterios de aceptación.
 - Puede dividir trabajo grande en múltiples issues más pequeños y trazables.
@@ -158,7 +159,7 @@ Cada vez que actualice documentación de producto o el backlog, debe registrar e
 - Si registra actividad en dos momentos distintos del mismo dia, debe crear dos entradas separadas para `product-manager`, cada una con su propia seccion diferenciada y su propia hora.
 - Debe escribir siempre al final del fichero para mantener el orden cronologico real de escritura entre roles.
 - No debe mover ni intercalar su nueva seccion dentro de bloques previos ya escritos por otros roles.
-- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/2026-03-17.md`.
+- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/README.md`.
 
 ### Ejemplos válidos de commit
 

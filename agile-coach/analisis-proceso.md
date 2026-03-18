@@ -95,5 +95,25 @@ Este analisis revisa la coordinacion definida entre `product-manager`, `develope
 - Se dificulta revisar metricas de flujo o auditar el cumplimiento de handoffs minimos.
 - La revalidacion es mas costosa porque la informacion no queda siempre en un formato comparable.
 
+## Problema 10: una issue puede parecer lista para desarrollo sin tener contexto minimo estable
+### Evidencia
+- `product-manager` debe crear issues ejecutables, pero hasta ahora no existia un paquete literal minimo comun que fijara backlog origen, historia, caso de uso, criterios de aceptacion y dependencias.
+- `developer-teams` debe leer los issues abiertos antes de empezar, pero no tenia una regla explicita para frenar el inicio cuando faltara ese contexto minimo.
+
+### Impacto observado
+- Desarrollo puede invertir tiempo en reinterpretar artefactos de producto antes de abrir una rama.
+- Aumenta el riesgo de empezar trabajo sobre una issue aun insuficientemente refinada.
+- QA recibe mas tarde la ambiguedad inicial, porque el hueco de definicion se descubre ya dentro del ciclo tecnico.
+
+## Problema 11: la referencia historica de `changelog/` ya no coincide con la norma vigente
+### Evidencia
+- Los roles seguian usando `changelog/2026-03-17.md` como referencia de formato.
+- Ese fichero no incluye la hora obligatoria por entrada que ahora exigen las propias reglas del repositorio y de cada rol.
+
+### Impacto observado
+- La instruccion mezcla una referencia historica util con un formato ya desfasado.
+- Cada rol debe decidir por interpretacion propia si prioriza la norma actual o el ejemplo antiguo.
+- La calidad del registro diario queda expuesta a deriva incluso cuando la regla de fondo ya esta clara.
+
 ## Conclusion
-El flujo base es correcto y la separacion de responsabilidades esta bien planteada. El principal problema no es de definicion de roles, sino de contrato operativo entre handoffs y de cierre administrativo tras validacion. La mejora prioritaria consiste en estandarizar estados, contenido minimo de entrega, sincronizacion con `main`, cierre post-validacion y formato literal de comentarios para reducir esperas, reprocesos y ambiguedad.
+El flujo base es correcto y la separacion de responsabilidades esta bien planteada. El principal problema no es de definicion de roles, sino de contrato operativo entre handoffs, de preparacion minima antes de iniciar desarrollo y de cierre administrativo tras validacion. La mejora prioritaria consiste en estandarizar estados, contenido minimo de issue, contenido minimo de entrega, sincronizacion con `main`, cierre post-validacion y una referencia vigente de `changelog/` para reducir esperas, reprocesos y ambiguedad.

@@ -22,3 +22,13 @@ Registrar los riesgos de coordinacion que siguen activos tras los ajustes de pro
 - Senal observable: entrega con `Impacto documental: si` y `Estado operativo: validado` sin movimiento posterior en documentacion.
 - Impacto: el producto validado queda operativamente desalineado de su documentacion oficial.
 - Mitigacion acordada: usar `Impacto documental: si` como disparador y revisar esta cola al cierre de cada entrega validada.
+
+## Riesgo 5: arranque de desarrollo sobre issues aun no operables
+- Senal observable: la issue se mueve a `en desarrollo` sin incluir `Backlog:`, `Historia de usuario:`, `Caso de uso:`, `Criterios de aceptacion:` o `Dependencias:`.
+- Impacto: se trasladan ambiguedades funcionales al trabajo tecnico y se desperdicia capacidad de desarrollo en aclaraciones tardias.
+- Mitigacion acordada: paquete minimo obligatorio de issue antes de abrir rama y bloqueo explicito de inicio si falta ese contexto.
+
+## Riesgo 6: deriva en el formato del `changelog/` por seguir ejemplos historicos
+- Senal observable: nuevas entradas sin hora exacta o con estructura copiada de ficheros anteriores a la regla vigente.
+- Impacto: baja la calidad de la trazabilidad diaria y aumenta la interpretacion manual entre roles.
+- Mitigacion acordada: usar `changelog/README.md` como referencia vigente de formato y tratar los ficheros historicos solo como contexto del nivel de detalle.

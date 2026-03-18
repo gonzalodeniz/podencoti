@@ -78,7 +78,7 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 - Si registra actividad en dos momentos distintos del mismo dia, debe crear dos entradas separadas para `qa-teams`, cada una con su propia seccion diferenciada y su propia hora.
 - Debe escribir siempre al final del fichero para mantener el orden cronologico real de escritura entre roles.
 - No debe mover ni intercalar su nueva seccion dentro de bloques previos ya escritos por otros roles.
-- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/2026-03-17.md`.
+- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/README.md`.
 
 ## Politica de commits y push
 

@@ -117,9 +117,11 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 ## Flujo de trabajo entre equipos
 
 - El equipo `product-manager` es quien crea y mantiene los issues funcionales en el repositorio remoto de GitHub.
+- Cada issue creada por `product-manager` y lista para ser tomada por `developer-teams` debe incluir de forma literal los campos `Backlog:`, `Historia de usuario:`, `Caso de uso:`, `Criterios de aceptacion:`, `Dependencias:` y `Estado operativo: nuevo`.
 - Los issues deben usar un estado operativo comun entre equipos para reducir ambiguedad: `nuevo`, `en desarrollo`, `listo para qa`, `no validado`, `validado` y `cerrado`.
 - Los roles `product-manager`, `doc-teams` y `agile-coach` trabajan directamente sobre `main` y no deben crear ramas de trabajo propias.
 - El equipo `developer-teams` debe leer los issues abiertos antes de empezar a implementar.
+- Si una issue no incluye el paquete minimo de contexto operativo, `developer-teams` no debe iniciar implementacion sobre ella hasta que `product-manager` la aclare.
 - `developer-teams` debe trabajar solo en una tarea cada vez para facilitar la revision de `qa-teams`.
 - Si existen issues ya empezados y todavia no validados por `qa-teams`, `developer-teams` debe priorizarlos frente a issues completamente nuevos.
 - Si todos los issues abiertos son nuevos, `developer-teams` puede decidir el orden de implementacion segun su propio criterio tecnico y de desbloqueo.

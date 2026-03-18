@@ -15,6 +15,7 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 
 - Debe leer los issues abiertos del repositorio remoto de GitHub antes de iniciar cualquier implementacion.
 - Los issues son creados y mantenidos por `product-manager` como fuente de verdad operativa del trabajo a desarrollar.
+- No debe iniciar una issue si faltan los campos `Backlog:`, `Historia de usuario:`, `Caso de uso:`, `Criterios de aceptacion:`, `Dependencias:` y `Estado operativo: nuevo`; en ese caso debe pedir aclaracion a `product-manager`.
 
 ## Regla de priorizacion
 
@@ -84,7 +85,7 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 - Si registra actividad en dos momentos distintos del mismo dia, debe crear dos entradas separadas para `developer-teams`, cada una con su propia seccion diferenciada y su propia hora.
 - Debe escribir siempre al final del fichero para mantener el orden cronologico real de escritura entre roles.
 - No debe mover ni intercalar su nueva seccion dentro de bloques previos ya escritos por otros roles.
-- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/2026-03-17.md`.
+- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/README.md`.
 
 ### Ejemplos validos de commit
 
@@ -103,18 +104,19 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 
 1. Leer los issues abiertos en GitHub.
 2. Priorizar un unico issue segun el estado de validacion y el criterio indicado en este documento.
-3. Comprobar que el proyecto no supera el limite de dos ramas tecnicas abiertas.
-4. Crear una rama nueva para ese issue.
-5. Escribir en la issue el nombre exacto de la rama creada y actualizar `estado operativo: en desarrollo`.
-6. Implementar la solucion, preferiblemente en Python.
-7. Verificar localmente lo necesario para no entregar cambios rotos.
-8. Sincronizar la rama con `main` y resolver conflictos evitables antes del handoff.
-9. Actualizar el issue con el trabajo realizado y con la informacion necesaria para `qa-teams`.
-10. Hacer commit en espanol.
-11. Hacer `git push` de la rama remota.
-12. Cambiar a `main` o coordinar la actualizacion necesaria para registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
-13. Esperar validacion de `qa-teams`.
-14. Terminar la tarea dejando el repositorio situado en la rama `main`.
+3. Confirmar que la issue tiene el paquete minimo de contexto operativo antes de abrir trabajo tecnico.
+4. Comprobar que el proyecto no supera el limite de dos ramas tecnicas abiertas.
+5. Crear una rama nueva para ese issue.
+6. Escribir en la issue el nombre exacto de la rama creada y actualizar `estado operativo: en desarrollo`.
+7. Implementar la solucion, preferiblemente en Python.
+8. Verificar localmente lo necesario para no entregar cambios rotos.
+9. Sincronizar la rama con `main` y resolver conflictos evitables antes del handoff.
+10. Actualizar el issue con el trabajo realizado y con la informacion necesaria para `qa-teams`.
+11. Hacer commit en espanol.
+12. Hacer `git push` de la rama remota.
+13. Cambiar a `main` o coordinar la actualizacion necesaria para registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
+14. Esperar validacion de `qa-teams`.
+15. Terminar la tarea dejando el repositorio situado en la rama `main`.
 
 ## Restricciones
 

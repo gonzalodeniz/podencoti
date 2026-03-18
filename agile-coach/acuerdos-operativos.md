@@ -13,6 +13,17 @@ Todos los equipos deben reutilizar estos estados operativos en sus comentarios y
 - `validado`: QA confirma que la entrega cumple el alcance revisado.
 - `cerrado`: `product-manager` cierra la issue tras validacion y promueve el siguiente paso de integracion.
 
+## Paquete minimo para iniciar una issue
+Antes de que `developer-teams` abra una rama, la issue debe incluir como minimo y de forma literal:
+- `Backlog:`
+- `Historia de usuario:`
+- `Caso de uso:`
+- `Criterios de aceptacion:`
+- `Dependencias:`
+- `Estado operativo: nuevo`
+
+Si falta alguno de estos campos, la issue no debe considerarse lista para desarrollo y `product-manager` debe completarla antes del inicio tecnico.
+
 ## Handoff minimo de `developer-teams` a `qa-teams`
 El comentario final de entrega de `developer-teams` debe incluir como minimo:
 - `Rama:`
