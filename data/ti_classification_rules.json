@@ -1,0 +1,118 @@
+{
+  "referencia_funcional": "PB-006 · HU-06 · CU-01 · product-manager/refinamiento-funcional.md",
+  "inclusion": {
+    "palabras_clave": [
+      "software",
+      "desarrollo",
+      "sistemas",
+      "soporte ti",
+      "ciberseguridad",
+      "redes",
+      "licencias",
+      "cloud",
+      "datos",
+      "hardware tecnologico"
+    ],
+    "cpv_prefixes": [
+      "302",
+      "324",
+      "480",
+      "481",
+      "482",
+      "483",
+      "484",
+      "485",
+      "486",
+      "487",
+      "488",
+      "489",
+      "5031",
+      "5032",
+      "5161",
+      "720",
+      "722",
+      "723",
+      "724",
+      "725",
+      "726",
+      "728"
+    ],
+    "necesidades_explicitas": [
+      "digitalizacion",
+      "mantenimiento de sistemas",
+      "infraestructura tic"
+    ]
+  },
+  "exclusion": {
+    "palabras_clave": [
+      "obra civil",
+      "mobiliario",
+      "material de oficina",
+      "servicios administrativos",
+      "consultoria juridica"
+    ]
+  },
+  "casos_frontera": {
+    "palabras_clave": [
+      "expediente mixto",
+      "lote mixto",
+      "telecomunicaciones",
+      "digitalizacion integral",
+      "transformacion digital"
+    ]
+  },
+  "ejemplos": [
+    {
+      "id": "ejemplo-ti-cpv",
+      "titulo": "Servicio de mantenimiento de sistemas corporativos del cabildo",
+      "descripcion": "Contrato para soporte TI, administracion de servidores y monitorizacion de redes.",
+      "cpvs": [
+        "72250000",
+        "32420000"
+      ],
+      "clasificacion_esperada": "TI",
+      "motivo": "Incluye mantenimiento de sistemas y CPVs tecnologicos."
+    },
+    {
+      "id": "ejemplo-ti-palabras-clave",
+      "titulo": "Suministro de licencias y software de gestion tributaria",
+      "descripcion": "Renovacion de licencias, soporte de software y servicios cloud asociados.",
+      "cpvs": [
+        "48218000"
+      ],
+      "clasificacion_esperada": "TI",
+      "motivo": "La necesidad tecnologica es explicita por software, licencias y cloud."
+    },
+    {
+      "id": "ejemplo-no-ti",
+      "titulo": "Suministro de mobiliario para oficinas administrativas",
+      "descripcion": "Compra de mesas, sillas y archivadores para dependencias municipales.",
+      "cpvs": [
+        "39130000"
+      ],
+      "clasificacion_esperada": "No TI",
+      "motivo": "Se trata de mobiliario general sin evidencia funcional de tecnologia."
+    },
+    {
+      "id": "ejemplo-frontera-mixto",
+      "titulo": "Expediente mixto para obra civil y sensorizacion del edificio",
+      "descripcion": "Proyecto de reforma con una partida menor de digitalizacion e instalacion de sensores.",
+      "cpvs": [
+        "45000000",
+        "72222300"
+      ],
+      "clasificacion_esperada": "Caso frontera",
+      "motivo": "Es un contrato mixto donde la parte TI puede ser secundaria."
+    },
+    {
+      "id": "ejemplo-frontera-teleco",
+      "titulo": "Servicio de telecomunicaciones y conectividad multisedes",
+      "descripcion": "Prestacion de enlaces y comunicaciones para sedes administrativas sin detalle tecnico de sistemas.",
+      "cpvs": [
+        "64200000"
+      ],
+      "clasificacion_esperada": "Caso frontera",
+      "motivo": "Telecomunicaciones sin evidencia suficiente sobre sistemas o redes TI."
+    }
+  ]
+}
