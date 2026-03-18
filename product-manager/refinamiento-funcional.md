@@ -6,13 +6,12 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 ## Estado funcional confirmado en el repositorio
 - `PB-007` dispone de entrega visible en producto y validacion explicita de `qa-teams` en la issue #1.
 - La entrega actual cubre delimitacion de fuentes, no ingestion real ni catalogo de licitaciones.
-- El siguiente trabajo funcional recomendado es `PB-006` para fijar reglas auditables de relevancia TI.
+- `PB-006` no quedo validado por `qa-teams` en la issue #2 y debe corregirse antes de abrir el catalogo de `PB-001`.
 
 ## Huecos funcionales detectados en esta revision
-- El backlog no reflejaba el estado real de `PB-007` ni su validacion por QA.
-- Faltaban casos de uso para la delimitacion de cobertura y para la revision de KPIs.
-- No existian issues remotas para `PB-004`, `PB-005` y `PB-008`.
-- Seguian abiertas decisiones funcionales sobre casos frontera TI, alertas y alcance del pipeline.
+- La issue `PB-006` quedo `no validada` porque la entrega no expuso las superficies declaradas para QA y no integraba limpia con `main`.
+- Sigue abierto el umbral funcional para expedientes mixtos donde TI es una parte secundaria.
+- Sigue siendo necesario asegurar que cualquier futura entrega funcional declare solo superficies realmente accesibles por QA.
 
 ## Decisiones funcionales vigentes
 - El MVP de negocio se compone de dos escalones:
@@ -21,6 +20,8 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 - La comunicacion del producto debe hablar de cobertura inicial priorizada, no de cobertura total.
 - La relevancia TI debe poder explicarse y auditarse sin depender de interpretaciones tecnicas implícitas.
 - El pipeline minimo sigue limitado a los estados `Nueva`, `Evaluando`, `Preparando oferta`, `Presentada` y `Descartada`.
+- La primera iteracion de alertas queda limitada a registrar coincidencias internas; la notificacion saliente se evaluara en una fase posterior.
+- El pipeline MVP queda limitado a gestion individual por usuario; la colaboracion por empresa no forma parte del alcance actual.
 
 ## Reglas funcionales vigentes de clasificacion TI
 - Se considera candidata TI una oportunidad que cumpla al menos uno de estos criterios:
@@ -49,14 +50,15 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 
 ## Dependencias abiertas
 - Confirmar con negocio si el MVP debe cubrir tambien ayuntamientos desde la primera release o si permanecen fuera de la promesa comercial inicial.
-- Confirmar si la primera version de alertas debe contemplar solo registro interno o tambien envio externo inmediato.
-- Confirmar si el pipeline sera individual por usuario o compartido por empresa en fases posteriores.
+- Definir el umbral funcional para expedientes mixtos donde TI no sea el componente principal.
+- Resolver la correccion de `PB-006` con evidencia funcional accesible para QA y con rama limpia frente a `main`.
 
 ## Riesgos de producto
 - Riesgo de falsa expectativa si se comunica "todas las licitaciones canarias" sin matizar la cobertura inicial real.
 - Riesgo de falsos positivos si la clasificacion TI no queda suficientemente definida antes del catalogo.
 - Riesgo de baja adopcion si el MVP entrega solo agregacion pero no relevancia util.
 - Riesgo de frustracion si faltan datos criticos en fichas sin indicarse claramente su ausencia.
+- Riesgo operativo si desarrollo declara rutas o superficies de validacion no expuestas realmente en la entrega revisable.
 
 ## Supuestos explicitos
 - El primer objetivo es demostrar que la centralizacion y el filtrado ahorran tiempo al usuario.
@@ -65,12 +67,11 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 
 ## Preguntas abiertas para siguiente refinamiento
 - Que umbral funcional convierte un expediente mixto en oportunidad TI relevante.
-- Que se considerara "alerta temprana" en el MVP: deteccion registrada, aviso en producto o notificacion saliente.
 - Como debe tratarse una oportunidad anulada, desierta o modificada dentro del pipeline del usuario.
 
 ## Recomendacion operativa para `developer-teams`
-- Tomar la issue #2 correspondiente a `PB-006` como siguiente trabajo.
-- No iniciar implementacion de catalogo visible de `PB-001` sin incorporar una regla TI validable por QA.
+- Mantener la correccion de la issue #2 correspondiente a `PB-006` en la rama `feat/pb-006-clasificacion-ti-auditable` mientras el alcance no cambie.
+- No iniciar implementacion de catalogo visible de `PB-001` sin incorporar una regla TI validable por QA y sin haber resuelto la integracion limpia con `main`.
 
 ## Trazabilidad operativa
 - `PB-007` y `HU-07` quedan cubiertos por la issue #1 y su validacion ya registrada.

@@ -8,10 +8,12 @@ Establecer cuando un item funcional puede considerarse terminado para pasar a va
 2. El alcance implementado coincide con los criterios de aceptacion acordados en el issue.
 3. `developer-teams` ha dejado constancia en el issue de lo realizado, decisiones relevantes, limitaciones conocidas, verificacion tecnica ejecutada e impacto documental.
 4. La funcionalidad es demostrable desde la perspectiva del usuario final prevista en la historia.
-5. No quedan ambiguedades funcionales abiertas que bloqueen la validacion.
-6. Se han actualizado los artefactos de producto si el alcance funcional ha cambiado.
-7. `qa-teams` dispone en el issue de criterios verificables para revisar el comportamiento esperado.
-8. El issue queda en estado operativo `listo para qa`.
+5. La superficie funcional declarada para QA esta realmente expuesta y accesible en la entrega servida o documentada.
+6. La rama tecnica integra limpia con `main` antes del handoff a `qa-teams`, sin conflictos evitables de sincronizacion.
+7. No quedan ambiguedades funcionales abiertas que bloqueen la validacion.
+8. Se han actualizado los artefactos de producto si el alcance funcional ha cambiado.
+9. `qa-teams` dispone en el issue de criterios verificables para revisar el comportamiento esperado.
+10. El issue queda en estado operativo `listo para qa`.
 
 ## Criterios para considerarlo validado
 1. `qa-teams` deja en la issue el resultado explicito `validado` o `no validado`.
@@ -32,6 +34,7 @@ Establecer cuando un item funcional puede considerarse terminado para pasar a va
 ## Evidencia minima esperada en el issue
 - Referencia al item de backlog.
 - Referencia a la historia de usuario y, si aplica, al caso de uso.
+- Rama tecnica indicada de forma explicita cuando el item esta en desarrollo o listo para QA.
 - Estado operativo actualizado.
 - Resumen del comportamiento esperado.
 - Criterios de aceptacion.

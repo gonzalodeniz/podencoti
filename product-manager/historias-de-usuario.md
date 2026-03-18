@@ -68,7 +68,7 @@
   1. El usuario puede crear una alerta con al menos un criterio funcional.
   2. El sistema permite editar y desactivar la alerta.
   3. La alerta queda visible como activa tras guardarse.
-  4. Las nuevas oportunidades compatibles quedan asociadas a la alerta para su futura notificacion.
+  4. Las nuevas oportunidades compatibles quedan asociadas a la alerta para su registro interno en el MVP.
 - Dependencias funcionales: PB-001, PB-003
 - Prioridad: P1
 - Estado: `nuevo`
@@ -81,6 +81,9 @@
   Como empresa o profesional TI,
   quiero guardar oportunidades y moverlas por estados,
   para gestionar mi trabajo de seguimiento y preparacion de ofertas.
+- Alcance funcional acotado:
+  - El pipeline del MVP es individual por usuario.
+  - La colaboracion por empresa queda fuera de esta historia.
 - Criterios de aceptacion:
   1. El usuario puede guardar una oportunidad en su pipeline.
   2. La oportunidad guardada recibe un estado inicial.
@@ -105,7 +108,8 @@
   4. El backlog y los issues hacen referencia a estas reglas.
 - Dependencias funcionales: PB-007
 - Prioridad: P0
-- Estado: `nuevo`
+- Estado: `no validado`
+- Nota de estado: `qa-teams` dejo la issue #2 en `no validado` el 2026-03-18 por falta de superficie funcional verificable y por no integrar limpia con `main`; debe corregirse en la misma issue y rama mientras no cambie el alcance.
 
 ## HU-07 Delimitar la cobertura inicial de fuentes
 - Backlog relacionado: PB-007

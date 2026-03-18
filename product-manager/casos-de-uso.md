@@ -85,7 +85,7 @@
 - Flujo principal:
   1. El usuario crea una alerta con criterios funcionales.
   2. El sistema confirma que la alerta queda activa.
-  3. Cuando aparecen nuevas oportunidades compatibles, el sistema las asocia a la alerta.
+  3. Cuando aparecen nuevas oportunidades compatibles, el sistema registra la coincidencia y la asocia a la alerta.
   4. El usuario consulta o modifica la alerta cuando lo necesita.
 - Flujos alternativos:
   - A1. Si el usuario intenta guardar una alerta sin criterios minimos, el sistema solicita completarlos.
@@ -95,6 +95,7 @@
 - Reglas de negocio relacionadas:
   - RB-08 Una alerta puede activarse, editarse o desactivarse.
   - RB-09 La configuracion de alertas debe reutilizar los mismos criterios funcionales que el filtrado del catalogo.
+  - RB-16 En el MVP la alerta debe registrar coincidencias funcionales aunque no exista todavia notificacion saliente.
 
 ## CU-05 Gestionar pipeline de oportunidades
 - Backlog relacionado: PB-005
@@ -104,6 +105,7 @@
 - Disparador: El usuario decide guardar una oportunidad en su pipeline.
 - Precondiciones:
   - La oportunidad existe y es visible para el usuario.
+  - El alcance del pipeline MVP es individual por usuario.
 - Flujo principal:
   1. El usuario guarda una oportunidad en su pipeline.
   2. El sistema la asigna a un estado inicial.
@@ -117,6 +119,7 @@
 - Reglas de negocio relacionadas:
   - RB-10 Los estados minimos del pipeline son `Nueva`, `Evaluando`, `Preparando oferta`, `Presentada` y `Descartada`.
   - RB-11 Una misma oportunidad no debe duplicarse en el pipeline del mismo usuario.
+  - RB-17 La primera release del pipeline no incluye colaboracion compartida por empresa.
 
 ## CU-06 Delimitar cobertura funcional inicial
 - Backlog relacionado: PB-007

@@ -16,11 +16,17 @@ Traducir la vision de PodencoTI en trabajo priorizado, trazable y ejecutable par
 - `validado`: item aceptado por `qa-teams`.
 - `cerrado`: item validado, integrado y cerrado administrativamente por `product-manager`.
 
+## Estado de referencia de backlog
+- Fecha de corte funcional: 2026-03-18.
+- `PB-007` permanece `validado` y abierto solo a efectos administrativos hasta resolver su integracion final y cierre.
+- `PB-006` pasa a estado `no validado` tras la revision de `qa-teams` en la issue #2 sobre la rama `feat/pb-006-clasificacion-ti-auditable`.
+- No se recomienda iniciar `PB-001` mientras `PB-006` no vuelva a quedar al menos en `listo para qa` con una superficie verificable y una rama limpia respecto a `main`.
+
 ## Backlog priorizado
 
 | ID | Titulo | Descripcion | Prioridad | Valor de negocio | Criterios de aceptacion | Dependencias | Estado | Trazabilidad |
 |---|---|---|---|---|---|---|---|---|
-| PB-006 | Reglas funcionales de clasificacion TI | El producto debe establecer reglas verificables para decidir si una oportunidad es relevante para tecnologia antes de ampliar el catalogo. | P0 | Reduce falsos positivos, evita debates posteriores con QA y protege la utilidad del catalogo. | 1. Existe un criterio funcional documentado de inclusion TI. 2. El criterio contempla CPVs, palabras clave y casos frontera. 3. Las exclusiones relevantes quedan explicitadas. 4. `qa-teams` puede contrastar una muestra representativa con estas reglas. | PB-007 | `nuevo` | HU-06, CU-01, issue #2 |
+| PB-006 | Reglas funcionales de clasificacion TI | El producto debe establecer reglas verificables para decidir si una oportunidad es relevante para tecnologia antes de ampliar el catalogo. | P0 | Reduce falsos positivos, evita debates posteriores con QA y protege la utilidad del catalogo. | 1. Existe un criterio funcional documentado de inclusion TI. 2. El criterio contempla CPVs, palabras clave y casos frontera. 3. Las exclusiones relevantes quedan explicitadas. 4. `qa-teams` puede contrastar una muestra representativa con estas reglas. | PB-007 | `no validado` | HU-06, CU-01, issue #2 |
 | PB-001 | Catalogo inicial de oportunidades TI de Canarias | El usuario debe poder consultar en un unico listado las licitaciones TI detectadas dentro de la cobertura MVP ya delimitada. | P0 | Permite validar la propuesta central de centralizacion y descubrimiento temprano. | 1. Existe un listado consultable de oportunidades TI. 2. Cada oportunidad muestra al menos titulo, organismo, ubicacion, presupuesto si existe, fecha limite y estado. 3. Solo se muestran oportunidades etiquetadas como TI segun reglas funcionales vigentes. 4. El usuario puede distinguir la fuente oficial de cada registro. 5. Si no hay oportunidades disponibles, se muestra un estado vacio claro. | PB-007, PB-006 | `nuevo` | HU-01, CU-01, issue #3 |
 | PB-002 | Ficha de detalle de licitacion | El usuario debe acceder a una vista con la informacion critica de cada oportunidad para decidir si merece seguimiento. | P0 | Reduce tiempo de analisis y evita revisar manualmente el pliego completo para un primer filtro. | 1. Desde el catalogo se accede al detalle. 2. La ficha muestra presupuesto, plazo, procedimiento, criterios de adjudicacion, solvencia tecnica si esta disponible y enlace a la fuente oficial. 3. El usuario puede identificar la fecha limite y el organismo convocante sin ambiguedad. 4. Si un dato no esta disponible en origen, se muestra como no informado. | PB-001 | `nuevo` | HU-02, CU-02, issue #4 |
 | PB-003 | Filtros funcionales de busqueda | El usuario debe poder filtrar oportunidades por palabras clave, presupuesto, procedimiento y ubicacion. | P0 | Aumenta relevancia y hace util el volumen de datos agregado. | 1. El usuario puede aplicar filtros por palabra clave, rango de presupuesto, procedimiento y ubicacion. 2. El listado refleja los filtros activos. 3. El usuario puede limpiar los filtros. 4. Si no hay resultados, se muestra un estado vacio comprensible. | PB-001 | `nuevo` | HU-03, CU-03, issue #5 |
@@ -40,12 +46,12 @@ Traducir la vision de PodencoTI en trabajo priorizado, trazable y ejecutable par
 
 ## Notas de priorizacion
 - `PB-007` ya esta validado por `qa-teams`; permanece trazado como base funcional del MVP y no debe reabrirse salvo cambio de alcance.
-- `PB-006` es el siguiente item recomendado porque reduce ambiguedad antes de construir el catalogo visible de oportunidades.
+- `PB-006` sigue siendo el item activo prioritario, pero actualmente esta `no validado`; la correccion debe hacerse en la misma issue #2 y en la misma rama mientras el alcance siga siendo el mismo.
 - `PB-001`, `PB-002` y `PB-003` conforman el MVP navegable minimo para validar descubrimiento y primera evaluacion.
 - `PB-004` y `PB-005` extienden el valor diferencial y la retencion tras validar descubrimiento.
 - `PB-008` queda fuera del camino critico del MVP, pero debe prepararse antes de una ampliacion comercial o de cobertura.
 
 ## Huecos funcionales pendientes de cerrar
 - Aun no esta fijada la definicion operativa de caso frontera para expedientes mixtos donde TI sea minoritaria.
-- Falta decidir si la primera iteracion de alertas registra coincidencias de forma interna o si ya incluye notificacion saliente.
-- Falta decidir si el pipeline es individual por usuario desde el inicio o si se reserva la colaboracion por empresa para una release posterior.
+- La primera iteracion de alertas queda acotada a registro interno de coincidencias; la notificacion saliente queda para refinamiento posterior.
+- El pipeline del MVP queda acotado a gestion individual por usuario; la colaboracion por empresa queda fuera de esta release.
