@@ -25,9 +25,14 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 
 ## Flujo de ramas
 
+- `developer-teams` es el unico rol que debe crear ramas tecnicas de implementacion.
+- Antes de comenzar cualquier issue, debe comprobar cuantas ramas tecnicas activas existen en el proyecto.
+- Si ya existen dos ramas tecnicas abiertas, no debe crear una tercera rama y debe contribuir a cerrar una de las issues activas antes de empezar una nueva.
 - Antes de comenzar cualquier issue, debe crear una rama nueva en git.
 - Cada rama debe estar asociada a un unico issue o tarea.
 - No debe mezclar en una misma rama trabajo de varios issues distintos.
+- Debe escribir en la issue de GitHub el nombre exacto de la rama en la que se esta realizando el trabajo.
+- Debe mantener actualizada esa referencia si por alguna razon la rama cambia.
 - La rama no debe fusionarse a `main` por iniciativa de `developer-teams`.
 
 ## Implementacion y entrega
@@ -41,6 +46,7 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 
 - `qa-teams` es quien valida el trabajo implementado.
 - `qa-teams` realiza la validacion funcional mediante pruebas funcionales, end-to-end, exploratorias o contra criterios de aceptacion.
+- `qa-teams` puede abrir una rama temporal de integracion para validar una entrega, pero `developer-teams` debe seguir considerando su rama tecnica como la rama fuente del issue.
 - `developer-teams` no debe considerar finalizada una tarea solo porque el codigo compile o pase comprobaciones locales.
 - Debe esperar la validacion de `qa-teams` antes de considerar el issue listo para cierre.
 
@@ -59,6 +65,7 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 ## Registro obligatorio en changelog
 
 - Al finalizar sus tareas del dia, debe registrar un resumen de trabajo en la carpeta `changelog/`.
+- Cualquier actualizacion de `changelog/` debe realizarse siempre sobre la rama `main`, no sobre la rama tecnica del issue.
 - Debe usar un fichero con la fecha actual en formato `yyyy-mm-dd.md`.
 - Si el fichero del dia no existe, debe crearlo.
 - Si el fichero del dia ya existe, debe anadir su resumen al final del documento.
@@ -82,14 +89,16 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 
 1. Leer los issues abiertos en GitHub.
 2. Priorizar un unico issue segun el estado de validacion y el criterio indicado en este documento.
-3. Crear una rama nueva para ese issue.
-4. Implementar la solucion, preferiblemente en Python.
-5. Verificar localmente lo necesario para no entregar cambios rotos.
-6. Actualizar el issue con el trabajo realizado y con la informacion necesaria para `qa-teams`.
-7. Hacer commit en espanol.
-8. Hacer `git push` de la rama remota.
-9. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
-10. Esperar validacion de `qa-teams`.
+3. Comprobar que el proyecto no supera el limite de dos ramas tecnicas abiertas.
+4. Crear una rama nueva para ese issue.
+5. Escribir en la issue el nombre exacto de la rama creada y actualizar `estado operativo: en desarrollo`.
+6. Implementar la solucion, preferiblemente en Python.
+7. Verificar localmente lo necesario para no entregar cambios rotos.
+8. Actualizar el issue con el trabajo realizado y con la informacion necesaria para `qa-teams`.
+9. Hacer commit en espanol.
+10. Hacer `git push` de la rama remota.
+11. Cambiar a `main` o coordinar la actualizacion necesaria para registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
+12. Esperar validacion de `qa-teams`.
 
 ## Restricciones
 
@@ -97,3 +106,4 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 - No debe cerrar issues.
 - No debe hacer merge a `main` por su cuenta.
 - No debe asumir validacion funcional sin confirmacion de `qa-teams`.
+- No debe abrir una tercera rama tecnica mientras ya existan dos ramas tecnicas activas en el proyecto.

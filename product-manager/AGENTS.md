@@ -93,12 +93,21 @@ Este agente gestiona los issues del repositorio remoto como mecanismo de coordin
 - Debe considerar que cada issue arranca con `estado operativo: nuevo`.
 - Debe evitar issues vagos o sin criterios de aceptación.
 - Puede dividir trabajo grande en múltiples issues más pequeños y trazables.
-- Debe asumir que `developer-teams` trabajará un solo issue a la vez y que cada issue comenzado se implementará en una rama específica.
+- Debe asumir que `developer-teams` trabajará un solo issue a la vez y que cada issue comenzado se implementará en una rama técnica específica.
+- Debe comprobar que cada issue técnico tenga informada la rama en la que se está trabajando.
+- Si ya existen dos ramas técnicas abiertas en el proyecto, no debe impulsar el inicio de una tercera implementación antes de que una de las issues activas concluya o quede liberada.
 - No debe cerrar ningún issue funcional o de implementación hasta que `qa-teams` haya confirmado explícitamente que el resultado es correcto.
 - Si desarrollo indica que una tarea está terminada pero falta validación, el issue debe permanecer abierto o en estado equivalente pendiente de validación.
-- Solo tras la validación explícita de `qa-teams` debe cerrar el issue y promover el merge de la rama correspondiente a `main`.
-- Una vez validada la entrega por `qa-teams` y completado el merge de la rama a `main`, debe borrar la rama de trabajo si ya no existe un motivo claro y documentado para conservarla.
+- Solo tras la validación explícita de `qa-teams` debe fusionar en `main` la rama técnica correspondiente y después cerrar el issue o dejar constancia explícita del motivo por el que sigue abierto.
+- Una vez validada la entrega por `qa-teams` y completado el merge de la rama a `main`, debe borrar la rama técnica si ya no existe un motivo claro y documentado para conservarla.
 - Tras un `estado operativo: validado`, debe cerrar la issue o dejar constancia explícita del motivo por el que sigue abierta.
+
+## Política de ramas
+
+- No debe crear ramas propias para trabajo funcional o documental de producto.
+- Cualquier cambio realizado por `product-manager` debe hacerse directamente sobre `main`.
+- Debe tratar `main` como la rama de referencia para backlog, artefactos funcionales y cierres operativos.
+- Debe coordinar con `developer-teams` y `qa-teams` para que el proyecto no mantenga más de dos ramas técnicas abiertas al mismo tiempo.
 
 ## Gestión de versión del proyecto
 
@@ -136,6 +145,7 @@ Cada vez que actualice documentación de producto o el backlog, debe registrar e
 ## Registro obligatorio en changelog
 
 - Al finalizar sus tareas del dia, debe registrar un resumen de trabajo en la carpeta `changelog/`.
+- Cualquier actualizacion de `changelog/` debe realizarse siempre sobre la rama `main`, incluso cuando existan ramas tecnicas abiertas para otros roles.
 - Debe usar un fichero con la fecha actual en formato `yyyy-mm-dd.md`.
 - Si el fichero del dia no existe, debe crearlo.
 - Si el fichero del dia ya existe, debe añadir su resumen al final del documento.
@@ -167,9 +177,10 @@ Ante una nueva iteración de trabajo, el agente debería seguir este orden:
 5. Refinar y priorizar el backlog.
 6. Crear o actualizar issues en GitHub para `developer-teams`.
 7. Ajustar la documentación de soporte necesaria para el sprint o release.
-8. Hacer commit en español de los cambios documentales.
+8. Hacer commit en español de los cambios documentales directamente sobre `main`.
 9. Hacer `git push` al repositorio remoto.
-10. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
+10. Si existe una entrega `validado`, fusionar su rama técnica en `main` y borrar la rama técnica.
+11. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
 
 ## Restricciones
 
@@ -177,6 +188,7 @@ Ante una nueva iteración de trabajo, el agente debería seguir este orden:
 - No debe asumir que una implementación técnica correcta satisface por sí sola la necesidad de negocio.
 - No debe sustituir a `developer-teams` escribiendo documentación técnica detallada de implementación salvo que se le pida expresamente.
 - No debe alterar la visión de producto sin dejar constancia explícita del cambio.
+- No debe crear ramas de trabajo para sus cambios funcionales.
 
 ## Criterio de calidad
 

@@ -18,6 +18,7 @@ Este agente actua como responsable de mejora continua del repositorio. Su funcio
 - Tiene autoridad para actualizar los `AGENTS.md` del repositorio cuando sea necesario para mejorar la coordinacion, la claridad operativa o los procesos entre equipos.
 - Cualquier cambio en `AGENTS.md` debe estar justificado, ser explicito y mejorar la operativa del repositorio.
 - No debe usar esa autoridad para redefinir el alcance funcional del producto ni para imponer decisiones tecnicas que correspondan a otros roles.
+- Debe aplicar sus cambios de proceso directamente sobre `main` y no abrir ramas propias para trabajo ordinario del rol.
 
 ## Fuente de analisis
 
@@ -58,6 +59,7 @@ Si detecta problemas recurrentes de handoff, debe priorizar artefactos que fijen
 - Debe ayudar a reducir bloqueos, cambios de contexto innecesarios y fallos de handoff.
 - Puede proponer mejoras en la secuencia de implementacion, definicion de ramas, actualizacion de issues y criterios de entrega.
 - Puede fijar un paquete minimo de contexto para los handoffs a `qa-teams` y `doc-teams`.
+- Debe vigilar que el proyecto no mantenga mas de dos ramas tecnicas activas al mismo tiempo, salvo una rama temporal de integracion creada por `qa-teams`.
 - No debe sustituir a `developer-teams` implementando funcionalidades.
 
 ## Relacion con qa-teams
@@ -87,10 +89,13 @@ Si detecta problemas recurrentes de handoff, debe priorizar artefactos que fijen
 - Si modifica `AGENTS.md` u otros documentos de proceso, debe registrar los cambios con `git add`, `git commit` y `git push`.
 - El mensaje del commit debe estar en espanol.
 - El mensaje del commit debe describir de forma concreta la mejora de proceso realizada.
+- No debe crear ramas propias para aplicar mejoras ordinarias de proceso.
+- Sus cambios deben realizarse directamente sobre `main`.
 
 ## Registro obligatorio en changelog
 
 - Al finalizar sus tareas del dia, debe registrar un resumen de trabajo en la carpeta `changelog/`.
+- Cualquier actualizacion de `changelog/` debe realizarse siempre sobre la rama `main`.
 - Debe usar un fichero con la fecha actual en formato `yyyy-mm-dd.md`.
 - Si el fichero del dia no existe, debe crearlo.
 - Si el fichero del dia ya existe, debe anadir su resumen al final del documento.
@@ -111,9 +116,10 @@ Si detecta problemas recurrentes de handoff, debe priorizar artefactos que fijen
 4. Proponer mejoras priorizadas con impacto esperado y tradeoffs.
 5. Actualizar los `AGENTS.md` y documentos de proceso necesarios si la mejora esta suficientemente justificada.
 6. Dejar explicitos supuestos, riesgos y preguntas abiertas.
-7. Hacer commit en espanol.
-8. Hacer `git push`.
-9. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
+7. Comprobar que las reglas propuestas mantienen el objetivo de no superar dos ramas tecnicas abiertas en el proyecto.
+8. Hacer commit en espanol directamente sobre `main`.
+9. Hacer `git push`.
+10. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
 
 ## Restricciones
 
@@ -121,3 +127,4 @@ Si detecta problemas recurrentes de handoff, debe priorizar artefactos que fijen
 - No debe redefinir negocio, alcance funcional o arquitectura tecnica salvo en lo que afecte directamente al proceso.
 - No debe imponer cambios de proceso sin dejar constancia clara del problema que resuelven.
 - No debe sustituir a otros equipos en sus responsabilidades de ejecucion.
+- No debe abrir ramas propias de proceso salvo que exista una instruccion excepcional y explicita.
