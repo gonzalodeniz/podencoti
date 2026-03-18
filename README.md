@@ -79,9 +79,9 @@ Tambien pueden recibir opciones adicionales de `codex exec`, por ejemplo:
 
 ## Entrega tecnica actual
 
-La primera entrega tecnica funcional implementa `PB-007` con una base minima en Python para hacer visible y verificable la cobertura inicial de fuentes del MVP.
+La entrega tecnica actual implementa `PB-001` sobre la base ya validada de `PB-007` y `PB-006`, con un catalogo inicial de oportunidades TI consultable desde una app WSGI minima en Python.
 
-### Como ejecutar la vista de cobertura
+### Como ejecutar las vistas actuales
 
 ```bash
 PYTHONPATH=src python3 -m podencoti.app
@@ -89,8 +89,12 @@ PYTHONPATH=src python3 -m podencoti.app
 
 Luego se puede abrir:
 
-- `http://127.0.0.1:8000/` para la vista HTML de cobertura
+- `http://127.0.0.1:8000/` para la vista HTML del catalogo inicial de oportunidades TI
+- `http://127.0.0.1:8000/api/oportunidades` para la salida JSON del catalogo filtrado por cobertura MVP y clasificacion TI
+- `http://127.0.0.1:8000/cobertura-fuentes` para la vista HTML de cobertura MVP
 - `http://127.0.0.1:8000/api/fuentes` para la salida JSON trazable a la configuracion
+- `http://127.0.0.1:8000/clasificacion-ti` para la vista HTML de la regla TI auditable
+- `http://127.0.0.1:8000/api/clasificacion-ti` para la salida JSON de reglas y ejemplos auditados
 
 ### Como ejecutar las pruebas tecnicas
 

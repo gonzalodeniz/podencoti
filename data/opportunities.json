@@ -1,0 +1,88 @@
+{
+  "referencia_funcional": "PB-001 · HU-01 · CU-01 · Cobertura MVP y clasificacion TI vigentes",
+  "opportunities": [
+    {
+      "id": "govcan-backup-cloud-2026",
+      "titulo": "Servicio cloud para copias de seguridad y continuidad de sistemas corporativos",
+      "descripcion": "Contrato de soporte TI para plataforma de backup, monitorizacion y recuperacion ante incidencias.",
+      "organismo": "Direccion General de Transformacion Digital del Gobierno de Canarias",
+      "ubicacion": "Canarias",
+      "procedimiento": "Abierto",
+      "presupuesto": 185000,
+      "fecha_limite": "2026-04-15",
+      "estado": "Abierta",
+      "fuente_oficial": "Gobierno de Canarias",
+      "url_fuente_oficial": "https://www.gobiernodecanarias.org/perfil_del_contratante/",
+      "cpvs": [
+        "72250000",
+        "48613000"
+      ]
+    },
+    {
+      "id": "pcsp-cabildo-licencias-2026",
+      "titulo": "Suministro de licencias y software de gestion tributaria insular",
+      "descripcion": "Incluye licencias, soporte de software y mantenimiento de sistemas de recaudacion.",
+      "organismo": "Cabildo de Tenerife",
+      "ubicacion": "Santa Cruz de Tenerife",
+      "procedimiento": "Abierto simplificado",
+      "presupuesto": 92000,
+      "fecha_limite": "2026-04-08",
+      "estado": "Abierta",
+      "fuente_oficial": "Plataforma de Contratación del Sector Público filtrada por órganos de Canarias",
+      "url_fuente_oficial": "https://contrataciondelestado.es/",
+      "cpvs": [
+        "48218000",
+        "72268000"
+      ]
+    },
+    {
+      "id": "cabildo-redes-2026",
+      "titulo": "Mantenimiento de redes y sistemas de sedes electronicas insulares",
+      "descripcion": "Servicio de administracion de redes, soporte TI y refuerzo de ciberseguridad perimetral.",
+      "organismo": "Cabildo de Gran Canaria",
+      "ubicacion": "Las Palmas",
+      "procedimiento": "Abierto",
+      "presupuesto": null,
+      "fecha_limite": "2026-04-20",
+      "estado": "Abierta",
+      "fuente_oficial": "Cabildos insulares",
+      "url_fuente_oficial": "https://www.grancanaria.com/perfil-del-contratante/",
+      "cpvs": [
+        "32420000",
+        "72810000"
+      ]
+    },
+    {
+      "id": "ayto-mobiliario-2026",
+      "titulo": "Suministro de mobiliario para dependencias administrativas municipales",
+      "descripcion": "Compra de mesas, armarios y sillas para oficinas generales.",
+      "organismo": "Ayuntamiento de Arucas",
+      "ubicacion": "Las Palmas",
+      "procedimiento": "Abierto simplificado",
+      "presupuesto": 34000,
+      "fecha_limite": "2026-04-02",
+      "estado": "Abierta",
+      "fuente_oficial": "Ayuntamientos con perfiles del contratante propios",
+      "url_fuente_oficial": "https://arucas.sedelectronica.es/contractor-profile-list",
+      "cpvs": [
+        "39130000"
+      ]
+    },
+    {
+      "id": "govcan-teleco-mixto-2026",
+      "titulo": "Servicio de telecomunicaciones y conectividad multisedes",
+      "descripcion": "Prestacion de enlaces y comunicaciones para sedes administrativas sin detalle tecnico de sistemas.",
+      "organismo": "Consejeria de Presidencia del Gobierno de Canarias",
+      "ubicacion": "Canarias",
+      "procedimiento": "Abierto",
+      "presupuesto": 210000,
+      "fecha_limite": "2026-04-11",
+      "estado": "Abierta",
+      "fuente_oficial": "Gobierno de Canarias",
+      "url_fuente_oficial": "https://www.gobiernodecanarias.org/perfil_del_contratante/",
+      "cpvs": [
+        "64200000"
+      ]
+    }
+  ]
+}

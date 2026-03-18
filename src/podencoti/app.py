@@ -4,6 +4,7 @@ import json
 from html import escape
 from wsgiref.simple_server import make_server
 
+from podencoti.opportunity_catalog import build_catalog
 from podencoti.source_coverage import load_source_coverage, summary_by_status
 from podencoti.ti_classification import audit_examples, load_rule_set
 
@@ -240,6 +241,92 @@ def _coverage_html_response() -> str:
     )
 
 
+def _format_budget(amount: int | None) -> str:
+    if amount is None:
+        return "Presupuesto no informado"
+    formatted = f"{amount:,.0f}".replace(",", ".")
+    return f"{formatted} EUR"
+
+
+def _catalog_html_response() -> str:
+    catalog = build_catalog()
+    opportunities = catalog["oportunidades"]
+
+    if opportunities:
+        rows = "\n".join(
+            (
+                "<tr>"
+                f'<td data-label="Oportunidad">{escape(item["titulo"])}</td>'
+                f'<td data-label="Organismo">{escape(item["organismo"])}</td>'
+                f'<td data-label="Ubicación">{escape(item["ubicacion"])}</td>'
+                f'<td data-label="Procedimiento">{escape(item["procedimiento"] or "No informado")}</td>'
+                f'<td data-label="Presupuesto">{escape(_format_budget(item["presupuesto"]))}</td>'
+                f'<td data-label="Fecha límite">{escape(item["fecha_limite"])}</td>'
+                f'<td data-label="Estado">{escape(item["estado"])}</td>'
+                f'<td data-label="Fuente oficial"><a href="{escape(item["url_fuente_oficial"])}">{escape(item["fuente_oficial"])}</a></td>'
+                "</tr>"
+            )
+            for item in opportunities
+        )
+        catalog_panel = f"""
+      <section class="panel">
+        <div class="panel-body">
+          <div class="summary">
+            <article class="metric"><strong>{catalog["total_oportunidades_catalogo"]}</strong>Oportunidades TI visibles</article>
+            <article class="metric"><strong>{len(catalog["cobertura_aplicada"])}</strong>Fuentes oficiales MVP aplicadas</article>
+            <article class="metric"><strong>{catalog["total_registros_origen"]}</strong>Registros evaluados en origen</article>
+          </div>
+          <p class="muted">
+            El catálogo reutiliza la cobertura MVP de <code>PB-007</code> y la clasificación auditable de <code>PB-006</code>.
+            No representa todavía cobertura total del ecosistema canario.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Oportunidad</th>
+              <th>Organismo</th>
+              <th>Ubicación</th>
+              <th>Procedimiento</th>
+              <th>Presupuesto</th>
+              <th>Fecha límite</th>
+              <th>Estado</th>
+              <th>Fuente oficial</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
+      </section>
+        """
+    else:
+        catalog_panel = """
+      <section class="note">
+        No hay oportunidades TI disponibles dentro de la cobertura MVP en este momento.
+      </section>
+        """
+
+    content = f"""
+      {catalog_panel}
+
+      <p class="note">
+        Referencia funcional activa: <code>{escape(catalog["referencia_funcional"])}</code>.
+        Cada registro mantiene visible su fuente oficial para facilitar verificación por <code>qa-teams</code>.
+      </p>
+    """
+    return _page_template(
+        "PodencoTI | Catálogo inicial de oportunidades TI",
+        "Catálogo inicial de oportunidades TI de Canarias",
+        "Release 1 · PB-001 · Descubrimiento inicial verificable",
+        (
+            "PodencoTI muestra aquí un primer catálogo consultable de oportunidades TI dentro de la cobertura MVP ya delimitada. "
+            "Solo se publican registros clasificados como TI y con fuente oficial visible."
+        ),
+        content,
+    )
+
+
 def _classification_html_response() -> str:
     rules = load_rule_set()
     audited_examples = audit_examples(rules)
@@ -351,6 +438,10 @@ def _respond(start_response, status: str, content_type: str, body: bytes) -> lis
 def application(environ, start_response):
     path = environ.get("PATH_INFO", "/")
 
+    if path == "/api/oportunidades":
+        body = b"".join(_json_response(build_catalog()))
+        return _respond(start_response, "200 OK", "application/json; charset=utf-8", body)
+
     if path == "/api/fuentes":
         sources = load_source_coverage()
         payload = {
@@ -380,8 +471,12 @@ def application(environ, start_response):
         body = b"".join(_html_response(_classification_html_response()))
         return _respond(start_response, "200 OK", "text/html; charset=utf-8", body)
 
-    if path == "/":
+    if path == "/cobertura-fuentes":
         body = b"".join(_html_response(_coverage_html_response()))
+        return _respond(start_response, "200 OK", "text/html; charset=utf-8", body)
+
+    if path == "/":
+        body = b"".join(_html_response(_catalog_html_response()))
         return _respond(start_response, "200 OK", "text/html; charset=utf-8", body)
 
     body = b"No encontrado"
