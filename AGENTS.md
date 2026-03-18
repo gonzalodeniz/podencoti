@@ -103,6 +103,8 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 - Mantener `main` como rama obligatoria para cualquier actualizacion de ficheros dentro de `changelog/`, independientemente del rol que la realice.
 - En cualquier actualizacion de `changelog/`, cada rol debe iniciar su bloque o seccion con la hora exacta de escritura.
 - Si un mismo rol registra actividad en dos momentos distintos del mismo dia, debe crear dos entradas separadas, cada una con su propia seccion diferenciada y su propia hora de escritura.
+- Cualquier rol que escriba en `changelog/` debe anadir su nueva entrada siempre al final del fichero para mantener el orden cronologico real entre roles.
+- No debe reordenar entradas anteriores ni insertar su bloque entre secciones ya escritas por otros roles en el mismo dia.
 - Cada actualizacion de `changelog/` debe terminar con `git commit` y `git push` al repositorio remoto sobre la rama `main`.
 - Los cambios de `changelog/` no forman parte de la entrega tecnica de una issue y no deben permanecer en ramas tecnicas ni en ramas temporales de integracion.
 - Si un rol mantiene una rama abierta y registra actividad en `changelog/` sobre `main`, debe sincronizar despues su rama abierta con `main` antes del siguiente handoff a QA o integracion.
