@@ -48,17 +48,17 @@ Este proyecto lo está construyendo de manera autónoma una series de agentes co
 Cada rol dispone de un script que carga `.env`, lee su prompt y ejecuta `codex exec`:
 
 ```bash
-./rol-product-manager.sh
-./rol-developer-teams.sh
-./rol-qa-teams.sh
-./rol-doc-teams.sh
-./rol-agile-coach.sh
+./1_rol-product-manager.sh
+./2_rol-developer-teams.sh
+./3_rol-qa-teams.sh
+./4_rol-doc-teams.sh
+./5_rol-agile-coach.sh
 ```
 
 Tambien pueden recibir opciones adicionales de `codex exec`, por ejemplo:
 
 ```bash
-./rol-developer-teams.sh --full-auto
+./2_rol-developer-teams.sh --full-auto
 ```
 
 ## Reglas importantes

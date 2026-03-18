@@ -40,11 +40,11 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 |-- qa-teams/
 |-- doc-teams/
 |-- agile-coach/
-|-- rol-product-manager.sh
-|-- rol-developer-teams.sh
-|-- rol-qa-teams.sh
-|-- rol-doc-teams.sh
-|-- rol-agile-coach.sh
+|-- 1_rol-product-manager.sh
+|-- 2_rol-developer-teams.sh
+|-- 3_rol-qa-teams.sh
+|-- 4_rol-doc-teams.sh
+|-- 5_rol-agile-coach.sh
 `-- run-codex.sh
 ```
 
@@ -65,7 +65,7 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 - `Makefile`: comandos de ejecucion local y pruebas.
 - `README.md`: descripcion general del proyecto y forma de uso.
 - `pyproject.toml`: metadatos y configuracion base del paquete Python.
-- `rol-*.sh`: scripts de entrada para ejecutar cada rol con su prompt correspondiente.
+- `*_rol-*.sh`: scripts de entrada para ejecutar cada rol con su prompt correspondiente.
 - `run-codex.sh`: script auxiliar de ejecucion de Codex.
 
 ## Vision del producto
