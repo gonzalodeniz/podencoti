@@ -35,7 +35,8 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 - Al tomar una issue debe escribir en la issue de GitHub un comentario de arranque usando de forma literal `Rama:` y `Estado operativo: en desarrollo`.
 - Al pasar una issue a `en desarrollo` o `listo para qa`, debe actualizar tambien en GitHub el campo `Estado operativo:` del cuerpo de la issue para que el backlog visible no quede desfasado.
 - Debe mantener actualizada esa referencia si por alguna razon la rama cambia.
-- La rama no debe fusionarse a `main` por iniciativa de `developer-teams`.
+- Solo tras la validacion explicita de `qa-teams`, `developer-teams` debe decidir y ejecutar la fusion de su rama tecnica a `main`.
+- Tras completar el merge a `main`, debe borrar de inmediato la rama tecnica correspondiente para no mantener ramas abiertas sin necesidad operativa.
 - Si cambia de rama durante su trabajo, el ultimo paso operativo al finalizar debe ser volver a la rama `main`.
 
 ## Implementacion y entrega
@@ -64,7 +65,7 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 
 - `product-manager` crea y define los issues.
 - Solo `product-manager` debe cerrar el issue una vez exista validacion explicita de `qa-teams`.
-- Solo despues de la validacion de `qa-teams` y de la decision de `product-manager` se realizara el merge de la rama a `main`.
+- Tras la validacion de `qa-teams`, `product-manager` debe realizar el cierre administrativo de la issue o dejar constancia explicita del motivo por el que permanece abierta.
 
 ## Politica de commits y push
 
@@ -125,12 +126,13 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 14. Hacer `git push` de la rama remota.
 15. Cambiar a `main` o coordinar la actualizacion necesaria para registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
 16. Esperar validacion de `qa-teams`.
-17. Terminar la tarea dejando el repositorio situado en la rama `main`.
+17. Si la issue queda validada, fusionar la rama tecnica en `main`.
+18. Borrar inmediatamente la rama tecnica tras completar el merge.
+19. Terminar la tarea dejando el repositorio situado en la rama `main`.
 
 ## Restricciones
 
 - No debe trabajar en varias tareas a la vez.
 - No debe cerrar issues.
-- No debe hacer merge a `main` por su cuenta.
 - No debe asumir validacion funcional sin confirmacion de `qa-teams`.
 - No debe abrir una tercera rama tecnica mientras ya existan dos ramas tecnicas activas en el proyecto.

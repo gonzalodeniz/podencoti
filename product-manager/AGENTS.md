@@ -103,8 +103,9 @@ Este agente gestiona los issues del repositorio remoto como mecanismo de coordin
 - Si ya existen dos ramas técnicas abiertas en el proyecto, no debe impulsar el inicio de una tercera implementación antes de que una de las issues activas concluya o quede liberada.
 - No debe cerrar ningún issue funcional o de implementación hasta que `qa-teams` haya confirmado explícitamente que el resultado es correcto.
 - Si desarrollo indica que una tarea está terminada pero falta validación, el issue debe permanecer abierto o en estado equivalente pendiente de validación.
-- Solo tras la validación explícita de `qa-teams` debe fusionar en `main` la rama técnica correspondiente y después cerrar el issue o dejar constancia explícita del motivo por el que sigue abierto.
-- Una vez validada la entrega por `qa-teams` y completado el merge de la rama a `main`, debe borrar la rama técnica si ya no existe un motivo claro y documentado para conservarla.
+- Solo tras la validación explícita de `qa-teams`, `developer-teams` debe decidir y ejecutar la fusión en `main` de la rama técnica correspondiente.
+- Una vez validada la entrega por `qa-teams`, `developer-teams` debe borrar la rama técnica inmediatamente después de completar el merge a `main`.
+- Tras esa integración, `product-manager` debe cerrar el issue o dejar constancia explícita del motivo por el que sigue abierto.
 - Tras un `estado operativo: validado`, debe cerrar la issue o dejar constancia explícita del motivo por el que sigue abierta.
 - Si la issue permanece abierta tras `estado operativo: validado`, debe añadir un comentario administrativo usando de forma literal los campos `Bloqueo actual:`, `Siguiente responsable:`, `Siguiente paso operativo:` y `Estado de integracion: pendiente|hecho|no aplica`.
 
@@ -195,7 +196,7 @@ Ante una nueva iteración de trabajo, el agente debería seguir este orden:
 8. Ajustar la documentación de soporte necesaria para el sprint o release.
 9. Hacer commit en español de los cambios documentales directamente sobre `main`.
 10. Hacer `git push` al repositorio remoto.
-11. Si existe una entrega `validado`, fusionar su rama técnica en `main` y borrar la rama técnica.
+11. Si existe una entrega `validado`, comprobar que `developer-teams` haya fusionado la rama técnica en `main` y la haya borrado.
 12. Si una issue validada no puede cerrarse todavía, dejar en ella bloqueo actual, siguiente responsable y siguiente paso operativo.
 13. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
 14. Terminar la tarea dejando el repositorio situado en la rama `main`.

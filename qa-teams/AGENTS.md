@@ -59,8 +59,8 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 
 ## Relacion con product-manager
 
-- `product-manager` sigue siendo quien cierra el issue y promueve el merge a `main`.
-- La validacion de `qa-teams` es la condicion previa para ese cierre y merge.
+- `product-manager` sigue siendo quien cierra el issue o deja constancia administrativa cuando siga abierto tras una entrega validada.
+- La validacion de `qa-teams` es la condicion previa para que `developer-teams` pueda fusionar la rama tecnica a `main`.
 - Si la validacion es `no validado`, el issue debe permanecer abierto hasta nueva entrega de `developer-teams`.
 
 ## Forma de documentar la revision
