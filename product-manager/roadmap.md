@@ -8,8 +8,8 @@
 ## Estado de referencia de la iteracion
 - Fecha de corte documental: 2026-03-19.
 - Estado confirmado: `PB-007` y `PB-006` ya fueron validados por `qa-teams` y sus entregas estan integradas en `main`.
-- Estado actual de trabajo tecnico: no hay ramas tecnicas abiertas en remoto en este momento.
-- Siguiente recomendacion para `developer-teams`: iniciar `PB-001` en la issue #3 como siguiente paso del Release 1.
+- Estado actual de trabajo tecnico: existen dos ramas tecnicas abiertas en remoto, pero `developer-teams/issue-4-ficha-detalle-licitacion` ya incorpora tambien `PB-001` y ambas entregas estan validadas por `qa-teams`.
+- Siguiente recomendacion para `developer-teams`: iniciar `PB-003` en la issue #5 una vez quede integrada en `main` la rama validada de `PB-002`.
 - Las decisiones funcionales sobre expedientes mixtos y sobre oportunidades anuladas, desiertas, desistidas o modificadas quedan ya definidas para evitar bloqueo de backlog posterior.
 
 ## Release 0: Delimitacion funcional del MVP
@@ -38,8 +38,8 @@
   - Que el equipo implemente un catalogo visible pero comunique cobertura o relevancia con mas seguridad de la que la release realmente soporta.
 - Estado operativo actual:
   - `PB-006` ya esta validado e integrado en `main` como prerequisito del catalogo.
-  - `PB-001` pasa a ser la siguiente pieza activa del Release 1.
-  - `PB-002` y `PB-003` deben mantenerse dependientes del catalogo para no romper la secuencia funcional del MVP.
+  - `PB-001` y `PB-002` ya fueron validados por `qa-teams` y deben quedar integrados administrativamente en `main` desde la rama validada de `PB-002`.
+  - `PB-003` pasa a ser la siguiente pieza activa del Release 1 para completar el MVP de descubrimiento filtrable.
 
 ## Release 2: Alertas y seguimiento operativo
 - Objetivo: Convertir el descubrimiento en uso recurrente y gestion operativa.
@@ -70,6 +70,6 @@
 - Definir en una iteracion posterior si las oportunidades modificadas deben generar historial visible de cambios, no solo el ultimo dato oficial.
 
 ## Decision operativa para la siguiente iteracion
-- La issue que debe tomar `developer-teams` a continuacion es la #3, asociada a `PB-001`.
-- La implementacion debe reutilizar la cobertura validada de `PB-007` y la regla auditable validada de `PB-006`.
-- No se recomienda iniciar `PB-002` ni `PB-003` antes de que exista una primera superficie estable del catalogo visible de `PB-001`.
+- La issue que debe tomar `developer-teams` a continuacion es la #5, asociada a `PB-003`.
+- La implementacion debe reutilizar la cobertura validada de `PB-007`, la regla auditable validada de `PB-006` y la superficie ya validada de catalogo y detalle.
+- No se recomienda iniciar `PB-004` ni `PB-005` antes de que `PB-003` complete el MVP de descubrimiento con capacidad de filtrado.

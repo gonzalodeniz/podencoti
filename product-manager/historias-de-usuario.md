@@ -19,7 +19,8 @@
   4. Si no hay oportunidades disponibles, se muestra un mensaje claro de estado vacio.
 - Dependencias funcionales: PB-007, PB-006
 - Prioridad: P0
-- Estado: `nuevo`
+- Estado: `cerrado`
+- Nota de estado: validado por `qa-teams` en la issue #3 el 2026-03-18; su entrega quedo pendiente solo de integracion administrativa en `main` y cierre por `product-manager`.
 
 ## HU-02 Evaluar una licitacion desde su ficha
 - Backlog relacionado: PB-002
@@ -37,7 +38,8 @@
   5. Si la fuente publica una rectificacion o modificacion del mismo expediente, la ficha refleja el ultimo dato oficial visible.
 - Dependencias funcionales: PB-001
 - Prioridad: P0
-- Estado: `nuevo`
+- Estado: `cerrado`
+- Nota de estado: validado por `qa-teams` en la issue #4 el 2026-03-19; su entrega incluye la base validada de `PB-001` y queda pendiente de integracion administrativa en `main` y cierre por `product-manager`.
 
 ## HU-03 Filtrar oportunidades relevantes
 - Backlog relacionado: PB-003

@@ -18,9 +18,11 @@ Traducir la vision de PodencoTI en trabajo priorizado, trazable y ejecutable par
 
 ## Estado de referencia de backlog
 - Fecha de corte funcional: 2026-03-19.
+- `PB-002` queda cerrado administrativamente: `qa-teams` lo valido en la issue #4 y su entrega se integrara en `main` junto con `PB-001` desde la rama tecnica ya validada.
+- `PB-001` queda cerrado administrativamente: `qa-teams` lo valido en la issue #3 y su entrega base ya viene incluida en la rama validada de `PB-002`.
 - `PB-007` queda cerrado administrativamente: su alcance fue validado por `qa-teams` y esta integrado en `main`.
 - `PB-006` queda cerrado administrativamente: `qa-teams` lo revalido en la issue #2 y la rama `feat/pb-006-clasificacion-ti-auditable` ya esta integrada en `main`.
-- La siguiente prioridad ejecutable para `developer-teams` sigue siendo `PB-001` en la issue #3.
+- La siguiente prioridad ejecutable para `developer-teams` pasa a ser `PB-003` en la issue #5.
 - En esta revision quedan cerradas dos decisiones de producto que ya no deben tratarse como preguntas abiertas:
   - Regla funcional para expedientes mixtos TI.
   - Tratamiento funcional minimo de oportunidades anuladas, desiertas, desistidas o modificadas.
@@ -29,8 +31,8 @@ Traducir la vision de PodencoTI en trabajo priorizado, trazable y ejecutable par
 
 | ID | Titulo | Descripcion | Prioridad | Valor de negocio | Criterios de aceptacion | Dependencias | Estado | Trazabilidad |
 |---|---|---|---|---|---|---|---|---|
-| PB-001 | Catalogo inicial de oportunidades TI de Canarias | El usuario debe poder consultar en un unico listado las licitaciones TI detectadas dentro de la cobertura MVP ya delimitada. | P0 | Permite validar la propuesta central de centralizacion y descubrimiento temprano. | 1. Existe un listado consultable de oportunidades TI. 2. Cada oportunidad muestra al menos titulo, organismo, ubicacion, presupuesto si existe, fecha limite y estado oficial del expediente si la fuente lo informa. 3. Solo se muestran oportunidades etiquetadas como TI segun reglas funcionales vigentes. 4. El usuario puede distinguir la fuente oficial de cada registro. 5. Si no hay oportunidades disponibles, se muestra un estado vacio claro. | PB-007, PB-006 | `nuevo` | HU-01, CU-01, issue #3 |
-| PB-002 | Ficha de detalle de licitacion | El usuario debe acceder a una vista con la informacion critica de cada oportunidad para decidir si merece seguimiento. | P0 | Reduce tiempo de analisis y evita revisar manualmente el pliego completo para un primer filtro. | 1. Desde el catalogo se accede al detalle. 2. La ficha muestra presupuesto, plazo, procedimiento, criterios de adjudicacion, solvencia tecnica si esta disponible y enlace a la fuente oficial. 3. El usuario puede identificar la fecha limite, el organismo convocante y el estado oficial del expediente sin ambiguedad. 4. Si un dato no esta disponible en origen, se muestra como no informado. 5. Si la oportunidad fue modificada y la fuente publica nueva fecha limite u otra variable critica, la ficha muestra el ultimo dato oficial disponible. | PB-001 | `nuevo` | HU-02, CU-02, issue #4 |
+| PB-001 | Catalogo inicial de oportunidades TI de Canarias | El usuario debe poder consultar en un unico listado las licitaciones TI detectadas dentro de la cobertura MVP ya delimitada. | P0 | Permite validar la propuesta central de centralizacion y descubrimiento temprano. | 1. Existe un listado consultable de oportunidades TI. 2. Cada oportunidad muestra al menos titulo, organismo, ubicacion, presupuesto si existe, fecha limite y estado oficial del expediente si la fuente lo informa. 3. Solo se muestran oportunidades etiquetadas como TI segun reglas funcionales vigentes. 4. El usuario puede distinguir la fuente oficial de cada registro. 5. Si no hay oportunidades disponibles, se muestra un estado vacio claro. | PB-007, PB-006 | `cerrado` | HU-01, CU-01, issue #3 |
+| PB-002 | Ficha de detalle de licitacion | El usuario debe acceder a una vista con la informacion critica de cada oportunidad para decidir si merece seguimiento. | P0 | Reduce tiempo de analisis y evita revisar manualmente el pliego completo para un primer filtro. | 1. Desde el catalogo se accede al detalle. 2. La ficha muestra presupuesto, plazo, procedimiento, criterios de adjudicacion, solvencia tecnica si esta disponible y enlace a la fuente oficial. 3. El usuario puede identificar la fecha limite, el organismo convocante y el estado oficial del expediente sin ambiguedad. 4. Si un dato no esta disponible en origen, se muestra como no informado. 5. Si la oportunidad fue modificada y la fuente publica nueva fecha limite u otra variable critica, la ficha muestra el ultimo dato oficial disponible. | PB-001 | `cerrado` | HU-02, CU-02, issue #4 |
 | PB-003 | Filtros funcionales de busqueda | El usuario debe poder filtrar oportunidades por palabras clave, presupuesto, procedimiento y ubicacion. | P0 | Aumenta relevancia y hace util el volumen de datos agregado. | 1. El usuario puede aplicar filtros por palabra clave, rango de presupuesto, procedimiento y ubicacion. 2. El listado refleja los filtros activos. 3. El usuario puede limpiar los filtros. 4. Si no hay resultados, se muestra un estado vacio comprensible. | PB-001 | `nuevo` | HU-03, CU-03, issue #5 |
 | PB-006 | Reglas funcionales de clasificacion TI | El producto debe establecer reglas verificables para decidir si una oportunidad es relevante para tecnologia antes de ampliar el catalogo. | P0 | Reduce falsos positivos, evita debates posteriores con QA y protege la utilidad del catalogo. | 1. Existe un criterio funcional documentado de inclusion TI. 2. El criterio contempla CPVs, palabras clave y casos frontera. 3. Las exclusiones relevantes quedan explicitadas. 4. `qa-teams` puede contrastar una muestra representativa con estas reglas desde una superficie funcional verificable. | PB-007 | `cerrado` | HU-06, CU-08, issue #2 |
 | PB-007 | Cobertura inicial de fuentes prioritarias | El MVP debe delimitar que fuentes oficiales entran en la primera entrega para evitar ambiguedad de alcance y expectativas incorrectas. | P0 | Permite planificar entrega incremental y medir cobertura real. | 1. Existe una lista priorizada de fuentes objetivo para la primera release. 2. Cada fuente tiene estado de inclusion objetivo: `MVP`, `Posterior` o `Por definir`. 3. La definicion queda alineada con roadmap y backlog. 4. La entrega no induce a pensar que existe cobertura total del ecosistema canario. | Ninguna | `cerrado` | HU-07, CU-06, issue #1 |
@@ -48,16 +50,14 @@ Traducir la vision de PodencoTI en trabajo priorizado, trazable y ejecutable par
 - Cuando una oportunidad sea modificada o rectificada, el producto debe mantener la misma referencia funcional si el expediente sigue siendo el mismo y exponer el ultimo dato oficial disponible en variables criticas.
 
 ## Orden recomendado para `developer-teams`
-1. PB-001
-2. PB-002
-3. PB-003
-4. PB-004
-5. PB-005
-6. PB-008
+1. PB-003
+2. PB-004
+3. PB-005
+4. PB-008
 
 ## Notas de priorizacion
 - `PB-007` y `PB-006` ya cumplieron su objetivo y quedan cerrados administrativamente tras validacion e integracion en `main`.
-- `PB-001`, `PB-002` y `PB-003` conforman el MVP navegable minimo para validar descubrimiento y primera evaluacion.
+- `PB-001` y `PB-002` ya quedaron validados por `qa-teams`; tras su integracion administrativa en `main`, `PB-003` pasa a ser la siguiente ampliacion necesaria del MVP navegable.
 - `PB-004` y `PB-005` extienden el valor diferencial y la retencion tras validar descubrimiento.
 - `PB-008` queda fuera del camino critico del MVP, pero debe prepararse antes de una ampliacion comercial o de cobertura.
 
