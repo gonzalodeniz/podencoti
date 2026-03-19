@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import json
 from html import escape
+from urllib.parse import quote
 from wsgiref.simple_server import make_server
 
+from podencoti.opportunity_catalog import build_catalog, build_opportunity_detail
 from podencoti.source_coverage import load_source_coverage, summary_by_status
 from podencoti.ti_classification import audit_examples, load_rule_set
 
@@ -240,6 +242,178 @@ def _coverage_html_response() -> str:
     )
 
 
+def _format_budget(amount: int | None) -> str:
+    if amount is None:
+        return "Presupuesto no informado"
+    formatted = f"{amount:,.0f}".replace(",", ".")
+    return f"{formatted} EUR"
+
+
+def _detail_url(opportunity_id: str) -> str:
+    return f"/oportunidades/{quote(opportunity_id)}"
+
+
+def _catalog_html_response() -> str:
+    catalog = build_catalog()
+    opportunities = catalog["oportunidades"]
+
+    if opportunities:
+        rows = "\n".join(
+            (
+                "<tr>"
+                f'<td data-label="Oportunidad"><a href="{escape(_detail_url(item["id"]))}">{escape(item["titulo"])}</a></td>'
+                f'<td data-label="Organismo">{escape(item["organismo"])}</td>'
+                f'<td data-label="Ubicación">{escape(item["ubicacion"])}</td>'
+                f'<td data-label="Procedimiento">{escape(item["procedimiento"] or "No informado")}</td>'
+                f'<td data-label="Presupuesto">{escape(_format_budget(item["presupuesto"]))}</td>'
+                f'<td data-label="Fecha límite">{escape(item["fecha_limite"])}</td>'
+                f'<td data-label="Estado">{escape(item["estado"])}</td>'
+                f'<td data-label="Fuente oficial"><a href="{escape(item["url_fuente_oficial"])}">{escape(item["fuente_oficial"])}</a></td>'
+                "</tr>"
+            )
+            for item in opportunities
+        )
+        catalog_panel = f"""
+      <section class="panel">
+        <div class="panel-body">
+          <div class="summary">
+            <article class="metric"><strong>{catalog["total_oportunidades_catalogo"]}</strong>Oportunidades TI visibles</article>
+            <article class="metric"><strong>{len(catalog["cobertura_aplicada"])}</strong>Fuentes oficiales MVP aplicadas</article>
+            <article class="metric"><strong>{catalog["total_registros_origen"]}</strong>Registros evaluados en origen</article>
+          </div>
+          <p class="muted">
+            El catálogo reutiliza la cobertura MVP de <code>PB-007</code> y la clasificación auditable de <code>PB-006</code>.
+            No representa todavía cobertura total del ecosistema canario.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Oportunidad</th>
+              <th>Organismo</th>
+              <th>Ubicación</th>
+              <th>Procedimiento</th>
+              <th>Presupuesto</th>
+              <th>Fecha límite</th>
+              <th>Estado</th>
+              <th>Fuente oficial</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
+      </section>
+        """
+    else:
+        catalog_panel = """
+      <section class="note">
+        No hay oportunidades TI disponibles dentro de la cobertura MVP en este momento.
+      </section>
+        """
+
+    content = f"""
+      {catalog_panel}
+
+      <p class="note">
+        Referencia funcional activa: <code>{escape(catalog["referencia_funcional"])}</code>.
+        Cada registro mantiene visible su fuente oficial para facilitar verificación por <code>qa-teams</code>.
+      </p>
+    """
+    return _page_template(
+        "PodencoTI | Catálogo inicial de oportunidades TI",
+        "Catálogo inicial de oportunidades TI de Canarias",
+        "Release 1 · PB-001 · Descubrimiento inicial verificable",
+        (
+            "PodencoTI muestra aquí un primer catálogo consultable de oportunidades TI dentro de la cobertura MVP ya delimitada. "
+            "Solo se publican registros clasificados como TI y con fuente oficial visible."
+        ),
+        content,
+    )
+
+
+def _detail_html_response(opportunity_id: str) -> str | None:
+    detail = build_opportunity_detail(opportunity_id)
+    if detail is None:
+        return None
+
+    update = detail["actualizacion_oficial_mas_reciente"]
+    update_panel = ""
+    if update is not None:
+        update_panel = f"""
+      <section class="note">
+        La ficha refleja el ultimo dato oficial visible publicado el <strong>{escape(str(update["fecha_publicacion"]))}</strong>
+        mediante <strong>{escape(str(update["tipo"]))}</strong>.
+        {escape(str(update["resumen"]))}
+      </section>
+        """
+
+    criteria_items = detail["criterios_adjudicacion"]
+    if criteria_items:
+        criteria_html = "<ul>" + "".join(
+            f"<li>{escape(str(item))}</li>" for item in criteria_items
+        ) + "</ul>"
+    else:
+        criteria_html = "<p>No informado</p>"
+
+    solvency_html = escape(str(detail["solvencia_tecnica"] or "No informado"))
+    latest_fields = f"""
+      <section class="panel">
+        <div class="panel-body">
+          <p><a href="/">Volver al catalogo</a></p>
+          <div class="summary">
+            <article class="metric"><strong>{escape(str(detail["estado"]))}</strong>Estado oficial visible</article>
+            <article class="metric"><strong>{escape(str(detail["fecha_limite"]))}</strong>Fecha limite visible</article>
+            <article class="metric"><strong>{escape(_format_budget(detail["presupuesto"]))}</strong>Presupuesto visible</article>
+          </div>
+          <table>
+            <tbody>
+              <tr><th>Organismo convocante</th><td>{escape(str(detail["organismo"]))}</td></tr>
+              <tr><th>Ubicacion</th><td>{escape(str(detail["ubicacion"]))}</td></tr>
+              <tr><th>Procedimiento</th><td>{escape(str(detail["procedimiento"] or "No informado"))}</td></tr>
+              <tr><th>Presupuesto</th><td>{escape(_format_budget(detail["presupuesto"]))}</td></tr>
+              <tr><th>Fecha limite</th><td>{escape(str(detail["fecha_limite"]))}</td></tr>
+              <tr><th>Estado oficial del expediente</th><td>{escape(str(detail["estado"]))}</td></tr>
+              <tr><th>Fuente oficial</th><td><a href="{escape(str(detail["url_fuente_oficial"]))}">{escape(str(detail["fuente_oficial"]))}</a></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-body">
+          <h2>Contexto resumido</h2>
+          <p>{escape(str(detail["descripcion"]))}</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-body">
+          <h2>Solvencia tecnica</h2>
+          <p>{solvency_html}</p>
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-body">
+          <h2>Criterios de adjudicacion</h2>
+          {criteria_html}
+        </div>
+      </section>
+    """
+
+    return _page_template(
+        "PodencoTI | Ficha de detalle de licitacion",
+        str(detail["titulo"]),
+        "Release 1 · PB-002 · Ficha resumida verificable",
+        (
+            "La ficha resume los datos criticos del expediente y mantiene visible la fuente oficial. "
+            "Cuando existe una rectificacion o modificacion publicada por el origen, se muestra el ultimo dato oficial visible."
+        ),
+        update_panel + latest_fields,
+    )
+
+
 def _classification_html_response() -> str:
     rules = load_rule_set()
     audited_examples = audit_examples(rules)
@@ -351,6 +525,19 @@ def _respond(start_response, status: str, content_type: str, body: bytes) -> lis
 def application(environ, start_response):
     path = environ.get("PATH_INFO", "/")
 
+    if path.startswith("/api/oportunidades/"):
+        opportunity_id = path.removeprefix("/api/oportunidades/")
+        detail = build_opportunity_detail(opportunity_id)
+        if detail is None:
+            body = b"No encontrado"
+            return _respond(start_response, "404 Not Found", "text/plain; charset=utf-8", body)
+        body = b"".join(_json_response(detail))
+        return _respond(start_response, "200 OK", "application/json; charset=utf-8", body)
+
+    if path == "/api/oportunidades":
+        body = b"".join(_json_response(build_catalog()))
+        return _respond(start_response, "200 OK", "application/json; charset=utf-8", body)
+
     if path == "/api/fuentes":
         sources = load_source_coverage()
         payload = {
@@ -380,8 +567,21 @@ def application(environ, start_response):
         body = b"".join(_html_response(_classification_html_response()))
         return _respond(start_response, "200 OK", "text/html; charset=utf-8", body)
 
-    if path == "/":
+    if path == "/cobertura-fuentes":
         body = b"".join(_html_response(_coverage_html_response()))
+        return _respond(start_response, "200 OK", "text/html; charset=utf-8", body)
+
+    if path.startswith("/oportunidades/"):
+        opportunity_id = path.removeprefix("/oportunidades/")
+        content = _detail_html_response(opportunity_id)
+        if content is None:
+            body = b"No encontrado"
+            return _respond(start_response, "404 Not Found", "text/plain; charset=utf-8", body)
+        body = b"".join(_html_response(content))
+        return _respond(start_response, "200 OK", "text/html; charset=utf-8", body)
+
+    if path == "/":
+        body = b"".join(_html_response(_catalog_html_response()))
         return _respond(start_response, "200 OK", "text/html; charset=utf-8", body)
 
     body = b"No encontrado"
