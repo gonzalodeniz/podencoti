@@ -11,16 +11,16 @@ Dejar una referencia unica y accionable sobre que capacidades estan disponibles 
 - Rama revisada: `main`
 - Verificacion ejecutada:
   - `PYTHONPATH=src python3 -m unittest discover -s tests -v`
-  - comprobacion directa de rutas `/`, `/api/fuentes`, `/clasificacion-ti`, `/api/clasificacion-ti`, `/oportunidades` y `/api/oportunidades`
+  - comprobacion directa de rutas `/`, `/api/oportunidades`, `/oportunidades/pcsp-cabildo-licencias-2026`, `/api/oportunidades/pcsp-cabildo-licencias-2026`, `/cobertura-fuentes`, `/api/fuentes`, `/clasificacion-ti` y `/api/clasificacion-ti`
 
 ## Matriz actual
 
 | Elemento | Fuente funcional | Evidencia tecnica en `main` | Estado real observable | Publico principal | Notas |
 |---|---|---|---|---|---|
-| Cobertura inicial de fuentes | `PB-007`, `HU-07`, `CU-06`, `product-manager/refinamiento-funcional.md` | `data/source_coverage.json`, `src/podencoti/source_coverage.py`, `src/podencoti/app.py`, `tests/test_source_coverage.py`, `tests/test_app.py` | Disponible | Usuario, tecnico, administracion | Visible en `/` y `/api/fuentes`. |
+| Catalogo de oportunidades TI | `PB-001`, `HU-01`, `CU-01` | `data/opportunities.json`, `src/podencoti/opportunity_catalog.py`, `src/podencoti/app.py`, `tests/test_opportunity_catalog.py`, `tests/test_app.py` | Disponible | Usuario, producto, tecnico | Visible en `/` y `/api/oportunidades`; publica solo oportunidades TI dentro de la cobertura MVP. |
+| Ficha de detalle de licitacion | `PB-002`, `HU-02`, `CU-02` | `data/opportunities.json`, `src/podencoti/opportunity_catalog.py`, `src/podencoti/app.py`, `tests/test_opportunity_catalog.py`, `tests/test_app.py` | Disponible | Usuario, producto, tecnico | Visible en `/oportunidades/<id>` y `/api/oportunidades/<id>`; aplica el ultimo dato oficial visible cuando hay rectificacion o modificacion. |
+| Cobertura inicial de fuentes | `PB-007`, `HU-07`, `CU-06`, `product-manager/refinamiento-funcional.md` | `data/source_coverage.json`, `src/podencoti/source_coverage.py`, `src/podencoti/app.py`, `tests/test_source_coverage.py`, `tests/test_app.py` | Disponible | Usuario, tecnico, administracion | Visible en `/cobertura-fuentes` y `/api/fuentes`. |
 | Clasificacion TI auditable | `PB-006`, `HU-06`, `CU-08`, `product-manager/refinamiento-funcional.md` | `data/ti_classification_rules.json`, `src/podencoti/ti_classification.py`, `src/podencoti/app.py`, `tests/test_ti_classification.py`, `tests/test_app.py` | Disponible | Usuario, tecnico, QA, producto | Visible en `/clasificacion-ti` y `/api/clasificacion-ti`. |
-| Catalogo de oportunidades TI | `PB-001`, `HU-01`, `CU-01` | No existe modulo, ruta ni datos versionados de catalogo en `src/` o `data/` | No disponible en `main` | Usuario, producto | `/oportunidades` y `/api/oportunidades` responden `404 Not Found`. |
-| Ficha de detalle de licitacion | `PB-002`, `HU-02`, `CU-02` | No existe modulo, ruta ni pruebas especificas de detalle en `src/` o `tests/` | No disponible en `main` | Usuario, producto | La narrativa del `changelog` no coincide con el codigo actual revisado. |
 | Filtros funcionales | `PB-003`, `HU-03`, `CU-03` | No existe soporte visible en vistas, API, datos o pruebas | No disponible en `main` | Usuario, producto | Sigue como backlog dependiente del catalogo. |
 | Alertas tempranas | `PB-004`, `HU-04`, `CU-04` | No existe soporte visible en vistas, API, datos o pruebas | No disponible en `main` | Usuario, producto | Sigue como backlog de Release 2. |
 | Pipeline de seguimiento | `PB-005`, `HU-05`, `CU-05` | No existe soporte visible en vistas, API, datos o pruebas | No disponible en `main` | Usuario, producto | Sigue como backlog de Release 2. |
@@ -28,10 +28,9 @@ Dejar una referencia unica y accionable sobre que capacidades estan disponibles 
 | Despliegue productivo | Vision general y necesidad operativa futura | Solo existe `wsgiref.simple_server` en `src/podencoti/app.py` | No soportado documentalmente | Administracion, tecnico | El repositorio no incluye `Dockerfile`, `systemd`, proxy ni healthcheck. |
 
 ## Contradicciones documentales abiertas
-- `changelog/2026-03-18.md` contiene afirmaciones incompatibles entre si y con el arbol actual: unas entradas dicen que no habia implementacion versionada y otras hablan de rutas de catalogo ya validadas.
-- `changelog/2026-03-19.md` afirma que `PB-002` fue implementado y validado con navegacion a fichas de detalle, pero esa superficie no existe hoy en `src/podencoti/` ni en `tests/`.
-- `pyproject.toml` solo menciona cobertura de fuentes en la descripcion del paquete, aunque el codigo actual tambien incluye la superficie de clasificacion TI auditable.
+- `pyproject.toml` solo menciona cobertura de fuentes en la descripcion del paquete, aunque el codigo actual tambien incluye catalogo inicial, ficha de detalle y clasificacion TI auditable.
+- La documentacion funcional mantiene capacidades futuras validas como filtros, alertas y pipeline, pero no hay evidencia tecnica visible de esas capacidades en `main`.
 
 ## Dependencias abiertas para siguiente revision documental
-- Sincronizar documentalmente el estado operativo historico con el estado real de `main` para reducir ambiguedad entre roles.
-- Revisar de nuevo esta matriz cuando `developer-teams` entregue una implementacion observable de `PB-001`, `PB-002` o `PB-003`.
+- Revisar de nuevo esta matriz cuando `developer-teams` entregue una implementacion observable de `PB-003`, `PB-004` o `PB-005`.
+- Sincronizar la metadata tecnica del paquete si se quiere reducir la brecha entre descripcion y comportamiento observable.

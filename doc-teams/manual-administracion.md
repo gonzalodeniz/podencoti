@@ -25,14 +25,18 @@ make run
 ```
 
 ## Resultado esperado en esta revision
-- `make test` ejecuta 15 pruebas y termina en verde.
+- `make test` ejecuta 26 pruebas y termina en verde.
 - `make run` publica el mensaje `Servidor disponible en http://127.0.0.1:8000`.
-- Mientras el proceso esta levantado, las rutas `/`, `/api/fuentes`, `/clasificacion-ti` y `/api/clasificacion-ti` responden `200 OK`.
+- Mientras el proceso esta levantado, las rutas `/`, `/api/oportunidades`, `/oportunidades/pcsp-cabildo-licencias-2026`, `/api/oportunidades/pcsp-cabildo-licencias-2026`, `/cobertura-fuentes`, `/api/fuentes`, `/clasificacion-ti` y `/api/clasificacion-ti` responden `200 OK`.
 
 ## Verificaciones operativas minimas
-- Abrir `http://127.0.0.1:8000/` para revisar la cobertura inicial del MVP.
+- Abrir `http://127.0.0.1:8000/` para revisar el catalogo inicial de oportunidades TI.
+- Abrir `http://127.0.0.1:8000/oportunidades/pcsp-cabildo-licencias-2026` para revisar una ficha de detalle con rectificacion visible.
+- Abrir `http://127.0.0.1:8000/cobertura-fuentes` para revisar la cobertura inicial del MVP.
 - Abrir `http://127.0.0.1:8000/clasificacion-ti` para revisar la regla TI auditable.
 - Consultar las salidas JSON para integracion basica o soporte QA:
+  - `http://127.0.0.1:8000/api/oportunidades`
+  - `http://127.0.0.1:8000/api/oportunidades/pcsp-cabildo-licencias-2026`
   - `http://127.0.0.1:8000/api/fuentes`
   - `http://127.0.0.1:8000/api/clasificacion-ti`
 
@@ -51,8 +55,8 @@ No existe en `main`:
 
 ## Riesgos operativos
 - Las superficies actuales son utiles para validacion temprana, pero no para explotacion operativa continua.
-- Comunicar que el producto ya ofrece catalogo, filtros o pipeline induciria a error.
-- El changelog contiene entradas contradictorias; para soporte operativo debe prevalecer el codigo y las verificaciones reproducibles de esta rama.
+- Comunicar que el producto ya ofrece filtros, alertas o pipeline induciria a error.
+- `pyproject.toml` sigue describiendo una superficie mas estrecha que la observable hoy; para soporte operativo debe prevalecer el codigo, las rutas verificadas y esta documentacion.
 
 ## Dependencias abiertas para administracion
 - Definir estrategia de despliegue productivo cuando exista una aplicacion mas alla del servidor local de demostracion.

@@ -39,7 +39,7 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
 
 Resultado esperado en esta revision:
-- 15 pruebas en verde
+- 26 pruebas en verde
 
 2. Comprueba el objetivo de pruebas del `Makefile`:
 
@@ -63,6 +63,10 @@ Resultado esperado en esta revision:
 
 ```bash
 curl -i http://127.0.0.1:8000/
+curl -i http://127.0.0.1:8000/api/oportunidades
+curl -i http://127.0.0.1:8000/oportunidades/pcsp-cabildo-licencias-2026
+curl -i http://127.0.0.1:8000/api/oportunidades/pcsp-cabildo-licencias-2026
+curl -i http://127.0.0.1:8000/cobertura-fuentes
 curl -i http://127.0.0.1:8000/api/fuentes
 curl -i http://127.0.0.1:8000/clasificacion-ti
 curl -i http://127.0.0.1:8000/api/clasificacion-ti
@@ -70,15 +74,14 @@ curl -i http://127.0.0.1:8000/api/clasificacion-ti
 
 ## Que queda instalado realmente
 - Paquete `podencoti` en modo editable.
-- Aplicacion WSGI local para cobertura y clasificacion TI auditables.
+- Aplicacion WSGI local para catalogo inicial, ficha de detalle, cobertura y clasificacion TI auditables.
 - Acceso a datos versionados en `data/` y a la suite automatizada en `tests/`.
 
 ## Que no queda disponible
-- Catalogo real de oportunidades.
-- Detalle de licitaciones.
 - Filtros, alertas o pipeline.
 - Componentes de despliegue productivo.
 
 ## Limitaciones y dependencias abiertas
-- La instalacion deja operativa una entrega minima de validacion, no el MVP completo descrito en backlog.
-- Algunas entradas del historial operativo del repositorio no reflejan el estado actual del codigo; verifica siempre contra esta guia y contra las pruebas.
+- La instalacion deja operativa una entrega minima de descubrimiento, no el MVP completo descrito en backlog.
+- Los datos del catalogo son versionados y estaticos; no existe todavia rastreo automatizado en ejecucion local.
+- `pyproject.toml` sigue describiendo una release mas limitada que la realmente visible; verifica siempre contra esta guia, el codigo y las pruebas.
