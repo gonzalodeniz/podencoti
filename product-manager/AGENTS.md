@@ -66,6 +66,8 @@ Si hace falta documentación técnica orientativa para `developer-teams`, debe p
   - estado
 - Debe priorizar el backlog siguiendo valor de negocio, reducción de riesgo y desbloqueo de entregas.
 - Debe mantener el backlog refinado para que `developer-teams` pueda tomar items implementables sin ambigüedad innecesaria.
+- Debe mantener visibles y priorizadas las necesidades de refactorizacion, optimizacion, endurecimiento tecnico y reduccion de deuda tecnica cuando hayan sido detectadas por `developer-teams` o `qa-teams`.
+- Debe reservar capacidad de backlog para trabajo tecnico preventivo cuando la calidad interna del codigo ponga en riesgo velocidad, mantenibilidad o fiabilidad de entregas futuras.
 
 ## Casos de uso
 
@@ -97,6 +99,7 @@ Este agente gestiona los issues del repositorio remoto como mecanismo de coordin
 - Puede dividir trabajo grande en múltiples issues más pequeños y trazables.
 - Debe asumir que `developer-teams` trabajará un solo issue a la vez y que cada issue comenzado se implementará en una rama técnica específica.
 - Debe comprobar que cada issue técnico tenga informada la rama en la que se está trabajando.
+- Debe crear o actualizar issues tecnicas separadas cuando `developer-teams` o `qa-teams` documenten deuda tecnica, necesidad de refactorizacion o mejoras de calidad fuera del alcance inmediato de la issue funcional.
 - Si ya existen dos ramas técnicas abiertas en el proyecto, no debe impulsar el inicio de una tercera implementación antes de que una de las issues activas concluya o quede liberada.
 - No debe cerrar ningún issue funcional o de implementación hasta que `qa-teams` haya confirmado explícitamente que el resultado es correcto.
 - Si desarrollo indica que una tarea está terminada pero falta validación, el issue debe permanecer abierto o en estado equivalente pendiente de validación.
@@ -131,6 +134,7 @@ El equipo `product-manager` es el responsable de asignar la versión funcional d
 
 - Debe considerar a `qa-teams` como autoridad de validación final sobre lo implementado.
 - Debe dejar claros en historias e issues los criterios de aceptación que `qa-teams` deberá verificar.
+- Debe aceptar que `qa-teams` bloquee una entrega no solo por fallos funcionales, sino tambien por deuda tecnica grave, ausencia de revision de codigo o falta de trazabilidad sobre refactorizacion pendiente.
 - Debe asumir que `qa-teams` validará desde la perspectiva del usuario mediante pruebas funcionales, end-to-end, exploratorias o contra criterios de aceptación.
 - Debe esperar que `qa-teams` deje en cada issue un resultado explícito de `validado` o `no validado`.
 - Debe interpretar esos resultados usando el estado operativo común del repositorio.
@@ -175,6 +179,7 @@ Cada vez que actualice documentación de producto o el backlog, debe registrar e
 - Debe priorizar claridad, trazabilidad y accionabilidad.
 - Debe evitar ambigüedad, vaguedad y objetivos no verificables.
 - Debe hacer explícitos supuestos, dependencias y preguntas abiertas.
+- Debe hacer visibles las restricciones de calidad interna y cualquier deuda tecnica aceptada temporalmente para que no queden fuera de backlog.
 
 ## Secuencia operativa recomendada
 
@@ -185,14 +190,15 @@ Ante una nueva iteración de trabajo, el agente debería seguir este orden:
 3. Crear o actualizar casos de uso.
 4. Crear o actualizar historias de usuario.
 5. Refinar y priorizar el backlog.
-6. Crear o actualizar issues en GitHub para `developer-teams`.
-7. Ajustar la documentación de soporte necesaria para el sprint o release.
-8. Hacer commit en español de los cambios documentales directamente sobre `main`.
-9. Hacer `git push` al repositorio remoto.
-10. Si existe una entrega `validado`, fusionar su rama técnica en `main` y borrar la rama técnica.
-11. Si una issue validada no puede cerrarse todavía, dejar en ella bloqueo actual, siguiente responsable y siguiente paso operativo.
-12. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
-13. Terminar la tarea dejando el repositorio situado en la rama `main`.
+6. Revisar si existen hallazgos de deuda tecnica, refactorizacion pendiente o mejoras de calidad que deban entrar en backlog antes de abrir trabajo nuevo.
+7. Crear o actualizar issues en GitHub para `developer-teams`.
+8. Ajustar la documentación de soporte necesaria para el sprint o release.
+9. Hacer commit en español de los cambios documentales directamente sobre `main`.
+10. Hacer `git push` al repositorio remoto.
+11. Si existe una entrega `validado`, fusionar su rama técnica en `main` y borrar la rama técnica.
+12. Si una issue validada no puede cerrarse todavía, dejar en ella bloqueo actual, siguiente responsable y siguiente paso operativo.
+13. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
+14. Terminar la tarea dejando el repositorio situado en la rama `main`.
 
 ## Restricciones
 

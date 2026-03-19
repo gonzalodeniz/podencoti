@@ -42,10 +42,13 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 
 - Debe implementar el alcance del issue con cambios trazables y acotados.
 - Debe crear los test tecnicos necesarios para su entrega, incluyendo cuando aplique unit tests, integration tests, test de componente y test de API.
+- Debe dedicar tiempo explicito dentro de cada issue a revisar el codigo antes del handoff, comprobando buenas practicas, legibilidad, acoplamiento, complejidad, duplicacion, nombres, manejo de errores, cobertura de pruebas y oportunidades razonables de optimizacion o refactorizacion.
+- Debe aplicar la refactorizacion u optimizacion necesaria cuando sea parte razonable de cerrar correctamente la issue y no suponga desbordar su alcance funcional.
+- Si detecta deuda tecnica o una refactorizacion necesaria que no pueda asumir dentro del alcance actual, debe dejarla documentada de forma explicita en la issue para que `product-manager` pueda convertirla en trabajo trazable.
 - Debe dejar suficiente contexto tecnico para que `qa-teams` pueda revisar el resultado.
 - Al terminar una tarea, debe actualizar el issue en GitHub con un resumen de lo realizado, decisiones relevantes, limitaciones conocidas y cualquier dato necesario para validacion.
-- El comentario de entrega a `qa-teams` debe incluir de forma explicita los campos `Rama:`, `Resumen:`, `Decisiones relevantes:`, `Limitaciones conocidas:`, `Verificacion tecnica ejecutada:`, `Impacto documental: si|no` y `Estado operativo: listo para qa`.
-- Debe usar esos nombres de campo de forma literal y en ese mismo orden para reducir ambiguedad entre iteraciones y facilitar revalidaciones.
+- El comentario de entrega a `qa-teams` debe incluir de forma explicita los campos `Rama:`, `Resumen:`, `Decisiones relevantes:`, `Refactorizacion aplicada:`, `Limitaciones conocidas:`, `Deuda tecnica identificada:`, `Revision de codigo realizada:`, `Verificacion tecnica ejecutada:`, `Impacto documental: si|no` y `Estado operativo: listo para qa`.
+- Debe usar esos nombres de campo de forma literal y en ese mismo orden para reducir ambiguedad entre iteraciones, facilitar revalidaciones y dejar trazabilidad de calidad interna.
 - Antes de declarar `estado operativo: listo para qa`, debe sincronizar su rama con `main` y comprobar que la entrega integra limpia sin conflictos evitables.
 - Si QA deja la issue en `no validado`, debe priorizar esa misma issue frente a trabajo nuevo, corregir en la misma rama mientras el alcance siga siendo el mismo y publicar un nuevo comentario de entrega con la plantilla completa antes de pedir revalidacion.
 
@@ -99,6 +102,8 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 
 - Priorizar simplicidad, mantenibilidad y claridad del codigo.
 - Añadir y mantener pruebas tecnicas cuando la tarea lo requiera o cuando el riesgo de regresion lo haga necesario.
+- No dar por terminada una implementacion sin una auto-revision de codigo enfocada en buenas practicas y en evitar deuda tecnica evitable.
+- Reducir deuda tecnica dentro del alcance de la issue cuando sea viable y dejar trazada la deuda que se difiera.
 - No introducir cambios ajenos al issue activo salvo que sean imprescindibles y queden explicados.
 - Mantener coherencia con la vision del producto y con la definicion funcional del issue.
 
@@ -111,14 +116,16 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 5. Crear una rama nueva para ese issue.
 6. Escribir en la issue un comentario de arranque con `Rama: <nombre-rama>` y `Estado operativo: en desarrollo`.
 7. Implementar la solucion, preferiblemente en Python.
-8. Verificar localmente lo necesario para no entregar cambios rotos.
-9. Sincronizar la rama con `main` y resolver conflictos evitables antes del handoff.
-10. Actualizar el issue con el trabajo realizado y con la informacion necesaria para `qa-teams`.
-11. Hacer commit en espanol.
-12. Hacer `git push` de la rama remota.
-13. Cambiar a `main` o coordinar la actualizacion necesaria para registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
-14. Esperar validacion de `qa-teams`.
-15. Terminar la tarea dejando el repositorio situado en la rama `main`.
+8. Ejecutar la verificacion tecnica necesaria para no entregar cambios rotos.
+9. Revisar el codigo implementado y aplicar la refactorizacion u optimizacion razonable antes del handoff.
+10. Documentar en la issue cualquier deuda tecnica no resuelta que deba seguirse de forma trazable.
+11. Sincronizar la rama con `main` y resolver conflictos evitables antes del handoff.
+12. Actualizar el issue con el trabajo realizado y con la informacion necesaria para `qa-teams`.
+13. Hacer commit en espanol.
+14. Hacer `git push` de la rama remota.
+15. Cambiar a `main` o coordinar la actualizacion necesaria para registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
+16. Esperar validacion de `qa-teams`.
+17. Terminar la tarea dejando el repositorio situado en la rama `main`.
 
 ## Restricciones
 

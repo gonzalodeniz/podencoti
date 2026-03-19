@@ -26,6 +26,8 @@ Antes de que `developer-teams` abra una rama, la issue debe incluir como minimo 
 
 Si falta alguno de estos campos, la issue no debe considerarse lista para desarrollo y `product-manager` debe completarla antes del inicio tecnico.
 
+Ademas, `product-manager` debe vigilar que la deuda tecnica relevante detectada en iteraciones previas este trazada en backlog y no quede fuera del sistema de priorizacion.
+
 ## Arranque minimo de `developer-teams`
 Cuando `developer-teams` tome una issue debe publicar un comentario de arranque con esta plantilla minima:
 
@@ -42,7 +44,10 @@ El comentario final de entrega de `developer-teams` debe incluir como minimo:
 - `Rama:`
 - `Resumen:`
 - `Decisiones relevantes:`
+- `Refactorizacion aplicada:`
 - `Limitaciones conocidas:`
+- `Deuda tecnica identificada:`
+- `Revision de codigo realizada:`
 - `Verificacion tecnica ejecutada:`
 - `Impacto documental: si|no`
 - `Estado operativo: listo para qa`
@@ -55,7 +60,13 @@ Resumen:
 - ...
 Decisiones relevantes:
 - ...
+Refactorizacion aplicada:
+- ...
 Limitaciones conocidas:
+- ...
+Deuda tecnica identificada:
+- ...
+Revision de codigo realizada:
 - ...
 Verificacion tecnica ejecutada:
 - <comando o evidencia>
@@ -69,6 +80,7 @@ Al publicar este handoff, `developer-teams` debe actualizar tambien el `Estado o
 El comentario de revision de `qa-teams` debe incluir como minimo:
 - `Rama revisada:`
 - `Pruebas realizadas:`
+- `Revision de codigo:`
 - `Resultados observados:`
 - `Defectos bloqueantes:`
 - `Observaciones:`
@@ -80,6 +92,8 @@ Plantilla minima recomendada:
 ```text
 Rama revisada: <nombre-rama>
 Pruebas realizadas:
+- ...
+Revision de codigo:
 - ...
 Resultados observados:
 - ...
@@ -98,6 +112,7 @@ Al publicar este resultado, `qa-teams` debe actualizar tambien el `Estado operat
 Antes de ejecutar la validacion funcional, `qa-teams` debe comprobar dos condiciones:
 1. La entrega de `developer-teams` usa la plantilla minima de handoff.
 2. La rama revisada integra limpia con `main`.
+3. Existe evidencia suficiente de revision de codigo y de como se ha tratado la deuda tecnica o la refactorizacion necesaria.
 
 Si alguna de estas condiciones falla, `qa-teams` debe registrar el problema como defecto bloqueante u operativo y cerrar la revision con `Estado operativo: no validado` sin dar por buena la entrega.
 
@@ -142,3 +157,8 @@ Estado de integracion: pendiente|hecho|no aplica
 
 ## Regla de simplicidad
 Estos acuerdos existen para reducir esperas y reprocesos. No deben usarse para introducir estados adicionales ni ceremonias no justificadas.
+
+## Regla de prevencion de deuda tecnica
+- `developer-teams` debe revisar y sanear el codigo dentro del alcance razonable de cada issue, no solo implementar el cambio minimo que haga pasar pruebas.
+- `qa-teams` debe comprobar que esa revision existe y que no se esta trasladando deuda tecnica evitable a iteraciones futuras sin dejarla trazada.
+- `product-manager` debe convertir la deuda tecnica relevante diferida en backlog o issues separadas antes del cierre administrativo de una entrega.
