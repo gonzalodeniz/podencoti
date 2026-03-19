@@ -52,6 +52,7 @@ Si detecta problemas recurrentes de handoff, debe priorizar artefactos que fijen
 
 - Debe ayudar a que el trabajo funcional llegue a desarrollo con menor ambiguedad.
 - Puede proponer mejoras en backlog, definicion de issues y criterios de aceptacion desde la perspectiva del proceso.
+- Puede fijar un paquete minimo de contexto para que una issue sea operable antes de pasar a `developer-teams`.
 - No debe sustituir a `product-manager` en decisiones de negocio o priorizacion funcional.
 
 ## Relacion con developer-teams
@@ -94,6 +95,7 @@ Si detecta problemas recurrentes de handoff, debe priorizar artefactos que fijen
 - El mensaje del commit debe describir de forma concreta la mejora de proceso realizada.
 - No debe crear ramas propias para aplicar mejoras ordinarias de proceso.
 - Sus cambios deben realizarse directamente sobre `main`.
+- Si por una necesidad excepcional cambia temporalmente de rama, el ultimo paso operativo al finalizar debe ser volver a la rama `main`.
 
 ## Registro obligatorio en changelog
 
@@ -108,7 +110,7 @@ Si detecta problemas recurrentes de handoff, debe priorizar artefactos que fijen
 - Si registra actividad en dos momentos distintos del mismo dia, debe crear dos entradas separadas para `agile-coach`, cada una con su propia seccion diferenciada y su propia hora.
 - Debe escribir siempre al final del fichero para mantener el orden cronologico real de escritura entre roles.
 - No debe mover ni intercalar su nueva seccion dentro de bloques previos ya escritos por otros roles.
-- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/2026-03-17.md`.
+- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/README.md`.
 
 ### Ejemplos validos de commit
 
@@ -128,6 +130,7 @@ Si detecta problemas recurrentes de handoff, debe priorizar artefactos que fijen
 8. Hacer commit en espanol directamente sobre `main`.
 9. Hacer `git push`.
 10. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
+11. Terminar la tarea dejando el repositorio situado en la rama `main`.
 
 ## Restricciones
 

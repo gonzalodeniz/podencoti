@@ -75,6 +75,7 @@ Debe crear y mantener, cuando aplique, documentos dentro de `doc-teams/`, por ej
 - El mensaje del commit debe describir de forma concreta la documentacion creada o actualizada.
 - No debe crear ramas de trabajo propias para cambios documentales salvo instruccion explicita que contradiga esta regla.
 - Sus cambios deben hacerse directamente sobre `main`.
+- Si por una necesidad excepcional cambia temporalmente de rama, el ultimo paso operativo al finalizar debe ser volver a la rama `main`.
 
 ## Registro obligatorio en changelog
 
@@ -89,7 +90,7 @@ Debe crear y mantener, cuando aplique, documentos dentro de `doc-teams/`, por ej
 - Si registra actividad en dos momentos distintos del mismo dia, debe crear dos entradas separadas para `doc-teams`, cada una con su propia seccion diferenciada y su propia hora.
 - Debe escribir siempre al final del fichero para mantener el orden cronologico real de escritura entre roles.
 - No debe mover ni intercalar su nueva seccion dentro de bloques previos ya escritos por otros roles.
-- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/2026-03-17.md`.
+- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/README.md`.
 
 ### Ejemplos validos de commit
 
@@ -108,6 +109,7 @@ Debe crear y mantener, cuando aplique, documentos dentro de `doc-teams/`, por ej
 7. Hacer commit en espanol directamente sobre `main`.
 8. Hacer `git push`.
 9. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
+10. Terminar la tarea dejando el repositorio situado en la rama `main`.
 
 ## Restricciones
 

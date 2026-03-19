@@ -48,17 +48,17 @@ Este proyecto lo está construyendo de manera autónoma una series de agentes co
 Cada rol dispone de un script que carga `.env`, lee su prompt y ejecuta `codex exec`:
 
 ```bash
-./rol-product-manager.sh
-./rol-developer-teams.sh
-./rol-qa-teams.sh
-./rol-doc-teams.sh
-./rol-agile-coach.sh
+./1_rol-product-manager.sh
+./2_rol-developer-teams.sh
+./3_rol-qa-teams.sh
+./4_rol-doc-teams.sh
+./5_rol-agile-coach.sh
 ```
 
 Tambien pueden recibir opciones adicionales de `codex exec`, por ejemplo:
 
 ```bash
-./rol-developer-teams.sh --full-auto
+./2_rol-developer-teams.sh --full-auto
 ```
 
 ## Reglas importantes
@@ -79,9 +79,15 @@ Tambien pueden recibir opciones adicionales de `codex exec`, por ejemplo:
 
 ## Entrega tecnica actual
 
-La entrega tecnica actual implementa `PB-001` sobre la base ya validada de `PB-007` y `PB-006`, con un catalogo inicial de oportunidades TI consultable desde una app WSGI minima en Python.
+La base integrada desde `main` cubre dos piezas previas al catalogo del MVP:
 
-La rama `developer-teams/issue-4-ficha-detalle-licitacion` amplia esa base con `PB-002`, anadiendo una ficha de detalle navegable desde el catalogo, tratamiento explicito de campos no informados y aplicacion del ultimo dato oficial visible cuando el expediente publica una rectificacion o modificacion.
+- `PB-007`: cobertura inicial visible y verificable de fuentes del MVP.
+- `PB-006`: regla de clasificacion TI auditable con ejemplos verificables.
+
+Sobre esa base, esta rama implementa:
+
+- `PB-001`: catalogo inicial de oportunidades TI consultable desde una app WSGI minima en Python.
+- `PB-002`: ficha de detalle navegable desde el catalogo, con tratamiento explicito de campos no informados y aplicacion del ultimo dato oficial visible cuando el expediente publica una rectificacion o modificacion.
 
 ### Como ejecutar las vistas actuales
 
@@ -99,6 +105,14 @@ Luego se puede abrir:
 - `http://127.0.0.1:8000/api/fuentes` para la salida JSON trazable a la configuracion
 - `http://127.0.0.1:8000/clasificacion-ti` para la vista HTML de la regla TI auditable
 - `http://127.0.0.1:8000/api/clasificacion-ti` para la salida JSON de reglas y ejemplos auditados
+
+## Capacidades aun no implementadas en esta rama
+
+Aunque formen parte de la vision y del backlog, todavia no existen en esta rama:
+
+- filtros funcionales
+- alertas tempranas
+- pipeline de seguimiento
 
 ### Como ejecutar las pruebas tecnicas
 

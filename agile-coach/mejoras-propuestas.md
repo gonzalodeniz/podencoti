@@ -176,3 +176,49 @@ Los equipos ya comparten que informacion debe aparecer en las issues, pero no un
 ### Riesgos y dependencias
 - Si las plantillas se vuelven demasiado largas, los equipos pueden tender a rellenarlas de forma mecanica.
 - Conviene mantener solo los campos necesarios para decidir el siguiente paso operativo.
+
+## Mejora 9: fijar un paquete minimo para que una issue sea ejecutable
+### Problema detectado
+Una issue puede pasar a desarrollo sin dejar trazado de forma literal su origen funcional ni sus dependencias, obligando a reinterpretar documentos antes de empezar.
+
+### Propuesta
+Exigir que toda issue lista para `developer-teams` incluya y mantenga en este orden:
+- `Backlog:`
+- `Historia de usuario:`
+- `Caso de uso:`
+- `Criterios de aceptacion:`
+- `Dependencias:`
+- `Estado operativo: nuevo`
+
+Ademas, `developer-teams` no debe iniciar implementacion si ese paquete minimo falta.
+
+### Impacto esperado
+- Reduce arranques en falso y preguntas repetidas antes de abrir rama.
+- Hace mas visible si el bloqueo esta en refinamiento funcional y no en capacidad tecnica.
+- Mejora la trazabilidad entre producto, desarrollo y QA desde el inicio del ciclo.
+
+### Tradeoffs
+- `product-manager` debe invertir algo mas de disciplina al abrir o refrescar issues.
+
+### Riesgos y dependencias
+- Si los campos se rellenan con texto ambiguo, el beneficio baja aunque el formato exista.
+- Requiere que `developer-teams` frene el inicio cuando la issue no sea realmente operable.
+
+## Mejora 10: sustituir la referencia historica de `changelog/` por una guia vigente
+### Problema detectado
+La referencia usada por los roles para el `changelog/` ya no refleja todas las reglas actuales, en especial la hora obligatoria por entrada.
+
+### Propuesta
+Crear `changelog/README.md` como referencia estable de formato, con plantilla minima y nota explicita de que los ficheros historicos anteriores pueden no cumplir reglas introducidas despues.
+
+### Impacto esperado
+- Reduce contradicciones entre ejemplo historico y norma vigente.
+- Facilita que todos los roles registren entradas homogoneas sin reinterpretar excepciones.
+- Mejora la utilidad del `changelog/` como evidencia operativa y fuente de auditoria ligera.
+
+### Tradeoffs
+- Introduce un fichero documental adicional de mantenimiento sencillo.
+
+### Riesgos y dependencias
+- Si los roles siguen copiando formatos antiguos por inercia, la mejora tardara en consolidarse.
+- Conviene actualizar tambien las referencias en todos los `AGENTS.md` afectados.

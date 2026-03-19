@@ -40,11 +40,11 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 |-- qa-teams/
 |-- doc-teams/
 |-- agile-coach/
-|-- rol-product-manager.sh
-|-- rol-developer-teams.sh
-|-- rol-qa-teams.sh
-|-- rol-doc-teams.sh
-|-- rol-agile-coach.sh
+|-- 1_rol-product-manager.sh
+|-- 2_rol-developer-teams.sh
+|-- 3_rol-qa-teams.sh
+|-- 4_rol-doc-teams.sh
+|-- 5_rol-agile-coach.sh
 `-- run-codex.sh
 ```
 
@@ -65,7 +65,7 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 - `Makefile`: comandos de ejecucion local y pruebas.
 - `README.md`: descripcion general del proyecto y forma de uso.
 - `pyproject.toml`: metadatos y configuracion base del paquete Python.
-- `rol-*.sh`: scripts de entrada para ejecutar cada rol con su prompt correspondiente.
+- `*_rol-*.sh`: scripts de entrada para ejecutar cada rol con su prompt correspondiente.
 - `run-codex.sh`: script auxiliar de ejecucion de Codex.
 
 ## Vision del producto
@@ -100,6 +100,7 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 - Priorizar documentos y entregables accionables frente a texto ambiguo o decorativo.
 - Hacer explicitos supuestos, riesgos, dependencias y preguntas abiertas.
 - Mantener `main` como rama de referencia para trabajo funcional, documental y de coordinacion no tecnica.
+- Si cualquier rol cambia temporalmente de rama para ejecutar una tarea permitida por sus instrucciones, el ultimo paso operativo al finalizar debe ser volver a la rama `main`.
 - Mantener `main` como rama obligatoria para cualquier actualizacion de ficheros dentro de `changelog/`, independientemente del rol que la realice.
 - En cualquier actualizacion de `changelog/`, cada rol debe iniciar su bloque o seccion con la hora exacta de escritura.
 - Si un mismo rol registra actividad en dos momentos distintos del mismo dia, debe crear dos entradas separadas, cada una con su propia seccion diferenciada y su propia hora de escritura.
@@ -116,9 +117,11 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 ## Flujo de trabajo entre equipos
 
 - El equipo `product-manager` es quien crea y mantiene los issues funcionales en el repositorio remoto de GitHub.
+- Cada issue creada por `product-manager` y lista para ser tomada por `developer-teams` debe incluir de forma literal los campos `Backlog:`, `Historia de usuario:`, `Caso de uso:`, `Criterios de aceptacion:`, `Dependencias:` y `Estado operativo: nuevo`.
 - Los issues deben usar un estado operativo comun entre equipos para reducir ambiguedad: `nuevo`, `en desarrollo`, `listo para qa`, `no validado`, `validado` y `cerrado`.
 - Los roles `product-manager`, `doc-teams` y `agile-coach` trabajan directamente sobre `main` y no deben crear ramas de trabajo propias.
 - El equipo `developer-teams` debe leer los issues abiertos antes de empezar a implementar.
+- Si una issue no incluye el paquete minimo de contexto operativo, `developer-teams` no debe iniciar implementacion sobre ella hasta que `product-manager` la aclare.
 - `developer-teams` debe trabajar solo en una tarea cada vez para facilitar la revision de `qa-teams`.
 - Si existen issues ya empezados y todavia no validados por `qa-teams`, `developer-teams` debe priorizarlos frente a issues completamente nuevos.
 - Si todos los issues abiertos son nuevos, `developer-teams` puede decidir el orden de implementacion segun su propio criterio tecnico y de desbloqueo.
@@ -131,6 +134,8 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 - En ese handoff a `qa-teams`, `developer-teams` debe usar de forma literal los campos `Rama:`, `Resumen:`, `Decisiones relevantes:`, `Limitaciones conocidas:`, `Verificacion tecnica ejecutada:`, `Impacto documental:` y `Estado operativo: listo para qa`.
 - Antes de pedir revision a `qa-teams`, `developer-teams` debe comprobar que su rama integra limpia con `main` y resolver los conflictos evitables de sincronizacion.
 - Cada cambio implementado por `developer-teams` debe terminar con `git commit` en espanol y `git push` de la rama remota.
+- Ademas de los commits de su rama tecnica, `developer-teams` debe registrar en la rama `main` un resumen de sus acciones en el fichero correspondiente de `changelog/`.
+- Ese registro en `changelog/` es obligatorio para cada trabajo realizado por `developer-teams`, debe escribirse siempre sobre `main` y no puede omitirse aunque la entrega tecnica se haya hecho en una rama del issue.
 - `qa-teams` revisa y valida el trabajo sobre la rama de la tarea desde la perspectiva del usuario y de los criterios de aceptacion.
 - `qa-teams` puede crear una rama temporal de integracion para ejecutar pruebas o preparar la validacion cuando lo necesite. Esa rama de integracion es adicional a las dos ramas tecnicas permitidas, debe usarse solo para validacion y debe borrarse al terminar la revision.
 - `qa-teams` es responsable de los tests de validacion, como pruebas funcionales, end-to-end, exploratorias y contra criterios de aceptacion.

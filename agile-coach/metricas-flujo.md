@@ -29,6 +29,10 @@ Medir si el proceso entre equipos mejora en velocidad, claridad y estabilidad si
 - Definicion: numero o porcentaje de entregas revisadas por QA que presentan conflictos de integracion con `main`.
 - Senal que aporta: detecta fallos de sincronizacion entre la rama tecnica y la rama de referencia del repositorio.
 
+## 7. Issues devueltas por falta de contexto minimo
+- Definicion: numero o porcentaje de issues que `developer-teams` no puede iniciar porque faltan campos obligatorios de contexto operativo.
+- Senal que aporta: detecta si el cuello de botella real esta en refinamiento funcional antes de abrir trabajo tecnico.
+
 ## Regla de uso
 - Revisar estas metricas al cierre de cada iteracion relevante o cuando se acumulen varias issues cerradas.
 - Si una metrica empeora de forma sostenida, revisar primero el handoff asociado antes de cambiar responsabilidades entre equipos.

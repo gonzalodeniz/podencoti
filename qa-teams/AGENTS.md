@@ -25,6 +25,7 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 - Debe usar como referencia el contenido del issue, los criterios de aceptacion y la documentacion funcional disponible.
 - Puede crear una rama temporal de integracion para preparar o ejecutar las pruebas si la validacion lo requiere.
 - La rama temporal de integracion de `qa-teams` no cuenta dentro del limite de dos ramas tecnicas del proyecto, pero debe borrarse al finalizar la revision.
+- Si durante la validacion cambia de rama, el ultimo paso operativo al finalizar debe ser volver a la rama `main`.
 - Si detecta que la rama entregada no integra limpia con `main`, debe registrarlo como bloqueo operativo o riesgo relevante segun el impacto en el flujo.
 
 ## Resultado obligatorio en la issue
@@ -77,7 +78,7 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 - Si registra actividad en dos momentos distintos del mismo dia, debe crear dos entradas separadas para `qa-teams`, cada una con su propia seccion diferenciada y su propia hora.
 - Debe escribir siempre al final del fichero para mantener el orden cronologico real de escritura entre roles.
 - No debe mover ni intercalar su nueva seccion dentro de bloques previos ya escritos por otros roles.
-- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/2026-03-17.md`.
+- Debe tomar como referencia de formato y nivel de detalle el fichero `changelog/README.md`.
 
 ## Politica de commits y push
 
@@ -102,6 +103,7 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 8. Si no esta validado, explicar exactamente que debe corregirse.
 9. Borrar la rama temporal de integracion si se ha creado.
 10. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
+11. Terminar la tarea dejando el repositorio situado en la rama `main`.
 
 ## Restricciones
 
