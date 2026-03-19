@@ -11,12 +11,19 @@
       "presupuesto": 185000,
       "fecha_limite": "2026-04-15",
       "estado": "Abierta",
+      "solvencia_tecnica": "Experiencia acreditada en administracion de plataformas cloud, backup corporativo y continuidad de negocio en al menos dos contratos similares.",
+      "criterios_adjudicacion": [
+        "Oferta economica",
+        "Plan de continuidad y recuperacion",
+        "Cobertura de soporte especializado 24x7"
+      ],
       "fuente_oficial": "Gobierno de Canarias",
       "url_fuente_oficial": "https://www.gobiernodecanarias.org/perfil_del_contratante/",
       "cpvs": [
         "72250000",
         "48613000"
-      ]
+      ],
+      "actualizaciones_oficiales": []
     },
     {
       "id": "pcsp-cabildo-licencias-2026",
@@ -28,11 +35,26 @@
       "presupuesto": 92000,
       "fecha_limite": "2026-04-08",
       "estado": "Abierta",
+      "solvencia_tecnica": null,
+      "criterios_adjudicacion": [
+        "Oferta economica",
+        "Cobertura funcional de la plataforma",
+        "Plan de migracion y soporte"
+      ],
       "fuente_oficial": "Plataforma de Contratación del Sector Público filtrada por órganos de Canarias",
       "url_fuente_oficial": "https://contrataciondelestado.es/",
       "cpvs": [
         "48218000",
         "72268000"
+      ],
+      "actualizaciones_oficiales": [
+        {
+          "fecha_publicacion": "2026-03-26",
+          "tipo": "Rectificacion",
+          "resumen": "Correccion del presupuesto base y ampliacion del plazo de presentacion tras aclaracion tecnica.",
+          "presupuesto": 97000,
+          "fecha_limite": "2026-04-10"
+        }
       ]
     },
     {
@@ -45,11 +67,21 @@
       "presupuesto": null,
       "fecha_limite": "2026-04-20",
       "estado": "Abierta",
+      "solvencia_tecnica": "Equipo minimo con perfiles de redes, seguridad perimetral y operacion de sedes electronicas.",
+      "criterios_adjudicacion": null,
       "fuente_oficial": "Cabildos insulares",
       "url_fuente_oficial": "https://www.grancanaria.com/perfil-del-contratante/",
       "cpvs": [
         "32420000",
         "72810000"
+      ],
+      "actualizaciones_oficiales": [
+        {
+          "fecha_publicacion": "2026-03-29",
+          "tipo": "Modificacion",
+          "resumen": "Publicacion de nota aclaratoria que confirma el procedimiento abierto y mantiene el resto de datos visibles.",
+          "procedimiento": "Abierto"
+        }
       ]
     },
     {
@@ -66,7 +98,8 @@
       "url_fuente_oficial": "https://arucas.sedelectronica.es/contractor-profile-list",
       "cpvs": [
         "39130000"
-      ]
+      ],
+      "actualizaciones_oficiales": []
     },
     {
       "id": "govcan-teleco-mixto-2026",
@@ -82,7 +115,8 @@
       "url_fuente_oficial": "https://www.gobiernodecanarias.org/perfil_del_contratante/",
       "cpvs": [
         "64200000"
-      ]
+      ],
+      "actualizaciones_oficiales": []
     }
   ]
 }

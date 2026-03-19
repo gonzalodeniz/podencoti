@@ -81,6 +81,8 @@ Tambien pueden recibir opciones adicionales de `codex exec`, por ejemplo:
 
 La entrega tecnica actual implementa `PB-001` sobre la base ya validada de `PB-007` y `PB-006`, con un catalogo inicial de oportunidades TI consultable desde una app WSGI minima en Python.
 
+La rama `developer-teams/issue-4-ficha-detalle-licitacion` amplia esa base con `PB-002`, anadiendo una ficha de detalle navegable desde el catalogo, tratamiento explicito de campos no informados y aplicacion del ultimo dato oficial visible cuando el expediente publica una rectificacion o modificacion.
+
 ### Como ejecutar las vistas actuales
 
 ```bash
@@ -91,6 +93,8 @@ Luego se puede abrir:
 
 - `http://127.0.0.1:8000/` para la vista HTML del catalogo inicial de oportunidades TI
 - `http://127.0.0.1:8000/api/oportunidades` para la salida JSON del catalogo filtrado por cobertura MVP y clasificacion TI
+- `http://127.0.0.1:8000/oportunidades/<id>` para la ficha HTML de detalle de una oportunidad visible
+- `http://127.0.0.1:8000/api/oportunidades/<id>` para la salida JSON trazable de la ficha de detalle
 - `http://127.0.0.1:8000/cobertura-fuentes` para la vista HTML de cobertura MVP
 - `http://127.0.0.1:8000/api/fuentes` para la salida JSON trazable a la configuracion
 - `http://127.0.0.1:8000/clasificacion-ti` para la vista HTML de la regla TI auditable

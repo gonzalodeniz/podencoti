@@ -30,6 +30,7 @@ class ApplicationTests(unittest.TestCase):
         self.assertIn("Catálogo inicial de oportunidades TI de Canarias", html)
         self.assertIn("Servicio cloud para copias de seguridad", html)
         self.assertIn("Fuente oficial", html)
+        self.assertIn('/oportunidades/govcan-backup-cloud-2026', html)
 
     def test_api_returns_catalog_only_with_mvp_ti_opportunities(self) -> None:
         status, headers, body = invoke_app("/api/oportunidades")
@@ -39,7 +40,31 @@ class ApplicationTests(unittest.TestCase):
         self.assertEqual("application/json; charset=utf-8", headers["Content-Type"])
         self.assertEqual(3, payload["total_oportunidades_catalogo"])
         self.assertEqual(5, payload["total_registros_origen"])
+        self.assertEqual(97000, payload["oportunidades"][0]["presupuesto"])
         self.assertTrue(all(item["clasificacion_ti"] == "TI" for item in payload["oportunidades"]))
+
+    def test_detail_page_renders_critical_fields_and_latest_visible_update(self) -> None:
+        status, headers, body = invoke_app("/oportunidades/pcsp-cabildo-licencias-2026")
+        html = body.decode("utf-8")
+
+        self.assertEqual("200 OK", status)
+        self.assertEqual("text/html; charset=utf-8", headers["Content-Type"])
+        self.assertIn("Suministro de licencias y software de gestion tributaria insular", html)
+        self.assertIn("2026-04-10", html)
+        self.assertIn("97.000 EUR", html)
+        self.assertIn("Rectificacion", html)
+        self.assertIn("No informado", html)
+
+    def test_detail_api_returns_structured_detail_payload(self) -> None:
+        status, headers, body = invoke_app("/api/oportunidades/pcsp-cabildo-licencias-2026")
+        payload = json.loads(body)
+
+        self.assertEqual("200 OK", status)
+        self.assertEqual("application/json; charset=utf-8", headers["Content-Type"])
+        self.assertEqual("pcsp-cabildo-licencias-2026", payload["id"])
+        self.assertEqual("2026-04-10", payload["fecha_limite"])
+        self.assertEqual("Rectificacion", payload["actualizacion_oficial_mas_reciente"]["tipo"])
+        self.assertEqual(3, len(payload["criterios_adjudicacion"]))
 
     def test_coverage_page_remains_available_on_dedicated_route(self) -> None:
         status, headers, body = invoke_app("/cobertura-fuentes")
@@ -81,6 +106,13 @@ class ApplicationTests(unittest.TestCase):
 
     def test_unknown_path_returns_404(self) -> None:
         status, headers, body = invoke_app("/desconocido")
+
+        self.assertEqual("404 Not Found", status)
+        self.assertEqual("text/plain; charset=utf-8", headers["Content-Type"])
+        self.assertEqual("No encontrado", body.decode("utf-8"))
+
+    def test_detail_path_returns_404_for_non_visible_opportunity(self) -> None:
+        status, headers, body = invoke_app("/oportunidades/govcan-teleco-mixto-2026")
 
         self.assertEqual("404 Not Found", status)
         self.assertEqual("text/plain; charset=utf-8", headers["Content-Type"])
