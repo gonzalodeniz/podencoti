@@ -22,6 +22,9 @@ Existe una entrega minima de descubrimiento con catalogo inicial de oportunidade
 ## El producto ya tiene catalogo de oportunidades, filtros, alertas o pipeline?
 En `main` si existen catalogo inicial y ficha de detalle. No existen todavia filtros, alertas ni pipeline, que siguen en backlog y roadmap de `product-manager/`.
 
+## Por que el changelog del 2026-03-20 menciona `PB-003` si aqui se documenta que no hay filtros?
+Porque `developer-teams` y `qa-teams` registran su trabajo en `changelog/` sobre `main` aunque la implementacion se haya hecho y validado en una rama tecnica. Mientras esa rama no se integre en `main`, `doc-teams` debe documentar que los filtros no forman parte aun del comportamiento observable de la rama principal.
+
 ## La ficha de detalle aplica rectificaciones o modificaciones oficiales?
 Si. El detalle visible resuelve el ultimo dato oficial publicado cuando el expediente tiene actualizaciones versionadas en `data/opportunities.json`.
 

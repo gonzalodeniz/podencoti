@@ -23,8 +23,9 @@ Usuario interno del proyecto que necesita interpretar de forma consistente la te
 - `Estado real observable`: comportamiento que puede comprobarse en la rama revisada mediante ficheros versionados y comandos reproducibles.
 - `Contradiccion documental`: diferencia entre lo que una fuente del repositorio afirma y lo que puede verificarse realmente en `main`.
 - `No disponible en main`: capacidad descrita por vision o backlog que no debe documentarse como funcionalidad utilizable hoy.
-- `Entrega minima ejecutable`: estado actual de `main` con servidor local, rutas de cobertura y rutas de clasificacion TI, pero sin catalogo ni flujos de usuario finales.
+- `Entrega minima ejecutable`: estado actual de `main` con servidor local, catalogo inicial, ficha de detalle, rutas de cobertura y rutas de clasificacion TI auditables, pero sin filtros, alertas, pipeline ni despliegue productivo.
+- `Trabajo validado no integrado`: entrega que puede aparecer en `changelog/` o en una issue como validada por `qa-teams`, pero que aun no forma parte del comportamiento observable de `main` hasta su integracion efectiva.
 
 ## Contradicciones clave asociadas al glosario
-- `Catalogo validado`: expresion sugerida en parte del historial operativo del 2026-03-18 que no coincide con las rutas ni con los modulos presentes hoy en `main`.
-- `Validado`: estado que aparece en el historial operativo y que debe leerse con cuidado cuando el propio changelog entra en contradiccion con el codigo vigente de la rama.
+- `Catalogo validado`: expresion historica que hoy si coincide con las rutas y modulos presentes en `main`, porque el catalogo y la ficha de detalle ya forman parte de la rama principal.
+- `Validado`: estado que puede referirse a una rama tecnica concreta y no necesariamente a funcionalidad ya integrada en `main`; debe interpretarse junto con la rama y la evidencia observable.

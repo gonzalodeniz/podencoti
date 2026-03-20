@@ -7,7 +7,7 @@ Equipo documental, stakeholders funcionales, equipo tecnico y administracion que
 Dejar una referencia unica y accionable sobre que capacidades estan disponibles hoy en `main`, que evidencia las respalda y que puntos siguen siendo backlog o contradiccion documental abierta.
 
 ## Estado de referencia
-- Fecha de revision: `2026-03-19`
+- Fecha de revision: `2026-03-20`
 - Rama revisada: `main`
 - Verificacion ejecutada:
   - `PYTHONPATH=src python3 -m unittest discover -s tests -v`
@@ -30,6 +30,7 @@ Dejar una referencia unica y accionable sobre que capacidades estan disponibles 
 ## Contradicciones documentales abiertas
 - `pyproject.toml` solo menciona cobertura de fuentes en la descripcion del paquete, aunque el codigo actual tambien incluye catalogo inicial, ficha de detalle y clasificacion TI auditable.
 - La documentacion funcional mantiene capacidades futuras validas como filtros, alertas y pipeline, pero no hay evidencia tecnica visible de esas capacidades en `main`.
+- `changelog/2026-03-20.md` refleja trabajo y validacion de `PB-003` en una rama tecnica, pero esa evidencia no sustituye a la integracion efectiva en `main`; por eso el estado observable de filtros sigue siendo `No disponible en main`.
 
 ## Dependencias abiertas para siguiente revision documental
 - Revisar de nuevo esta matriz cuando `developer-teams` entregue una implementacion observable de `PB-003`, `PB-004` o `PB-005`.

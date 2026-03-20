@@ -34,6 +34,7 @@ La descripcion de paquete en `pyproject.toml` sigue mencionando solo cobertura d
 - `/api/clasificacion-ti`: JSON con reglas y ejemplos auditados.
 
 La aplicacion devuelve `404 Not Found` para cualquier otra ruta no declarada.
+No existe hoy en `main` ningun parametro funcional documentado para filtros en `/` ni en `/api/oportunidades`.
 
 ### Campos visibles por superficie
 - `/api/oportunidades`: devuelve `referencia_funcional`, `cobertura_aplicada`, `total_registros_origen`, `total_oportunidades_catalogo` y `oportunidades`.
@@ -62,6 +63,7 @@ Resultado verificado en esta revision:
 ## Contradicciones explicitadas
 - `pyproject.toml` sigue describiendo el paquete como una release centrada solo en cobertura de fuentes, aunque la rama ya expone catalogo, detalle y clasificacion TI auditable.
 - La documentacion funcional de `product-manager/` describe backlog posterior valido, pero no debe leerse como contrato tecnico ya implementado para filtros, alertas o pipeline.
+- `changelog/2026-03-20.md` ya registra trabajo y validacion funcional de `PB-003` en una rama tecnica, pero la revision tecnica de `main` todavia no muestra ese comportamiento ni pruebas asociadas a filtros integradas en esta rama.
 
 ## Limitaciones tecnicas actuales
 - No existe persistencia de usuario ni ingestion automatizada real de licitaciones; el catalogo se alimenta desde `data/opportunities.json`.

@@ -23,6 +23,12 @@ La rama `main` expone una entrega minima navegable orientada a descubrimiento in
 - Que la cobertura inicial del MVP esta acotada a fuentes `MVP`, `Posterior` y `Por definir`.
 - Que la regla de relevancia TI muestra inclusiones, exclusiones y casos frontera auditables.
 
+## Recorrido recomendado para una revision funcional
+1. Abre `/` y revisa el listado de oportunidades visibles.
+2. Entra en una ficha desde el titulo de una oportunidad para comprobar presupuesto, fecha limite, estado oficial y enlace a la fuente.
+3. Abre `/cobertura-fuentes` para confirmar que la cobertura comunicada sigue siendo parcial y priorizada.
+4. Abre `/clasificacion-ti` para entender por que una oportunidad entra, se excluye o queda como caso frontera.
+
 ## Que no esta disponible hoy en `main`
 - Filtros por palabra clave, presupuesto, procedimiento o ubicacion.
 - Alertas tempranas.
@@ -36,6 +42,7 @@ Los documentos de `product-manager/` siguen siendo la fuente funcional para visi
 - Las superficies actuales permiten descubrimiento inicial y revision de detalle, pero no cubren todavia filtrado, seguimiento operativo ni alertas.
 - La cobertura visible sigue siendo parcial y no debe interpretarse como rastreo exhaustivo de todo el ecosistema canario.
 - La metadata tecnica del paquete sigue describiendo una release anterior mas limitada que la visible hoy en `main`.
+- El `changelog` del proyecto puede mencionar trabajo ya validado por otros equipos en ramas tecnicas; eso no implica que la funcionalidad este disponible para uso en `main`.
 
 ## Recomendacion de uso
 Para demos o revision funcional temprana, utiliza el catalogo en `/`, la ficha de detalle de una oportunidad visible y, como apoyo, las vistas de cobertura y clasificacion TI. Para capacidades de negocio pendientes, toma como referencia `product-manager/roadmap.md` y `product-manager/product-backlog.md`.

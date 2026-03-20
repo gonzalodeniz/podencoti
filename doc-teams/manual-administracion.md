@@ -57,6 +57,7 @@ No existe en `main`:
 - Las superficies actuales son utiles para validacion temprana, pero no para explotacion operativa continua.
 - Comunicar que el producto ya ofrece filtros, alertas o pipeline induciria a error.
 - `pyproject.toml` sigue describiendo una superficie mas estrecha que la observable hoy; para soporte operativo debe prevalecer el codigo, las rutas verificadas y esta documentacion.
+- El `changelog` puede anticipar trabajo validado en ramas tecnicas no integradas; para operacion y soporte solo debe tomarse como referencia el estado reproducible de `main`.
 
 ## Dependencias abiertas para administracion
 - Definir estrategia de despliegue productivo cuando exista una aplicacion mas alla del servidor local de demostracion.

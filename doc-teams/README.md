@@ -4,7 +4,7 @@
 Centralizar la documentacion oficial de `PodencoTI` separando con claridad el contenido para usuario final, equipo tecnico y administracion.
 
 ## Estado documental de referencia
-Fecha de revision: `2026-03-19`.
+Fecha de revision: `2026-03-20`.
 
 Esta carpeta documenta el estado real verificable de la rama `main`. En esta revision existe una entrega minima ejecutable de descubrimiento, pero su alcance sigue siendo acotado:
 
@@ -36,11 +36,13 @@ No existen todavia filtros funcionales, alertas tempranas, pipeline de seguimien
 - `make run` arranca un servidor WSGI local en `http://127.0.0.1:8000`.
 - Las rutas verificables hoy son `/`, `/api/oportunidades`, `/oportunidades/<id>`, `/api/oportunidades/<id>`, `/cobertura-fuentes`, `/api/fuentes`, `/clasificacion-ti` y `/api/clasificacion-ti`.
 - El catalogo visible publica 3 oportunidades TI a partir de 5 registros de origen dentro de la cobertura MVP actual.
+- El `changelog/2026-03-20.md` ya registra trabajo y validacion funcional de `PB-003` en una rama tecnica, pero esa capacidad aun no forma parte del comportamiento observable de `main`.
 
 ## Dependencias y contradicciones abiertas
 - La vision y el backlog de `product-manager/` describen capacidades futuras validas como fuente funcional, pero esas capacidades aun no estan implementadas en `main`.
 - `pyproject.toml` sigue describiendo el paquete como "Cobertura inicial visible de fuentes del MVP de PodencoTI.", aunque `main` ya expone tambien catalogo inicial (`PB-001`), ficha de detalle (`PB-002`) y superficie auditable de `PB-006`.
 - Filtros (`PB-003`), alertas (`PB-004`) y pipeline (`PB-005`) siguen definidos funcionalmente, pero no tienen evidencia tecnica visible en `main`.
+- El `changelog` puede registrar actividad de ramas tecnicas todavia no integradas; para documentacion de uso, tecnica u operativa prevalece siempre el estado verificable de `main`.
 
 ## Criterio documental aplicado
 - Se documenta solo lo verificable en `main`.
