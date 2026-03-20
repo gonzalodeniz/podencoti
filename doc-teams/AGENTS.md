@@ -45,6 +45,7 @@ Este agente actua como equipo de documentacion del repositorio. Su responsabilid
 - Debe facilitar documentacion clara que pueda servir de apoyo a la validacion funcional y operativa.
 - Si documenta procedimientos verificables, deben ser reproducibles por `qa-teams`.
 - Debe priorizar cambios documentales una vez la entrega correspondiente haya quedado `validado`, salvo peticion explicita en otro sentido.
+- Si escribe una nota o comentario en una issue de GitHub, debe comenzar con la linea literal `Rol: doc-teams`.
 
 ## Artefactos recomendados
 

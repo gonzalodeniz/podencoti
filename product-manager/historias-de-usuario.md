@@ -55,9 +55,11 @@
   3. El usuario puede filtrar por tipo de procedimiento y ubicacion.
   4. Los filtros activos se ven en pantalla y pueden limpiarse.
   5. Si no hay resultados, se muestra un estado vacio comprensible.
+  6. Si el usuario introduce un rango de presupuesto minimo mayor que el maximo, el sistema solicita corregirlo y no presenta ese caso como una busqueda valida sin coincidencias.
 - Dependencias funcionales: PB-001
 - Prioridad: P0
-- Estado: `nuevo`
+- Estado: `no validado`
+- Nota de estado: `qa-teams` dejo la issue #5 en `no validado` el 2026-03-19 porque el tratamiento actual del rango de presupuesto invalido incumple el flujo alternativo de `CU-03`. `developer-teams` debe corregirlo en la misma rama antes de retomar trabajo nuevo.
 
 ## HU-04 Recibir alertas tempranas
 - Backlog relacionado: PB-004

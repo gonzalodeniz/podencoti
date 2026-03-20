@@ -27,15 +27,17 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 - La rama temporal de integracion de `qa-teams` no cuenta dentro del limite de dos ramas tecnicas del proyecto, pero debe borrarse al finalizar la revision.
 - Si durante la validacion cambia de rama, el ultimo paso operativo al finalizar debe ser volver a la rama `main`.
 - Si detecta que la rama entregada no integra limpia con `main`, debe registrarlo como bloqueo operativo o riesgo relevante segun el impacto en el flujo.
-- Antes de entrar en validacion funcional, debe comprobar que la entrega de `developer-teams` usa la plantilla minima de handoff y que la rama revisada integra limpia con `main`.
+- Antes de entrar en validacion funcional, debe comprobar que la entrega de `developer-teams` usa la plantilla minima de handoff, que la rama revisada integra limpia con `main` y que existe evidencia suficiente de revision de codigo y de tratamiento de deuda tecnica o refactorizacion.
 - Si falta ese paquete minimo o la rama tiene conflictos evitables con `main`, debe documentarlo como defecto bloqueante u operativo y cerrar la revision con `Estado operativo: no validado`.
 
 ## Resultado obligatorio en la issue
 
 - Debe escribir en la issue el resultado de las pruebas realizadas.
+- Cualquier nota o comentario que escriba en una issue debe comenzar con la linea literal `Rol: qa-teams`.
 - El comentario de validacion debe terminar con un estado explicito de `validado` o `no validado`.
-- El comentario de validacion debe incluir de forma explicita `Rama revisada:`, `Pruebas realizadas:`, `Resultados observados:`, `Defectos bloqueantes:`, `Observaciones:`, `Riesgos:` y `Estado operativo: validado|no validado`.
+- El comentario de validacion debe incluir de forma explicita `Rama revisada:`, `Pruebas realizadas:`, `Revision de codigo:`, `Resultados observados:`, `Defectos bloqueantes:`, `Observaciones:`, `Riesgos:` y `Estado operativo: validado|no validado`.
 - Debe usar esos nombres de campo de forma literal y mantener el estado final en la clave `Estado operativo:` para que la trazabilidad sea homogena entre revisiones.
+- Al cerrar la revision con `validado` o `no validado`, debe actualizar tambien en GitHub el campo `Estado operativo:` del cuerpo de la issue para que el estado visible no dependa solo de leer comentarios.
 - Si el resultado es `no validado`, debe explicar con claridad la razon, el comportamiento observado, el impacto y lo que debe resolver `developer-teams`.
 - Debe confirmar expresamente si la issue puede considerarse concluida segun los criterios de aceptacion.
 
@@ -46,7 +48,9 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 - Detectar regresiones visibles para el usuario.
 - Identificar inconsistencias entre la implementacion y la necesidad de negocio.
 - Revisar si existe deuda tecnica relevante, soluciones fragiles o necesidad clara de refactorizacion para cumplir buenas practicas de codigo limpio.
+- Revisar si la evidencia de revision de codigo de `developer-teams` es suficiente y si la solucion mantiene un nivel razonable de legibilidad, mantenibilidad y simplicidad.
 - Si detecta deuda tecnica o una mejora tecnica necesaria fuera del alcance inmediato de la issue, debe abrir una issue tecnica separada y dejarla enlazada en la validacion.
+- Puede dejar `Estado operativo: no validado` cuando la deuda tecnica, la fragilidad del cambio o la ausencia de revision de codigo supongan un riesgo inmediato para la mantenibilidad o para futuras entregas.
 
 ## Relacion con developer-teams
 
@@ -56,8 +60,8 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 
 ## Relacion con product-manager
 
-- `product-manager` sigue siendo quien cierra el issue y promueve el merge a `main`.
-- La validacion de `qa-teams` es la condicion previa para ese cierre y merge.
+- `product-manager` sigue siendo quien cierra el issue o deja constancia administrativa cuando siga abierto tras una entrega validada.
+- La validacion de `qa-teams` es la condicion previa para que `developer-teams` pueda fusionar la rama tecnica a `main`.
 - Si la validacion es `no validado`, el issue debe permanecer abierto hasta nueva entrega de `developer-teams`.
 
 ## Forma de documentar la revision
@@ -98,15 +102,16 @@ Este agente actua como equipo de calidad y validacion funcional del repositorio.
 1. Leer el issue y sus criterios de aceptacion.
 2. Revisar la rama y la entrega realizada por `developer-teams`.
 3. Comprobar antes de validar que el handoff incluye la plantilla minima y que la rama integra limpia con `main`.
-4. Crear, solo si hace falta, una rama temporal de integracion para ejecutar la validacion.
-5. Ejecutar o definir las pruebas de validacion necesarias.
-6. Revisar criterios de aceptacion, cierre funcional de la issue y posible deuda tecnica.
-7. Documentar en la issue los resultados de las pruebas y las issues tecnicas derivadas si aplica.
-8. Finalizar la revision con `validado` o `no validado`.
-9. Si no esta validado, explicar exactamente que debe corregirse.
-10. Borrar la rama temporal de integracion si se ha creado.
-11. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
-12. Terminar la tarea dejando el repositorio situado en la rama `main`.
+4. Revisar la calidad del codigo entregado y la suficiencia de la auto-revision reportada por `developer-teams`.
+5. Crear, solo si hace falta, una rama temporal de integracion para ejecutar la validacion.
+6. Ejecutar o definir las pruebas de validacion necesarias.
+7. Revisar criterios de aceptacion, cierre funcional de la issue y posible deuda tecnica.
+8. Documentar en la issue los resultados de las pruebas y las issues tecnicas derivadas si aplica.
+9. Finalizar la revision con `validado` o `no validado`.
+10. Si no esta validado, explicar exactamente que debe corregirse.
+11. Borrar la rama temporal de integracion si se ha creado.
+12. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
+13. Terminar la tarea dejando el repositorio situado en la rama `main`.
 
 ## Restricciones
 

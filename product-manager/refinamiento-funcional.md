@@ -9,12 +9,18 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 - `PB-006` ya quedo validado por `qa-teams` en la issue #2 y deja una superficie funcional auditable previa al catalogo de `PB-001`.
 - `PB-001` ya quedo validado por `qa-teams` en la issue #3 y aporta el catalogo visible inicial sobre cobertura MVP y clasificacion TI vigente.
 - `PB-002` ya quedo validado por `qa-teams` en la issue #4 y amplia el catalogo con ficha de detalle y tratamiento visible de rectificaciones o modificaciones del expediente.
+- `PB-003` sigue abierto en la issue #5 con estado `no validado` tras detectarse un incumplimiento funcional en el tratamiento del rango de presupuesto invalido.
 
 ## Huecos funcionales cerrados en esta revision
 - Queda definida la regla funcional para expedientes mixtos donde TI no es el unico componente.
 - Queda definido el tratamiento minimo de oportunidades anuladas, desiertas, desistidas o modificadas.
 - Queda identificado como deuda de trazabilidad el formato incompleto de varios issues abiertos, que debe corregirse para cumplir las reglas del repositorio.
 - Queda despejada la dependencia funcional entre catalogo y ficha: el catalogo base y la ficha ya estan validados y la siguiente pieza accionable pasa a ser el filtrado funcional.
+
+## Incidencia funcional abierta prioritaria
+- La issue #5 de `PB-003` no puede cerrarse porque el sistema trata un rango de presupuesto invalido como si fuera una busqueda valida sin resultados.
+- El comportamiento esperado sigue siendo el definido en `CU-03`: cuando `presupuesto_min` sea mayor que `presupuesto_max`, el sistema debe pedir correccion al usuario.
+- Mientras esta incidencia siga abierta, `developer-teams` no debe saltar a `PB-004` ni `PB-005`.
 
 ## Decisiones funcionales vigentes
 - El MVP de negocio se compone de dos escalones:
@@ -79,6 +85,7 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 - Riesgo de baja adopcion si el MVP entrega solo agregacion pero no relevancia util.
 - Riesgo de frustracion si faltan datos criticos en fichas sin indicarse claramente su ausencia.
 - Riesgo operativo si desarrollo declara rutas o superficies de validacion no expuestas realmente en la entrega revisable.
+- Riesgo de decision comercial erronea si el usuario interpreta un rango de presupuesto inconsistente como falta real de oportunidades.
 
 ## Supuestos explicitos
 - El primer objetivo es demostrar que la centralizacion y el filtrado ahorran tiempo al usuario.
@@ -90,7 +97,7 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 - Que datos minimos deben gobernar una futura decision de monetizacion o plan de pago.
 
 ## Recomendacion operativa para `developer-teams`
-- Iniciar la issue #5 correspondiente a `PB-003` como siguiente paso del Release 1.
+- Corregir la issue #5 correspondiente a `PB-003` en la misma rama y publicar un nuevo handoff completo para `qa-teams`.
 - Reutilizar la cobertura validada de `PB-007`, la regla auditable de `PB-006` y la superficie ya validada de `PB-001` y `PB-002` sin reabrirlas salvo cambio de alcance.
 - Mantener visible en el catalogo la fuente oficial y evitar mensajes que sugieran cobertura total del ecosistema canario.
 - Aplicar el filtrado solo sobre oportunidades ya visibles dentro de cobertura MVP y clasificacion final `TI`.
@@ -99,6 +106,6 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 ## Trazabilidad operativa
 - `PB-007` y `HU-07` quedan cubiertos por la issue #1 y su validacion ya registrada.
 - `PB-006`, `HU-06` y `CU-08` resuelven la definicion de relevancia TI antes del catalogo.
-- `PB-001` y `PB-002` ya quedaron validados por `qa-teams`; `PB-003` pasa a ser la pieza restante para completar el MVP de descubrimiento de Release 1.
+- `PB-001` y `PB-002` ya quedaron validados por `qa-teams`; `PB-003` sigue siendo la pieza restante para completar el MVP de descubrimiento de Release 1 y permanece abierta por el defecto funcional reportado por `qa-teams`.
 - `PB-004` y `PB-005` quedan listos para Release 2 tras validar el MVP de descubrimiento.
 - `PB-008` prepara la base de decision para evolucion posterior sin bloquear el MVP.

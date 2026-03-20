@@ -6,10 +6,10 @@
 - Cada release debe dejar un resultado verificable por `qa-teams` y trazable a backlog e issues.
 
 ## Estado de referencia de la iteracion
-- Fecha de corte documental: 2026-03-19.
+- Fecha de corte documental: 2026-03-20.
 - Estado confirmado: `PB-007` y `PB-006` ya fueron validados por `qa-teams` y sus entregas estan integradas en `main`.
-- Estado actual de trabajo tecnico: existen dos ramas tecnicas abiertas en remoto, pero `developer-teams/issue-4-ficha-detalle-licitacion` ya incorpora tambien `PB-001` y ambas entregas estan validadas por `qa-teams`.
-- Siguiente recomendacion para `developer-teams`: iniciar `PB-003` en la issue #5 una vez quede integrada en `main` la rama validada de `PB-002`.
+- Estado actual de trabajo tecnico: solo permanece abierta en remoto la rama `developer-teams/issue-5-pb-003-filtros-catalogo`.
+- Siguiente recomendacion para `developer-teams`: corregir `PB-003` en la issue #5 dentro de la misma rama hasta obtener validacion explicita de `qa-teams`.
 - Las decisiones funcionales sobre expedientes mixtos y sobre oportunidades anuladas, desiertas, desistidas o modificadas quedan ya definidas para evitar bloqueo de backlog posterior.
 
 ## Release 0: Delimitacion funcional del MVP
@@ -38,8 +38,8 @@
   - Que el equipo implemente un catalogo visible pero comunique cobertura o relevancia con mas seguridad de la que la release realmente soporta.
 - Estado operativo actual:
   - `PB-006` ya esta validado e integrado en `main` como prerequisito del catalogo.
-  - `PB-001` y `PB-002` ya fueron validados por `qa-teams` y deben quedar integrados administrativamente en `main` desde la rama validada de `PB-002`.
-  - `PB-003` pasa a ser la siguiente pieza activa del Release 1 para completar el MVP de descubrimiento filtrable.
+  - `PB-001` y `PB-002` ya fueron validados por `qa-teams` y estan integrados administrativamente en `main`.
+  - `PB-003` sigue siendo la pieza activa del Release 1, pero su ultimo handoff fue `no validado` por `qa-teams` al no solicitar correccion cuando el rango de presupuesto es invalido.
 
 ## Release 2: Alertas y seguimiento operativo
 - Objetivo: Convertir el descubrimiento en uso recurrente y gestion operativa.
@@ -71,5 +71,6 @@
 
 ## Decision operativa para la siguiente iteracion
 - La issue que debe tomar `developer-teams` a continuacion es la #5, asociada a `PB-003`.
-- La implementacion debe reutilizar la cobertura validada de `PB-007`, la regla auditable validada de `PB-006` y la superficie ya validada de catalogo y detalle.
-- No se recomienda iniciar `PB-004` ni `PB-005` antes de que `PB-003` complete el MVP de descubrimiento con capacidad de filtrado.
+- La implementacion debe corregir en la misma rama el manejo del rango de presupuesto invalido y publicar un nuevo handoff completo antes de volver a QA.
+- La correccion debe reutilizar la cobertura validada de `PB-007`, la regla auditable validada de `PB-006` y la superficie ya validada de catalogo y detalle.
+- No se recomienda iniciar `PB-004` ni `PB-005` antes de que `PB-003` quede `validado`.
