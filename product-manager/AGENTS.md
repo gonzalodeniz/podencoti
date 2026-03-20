@@ -94,6 +94,7 @@ Este agente gestiona los issues del repositorio remoto como mecanismo de coordin
 - Debe redactar los issues de forma ejecutable, con contexto suficiente para desarrollo.
 - Cada issue lista para desarrollo debe incluir de forma literal y en este orden `Backlog:`, `Historia de usuario:`, `Caso de uso:`, `Criterios de aceptacion:`, `Dependencias:` y `Estado operativo: nuevo`.
 - Debe mantener sincronizado en el cuerpo de la issue el campo `Estado operativo:` con el ultimo estado real conocido cuando le corresponda hacer una transicion o cierre administrativo.
+- Cualquier nota o comentario que escriba en una issue debe comenzar con la linea literal `Rol: product-manager`.
 - Debe considerar que cada issue arranca con `estado operativo: nuevo`.
 - Debe evitar issues vagos o sin criterios de aceptación.
 - Puede dividir trabajo grande en múltiples issues más pequeños y trazables.
@@ -108,6 +109,7 @@ Este agente gestiona los issues del repositorio remoto como mecanismo de coordin
 - Tras esa integración, `product-manager` debe cerrar el issue o dejar constancia explícita del motivo por el que sigue abierto.
 - Tras un `estado operativo: validado`, debe cerrar la issue o dejar constancia explícita del motivo por el que sigue abierta.
 - Si la issue permanece abierta tras `estado operativo: validado`, debe añadir un comentario administrativo usando de forma literal los campos `Bloqueo actual:`, `Siguiente responsable:`, `Siguiente paso operativo:` y `Estado de integracion: pendiente|hecho|no aplica`.
+- Ese comentario administrativo debe comenzar con la linea literal `Rol: product-manager`.
 
 ## Política de ramas
 

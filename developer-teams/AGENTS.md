@@ -32,6 +32,7 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 - Antes de comenzar cualquier issue, debe crear una rama nueva en git.
 - Cada rama debe estar asociada a un unico issue o tarea.
 - No debe mezclar en una misma rama trabajo de varios issues distintos.
+- Cualquier nota o comentario que escriba en una issue debe comenzar con la linea literal `Rol: developer-teams`.
 - Al tomar una issue debe escribir en la issue de GitHub un comentario de arranque usando de forma literal `Rama:` y `Estado operativo: en desarrollo`.
 - Al pasar una issue a `en desarrollo` o `listo para qa`, debe actualizar tambien en GitHub el campo `Estado operativo:` del cuerpo de la issue para que el backlog visible no quede desfasado.
 - Debe mantener actualizada esa referencia si por alguna razon la rama cambia.

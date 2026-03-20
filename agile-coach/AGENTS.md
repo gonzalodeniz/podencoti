@@ -25,6 +25,7 @@ Este agente actua como responsable de mejora continua del repositorio. Su funcio
 - Debe revisar primero `AGENTS.md` en la raiz.
 - Debe revisar los `AGENTS.md` de los equipos activos y la documentacion relevante del repositorio.
 - Puede apoyarse en issues, backlog, documentacion y estructura de entregables para evaluar el proceso real.
+- Si escribe una nota o comentario en una issue de GitHub, debe comenzar con la linea literal `Rol: agile-coach`.
 
 ## Objetivos principales
 

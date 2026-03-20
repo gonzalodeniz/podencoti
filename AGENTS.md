@@ -121,6 +121,7 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 - Cada issue creada por `product-manager` y lista para ser tomada por `developer-teams` debe incluir de forma literal los campos `Backlog:`, `Historia de usuario:`, `Caso de uso:`, `Criterios de aceptacion:`, `Dependencias:` y `Estado operativo: nuevo`.
 - Los issues deben usar un estado operativo comun entre equipos para reducir ambiguedad: `nuevo`, `en desarrollo`, `listo para qa`, `no validado`, `validado` y `cerrado`.
 - El campo `Estado operativo:` del cuerpo de la issue debe mantenerse sincronizado con el ultimo estado real del flujo; el rol que produzca la transicion debe actualizar ese campo en GitHub ademas de dejar su comentario estructurado.
+- Cualquier rol que escriba una nota o comentario en una issue de GitHub debe comenzar la nota con la linea literal `Rol: <nombre-del-rol>` para que quede identificado quien la ha escrito.
 - `product-manager` debe mantener visible en backlog la deuda tecnica relevante detectada por `developer-teams` o `qa-teams`, priorizando issues tecnicas de refactorizacion, endurecimiento o mejora cuando el riesgo operativo o de mantenibilidad lo justifique.
 - Los roles `product-manager`, `doc-teams` y `agile-coach` trabajan directamente sobre `main` y no deben crear ramas de trabajo propias.
 - El equipo `developer-teams` debe leer los issues abiertos antes de empezar a implementar.
