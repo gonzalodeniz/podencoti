@@ -56,6 +56,22 @@ class ApplicationTests(unittest.TestCase):
         self.assertEqual(["pcsp-cabildo-licencias-2026"], [item["id"] for item in payload["oportunidades"]])
         self.assertEqual("licencias", payload["filtros_activos"]["palabra_clave"])
 
+    def test_api_rejects_invalid_budget_range_with_explicit_message(self) -> None:
+        status, headers, body = invoke_app(
+            "/api/oportunidades",
+            "presupuesto_min=120000&presupuesto_max=90000",
+        )
+        payload = json.loads(body)
+
+        self.assertEqual("400 Bad Request", status)
+        self.assertEqual("application/json; charset=utf-8", headers["Content-Type"])
+        self.assertEqual(
+            "El presupuesto mínimo no puede ser mayor que el presupuesto máximo. "
+            "Revisa el rango antes de aplicar los filtros.",
+            payload["error_validacion"],
+        )
+        self.assertEqual(3, payload["total_oportunidades_catalogo"])
+
     def test_detail_page_renders_critical_fields_and_latest_visible_update(self) -> None:
         status, headers, body = invoke_app("/oportunidades/pcsp-cabildo-licencias-2026")
         html = body.decode("utf-8")
@@ -176,3 +192,13 @@ class ApplicationTests(unittest.TestCase):
         self.assertIn("Palabra clave: inexistente", html)
         self.assertIn("No hay resultados con los filtros activos.", html)
         self.assertIn("Limpiar filtros", html)
+
+    def test_root_requests_correction_for_invalid_budget_range(self) -> None:
+        status, headers, body = invoke_app("/", "presupuesto_min=120000&presupuesto_max=90000")
+        html = body.decode("utf-8")
+
+        self.assertEqual("200 OK", status)
+        self.assertEqual("text/html; charset=utf-8", headers["Content-Type"])
+        self.assertIn("Corrige el rango de presupuesto.", html)
+        self.assertIn("El presupuesto mínimo no puede ser mayor que el presupuesto máximo.", html)
+        self.assertNotIn("No hay resultados con los filtros activos.", html)

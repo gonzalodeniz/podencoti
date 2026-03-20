@@ -351,11 +351,23 @@ def _active_filter_badges(filters: dict[str, object]) -> str:
     """
 
 
+def _validation_note_html(message: str | None) -> str:
+    if message is None:
+        return ""
+    return f"""
+      <section class="note">
+        <strong>Corrige el rango de presupuesto.</strong>
+        {escape(message)}
+      </section>
+    """
+
+
 def _catalog_html_response(filters: CatalogFilters | None = None) -> str:
     catalog = build_catalog(filters=filters)
     opportunities = catalog["oportunidades"]
     active_filters = catalog["filtros_activos"]
     available_filters = catalog["filtros_disponibles"]
+    validation_error = catalog.get("error_validacion")
     filter_form = f"""
       <section class="panel">
         <div class="panel-body">
@@ -401,6 +413,7 @@ def _catalog_html_response(filters: CatalogFilters | None = None) -> str:
             </div>
           </form>
           {_active_filter_badges(active_filters)}
+          {_validation_note_html(validation_error)}
         </div>
       </section>
     """
@@ -456,7 +469,7 @@ def _catalog_html_response(filters: CatalogFilters | None = None) -> str:
     else:
         message = (
             "No hay resultados con los filtros activos."
-            if active_filters
+            if active_filters and validation_error is None
             else "No hay oportunidades TI disponibles dentro de la cobertura MVP en este momento."
         )
         catalog_panel = f"""
@@ -690,8 +703,10 @@ def application(environ, start_response):
         return _respond(start_response, "200 OK", "application/json; charset=utf-8", body)
 
     if path == "/api/oportunidades":
-        body = b"".join(_json_response(build_catalog(filters=filters)))
-        return _respond(start_response, "200 OK", "application/json; charset=utf-8", body)
+        payload = build_catalog(filters=filters)
+        status = "400 Bad Request" if payload["error_validacion"] else "200 OK"
+        body = b"".join(_json_response(payload))
+        return _respond(start_response, status, "application/json; charset=utf-8", body)
 
     if path == "/api/fuentes":
         sources = load_source_coverage()

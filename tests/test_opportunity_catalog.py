@@ -119,3 +119,14 @@ class OpportunityCatalogTests(unittest.TestCase):
             ["pcsp-cabildo-licencias-2026"],
             [item["id"] for item in catalog["oportunidades"]],
         )
+
+    def test_build_catalog_flags_invalid_budget_range_without_treating_it_as_empty_result(self) -> None:
+        catalog = build_catalog(filters=CatalogFilters(presupuesto_min=120000, presupuesto_max=90000))
+
+        self.assertEqual(
+            "El presupuesto mínimo no puede ser mayor que el presupuesto máximo. "
+            "Revisa el rango antes de aplicar los filtros.",
+            catalog["error_validacion"],
+        )
+        self.assertEqual(3, catalog["total_oportunidades_catalogo"])
+        self.assertEqual(3, len(catalog["oportunidades"]))

@@ -97,6 +97,18 @@ class CatalogFilters:
             if value not in (None, "")
         }
 
+    def validation_error(self) -> str | None:
+        if (
+            self.presupuesto_min is not None
+            and self.presupuesto_max is not None
+            and self.presupuesto_min > self.presupuesto_max
+        ):
+            return (
+                "El presupuesto mínimo no puede ser mayor que el presupuesto máximo. "
+                "Revisa el rango antes de aplicar los filtros."
+            )
+        return None
+
 
 def load_opportunity_records(path: Path = DEFAULT_DATA_PATH) -> tuple[str, list[OpportunityRecord]]:
     payload = json.loads(path.read_text(encoding="utf-8"))
@@ -268,6 +280,7 @@ def build_catalog(
     rules = load_rule_set()
     mvp_sources = {source.nombre for source in load_source_coverage() if source.estado == "MVP"}
     active_filters = (filters or CatalogFilters()).normalized()
+    validation_error = active_filters.validation_error()
 
     opportunities: list[CatalogOpportunity] = []
     available_locations: set[str] = set()
@@ -286,7 +299,7 @@ def build_catalog(
         if snapshot["procedimiento"]:
             available_procedures.add(str(snapshot["procedimiento"]))
 
-        if not _matches_filters(record, snapshot, active_filters):
+        if validation_error is None and not _matches_filters(record, snapshot, active_filters):
             continue
 
         opportunities.append(
@@ -313,6 +326,7 @@ def build_catalog(
         "total_oportunidades_visibles": total_visible_before_filters,
         "total_oportunidades_catalogo": len(opportunities),
         "filtros_activos": active_filters.active_filters(),
+        "error_validacion": validation_error,
         "filtros_disponibles": {
             "procedimientos": sorted(available_procedures),
             "ubicaciones": sorted(available_locations),
