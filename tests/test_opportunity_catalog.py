@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from podencoti.opportunity_catalog import build_catalog, build_opportunity_detail, load_opportunity_records
+from podencoti.opportunity_catalog import CatalogFilters, build_catalog, build_opportunity_detail, load_opportunity_records
 
 
 class OpportunityCatalogTests(unittest.TestCase):
@@ -86,3 +86,47 @@ class OpportunityCatalogTests(unittest.TestCase):
         self.assertEqual(1, catalog["total_registros_origen"])
         self.assertEqual(0, catalog["total_oportunidades_catalogo"])
         self.assertEqual([], catalog["oportunidades"])
+
+    def test_build_catalog_applies_combined_filters(self) -> None:
+        catalog = build_catalog(
+            filters=CatalogFilters(
+                palabra_clave="licencias",
+                presupuesto_min=90000,
+                presupuesto_max=120000,
+                procedimiento="Abierto simplificado",
+                ubicacion="Santa Cruz de Tenerife",
+            )
+        )
+
+        self.assertEqual(3, catalog["total_oportunidades_visibles"])
+        self.assertEqual(1, catalog["total_oportunidades_catalogo"])
+        self.assertEqual(["pcsp-cabildo-licencias-2026"], [item["id"] for item in catalog["oportunidades"]])
+        self.assertEqual(
+            {
+                "palabra_clave": "licencias",
+                "presupuesto_min": 90000,
+                "presupuesto_max": 120000,
+                "procedimiento": "Abierto simplificado",
+                "ubicacion": "Santa Cruz de Tenerife",
+            },
+            catalog["filtros_activos"],
+        )
+
+    def test_build_catalog_excludes_records_without_known_budget_when_range_is_requested(self) -> None:
+        catalog = build_catalog(filters=CatalogFilters(presupuesto_max=100000))
+
+        self.assertEqual(
+            ["pcsp-cabildo-licencias-2026"],
+            [item["id"] for item in catalog["oportunidades"]],
+        )
+
+    def test_build_catalog_flags_invalid_budget_range_without_treating_it_as_empty_result(self) -> None:
+        catalog = build_catalog(filters=CatalogFilters(presupuesto_min=120000, presupuesto_max=90000))
+
+        self.assertEqual(
+            "El presupuesto mínimo no puede ser mayor que el presupuesto máximo. "
+            "Revisa el rango antes de aplicar los filtros.",
+            catalog["error_validacion"],
+        )
+        self.assertEqual(3, catalog["total_oportunidades_catalogo"])
+        self.assertEqual(3, len(catalog["oportunidades"]))
