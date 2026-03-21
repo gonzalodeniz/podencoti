@@ -198,3 +198,26 @@
 - Reglas de negocio relacionadas:
   - RB-18 La regla TI debe ser auditable por producto y `qa-teams` antes de depender de ella en el catalogo.
   - RB-19 Los casos frontera no deben presentarse como inclusion inequivoca si requieren criterio adicional.
+
+## CU-09 Priorizar fuentes reales oficiales para recopilacion
+- Backlog relacionado: PB-009
+- Historias relacionadas: HU-09
+- Actor principal: Responsable de producto.
+- Objetivo: Definir que fuentes reales oficiales deben entrar antes en la recopilacion para acercar el producto a datos utilizables en produccion.
+- Disparador: Se revisa la priorizacion posterior al MVP inicial de descubrimiento.
+- Precondiciones:
+  - Existe una cobertura funcional inicial ya delimitada.
+  - Existen fuentes oficiales reales identificables con valor potencial para contratos y concursos TI.
+- Flujo principal:
+  1. El responsable de producto revisa fuentes reales oficiales candidatas.
+  2. Prioriza las fuentes segun valor para Canarias, credibilidad del dato y capacidad de alimentar recopilacion util.
+  3. Registra fuentes concretas y su prioridad en backlog, roadmap y refinamiento funcional.
+  4. Crea una issue ejecutable para que `developer-teams` implemente la nueva prioridad.
+- Flujos alternativos:
+  - A1. Si una fuente oficial es real pero su formato o acceso exige analisis adicional, puede quedar priorizada con alcance incremental en lugar de descartarse.
+  - A2. Si una fuente tiene cobertura estatal pero aporta contratos relevantes para Canarias, puede quedar incluida como prioridad complementaria.
+- Postcondiciones:
+  - El proyecto dispone de una prioridad trazable y ejecutable para reforzar la recopilacion con fuentes reales.
+- Reglas de negocio relacionadas:
+  - RB-27 La recopilacion prioritaria debe apoyarse en fuentes oficiales reales y verificables antes que en nuevas capacidades de retencion no esenciales.
+  - RB-28 La lista prioritaria debe nombrar de forma explicita al menos `BOC`, `BOP Las Palmas` y `BOE`.

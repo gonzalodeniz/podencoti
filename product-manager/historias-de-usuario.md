@@ -58,8 +58,8 @@
   6. Si el usuario introduce un rango de presupuesto minimo mayor que el maximo, el sistema solicita corregirlo y no presenta ese caso como una busqueda valida sin coincidencias.
 - Dependencias funcionales: PB-001
 - Prioridad: P0
-- Estado: `validado`
-- Nota de estado: `qa-teams` valido la reentrega de la issue #5 el 2026-03-20 tras comprobar la correccion del rango de presupuesto invalido en HTML y API. La historia queda funcionalmente aceptada y pendiente solo de merge en `main`, borrado de rama tecnica y cierre administrativo.
+- Estado: `cerrado`
+- Nota de estado: `qa-teams` valido la reentrega de la issue #5 el 2026-03-20 tras comprobar la correccion del rango de presupuesto invalido en HTML y API. `developer-teams` integro la rama en `main` el 2026-03-21 y `product-manager` cierra administrativamente el trabajo.
 
 ## HU-04 Recibir alertas tempranas
 - Backlog relacionado: PB-004
@@ -152,4 +152,21 @@
   4. El equipo puede revisar estos KPIs sin bloquear el MVP funcional.
 - Dependencias funcionales: PB-001, PB-004
 - Prioridad: P2
+- Estado: `nuevo`
+
+## HU-09 Priorizar recopilacion sobre fuentes reales oficiales
+- Backlog relacionado: PB-009
+- Caso de uso relacionado: CU-09
+- Issue relacionado: #9
+- Historia:
+  Como responsable de producto,
+  quiero priorizar que la recopilacion se haga sobre fuentes oficiales reales y verificables,
+  para que el catalogo y las oportunidades futuras se apoyen cuanto antes en origenes creibles y utiles para negocio.
+- Criterios de aceptacion:
+  1. Existe una lista priorizada de fuentes reales oficiales candidatas a integracion temprana.
+  2. La prioridad incluye de forma explicita `BOC` (`https://www.gobiernodecanarias.org/boc/`), `BOP Las Palmas` (`https://www.boplaspalmas.net/nbop2/index.php`) y `BOE` (`https://www.boe.es/`) como fuentes reales a evaluar o integrar antes que nuevas capacidades no esenciales de retencion.
+  3. El backlog, el roadmap y el refinamiento funcional reflejan que esta prioridad adelanta a alertas y pipeline.
+  4. Existe una issue de GitHub ejecutable para `developer-teams` con criterios de aceptacion verificables.
+- Dependencias funcionales: PB-007, PB-006
+- Prioridad: P0
 - Estado: `nuevo`

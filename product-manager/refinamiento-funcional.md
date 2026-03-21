@@ -9,7 +9,7 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 - `PB-006` ya quedo validado por `qa-teams` en la issue #2 y deja una superficie funcional auditable previa al catalogo de `PB-001`.
 - `PB-001` ya quedo validado por `qa-teams` en la issue #3 y aporta el catalogo visible inicial sobre cobertura MVP y clasificacion TI vigente.
 - `PB-002` ya quedo validado por `qa-teams` en la issue #4 y amplia el catalogo con ficha de detalle y tratamiento visible de rectificaciones o modificaciones del expediente.
-- `PB-003` ya fue revalidado por `qa-teams` en la issue #5 el 2026-03-20 y queda pendiente solo de merge en `main`, borrado de rama tecnica y cierre administrativo.
+- `PB-003` ya fue revalidado por `qa-teams` en la issue #5 el 2026-03-20, integrado en `main` por `developer-teams` el 2026-03-21 y cerrado administrativamente por `product-manager`.
 
 ## Huecos funcionales cerrados en esta revision
 - Queda definida la regla funcional para expedientes mixtos donde TI no es el unico componente.
@@ -19,17 +19,20 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 - Queda definido que una alerta del MVP necesita al menos un criterio funcional informado y no puede guardarse vacia.
 - Queda definido que el alta inicial en pipeline crea siempre el estado `Nueva`.
 - Queda definido que `PB-008` puede avanzar como definicion funcional de KPIs aunque la instrumentacion completa llegue en una iteracion posterior.
+- Queda incorporada como prioridad explicita la recopilacion desde fuentes reales oficiales nominadas, ya que `PB-007` solo cerraba cobertura funcional y no orden de implementacion de fuentes reales.
 
 ## Incidencia operativa abierta prioritaria
-- La issue #5 de `PB-003` ya esta `validado`, pero sigue abierta porque la rama `developer-teams/issue-5-pb-003-filtros-catalogo` aun no se ha fusionado en `main` ni se ha borrado.
-- El siguiente paso exigible a `developer-teams` es completar esa integracion antes de abrir una nueva implementacion.
-- Mientras la rama validada siga abierta, no debe arrancarse `PB-004` ni `PB-005`.
+- La nueva prioridad abierta para `developer-teams` pasa a ser `PB-009`.
+- La secuencia de trabajo ya no tiene bloqueos administrativos previos asociados a `PB-003`.
+- La validacion e integracion previas permiten reordenar la siguiente iteracion sin reabrir entregas ya aceptadas.
 
 ## Decisiones funcionales vigentes
 - El MVP de negocio se compone de dos escalones:
   - escalon 1: cobertura acotada, regla de relevancia TI, catalogo, detalle y filtros
-  - escalon 2: alertas y pipeline
+  - escalon 2: recopilacion prioritaria desde fuentes reales oficiales
+  - escalon 3: alertas y pipeline
 - La comunicacion del producto debe hablar de cobertura inicial priorizada, no de cobertura total.
+- La recopilacion de contratos y concursos debe priorizar fuentes reales oficiales y verificables antes de invertir en capacidades de retencion no esenciales.
 - La relevancia TI debe poder explicarse y auditarse sin depender de interpretaciones tecnicas implicitas.
 - La regla TI ya puede validarse de forma observable antes de construir el catalogo, pero su casuistica seguira refinandose con ejemplos reales.
 - El pipeline minimo sigue limitado a los estados `Nueva`, `Evaluando`, `Preparando oferta`, `Presentada` y `Descartada`.
@@ -81,6 +84,16 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 - Estado `Por definir`:
   - Fuentes con acceso inconsistente, formatos no estandar o baja frecuencia de oportunidades TI
 
+## Fuentes reales oficiales priorizadas para recopilacion
+- Prioridad alta inmediata:
+  - `BOC` (`https://www.gobiernodecanarias.org/boc/`)
+  - `BOP Las Palmas` (`https://www.boplaspalmas.net/nbop2/index.php`)
+  - `BOE` (`https://www.boe.es/`)
+- Prioridad alta posterior o dependiente de validacion adicional:
+  - perfiles del contratante y boletines oficiales adicionales que aporten oportunidades TI relevantes para Canarias, incluidos cabildos y otros boletines provinciales o locales
+- Criterio funcional:
+  - si una fuente es oficial, real y aporta señal temprana de contratos o concursos aprovechables por el usuario objetivo, debe evaluarse antes que nuevas capacidades de engagement no esenciales
+
 ## Dependencias abiertas
 - Confirmar con negocio si el MVP debe cubrir tambien ayuntamientos desde la primera promesa comercial o si permanecen fuera de la comunicacion inicial.
 - Definir mas adelante si las modificaciones oficiales del expediente requieren un historial visible de cambios en lugar de mostrar solo el ultimo dato disponible.
@@ -92,7 +105,7 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 - Riesgo de baja adopcion si el MVP entrega solo agregacion pero no relevancia util.
 - Riesgo de frustracion si faltan datos criticos en fichas sin indicarse claramente su ausencia.
 - Riesgo operativo si desarrollo declara rutas o superficies de validacion no expuestas realmente en la entrega revisable.
-- Riesgo operativo si una rama tecnica ya validada permanece abierta y retrasa el paso ordenado hacia `PB-004`.
+- Riesgo de credibilidad si el producto retrasa la recopilacion real y prioriza antes capacidades de retencion sobre fuentes oficiales verificables.
 
 ## Supuestos explicitos
 - El primer objetivo es demostrar que la centralizacion y el filtrado ahorran tiempo al usuario.
@@ -104,9 +117,9 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 - Que datos minimos deben gobernar una futura decision de monetizacion o plan de pago.
 
 ## Recomendacion operativa para `developer-teams`
-- Completar merge a `main` y borrado de rama de la issue #5 correspondiente a `PB-003`, ya validada por `qa-teams`.
-- Tras esa integracion, tomar `PB-004` como siguiente pieza funcional prioritaria.
+- Tomar `PB-009` como siguiente pieza funcional prioritaria para reforzar recopilacion sobre fuentes reales oficiales nominadas.
 - Reutilizar la cobertura validada de `PB-007`, la regla auditable de `PB-006` y la superficie ya validada de `PB-001`, `PB-002` y `PB-003` sin reabrirlas salvo cambio de alcance.
+- Tratar `BOC`, `BOP Las Palmas` y `BOE` como fuentes reales de referencia para la siguiente iteracion.
 - Mantener visible en el catalogo la fuente oficial y evitar mensajes que sugieran cobertura total del ecosistema canario.
 - Aplicar el filtrado solo sobre oportunidades ya visibles dentro de cobertura MVP y clasificacion final `TI`.
 - Tratar los expedientes mixtos dudosos como caso frontera fuera del catalogo hasta que exista evidencia funcional suficiente.
@@ -114,6 +127,7 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 ## Trazabilidad operativa
 - `PB-007` y `HU-07` quedan cubiertos por la issue #1 y su validacion ya registrada.
 - `PB-006`, `HU-06` y `CU-08` resuelven la definicion de relevancia TI antes del catalogo.
-- `PB-001`, `PB-002` y `PB-003` ya quedaron validados por `qa-teams`; Release 1 queda funcionalmente completa y pendiente solo de la integracion operativa final de la issue #5.
-- `PB-004` y `PB-005` quedan listos para Release 2 tras validar el MVP de descubrimiento.
+- `PB-001`, `PB-002` y `PB-003` ya quedaron validados por `qa-teams` y cerrados administrativamente; Release 1 queda funcionalmente completa.
+- `PB-009` pasa a ser la siguiente pieza prioritaria tras el MVP de descubrimiento para reforzar recopilacion real.
+- `PB-004` y `PB-005` quedan desplazados a la release posterior de retencion.
 - `PB-008` prepara la base de decision para evolucion posterior sin bloquear el MVP.

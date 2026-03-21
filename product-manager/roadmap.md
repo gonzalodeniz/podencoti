@@ -8,13 +8,14 @@
 ## Estado de referencia de la iteracion
 - Fecha de corte documental: 2026-03-21.
 - Estado confirmado: `PB-007` y `PB-006` ya fueron validados por `qa-teams` y sus entregas estan integradas en `main`.
-- Estado actual de trabajo tecnico: solo permanece abierta en remoto la rama `developer-teams/issue-5-pb-003-filtros-catalogo`.
-- Siguiente recomendacion para `developer-teams`: fusionar en `main` la rama validada de `PB-003`, borrar la rama tecnica y cerrar la issue #5 antes de tomar una nueva implementacion.
+- Estado actual de trabajo tecnico: la siguiente implementacion funcional priorizada pasa a ser `PB-009`.
+- Siguiente recomendacion para `developer-teams`: tomar `PB-009` como siguiente implementacion.
 - Las decisiones funcionales sobre expedientes mixtos y sobre oportunidades anuladas, desiertas, desistidas o modificadas quedan ya definidas para evitar bloqueo de backlog posterior.
 - En esta revision tambien quedan cerradas tres aclaraciones de release para reducir ambiguedad de implementacion:
   - una alerta del MVP requiere al menos un criterio funcional informado
   - el alta inicial en pipeline crea siempre el estado `Nueva`
   - `PB-008` puede refinarse documentalmente antes de disponer de instrumentacion completa
+  - la recopilacion desde fuentes reales oficiales nominadas se prioriza antes que alertas y pipeline
 
 ## Release 0: Delimitacion funcional del MVP
 - Objetivo: Cerrar ambiguedades criticas antes de la implementacion del catalogo.
@@ -43,9 +44,20 @@
 - Estado operativo actual:
   - `PB-006` ya esta validado e integrado en `main` como prerequisito del catalogo.
   - `PB-001` y `PB-002` ya fueron validados por `qa-teams` y estan integrados administrativamente en `main`.
-  - `PB-003` ya fue validado por `qa-teams` el 2026-03-20 en la issue #5. Release 1 queda funcionalmente completada y pendiente solo de integracion final en `main` por `developer-teams`.
+  - `PB-003` ya fue validado por `qa-teams` el 2026-03-20 en la issue #5, integrado por `developer-teams` en `main` el 2026-03-21 y cerrado administrativamente por `product-manager`.
 
-## Release 2: Alertas y seguimiento operativo
+## Release 2: Fuentes reales priorizadas
+- Objetivo: Reforzar la credibilidad del producto y la utilidad del catalogo priorizando recopilacion desde fuentes oficiales reales.
+- Alcance:
+  - PB-009 Priorizacion de recopilacion desde fuentes reales oficiales.
+- Criterios de salida:
+  - Existe una prioridad trazable y ejecutable de fuentes reales oficiales para recopilacion.
+  - `BOC`, `BOP Las Palmas` y `BOE` quedan identificadas de forma explicita como fuentes reales prioritarias.
+  - La secuencia de entregas deja claro que esta prioridad adelanta a nuevas capacidades de retencion.
+- Riesgo principal:
+  - Que el producto invierta antes en engagement que en reforzar la calidad y credibilidad de las oportunidades visibles.
+
+## Release 3: Alertas y seguimiento operativo
 - Objetivo: Convertir el descubrimiento en uso recurrente y gestion operativa.
 - Alcance:
   - PB-004 Configuracion de alertas tempranas.
@@ -55,14 +67,14 @@
   - El usuario puede seguir oportunidades guardadas sin duplicados y con estados consistentes.
   - Las oportunidades con estado oficial `anulada`, `desierta` o `desistida` no se presentan como nuevas alertas accionables y siguen siendo visibles en pipeline con advertencia.
 - Dependencia clave:
-  - Requiere que Release 1 haya validado e integrado en `main` el valor del catalogo y de los filtros.
+  - Requiere que Release 1 haya validado el valor del catalogo y de los filtros, y que Release 2 haya fijado la prioridad de recopilacion real.
 - Decision funcional vigente:
   - Las alertas del MVP registran coincidencias de forma interna; la notificacion saliente queda fuera de esta release.
   - Una alerta del MVP solo es valida si contiene al menos un criterio funcional; no se permiten alertas vacias.
   - El pipeline del MVP es individual por usuario; la colaboracion por empresa queda para una release posterior.
   - El alta inicial de una oportunidad en pipeline debe crear el estado `Nueva`.
 
-## Release 3: Medicion y aprendizaje
+## Release 4: Medicion y aprendizaje
 - Objetivo: Mejorar precision, cobertura y priorizacion apoyandose en indicadores.
 - Alcance:
   - PB-008 Medicion basica de valor del producto.
@@ -77,7 +89,6 @@
 - Decidir en una iteracion posterior si los KPIs de alertas deben exigirse ya con dato real o pueden arrancar con definicion documental y recogida manual temporal.
 
 ## Decision operativa para la siguiente iteracion
-- El siguiente paso operativo de `developer-teams` es completar merge y borrado de rama de la issue #5, asociada a `PB-003`.
-- Tras esa integracion, la siguiente issue recomendada para iniciar es la #6, asociada a `PB-004`.
-- `PB-004` debe reutilizar la cobertura validada de `PB-007`, la regla auditable validada de `PB-006` y la superficie ya validada de catalogo, detalle y filtros.
-- No se recomienda iniciar `PB-004` ni `PB-005` mientras la rama validada de `PB-003` siga abierta sin integrar.
+- La siguiente issue recomendada para iniciar es la #9, asociada a `PB-009`.
+- `PB-009` debe reutilizar la cobertura validada de `PB-007`, la regla auditable validada de `PB-006` y la superficie ya validada de catalogo, detalle y filtros.
+- No se recomienda iniciar `PB-004` ni `PB-005` antes de dejar priorizada y trazada la recopilacion sobre fuentes reales oficiales.
