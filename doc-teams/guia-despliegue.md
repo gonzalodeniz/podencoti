@@ -19,7 +19,7 @@ timeout 2s make run
 
 ## Resultado esperado en esta revision
 - `python3 -m pip install -e .` termina correctamente.
-- `make test` ejecuta 26 pruebas en verde.
+- `make test` ejecuta 33 pruebas en verde.
 - `make run` arranca el servidor local y queda a la escucha hasta que se interrumpe el proceso.
 
 ## Conclusion operativa

@@ -79,15 +79,13 @@ Tambien pueden recibir opciones adicionales de `codex exec`, por ejemplo:
 
 ## Entrega tecnica actual
 
-La base integrada desde `main` cubre dos piezas previas al catalogo del MVP:
+La rama `main` ya integra cinco piezas funcionales verificables del MVP inicial:
 
 - `PB-007`: cobertura inicial visible y verificable de fuentes del MVP.
 - `PB-006`: regla de clasificacion TI auditable con ejemplos verificables.
-
-Sobre esa base, esta rama implementa:
-
 - `PB-001`: catalogo inicial de oportunidades TI consultable desde una app WSGI minima en Python.
 - `PB-002`: ficha de detalle navegable desde el catalogo, con tratamiento explicito de campos no informados y aplicacion del ultimo dato oficial visible cuando el expediente publica una rectificacion o modificacion.
+- `PB-003`: filtros funcionales sobre el catalogo y su API por palabra clave, rango de presupuesto, procedimiento y ubicacion, incluyendo validacion explicita de rangos invalidos.
 
 ### Como ejecutar las vistas actuales
 
@@ -97,7 +95,7 @@ PYTHONPATH=src python3 -m podencoti.app
 
 Luego se puede abrir:
 
-- `http://127.0.0.1:8000/` para la vista HTML del catalogo inicial de oportunidades TI
+- `http://127.0.0.1:8000/` para la vista HTML del catalogo inicial de oportunidades TI, con formulario de filtros funcionales
 - `http://127.0.0.1:8000/api/oportunidades` para la salida JSON del catalogo filtrado por cobertura MVP y clasificacion TI
 - `http://127.0.0.1:8000/oportunidades/<id>` para la ficha HTML de detalle de una oportunidad visible
 - `http://127.0.0.1:8000/api/oportunidades/<id>` para la salida JSON trazable de la ficha de detalle
@@ -106,11 +104,16 @@ Luego se puede abrir:
 - `http://127.0.0.1:8000/clasificacion-ti` para la vista HTML de la regla TI auditable
 - `http://127.0.0.1:8000/api/clasificacion-ti` para la salida JSON de reglas y ejemplos auditados
 
+Ejemplos de filtros ya soportados:
+
+- `http://127.0.0.1:8000/?palabra_clave=licencias`
+- `http://127.0.0.1:8000/api/oportunidades?procedimiento=Abierto`
+- `http://127.0.0.1:8000/api/oportunidades?presupuesto_min=90000&presupuesto_max=120000`
+
 ## Capacidades aun no implementadas en esta rama
 
 Aunque formen parte de la vision y del backlog, todavia no existen en esta rama:
 
-- filtros funcionales
 - alertas tempranas
 - pipeline de seguimiento
 

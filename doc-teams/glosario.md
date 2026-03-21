@@ -10,6 +10,7 @@ Usuario interno del proyecto que necesita interpretar de forma consistente la te
 - `Cobertura funcional`: conjunto de fuentes y capacidades que el producto declara cubrir de forma observable y verificable.
 - `Fuente oficial`: portal, perfil del contratante u origen institucional desde el que se obtiene informacion de contratacion publica.
 - `Clasificacion TI auditable`: superficie visible que expone reglas, exclusiones, casos frontera y ejemplos verificables antes del catalogo.
+- `Filtro funcional`: criterio aplicable sobre el catalogo visible y su API para reducir resultados por palabra clave, presupuesto, procedimiento o ubicacion.
 - `Pipeline`: seguimiento del estado de trabajo de una oportunidad por parte del usuario; sigue siendo capacidad planificada, no disponible en `main`.
 - `Alerta temprana`: mecanismo para registrar o notificar nuevas oportunidades compatibles con criterios del usuario; sigue siendo capacidad planificada, no disponible en `main`.
 
@@ -23,7 +24,7 @@ Usuario interno del proyecto que necesita interpretar de forma consistente la te
 - `Estado real observable`: comportamiento que puede comprobarse en la rama revisada mediante ficheros versionados y comandos reproducibles.
 - `Contradiccion documental`: diferencia entre lo que una fuente del repositorio afirma y lo que puede verificarse realmente en `main`.
 - `No disponible en main`: capacidad descrita por vision o backlog que no debe documentarse como funcionalidad utilizable hoy.
-- `Entrega minima ejecutable`: estado actual de `main` con servidor local, catalogo inicial, ficha de detalle, rutas de cobertura y rutas de clasificacion TI auditables, pero sin filtros, alertas, pipeline ni despliegue productivo.
+- `Entrega minima ejecutable`: estado actual de `main` con servidor local, catalogo inicial, filtros funcionales, ficha de detalle, rutas de cobertura y rutas de clasificacion TI auditables, pero sin alertas, pipeline ni despliegue productivo.
 - `Trabajo validado no integrado`: entrega que puede aparecer en `changelog/` o en una issue como validada por `qa-teams`, pero que aun no forma parte del comportamiento observable de `main` hasta su integracion efectiva.
 
 ## Contradicciones clave asociadas al glosario

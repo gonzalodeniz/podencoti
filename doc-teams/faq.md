@@ -7,7 +7,7 @@ Personas usuarias internas, equipo tecnico y administracion que necesitan aclara
 Si. `make run` levanta un servidor local en `http://127.0.0.1:8000`.
 
 ## Entonces que entrega existe realmente hoy?
-Existe una entrega minima de descubrimiento con catalogo inicial de oportunidades TI, ficha de detalle, cobertura inicial del MVP y clasificacion TI auditable.
+Existe una entrega minima de descubrimiento con catalogo inicial de oportunidades TI, filtros funcionales sobre ese catalogo, ficha de detalle, cobertura inicial del MVP y clasificacion TI auditable.
 
 ## Que rutas estan verificadas?
 - `/`
@@ -20,10 +20,16 @@ Existe una entrega minima de descubrimiento con catalogo inicial de oportunidade
 - `/api/clasificacion-ti`
 
 ## El producto ya tiene catalogo de oportunidades, filtros, alertas o pipeline?
-En `main` si existen catalogo inicial y ficha de detalle. No existen todavia filtros, alertas ni pipeline, que siguen en backlog y roadmap de `product-manager/`.
+En `main` ya existen catalogo inicial, filtros funcionales y ficha de detalle. No existen todavia alertas ni pipeline, que siguen en backlog y roadmap de `product-manager/`.
 
-## Por que el changelog del 2026-03-20 menciona `PB-003` si aqui se documenta que no hay filtros?
-Porque `developer-teams` y `qa-teams` registran su trabajo en `changelog/` sobre `main` aunque la implementacion se haya hecho y validado en una rama tecnica. Mientras esa rama no se integre en `main`, `doc-teams` debe documentar que los filtros no forman parte aun del comportamiento observable de la rama principal.
+## Que filtros existen hoy?
+Se pueden aplicar `palabra_clave`, `presupuesto_min`, `presupuesto_max`, `procedimiento` y `ubicacion` tanto en `/` como en `/api/oportunidades`.
+
+## Como responde el sistema si el rango de presupuesto es invalido?
+Si `presupuesto_min` es mayor que `presupuesto_max`, la vista HTML mantiene el catalogo y muestra un mensaje de correccion. La API responde `400 Bad Request` con el campo `error_validacion`.
+
+## Sigue habiendo contradicciones documentales relevantes?
+Si. La principal contradiccion vigente es `pyproject.toml`, que sigue describiendo el paquete como si solo cubriera cobertura de fuentes, cuando `main` ya expone catalogo, filtros, detalle y clasificacion TI auditable.
 
 ## La ficha de detalle aplica rectificaciones o modificaciones oficiales?
 Si. El detalle visible resuelve el ultimo dato oficial publicado cuando el expediente tiene actualizaciones versionadas en `data/opportunities.json`.
@@ -35,7 +41,7 @@ Porque `pyproject.toml` sigue describiendo el paquete solo como cobertura inicia
 Si. La instalacion editable deja operativa la aplicacion local y permite ejecutar las pruebas.
 
 ## Hay pruebas automatizadas disponibles?
-Si. `PYTHONPATH=src python3 -m unittest discover -s tests -v` ejecuta 26 pruebas en esta revision.
+Si. `PYTHONPATH=src python3 -m unittest discover -s tests -v` ejecuta 33 pruebas en esta revision.
 
 ## Se puede desplegar en produccion con lo que hay ahora?
 No hay base documental suficiente para afirmarlo. Solo esta verificado el arranque local con `wsgiref`.
@@ -46,6 +52,6 @@ No hay base documental suficiente para afirmarlo. Solo esta verificado el arranq
 - Para el estado tecnico realmente observable en `main`: los manuales actuales de `doc-teams/` y el codigo versionado
 
 ## Que dependencias siguen abiertas?
-- Implementar `PB-003`, `PB-004` y `PB-005`.
+- Implementar `PB-004`, `PB-005` y `PB-009`.
 - Definir una estrategia de despliegue real cuando el alcance tecnico lo requiera.
 - Actualizar la metadata del paquete si se quiere alinearla con la superficie visible actual.

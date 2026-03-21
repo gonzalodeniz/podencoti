@@ -4,12 +4,13 @@
 Centralizar la documentacion oficial de `PodencoTI` separando con claridad el contenido para usuario final, equipo tecnico y administracion.
 
 ## Estado documental de referencia
-Fecha de revision: `2026-03-20`.
+Fecha de revision: `2026-03-21`.
 
 Esta carpeta documenta el estado real verificable de la rama `main`. En esta revision existe una entrega minima ejecutable de descubrimiento, pero su alcance sigue siendo acotado:
 
 - Vista HTML del catalogo inicial de oportunidades TI (`PB-001`) en `/`.
-- API JSON del catalogo filtrado por cobertura MVP y clasificacion TI en `/api/oportunidades`.
+- API JSON del catalogo en `/api/oportunidades`.
+- Filtros funcionales (`PB-003`) en la vista HTML del catalogo y en la API JSON de `/api/oportunidades`.
 - Vista HTML de ficha de detalle (`PB-002`) en `/oportunidades/<id>`.
 - API JSON del detalle trazable en `/api/oportunidades/<id>`.
 - Vista HTML de cobertura inicial del MVP (`PB-007`) en `/cobertura-fuentes`.
@@ -17,7 +18,7 @@ Esta carpeta documenta el estado real verificable de la rama `main`. En esta rev
 - Vista HTML de clasificacion TI auditable (`PB-006`) en `/clasificacion-ti`.
 - API JSON de reglas y ejemplos auditados de clasificacion TI en `/api/clasificacion-ti`.
 
-No existen todavia filtros funcionales, alertas tempranas, pipeline de seguimiento, autenticacion ni componentes de despliegue productivo.
+No existen todavia alertas tempranas, pipeline de seguimiento, autenticacion ni componentes de despliegue productivo.
 
 ## Audiencias cubiertas
 - Usuario final o stakeholder funcional: [manual-usuario.md](manual-usuario.md)
@@ -31,18 +32,19 @@ No existen todavia filtros funcionales, alertas tempranas, pipeline de seguimien
 
 ## Hallazgos principales de esta revision
 - `main` contiene implementacion Python versionada en `src/podencoti/`, datos en `data/` y pruebas automatizadas en `tests/`.
-- `PYTHONPATH=src python3 -m unittest discover -s tests -v` ejecuta 26 pruebas y finaliza correctamente.
+- `PYTHONPATH=src python3 -m unittest discover -s tests -v` ejecuta 33 pruebas y finaliza correctamente.
 - `make test` tambien funciona en un entorno con `.venv` disponible.
 - `make run` arranca un servidor WSGI local en `http://127.0.0.1:8000`.
 - Las rutas verificables hoy son `/`, `/api/oportunidades`, `/oportunidades/<id>`, `/api/oportunidades/<id>`, `/cobertura-fuentes`, `/api/fuentes`, `/clasificacion-ti` y `/api/clasificacion-ti`.
 - El catalogo visible publica 3 oportunidades TI a partir de 5 registros de origen dentro de la cobertura MVP actual.
-- El `changelog/2026-03-20.md` ya registra trabajo y validacion funcional de `PB-003` en una rama tecnica, pero esa capacidad aun no forma parte del comportamiento observable de `main`.
+- El catalogo permite filtrar por `palabra_clave`, `presupuesto_min`, `presupuesto_max`, `procedimiento` y `ubicacion`.
+- Si el usuario informa un rango de presupuesto invalido, la vista HTML muestra una correccion explicita y la API responde `400 Bad Request` con `error_validacion`.
 
 ## Dependencias y contradicciones abiertas
 - La vision y el backlog de `product-manager/` describen capacidades futuras validas como fuente funcional, pero esas capacidades aun no estan implementadas en `main`.
-- `pyproject.toml` sigue describiendo el paquete como "Cobertura inicial visible de fuentes del MVP de PodencoTI.", aunque `main` ya expone tambien catalogo inicial (`PB-001`), ficha de detalle (`PB-002`) y superficie auditable de `PB-006`.
-- Filtros (`PB-003`), alertas (`PB-004`) y pipeline (`PB-005`) siguen definidos funcionalmente, pero no tienen evidencia tecnica visible en `main`.
-- El `changelog` puede registrar actividad de ramas tecnicas todavia no integradas; para documentacion de uso, tecnica u operativa prevalece siempre el estado verificable de `main`.
+- `pyproject.toml` sigue describiendo el paquete como "Cobertura inicial visible de fuentes del MVP de PodencoTI.", aunque `main` ya expone tambien catalogo inicial (`PB-001`), filtros funcionales (`PB-003`), ficha de detalle (`PB-002`) y superficie auditable de `PB-006`.
+- Alertas (`PB-004`) y pipeline (`PB-005`) siguen definidos funcionalmente, pero no tienen evidencia tecnica visible en `main`.
+- `PB-009` ya existe como prioridad funcional en `product-manager/`, pero aun no hay implementacion visible de recopilacion desde fuentes reales oficiales en la rama principal.
 
 ## Criterio documental aplicado
 - Se documenta solo lo verificable en `main`.

@@ -4,9 +4,10 @@
 Equipo tecnico que necesita conocer la implementacion actual de `main`, sus rutas verificables y los limites funcionales todavia abiertos.
 
 ## Resumen tecnico verificable
-`PodencoTI` expone en `main` una aplicacion WSGI minima en Python con cuatro superficies funcionales verificables:
+`PodencoTI` expone en `main` una aplicacion WSGI minima en Python con cinco piezas funcionales verificables:
 
 - `PB-001`: catalogo inicial de oportunidades TI.
+- `PB-003`: filtros funcionales aplicados sobre el catalogo HTML y la API JSON.
 - `PB-002`: ficha resumida de detalle por oportunidad visible.
 - `PB-007`: cobertura inicial visible y verificable de fuentes.
 - `PB-006`: regla de clasificacion TI auditable con ejemplos trazables.
@@ -24,7 +25,7 @@ La descripcion de paquete en `pyproject.toml` sigue mencionando solo cobertura d
 - Suite tecnica: `tests/test_app.py`, `tests/test_opportunity_catalog.py`, `tests/test_source_coverage.py`, `tests/test_ti_classification.py`
 
 ## Superficie HTTP vigente
-- `/`: vista HTML del catalogo inicial de oportunidades TI.
+- `/`: vista HTML del catalogo inicial de oportunidades TI con formulario de filtros funcionales.
 - `/api/oportunidades`: JSON del catalogo filtrado por cobertura MVP y clasificacion TI.
 - `/oportunidades/<id>`: ficha HTML de detalle de una oportunidad visible.
 - `/api/oportunidades/<id>`: JSON trazable de la ficha de detalle.
@@ -34,10 +35,11 @@ La descripcion de paquete en `pyproject.toml` sigue mencionando solo cobertura d
 - `/api/clasificacion-ti`: JSON con reglas y ejemplos auditados.
 
 La aplicacion devuelve `404 Not Found` para cualquier otra ruta no declarada.
-No existe hoy en `main` ningun parametro funcional documentado para filtros en `/` ni en `/api/oportunidades`.
+Los parametros funcionales visibles hoy para `/` y `/api/oportunidades` son `palabra_clave`, `presupuesto_min`, `presupuesto_max`, `procedimiento` y `ubicacion`.
+Si `presupuesto_min` es mayor que `presupuesto_max`, la API responde `400 Bad Request` y la vista HTML mantiene el catalogo base junto con un mensaje de correccion.
 
 ### Campos visibles por superficie
-- `/api/oportunidades`: devuelve `referencia_funcional`, `cobertura_aplicada`, `total_registros_origen`, `total_oportunidades_catalogo` y `oportunidades`.
+- `/api/oportunidades`: devuelve `referencia_funcional`, `cobertura_aplicada`, `total_registros_origen`, `total_oportunidades_visibles`, `total_oportunidades_catalogo`, `filtros_activos`, `error_validacion`, `filtros_disponibles` y `oportunidades`.
 - `/api/oportunidades/<id>`: devuelve datos criticos visibles, `actualizacion_oficial_mas_reciente` y `historial_actualizaciones`.
 - `/api/fuentes`: devuelve `sources` y `summary`.
 - `/api/clasificacion-ti`: devuelve `referencia_funcional`, `reglas` y `ejemplos_auditados`.
@@ -57,13 +59,12 @@ PYTHONPATH=src python3 -m podencoti.app
 ```
 
 Resultado verificado en esta revision:
-- 26 pruebas automatizadas en verde.
+- 33 pruebas automatizadas en verde.
 - Servidor local disponible en `http://127.0.0.1:8000`.
 
 ## Contradicciones explicitadas
-- `pyproject.toml` sigue describiendo el paquete como una release centrada solo en cobertura de fuentes, aunque la rama ya expone catalogo, detalle y clasificacion TI auditable.
-- La documentacion funcional de `product-manager/` describe backlog posterior valido, pero no debe leerse como contrato tecnico ya implementado para filtros, alertas o pipeline.
-- `changelog/2026-03-20.md` ya registra trabajo y validacion funcional de `PB-003` en una rama tecnica, pero la revision tecnica de `main` todavia no muestra ese comportamiento ni pruebas asociadas a filtros integradas en esta rama.
+- `pyproject.toml` sigue describiendo el paquete como una release centrada solo en cobertura de fuentes, aunque la rama ya expone catalogo, filtros, detalle y clasificacion TI auditable.
+- La documentacion funcional de `product-manager/` describe backlog posterior valido, pero no debe leerse como contrato tecnico ya implementado para alertas, pipeline o recopilacion real desde nuevas fuentes oficiales.
 
 ## Limitaciones tecnicas actuales
 - No existe persistencia de usuario ni ingestion automatizada real de licitaciones; el catalogo se alimenta desde `data/opportunities.json`.
@@ -71,5 +72,5 @@ Resultado verificado en esta revision:
 - No hay contrato de despliegue productivo versionado, mas alla del arranque local con `wsgiref`.
 
 ## Dependencias abiertas
-- Implementar `PB-003`, `PB-004` y `PB-005` para evolucionar desde el descubrimiento inicial a un MVP mas operativo.
+- Implementar `PB-004`, `PB-005` y `PB-009` para evolucionar desde el descubrimiento inicial filtrable a un MVP mas operativo y con fuentes reales adicionales.
 - Actualizar la metadata de paquete si se quiere que describa fielmente la superficie observable de `main`.

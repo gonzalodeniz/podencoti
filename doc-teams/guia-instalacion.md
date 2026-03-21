@@ -39,7 +39,7 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
 
 Resultado esperado en esta revision:
-- 26 pruebas en verde
+- 33 pruebas en verde
 
 2. Comprueba el objetivo de pruebas del `Makefile`:
 
@@ -64,6 +64,9 @@ Resultado esperado en esta revision:
 ```bash
 curl -i http://127.0.0.1:8000/
 curl -i http://127.0.0.1:8000/api/oportunidades
+curl -i "http://127.0.0.1:8000/?palabra_clave=licencias"
+curl -i "http://127.0.0.1:8000/api/oportunidades?procedimiento=Abierto"
+curl -i "http://127.0.0.1:8000/api/oportunidades?presupuesto_min=120000&presupuesto_max=90000"
 curl -i http://127.0.0.1:8000/oportunidades/pcsp-cabildo-licencias-2026
 curl -i http://127.0.0.1:8000/api/oportunidades/pcsp-cabildo-licencias-2026
 curl -i http://127.0.0.1:8000/cobertura-fuentes
@@ -74,11 +77,11 @@ curl -i http://127.0.0.1:8000/api/clasificacion-ti
 
 ## Que queda instalado realmente
 - Paquete `podencoti` en modo editable.
-- Aplicacion WSGI local para catalogo inicial, ficha de detalle, cobertura y clasificacion TI auditables.
+- Aplicacion WSGI local para catalogo inicial, filtros funcionales, ficha de detalle, cobertura y clasificacion TI auditables.
 - Acceso a datos versionados en `data/` y a la suite automatizada en `tests/`.
 
 ## Que no queda disponible
-- Filtros, alertas o pipeline.
+- Alertas o pipeline.
 - Componentes de despliegue productivo.
 
 ## Limitaciones y dependencias abiertas
