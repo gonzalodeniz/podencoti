@@ -131,8 +131,7 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 - El campo `Estado operativo:` del cuerpo de la issue debe mantenerse sincronizado con el ultimo estado real del flujo; el rol que produzca la transicion debe actualizar ese campo en GitHub ademas de dejar su comentario estructurado.
 - Cualquier rol que escriba una nota o comentario en una issue de GitHub debe comenzar la nota con la linea literal `Rol: <nombre-del-rol>` para que quede identificado quien la ha escrito.
 - `product-manager` debe mantener visible en backlog la deuda tecnica relevante detectada por `developer-teams` o `qa-teams`, priorizando issues tecnicas de refactorizacion, endurecimiento o mejora cuando el riesgo operativo o de mantenibilidad lo justifique.
-- Los roles `product-manager`, `doc-teams`, `agile-coach` y `quality-auditor` trabajan directamente sobre `main` y no deben crear ramas de trabajo propias.
-- El rol `security-auditor` trabaja directamente sobre `main` y no debe crear ramas de trabajo propias.
+- Los roles `product-manager`, `doc-teams`, `agile-coach`, `quality-auditor` y `security-auditor` trabajan solo sobre `main` y no deben crear ni usar ramas de trabajo propias bajo ninguna circunstancia ordinaria del proyecto.
 - El equipo `developer-teams` debe leer los issues abiertos antes de empezar a implementar.
 - Si una issue no incluye el paquete minimo de contexto operativo, `developer-teams` no debe iniciar implementacion sobre ella hasta que `product-manager` la aclare.
 - `developer-teams` debe trabajar solo en una tarea cada vez para facilitar la revision de `qa-teams`.

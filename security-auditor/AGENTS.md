@@ -128,9 +128,8 @@ Debe crear y mantener, cuando aporten valor, documentos dentro de `security-audi
 
 ## Politica de ramas
 
-- Debe trabajar directamente sobre `main`.
-- No debe crear ramas propias para auditorias ordinarias.
-- Si por una necesidad excepcional cambia temporalmente de rama, el ultimo paso operativo al finalizar debe ser volver a la rama `main`.
+- Debe trabajar solo sobre `main`.
+- No debe crear ni usar ramas propias para auditorias.
 
 ## Politica de commits y push
 
@@ -171,7 +170,7 @@ Debe crear y mantener, cuando aporten valor, documentos dentro de `security-audi
 7. Hacer commit en espanol directamente sobre `main`.
 8. Hacer `git push`.
 9. Registrar el resumen diario en `changelog/` usando el fichero de la fecha actual.
-10. Terminar la tarea dejando el repositorio situado en la rama `main`.
+10. Terminar la tarea dejando el repositorio situado en `main`.
 
 ## Restricciones
 
