@@ -87,6 +87,10 @@ La rama `main` ya integra cinco piezas funcionales verificables del MVP inicial:
 - `PB-002`: ficha de detalle navegable desde el catalogo, con tratamiento explicito de campos no informados y aplicacion del ultimo dato oficial visible cuando el expediente publica una rectificacion o modificacion.
 - `PB-003`: filtros funcionales sobre el catalogo y su API por palabra clave, rango de presupuesto, procedimiento y ubicacion, incluyendo validacion explicita de rangos invalidos.
 
+La siguiente entrega tecnica en curso amplía esa base con una sexta superficie verificable:
+
+- `PB-009`: priorizacion visible de fuentes reales oficiales por olas (`BOC`, `BOP Las Palmas`, `BOE`) y refuerzo de la trazabilidad minima al origen oficial en cada oportunidad publicada.
+
 ### Como ejecutar las vistas actuales
 
 ```bash
@@ -101,6 +105,8 @@ Luego se puede abrir:
 - `http://127.0.0.1:8000/api/oportunidades/<id>` para la salida JSON trazable de la ficha de detalle
 - `http://127.0.0.1:8000/cobertura-fuentes` para la vista HTML de cobertura MVP
 - `http://127.0.0.1:8000/api/fuentes` para la salida JSON trazable a la configuracion
+- `http://127.0.0.1:8000/priorizacion-fuentes-reales` para la vista HTML de priorizacion de fuentes reales oficiales por olas
+- `http://127.0.0.1:8000/api/fuentes-prioritarias` para la salida JSON de la priorizacion de fuentes reales oficiales
 - `http://127.0.0.1:8000/clasificacion-ti` para la vista HTML de la regla TI auditable
 - `http://127.0.0.1:8000/api/clasificacion-ti` para la salida JSON de reglas y ejemplos auditados
 

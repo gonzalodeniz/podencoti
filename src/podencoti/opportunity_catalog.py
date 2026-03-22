@@ -21,6 +21,7 @@ class OpportunityRecord:
     ubicacion: str
     procedimiento: str | None
     presupuesto: int | None
+    fecha_publicacion_oficial: str
     fecha_limite: str
     estado: str
     solvencia_tecnica: str | None
@@ -39,6 +40,7 @@ class CatalogOpportunity:
     ubicacion: str
     procedimiento: str | None
     presupuesto: int | None
+    fecha_publicacion_oficial: str
     fecha_limite: str
     estado: str
     fuente_oficial: str
@@ -55,6 +57,7 @@ class OpportunityDetail:
     ubicacion: str
     procedimiento: str | None
     presupuesto: int | None
+    fecha_publicacion_oficial: str
     fecha_limite: str
     estado: str
     solvencia_tecnica: str | None
@@ -121,6 +124,7 @@ def load_opportunity_records(path: Path = DEFAULT_DATA_PATH) -> tuple[str, list[
             ubicacion=item["ubicacion"],
             procedimiento=item.get("procedimiento"),
             presupuesto=item.get("presupuesto"),
+            fecha_publicacion_oficial=item["fecha_publicacion_oficial"],
             fecha_limite=item["fecha_limite"],
             estado=item["estado"],
             solvencia_tecnica=item.get("solvencia_tecnica"),
@@ -256,6 +260,7 @@ def build_opportunity_detail(
             ubicacion=record.ubicacion,
             procedimiento=snapshot["procedimiento"],
             presupuesto=snapshot["presupuesto"],
+            fecha_publicacion_oficial=record.fecha_publicacion_oficial,
             fecha_limite=str(snapshot["fecha_limite"]),
             estado=str(snapshot["estado"]),
             solvencia_tecnica=snapshot["solvencia_tecnica"],
@@ -310,6 +315,7 @@ def build_catalog(
                 ubicacion=record.ubicacion,
                 procedimiento=snapshot["procedimiento"],
                 presupuesto=snapshot["presupuesto"],
+                fecha_publicacion_oficial=record.fecha_publicacion_oficial,
                 fecha_limite=str(snapshot["fecha_limite"]),
                 estado=str(snapshot["estado"]),
                 fuente_oficial=record.fuente_oficial,

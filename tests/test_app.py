@@ -29,6 +29,7 @@ class ApplicationTests(unittest.TestCase):
         self.assertEqual("text/html; charset=utf-8", headers["Content-Type"])
         self.assertIn("Catálogo inicial de oportunidades TI de Canarias", html)
         self.assertIn("Servicio cloud para copias de seguridad", html)
+        self.assertIn("Publicación oficial", html)
         self.assertIn("Fuente oficial", html)
         self.assertIn('/oportunidades/govcan-backup-cloud-2026', html)
 
@@ -40,6 +41,7 @@ class ApplicationTests(unittest.TestCase):
         self.assertEqual("application/json; charset=utf-8", headers["Content-Type"])
         self.assertEqual(3, payload["total_oportunidades_catalogo"])
         self.assertEqual(5, payload["total_registros_origen"])
+        self.assertEqual("2026-03-22", payload["oportunidades"][0]["fecha_publicacion_oficial"])
         self.assertEqual(97000, payload["oportunidades"][0]["presupuesto"])
         self.assertTrue(all(item["clasificacion_ti"] == "TI" for item in payload["oportunidades"]))
 
@@ -79,6 +81,7 @@ class ApplicationTests(unittest.TestCase):
         self.assertEqual("200 OK", status)
         self.assertEqual("text/html; charset=utf-8", headers["Content-Type"])
         self.assertIn("Suministro de licencias y software de gestion tributaria insular", html)
+        self.assertIn("2026-03-22", html)
         self.assertIn("2026-04-10", html)
         self.assertIn("97.000 EUR", html)
         self.assertIn("Rectificacion", html)
@@ -91,6 +94,7 @@ class ApplicationTests(unittest.TestCase):
         self.assertEqual("200 OK", status)
         self.assertEqual("application/json; charset=utf-8", headers["Content-Type"])
         self.assertEqual("pcsp-cabildo-licencias-2026", payload["id"])
+        self.assertEqual("2026-03-22", payload["fecha_publicacion_oficial"])
         self.assertEqual("2026-04-10", payload["fecha_limite"])
         self.assertEqual("Rectificacion", payload["actualizacion_oficial_mas_reciente"]["tipo"])
         self.assertEqual(3, len(payload["criterios_adjudicacion"]))
@@ -112,6 +116,29 @@ class ApplicationTests(unittest.TestCase):
         self.assertEqual("application/json; charset=utf-8", headers["Content-Type"])
         self.assertEqual(6, len(payload["sources"]))
         self.assertEqual({"MVP": 3, "Posterior": 2, "Por definir": 1}, payload["summary"])
+
+    def test_real_source_prioritization_page_lists_named_official_sources_by_wave(self) -> None:
+        status, headers, body = invoke_app("/priorizacion-fuentes-reales")
+        html = body.decode("utf-8")
+
+        self.assertEqual("200 OK", status)
+        self.assertEqual("text/html; charset=utf-8", headers["Content-Type"])
+        self.assertIn("Priorización de fuentes reales oficiales para recopilación", html)
+        self.assertIn("BOC", html)
+        self.assertIn("BOP Las Palmas", html)
+        self.assertIn("BOE", html)
+        self.assertIn("Ola 1", html)
+        self.assertIn("Fuera de alcance en esta iteración", html)
+
+    def test_real_source_prioritization_api_returns_waves_and_out_of_scope(self) -> None:
+        status, headers, body = invoke_app("/api/fuentes-prioritarias")
+        payload = json.loads(body)
+
+        self.assertEqual("200 OK", status)
+        self.assertEqual("application/json; charset=utf-8", headers["Content-Type"])
+        self.assertEqual(["BOC", "BOP Las Palmas", "BOE"], [item["nombre"] for item in payload["sources"]])
+        self.assertEqual({"Ola 1": 1, "Ola 2": 1, "Ola 3": 1}, payload["summary"])
+        self.assertIn("Alertas tempranas", payload["fuera_de_alcance"])
 
     def test_classification_page_renders_auditable_rules(self) -> None:
         status, headers, body = invoke_app("/clasificacion-ti")
