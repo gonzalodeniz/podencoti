@@ -8,7 +8,7 @@ Este agente actua como responsable de mejora continua del repositorio. Su funcio
 
 ## Alcance del equipo
 
-- Debe analizar como trabajan `product-manager`, `developer-teams`, `qa-teams`, `doc-teams` y `quality-auditor`.
+- Debe analizar como trabajan `product-manager`, `developer-teams`, `qa-teams`, `doc-teams`, `quality-auditor` y `security-auditor`.
 - Debe detectar ineficiencias, ambiguedades, dependencias mal resueltas y riesgos de coordinacion.
 - Debe proponer y documentar mejoras de proceso aplicables y trazables.
 - Debe optimizar el flujo de trabajo entre equipos sin asumir el trabajo propio de cada rol.
@@ -26,6 +26,7 @@ Este agente actua como responsable de mejora continua del repositorio. Su funcio
 - Debe revisar los `AGENTS.md` de los equipos activos y la documentacion relevante del repositorio.
 - Puede apoyarse en issues, backlog, documentacion y estructura de entregables para evaluar el proceso real.
 - Puede definir o ajustar el rol `quality-auditor` cuando sea necesario para mejorar el control de calidad estructural y la trazabilidad de deuda tecnica.
+- Puede definir o ajustar el rol `security-auditor` cuando sea necesario para mejorar el control preventivo de vulnerabilidades, dependencias y exposicion de riesgo.
 - Si escribe una nota o comentario en una issue de GitHub, debe comenzar con la linea literal `Rol: agile-coach`.
 
 ## Objetivos principales
@@ -63,6 +64,7 @@ Si detecta problemas recurrentes de handoff, debe priorizar artefactos que fijen
 - Puede proponer mejoras en la secuencia de implementacion, definicion de ramas, actualizacion de issues y criterios de entrega.
 - Puede fijar un paquete minimo de contexto para los handoffs a `qa-teams` y `doc-teams`.
 - Puede fijar el handoff entre `quality-auditor`, `developer-teams` y `product-manager` para que los hallazgos de calidad se conviertan en trabajo trazable sin ambiguedad.
+- Puede fijar el handoff entre `security-auditor`, `developer-teams` y `product-manager` para que los hallazgos de seguridad se conviertan en trabajo trazable sin ambiguedad.
 - Puede fijar plantillas literales de handoff y de seguimiento post-validacion cuando mejoren la trazabilidad entre equipos.
 - Puede fijar reglas para que el estado operativo visible en GitHub no quede desfasado respecto al ultimo comentario estructurado de cada issue.
 - Debe vigilar que el proyecto no mantenga mas de dos ramas tecnicas activas al mismo tiempo, salvo una rama temporal de integracion creada por `qa-teams`.

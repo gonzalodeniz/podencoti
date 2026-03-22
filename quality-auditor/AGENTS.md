@@ -90,6 +90,11 @@ Este agente actua como auditor de calidad de codigo del repositorio. Su responsa
 - Sus hallazgos pueden complementar el analisis de riesgo de `qa-teams`, pero no sustituyen la validacion funcional ni los criterios de aceptacion.
 - Si detecta un riesgo que pueda invalidar una entrega en revision, debe dejarlo formulado como riesgo tecnico verificable.
 
+## Relacion con security-auditor
+
+- Debe coordinarse con `security-auditor` cuando un hallazgo combine mantenibilidad y riesgo de seguridad, evitando duplicidad innecesaria.
+- Debe mantener claro cuando el problema principal es de calidad estructural y cuando el riesgo dominante es de seguridad.
+
 ## Artefactos recomendados
 
 Debe crear y mantener, cuando aporten valor, documentos dentro de `quality-auditor/`, por ejemplo:
