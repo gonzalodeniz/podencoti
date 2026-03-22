@@ -3,6 +3,11 @@
 ## Estado actual
 La vision sigue siendo consistente con la propuesta de valor central. No se detectan contradicciones de fondo, pero si una necesidad permanente de acotar el lenguaje de "centralizacion" para no confundir cobertura progresiva con cobertura total.
 
+## Huecos de definicion detectados en esta revision
+- La prioridad funcional de `PB-009` ya existia, pero faltaba fijar el orden de ejecucion entre fuentes reales oficiales para evitar una implementacion demasiado amplia en un solo salto.
+- Faltaba dejar explicito el minimo de trazabilidad al origen oficial que debe conservar cada oportunidad recopilada en esta iteracion.
+- Faltaba remarcar de forma mas dura que `PB-009` no abre por si mismo alertas, pipeline ni ampliacion comercial de cobertura.
+
 ## Estado funcional confirmado en el repositorio
 - `PB-007` dispone de entrega visible en producto y validacion explicita de `qa-teams` en la issue #1.
 - La entrega de `PB-007` cubre delimitacion de fuentes, no ingestion real ni catalogo de licitaciones.
@@ -15,7 +20,7 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 - Queda definida la regla funcional para expedientes mixtos donde TI no es el unico componente.
 - Queda definido el tratamiento minimo de oportunidades anuladas, desiertas, desistidas o modificadas.
 - Queda identificado como deuda de trazabilidad el formato incompleto de varios issues abiertos, que debe corregirse para cumplir las reglas del repositorio.
-- Queda despejada la dependencia funcional entre catalogo y ficha: el catalogo base y la ficha ya estan validados y la siguiente pieza accionable pasa a ser el filtrado funcional.
+- Queda despejada la dependencia funcional entre catalogo y ficha: el catalogo base, la ficha y el filtrado ya estan validados y la siguiente pieza accionable pasa a ser `PB-009`.
 - Queda definido que una alerta del MVP necesita al menos un criterio funcional informado y no puede guardarse vacia.
 - Queda definido que el alta inicial en pipeline crea siempre el estado `Nueva`.
 - Queda definido que `PB-008` puede avanzar como definicion funcional de KPIs aunque la instrumentacion completa llegue en una iteracion posterior.
@@ -33,6 +38,10 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
   - escalon 3: alertas y pipeline
 - La comunicacion del producto debe hablar de cobertura inicial priorizada, no de cobertura total.
 - La recopilacion de contratos y concursos debe priorizar fuentes reales oficiales y verificables antes de invertir en capacidades de retencion no esenciales.
+- La ejecucion funcional de esa prioridad se ordena por olas para reducir dispersion:
+  - `Ola 1`: `BOC`
+  - `Ola 2`: `BOP Las Palmas`
+  - `Ola 3`: `BOE`
 - La relevancia TI debe poder explicarse y auditarse sin depender de interpretaciones tecnicas implicitas.
 - La regla TI ya puede validarse de forma observable antes de construir el catalogo, pero su casuistica seguira refinandose con ejemplos reales.
 - El pipeline minimo sigue limitado a los estados `Nueva`, `Evaluando`, `Preparando oferta`, `Presentada` y `Descartada`.
@@ -41,6 +50,8 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 - El pipeline MVP queda limitado a gestion individual por usuario; la colaboracion por empresa no forma parte del alcance actual.
 - La primera vez que una oportunidad entra en pipeline debe hacerlo en estado `Nueva`.
 - La definicion de KPIs de `PB-008` no exige disponer desde el primer dia de toda la instrumentacion automatizada, pero si exige dejar explicita cualquier limitacion de medicion.
+- La primera entrega de `PB-009` debe conservar, como minimo por oportunidad recopilada, referencia a la fuente oficial, enlace oficial, fecha de publicacion o equivalente y estado oficial cuando la fuente lo publique.
+- `PB-009` no cambia por si solo la promesa comercial de cobertura ni adelanta funcionalidades de alertas o pipeline.
 
 ## Regla funcional vigente para expedientes mixtos
 - Un expediente mixto debe considerarse TI en el MVP cuando se cumpla al menos una de estas condiciones:
@@ -85,14 +96,25 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
   - Fuentes con acceso inconsistente, formatos no estandar o baja frecuencia de oportunidades TI
 
 ## Fuentes reales oficiales priorizadas para recopilacion
-- Prioridad alta inmediata:
+- `Ola 1`:
   - `BOC` (`https://www.gobiernodecanarias.org/boc/`)
+- `Ola 2`:
   - `BOP Las Palmas` (`https://www.boplaspalmas.net/nbop2/index.php`)
+- `Ola 3`:
   - `BOE` (`https://www.boe.es/`)
 - Prioridad alta posterior o dependiente de validacion adicional:
   - perfiles del contratante y boletines oficiales adicionales que aporten oportunidades TI relevantes para Canarias, incluidos cabildos y otros boletines provinciales o locales
 - Criterio funcional:
   - si una fuente es oficial, real y aporta señal temprana de contratos o concursos aprovechables por el usuario objetivo, debe evaluarse antes que nuevas capacidades de engagement no esenciales
+- Minimo funcional verificable por oportunidad recopilada en `PB-009`:
+  - identificacion visible de la fuente oficial
+  - enlace oficial clicable o accesible
+  - fecha de publicacion o equivalente oficial visible
+  - estado oficial del expediente cuando la fuente lo informe
+- Fuera de alcance de esta iteracion:
+  - notificaciones salientes al usuario
+  - automatizacion completa de pipeline
+  - ampliacion de promesa comercial a cobertura total o a ayuntamientos no confirmados
 
 ## Dependencias abiertas
 - Confirmar con negocio si el MVP debe cubrir tambien ayuntamientos desde la primera promesa comercial o si permanecen fuera de la comunicacion inicial.
@@ -106,6 +128,7 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 - Riesgo de frustracion si faltan datos criticos en fichas sin indicarse claramente su ausencia.
 - Riesgo operativo si desarrollo declara rutas o superficies de validacion no expuestas realmente en la entrega revisable.
 - Riesgo de credibilidad si el producto retrasa la recopilacion real y prioriza antes capacidades de retencion sobre fuentes oficiales verificables.
+- Riesgo de dispersion si `developer-teams` intenta abordar simultaneamente las tres fuentes prioritarias sin un orden de entrega ni un minimo comun verificable.
 
 ## Supuestos explicitos
 - El primer objetivo es demostrar que la centralizacion y el filtrado ahorran tiempo al usuario.
@@ -119,8 +142,9 @@ La vision sigue siendo consistente con la propuesta de valor central. No se dete
 ## Recomendacion operativa para `developer-teams`
 - Tomar `PB-009` como siguiente pieza funcional prioritaria para reforzar recopilacion sobre fuentes reales oficiales nominadas.
 - Reutilizar la cobertura validada de `PB-007`, la regla auditable de `PB-006` y la superficie ya validada de `PB-001`, `PB-002` y `PB-003` sin reabrirlas salvo cambio de alcance.
-- Tratar `BOC`, `BOP Las Palmas` y `BOE` como fuentes reales de referencia para la siguiente iteracion.
+- Tratar `BOC`, `BOP Las Palmas` y `BOE` como fuentes reales de referencia para la siguiente iteracion, en ese orden por olas.
 - Mantener visible en el catalogo la fuente oficial y evitar mensajes que sugieran cobertura total del ecosistema canario.
+- Garantizar como minimo por oportunidad recopilada la visibilidad de origen oficial, enlace oficial, fecha de publicacion o equivalente y estado oficial cuando exista.
 - Aplicar el filtrado solo sobre oportunidades ya visibles dentro de cobertura MVP y clasificacion final `TI`.
 - Tratar los expedientes mixtos dudosos como caso frontera fuera del catalogo hasta que exista evidencia funcional suficiente.
 

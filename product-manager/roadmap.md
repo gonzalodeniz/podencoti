@@ -6,7 +6,7 @@
 - Cada release debe dejar un resultado verificable por `qa-teams` y trazable a backlog e issues.
 
 ## Estado de referencia de la iteracion
-- Fecha de corte documental: 2026-03-21.
+- Fecha de corte documental: 2026-03-22.
 - Estado confirmado: `PB-007` y `PB-006` ya fueron validados por `qa-teams` y sus entregas estan integradas en `main`.
 - Estado actual de trabajo tecnico: la siguiente implementacion funcional priorizada pasa a ser `PB-009`.
 - Siguiente recomendacion para `developer-teams`: tomar `PB-009` como siguiente implementacion.
@@ -16,6 +16,7 @@
   - el alta inicial en pipeline crea siempre el estado `Nueva`
   - `PB-008` puede refinarse documentalmente antes de disponer de instrumentacion completa
   - la recopilacion desde fuentes reales oficiales nominadas se prioriza antes que alertas y pipeline
+  - `PB-009` debe ejecutarse por olas y con trazabilidad minima visible al origen oficial
 
 ## Release 0: Delimitacion funcional del MVP
 - Objetivo: Cerrar ambiguedades criticas antes de la implementacion del catalogo.
@@ -50,10 +51,15 @@
 - Objetivo: Reforzar la credibilidad del producto y la utilidad del catalogo priorizando recopilacion desde fuentes oficiales reales.
 - Alcance:
   - PB-009 Priorizacion de recopilacion desde fuentes reales oficiales.
+- Secuencia funcional de esta release:
+  - Ola 1: `BOC`
+  - Ola 2: `BOP Las Palmas`
+  - Ola 3: `BOE`
 - Criterios de salida:
   - Existe una prioridad trazable y ejecutable de fuentes reales oficiales para recopilacion.
-  - `BOC`, `BOP Las Palmas` y `BOE` quedan identificadas de forma explicita como fuentes reales prioritarias.
-  - La secuencia de entregas deja claro que esta prioridad adelanta a nuevas capacidades de retencion.
+  - `BOC`, `BOP Las Palmas` y `BOE` quedan identificadas de forma explicita como fuentes reales prioritarias y ordenadas por olas.
+  - La entrega deja visible, para cada oportunidad obtenida desde estas fuentes, la trazabilidad minima al origen oficial.
+  - La secuencia de entregas deja claro que esta prioridad adelanta a nuevas capacidades de retencion y no amplía por si misma la promesa comercial de cobertura.
 - Riesgo principal:
   - Que el producto invierta antes en engagement que en reforzar la calidad y credibilidad de las oportunidades visibles.
 
@@ -91,4 +97,4 @@
 ## Decision operativa para la siguiente iteracion
 - La siguiente issue recomendada para iniciar es la #9, asociada a `PB-009`.
 - `PB-009` debe reutilizar la cobertura validada de `PB-007`, la regla auditable validada de `PB-006` y la superficie ya validada de catalogo, detalle y filtros.
-- No se recomienda iniciar `PB-004` ni `PB-005` antes de dejar priorizada y trazada la recopilacion sobre fuentes reales oficiales.
+- No se recomienda iniciar `PB-004` ni `PB-005` antes de dejar priorizada, ordenada por olas y trazada la recopilacion sobre fuentes reales oficiales.

@@ -163,10 +163,11 @@
   quiero priorizar que la recopilacion se haga sobre fuentes oficiales reales y verificables,
   para que el catalogo y las oportunidades futuras se apoyen cuanto antes en origenes creibles y utiles para negocio.
 - Criterios de aceptacion:
-  1. Existe una lista priorizada de fuentes reales oficiales candidatas a integracion temprana.
-  2. La prioridad incluye de forma explicita `BOC` (`https://www.gobiernodecanarias.org/boc/`), `BOP Las Palmas` (`https://www.boplaspalmas.net/nbop2/index.php`) y `BOE` (`https://www.boe.es/`) como fuentes reales a evaluar o integrar antes que nuevas capacidades no esenciales de retencion.
-  3. El backlog, el roadmap y el refinamiento funcional reflejan que esta prioridad adelanta a alertas y pipeline.
-  4. Existe una issue de GitHub ejecutable para `developer-teams` con criterios de aceptacion verificables.
+  1. Existe una lista priorizada y ordenada de fuentes reales oficiales candidatas a integracion temprana.
+  2. La prioridad incluye de forma explicita `BOC` (`https://www.gobiernodecanarias.org/boc/`), `BOP Las Palmas` (`https://www.boplaspalmas.net/nbop2/index.php`) y `BOE` (`https://www.boe.es/`) y las clasifica en olas de ejecucion.
+  3. Se define el minimo funcional verificable que debe conservar cada oportunidad obtenida desde esas fuentes: origen oficial, enlace oficial, fecha de publicacion o equivalente y estado oficial cuando exista.
+  4. El backlog, el roadmap y el refinamiento funcional reflejan que esta prioridad adelanta a alertas y pipeline y no implica por si sola ampliar la promesa comercial de cobertura.
+  5. Existe una issue de GitHub ejecutable para `developer-teams` con criterios de aceptacion verificables.
 - Dependencias funcionales: PB-007, PB-006
 - Prioridad: P0
 - Estado: `nuevo`

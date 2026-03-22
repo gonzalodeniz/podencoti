@@ -210,14 +210,19 @@
   - Existen fuentes oficiales reales identificables con valor potencial para contratos y concursos TI.
 - Flujo principal:
   1. El responsable de producto revisa fuentes reales oficiales candidatas.
-  2. Prioriza las fuentes segun valor para Canarias, credibilidad del dato y capacidad de alimentar recopilacion util.
-  3. Registra fuentes concretas y su prioridad en backlog, roadmap y refinamiento funcional.
-  4. Crea una issue ejecutable para que `developer-teams` implemente la nueva prioridad.
+  2. Prioriza las fuentes segun valor para Canarias, credibilidad del dato y capacidad de alimentar recopilacion util, distinguiendo `Ola 1`, `Ola 2` y `Ola 3`.
+  3. Define el minimo funcional verificable que debe conservar cada oportunidad recopilada desde fuente real oficial.
+  4. Registra fuentes concretas, su prioridad y las exclusiones de iteracion en backlog, roadmap y refinamiento funcional.
+  5. Crea o actualiza una issue ejecutable para que `developer-teams` implemente la nueva prioridad.
 - Flujos alternativos:
   - A1. Si una fuente oficial es real pero su formato o acceso exige analisis adicional, puede quedar priorizada con alcance incremental en lugar de descartarse.
   - A2. Si una fuente tiene cobertura estatal pero aporta contratos relevantes para Canarias, puede quedar incluida como prioridad complementaria.
+  - A3. Si una fuente prioritaria no puede aportar de momento todos los campos enriquecidos del catalogo, la entrega sigue siendo valida si conserva al menos referencia oficial, enlace oficial, fecha de publicacion o equivalente y estado oficial cuando exista.
 - Postcondiciones:
   - El proyecto dispone de una prioridad trazable y ejecutable para reforzar la recopilacion con fuentes reales.
 - Reglas de negocio relacionadas:
   - RB-27 La recopilacion prioritaria debe apoyarse en fuentes oficiales reales y verificables antes que en nuevas capacidades de retencion no esenciales.
   - RB-28 La lista prioritaria debe nombrar de forma explicita al menos `BOC`, `BOP Las Palmas` y `BOE`.
+  - RB-29 La primera iteracion de recopilacion priorizada debe ordenar las fuentes por olas para evitar una implementacion simultanea difusa.
+  - RB-30 Toda oportunidad recopilada desde una fuente real priorizada debe conservar trazabilidad minima al origen oficial.
+  - RB-31 `PB-009` no amplía por si mismo el alcance comercial prometido ni habilita alertas o pipeline.
