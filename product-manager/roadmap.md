@@ -6,10 +6,10 @@
 - Cada release debe dejar un resultado verificable por `qa-teams` y trazable a backlog e issues.
 
 ## Estado de referencia de la iteracion
-- Fecha de corte documental: 2026-03-23.
+- Fecha de corte documental: 2026-03-24.
 - Estado confirmado: `PB-007` y `PB-006` ya fueron validados por `qa-teams` y sus entregas estan integradas en `main`.
-- Estado actual de trabajo tecnico: `PB-009` sigue siendo la siguiente implementacion funcional priorizada, pero su issue activa (#9) esta en `no validado` y debe reentregarse en la misma rama tecnica.
-- Siguiente recomendacion para `developer-teams`: tomar `PB-009` como siguiente implementacion.
+- Estado actual de trabajo tecnico: `PB-009` ya esta `validado` por `qa-teams` en la issue #9, pero su rama tecnica sigue pendiente de fusion en `main` y borrado.
+- Siguiente recomendacion para `developer-teams`: completar la integracion de `PB-009` en `main` y cerrar su rama tecnica antes de tomar una nueva issue.
 - Las decisiones funcionales sobre expedientes mixtos y sobre oportunidades anuladas, desiertas, desistidas o modificadas quedan ya definidas para evitar bloqueo de backlog posterior.
 - En esta revision tambien quedan cerradas tres aclaraciones de release para reducir ambiguedad de implementacion:
   - una alerta del MVP requiere al menos un criterio funcional informado
@@ -17,7 +17,7 @@
   - `PB-008` puede refinarse documentalmente antes de disponer de instrumentacion completa
   - la recopilacion desde fuentes reales oficiales nominadas se prioriza antes que alertas y pipeline
 - `PB-009` debe ejecutarse por olas y con trazabilidad minima visible al origen oficial
-- La no validacion de `PB-009` responde a un problema de sincronizacion de rama y no invalida su prioridad funcional dentro del roadmap
+- La validacion de `PB-009` confirma la prioridad funcional definida; lo pendiente ya no es el alcance de producto, sino el cierre operativo de integracion
 
 ## Release 0: Delimitacion funcional del MVP
 - Objetivo: Cerrar ambiguedades criticas antes de la implementacion del catalogo.
@@ -64,8 +64,8 @@
 - Riesgo principal:
   - Que el producto invierta antes en engagement que en reforzar la calidad y credibilidad de las oportunidades visibles.
 - Estado operativo actual:
-  - La issue #9 sigue abierta en `no validado` tras la revision de `qa-teams` del 2026-03-22.
-  - La correccion debe producirse en la rama `developer-teams/issue-9-pb-009-fuentes-reales`, resincronizada con `main` antes de nuevo handoff.
+  - La issue #9 queda abierta en `validado` tras la revision de `qa-teams` del 2026-03-23.
+  - Queda pendiente que `developer-teams` fusione en `main` la rama `developer-teams/issue-9-pb-009-fuentes-reales` y la borre para habilitar el cierre administrativo por `product-manager`.
 
 ## Release 3: Alertas y seguimiento operativo
 - Objetivo: Convertir el descubrimiento en uso recurrente y gestion operativa.
@@ -99,7 +99,7 @@
 - Decidir en una iteracion posterior si los KPIs de alertas deben exigirse ya con dato real o pueden arrancar con definicion documental y recogida manual temporal.
 
 ## Decision operativa para la siguiente iteracion
-- La siguiente issue recomendada para iniciar es la #9, asociada a `PB-009`.
-- `PB-009` debe reutilizar la cobertura validada de `PB-007`, la regla auditable validada de `PB-006` y la superficie ya validada de catalogo, detalle y filtros.
-- La issue #9 no debe dividirse ni duplicarse mientras siga siendo el mismo alcance funcional; corresponde corregir y reentregar sobre la misma rama.
-- No se recomienda iniciar `PB-004` ni `PB-005` antes de dejar priorizada, ordenada por olas y trazada la recopilacion sobre fuentes reales oficiales.
+- El siguiente paso operativo no es abrir una nueva implementacion, sino completar la fusion en `main` y el borrado de rama de la issue #9, asociada a `PB-009`.
+- Tras esa integracion, la siguiente issue recomendada para iniciar es la #6, asociada a `PB-004`.
+- `PB-009` ya reutiliza la cobertura validada de `PB-007`, la regla auditable validada de `PB-006` y la superficie ya validada de catalogo, detalle y filtros.
+- No se recomienda iniciar `PB-004` ni `PB-005` hasta que `PB-009` deje de estar solo validado y quede tambien integrado y cerrado administrativamente.

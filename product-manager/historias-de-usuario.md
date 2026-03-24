@@ -170,5 +170,5 @@
   5. Existe una issue de GitHub ejecutable para `developer-teams` con criterios de aceptacion verificables.
 - Dependencias funcionales: PB-007, PB-006
 - Prioridad: P0
-- Estado: `no validado`
-- Nota de estado: `qa-teams` dejo la issue #9 en `no validado` el 2026-03-22 por desincronizacion de la rama `developer-teams/issue-9-pb-009-fuentes-reales` con `main` y arrastre de borrados ajenos al alcance; la correccion debe continuar en la misma issue y en la misma rama mientras no cambie el alcance funcional.
+- Estado: `validado`
+- Nota de estado: `qa-teams` valido la reentrega de la issue #9 el 2026-03-23. La historia no debe pasar a `cerrado` hasta que `developer-teams` integre la rama `developer-teams/issue-9-pb-009-fuentes-reales` en `main` y elimine esa rama tecnica.
