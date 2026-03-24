@@ -1,0 +1,40 @@
+{
+  "referencia_funcional": "PB-009 · HU-09 · CU-09 · Priorizacion de recopilacion sobre fuentes reales oficiales con trazabilidad a PB-007 y PB-006",
+  "sources": [
+    {
+      "nombre": "BOC",
+      "ola": "Ola 1",
+      "url_oficial": "https://www.gobiernodecanarias.org/boc/",
+      "categoria": "Boletin oficial autonomico",
+      "prioridad": 1,
+      "alcance": "Fuente real prioritaria para deteccion temprana de publicaciones oficiales con impacto directo en Canarias.",
+      "justificacion": "Se prioriza por proximidad al ambito canario, credibilidad del origen oficial y capacidad de aportar señal temprana reutilizable por el catalogo.",
+      "trazabilidad": "PB-009 · Dependencia funcional reutilizando PB-007 y PB-006"
+    },
+    {
+      "nombre": "BOP Las Palmas",
+      "ola": "Ola 2",
+      "url_oficial": "https://www.boplaspalmas.net/nbop2/index.php",
+      "categoria": "Boletin oficial provincial",
+      "prioridad": 2,
+      "alcance": "Fuente oficial provincial para ampliar recopilacion temprana en administraciones y entes del ambito de Las Palmas.",
+      "justificacion": "Aporta cobertura oficial incremental para Canarias sin prometer todavia exhaustividad de administraciones locales.",
+      "trazabilidad": "PB-009 · Dependencia funcional reutilizando PB-007 y PB-006"
+    },
+    {
+      "nombre": "BOE",
+      "ola": "Ola 3",
+      "url_oficial": "https://www.boe.es/",
+      "categoria": "Boletin oficial estatal",
+      "prioridad": 3,
+      "alcance": "Fuente oficial estatal complementaria para reforzar credibilidad y contraste de publicaciones relevantes para Canarias.",
+      "justificacion": "Se incorpora como ola posterior porque es oficial y verificable, aunque la señal temprana mas cercana al territorio se concentra antes en BOC y BOP Las Palmas.",
+      "trazabilidad": "PB-009 · Dependencia funcional reutilizando PB-007 y PB-006"
+    }
+  ],
+  "fuera_de_alcance": [
+    "Alertas tempranas",
+    "Pipeline de seguimiento",
+    "Ampliacion de cobertura a nuevas administraciones no confirmadas"
+  ]
+}

@@ -8,6 +8,7 @@ from urllib.parse import parse_qs, quote
 from wsgiref.simple_server import make_server
 
 from podencoti.opportunity_catalog import CatalogFilters, build_catalog, build_opportunity_detail
+from podencoti.real_source_prioritization import load_real_source_prioritization, summarize_prioritization
 from podencoti.source_coverage import load_source_coverage, summary_by_status
 from podencoti.ti_classification import audit_examples, load_rule_set
 
@@ -349,6 +350,78 @@ def _coverage_html_response() -> str:
     )
 
 
+def _real_source_prioritization_html_response() -> str:
+    reference, sources, out_of_scope = load_real_source_prioritization()
+    summary = summarize_prioritization(sources)
+    rows = "\n".join(
+        (
+            "<tr>"
+            f'<td data-label="Ola">{escape(source.ola)}</td>'
+            f'<td data-label="Fuente real oficial"><a href="{escape(source.url_oficial)}">{escape(source.nombre)}</a></td>'
+            f'<td data-label="Categoría">{escape(source.categoria)}</td>'
+            f'<td data-label="Alcance">{escape(source.alcance)}</td>'
+            f'<td data-label="Justificación">{escape(source.justificacion)}</td>'
+            f'<td data-label="Trazabilidad">{escape(source.trazabilidad)}</td>'
+            "</tr>"
+        )
+        for source in sources
+    )
+    out_of_scope_html = "".join(f"<li>{escape(item)}</li>" for item in out_of_scope)
+
+    content = f"""
+      <section class="panel">
+        <div class="panel-body">
+          <div class="summary">
+            <article class="metric"><strong>{summary["Ola 1"]}</strong>Fuentes en Ola 1</article>
+            <article class="metric"><strong>{summary["Ola 2"]}</strong>Fuentes en Ola 2</article>
+            <article class="metric"><strong>{summary["Ola 3"]}</strong>Fuentes en Ola 3</article>
+          </div>
+          <p class="muted">
+            Esta priorización reutiliza la cobertura visible de <code>PB-007</code> y la clasificación auditable de <code>PB-006</code>
+            para reforzar la recopilación con fuentes reales oficiales antes de abrir alertas o pipeline.
+          </p>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Ola</th>
+              <th>Fuente real oficial</th>
+              <th>Categoría</th>
+              <th>Alcance</th>
+              <th>Justificación</th>
+              <th>Trazabilidad</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows}
+          </tbody>
+        </table>
+      </section>
+
+      <section class="note">
+        <strong>Fuera de alcance en esta iteración</strong>
+        <ul>
+          {out_of_scope_html}
+        </ul>
+      </section>
+
+      <p class="note">
+        Referencia funcional activa: <code>{escape(reference)}</code>.
+        La lista priorizada nombra de forma explícita <code>BOC</code>, <code>BOP Las Palmas</code> y <code>BOE</code> con orden por olas verificable por <code>qa-teams</code>.
+      </p>
+    """
+    return _page_template(
+        "PodencoTI | Priorización de fuentes reales oficiales",
+        "Priorización de fuentes reales oficiales para recopilación",
+        "Release 2 · PB-009 · Recopilación priorizada por olas",
+        (
+            "PodencoTI deja aquí visible qué fuentes oficiales reales deben entrar antes en la recopilación temprana. "
+            "La entrega refuerza credibilidad y trazabilidad sin ampliar todavía cobertura comercial, alertas ni pipeline."
+        ),
+        content,
+    )
+
+
 def _format_budget(amount: int | None) -> str:
     if amount is None:
         return "Presupuesto no informado"
@@ -487,6 +560,7 @@ def _catalog_html_response(filters: CatalogFilters | None = None) -> str:
                 f'<td data-label="Ubicación">{escape(item["ubicacion"])}</td>'
                 f'<td data-label="Procedimiento">{escape(item["procedimiento"] or "No informado")}</td>'
                 f'<td data-label="Presupuesto">{escape(_format_budget(item["presupuesto"]))}</td>'
+                f'<td data-label="Publicación oficial">{escape(item["fecha_publicacion_oficial"])}</td>'
                 f'<td data-label="Fecha límite">{escape(item["fecha_limite"])}</td>'
                 f'<td data-label="Estado">{escape(item["estado"])}</td>'
                 f'<td data-label="Fuente oficial"><a class="source-link" href="{escape(item["url_fuente_oficial"])}" target="_blank" rel="noopener noreferrer">{escape(item["fuente_oficial"])}</a></td>'
@@ -503,8 +577,9 @@ def _catalog_html_response(filters: CatalogFilters | None = None) -> str:
             <article class="metric"><strong>{catalog["total_oportunidades_visibles"]}</strong>Oportunidades TI antes de filtrar</article>
           </div>
           <p class="muted">
-            El catálogo reutiliza la cobertura MVP de <code>PB-007</code> y la clasificación auditable de <code>PB-006</code>.
-            No representa todavía cobertura total del ecosistema canario.
+            El catálogo reutiliza la cobertura MVP de <code>PB-007</code>, la clasificación auditable de <code>PB-006</code>
+            y la prioridad de fuentes reales oficiales de <code>PB-009</code>.
+            No representa todavía cobertura total del ecosistema canario ni habilita alertas o pipeline.
           </p>
         </div>
         <div class="table-wrap">
@@ -516,6 +591,7 @@ def _catalog_html_response(filters: CatalogFilters | None = None) -> str:
                 <th>Ubicación</th>
                 <th>Procedimiento</th>
                 <th>Presupuesto</th>
+                <th>Publicación oficial</th>
                 <th>Fecha límite</th>
                 <th>Estado</th>
                 <th>Fuente oficial</th>
@@ -546,7 +622,7 @@ def _catalog_html_response(filters: CatalogFilters | None = None) -> str:
 
       <p class="note">
         Referencia funcional activa: <code>{escape(catalog["referencia_funcional"])}</code>.
-        Cada registro mantiene visible su fuente oficial para facilitar verificación por <code>qa-teams</code>.
+        Cada registro mantiene visible su fuente oficial, enlace oficial, fecha de publicación y estado oficial para facilitar verificación por <code>qa-teams</code>.
       </p>
     """
     return _page_template(
@@ -602,6 +678,7 @@ def _detail_html_response(opportunity_id: str) -> str | None:
                 <tr><th>Ubicacion</th><td>{escape(str(detail["ubicacion"]))}</td></tr>
                 <tr><th>Procedimiento</th><td>{escape(str(detail["procedimiento"] or "No informado"))}</td></tr>
                 <tr><th>Presupuesto</th><td>{escape(_format_budget(detail["presupuesto"]))}</td></tr>
+                <tr><th>Publicación oficial</th><td>{escape(str(detail["fecha_publicacion_oficial"]))}</td></tr>
                 <tr><th>Fecha limite</th><td>{escape(str(detail["fecha_limite"]))}</td></tr>
                 <tr><th>Estado oficial del expediente</th><td>{escape(str(detail["estado"]))}</td></tr>
                 <tr><th>Fuente oficial</th><td><a class="source-link" href="{escape(str(detail["url_fuente_oficial"]))}" target="_blank" rel="noopener noreferrer">{escape(str(detail["fuente_oficial"]))}</a></td></tr>
@@ -638,7 +715,7 @@ def _detail_html_response(opportunity_id: str) -> str | None:
         str(detail["titulo"]),
         "Release 1 · PB-002 · Ficha resumida verificable",
         (
-            "La ficha resume los datos criticos del expediente y mantiene visible la fuente oficial. "
+            "La ficha resume los datos criticos del expediente y mantiene visible la fuente oficial, la fecha de publicación y el estado oficial. "
             "Cuando existe una rectificacion o modificacion publicada por el origen, se muestra el ultimo dato oficial visible."
         ),
         update_panel + latest_fields,
@@ -817,6 +894,17 @@ def application(environ, start_response):
         body = b"".join(_json_response(payload))
         return _respond(start_response, "200 OK", "application/json; charset=utf-8", body)
 
+    if path == "/api/fuentes-prioritarias":
+        reference, sources, out_of_scope = load_real_source_prioritization()
+        payload = {
+            "referencia_funcional": reference,
+            "sources": [source.__dict__ for source in sources],
+            "summary": summarize_prioritization(sources),
+            "fuera_de_alcance": list(out_of_scope),
+        }
+        body = b"".join(_json_response(payload))
+        return _respond(start_response, "200 OK", "application/json; charset=utf-8", body)
+
     if path == "/api/clasificacion-ti":
         rules = load_rule_set()
         payload = {
@@ -839,6 +927,10 @@ def application(environ, start_response):
 
     if path == "/cobertura-fuentes":
         body = b"".join(_html_response(_coverage_html_response()))
+        return _respond(start_response, "200 OK", "text/html; charset=utf-8", body)
+
+    if path == "/priorizacion-fuentes-reales":
+        body = b"".join(_html_response(_real_source_prioritization_html_response()))
         return _respond(start_response, "200 OK", "text/html; charset=utf-8", body)
 
     if path.startswith("/oportunidades/"):

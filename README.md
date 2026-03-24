@@ -104,6 +104,10 @@ La rama `main` ya integra seis piezas funcionales y operativas verificables del 
 - `PB-003`: filtros funcionales sobre el catalogo y su API por palabra clave, rango de presupuesto, procedimiento y ubicacion, incluyendo validacion explicita de rangos invalidos.
 - Despliegue local en contenedor Docker con `Dockerfile`, `docker-compose.yml` y persistencia de `data/`.
 
+La siguiente entrega tecnica en curso amplía esa base con una sexta superficie verificable:
+
+- `PB-009`: priorizacion visible de fuentes reales oficiales por olas (`BOC`, `BOP Las Palmas`, `BOE`) y refuerzo de la trazabilidad minima al origen oficial en cada oportunidad publicada.
+
 ### Como ejecutar las vistas actuales
 
 Si no existe `.env`, copia `.env.example` y ajusta al menos `PORT` antes de arrancar.
@@ -123,6 +127,8 @@ Luego se puede abrir:
 - `http://127.0.0.1:<PORT>/api/oportunidades/<id>` para la salida JSON trazable de la ficha de detalle
 - `http://127.0.0.1:<PORT>/cobertura-fuentes` para la vista HTML de cobertura MVP
 - `http://127.0.0.1:<PORT>/api/fuentes` para la salida JSON trazable a la configuracion
+- `http://127.0.0.1:<PORT>/priorizacion-fuentes-reales` para la vista HTML de priorizacion de fuentes reales oficiales por olas
+- `http://127.0.0.1:<PORT>/api/fuentes-prioritarias` para la salida JSON de la priorizacion de fuentes reales oficiales
 - `http://127.0.0.1:<PORT>/clasificacion-ti` para la vista HTML de la regla TI auditable
 - `http://127.0.0.1:<PORT>/api/clasificacion-ti` para la salida JSON de reglas y ejemplos auditados
 

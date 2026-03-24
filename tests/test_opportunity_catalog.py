@@ -29,6 +29,7 @@ class OpportunityCatalogTests(unittest.TestCase):
             ],
             [item["id"] for item in catalog["oportunidades"]],
         )
+        self.assertEqual("2026-03-22", catalog["oportunidades"][0]["fecha_publicacion_oficial"])
         self.assertEqual("2026-04-10", catalog["oportunidades"][0]["fecha_limite"])
         self.assertEqual(97000, catalog["oportunidades"][0]["presupuesto"])
         self.assertTrue(
@@ -40,6 +41,7 @@ class OpportunityCatalogTests(unittest.TestCase):
         detail = build_opportunity_detail("pcsp-cabildo-licencias-2026")
 
         assert detail is not None
+        self.assertEqual("2026-03-22", detail["fecha_publicacion_oficial"])
         self.assertEqual("2026-04-10", detail["fecha_limite"])
         self.assertEqual(97000, detail["presupuesto"])
         self.assertEqual("No informado", detail["solvencia_tecnica"] or "No informado")
@@ -68,6 +70,7 @@ class OpportunityCatalogTests(unittest.TestCase):
                     "ubicacion": "Canarias",
                     "procedimiento": "Abierto",
                     "presupuesto": 12000,
+                    "fecha_publicacion_oficial": "2026-04-01",
                     "fecha_limite": "2026-05-01",
                     "estado": "Abierta",
                     "fuente_oficial": "Gobierno de Canarias",
