@@ -31,6 +31,14 @@ source .venv/bin/activate
 python3 -m pip install -e .
 ```
 
+4. Prepara la configuracion local:
+
+```bash
+cp .env.example .env
+```
+
+Edita `.env` y ajusta al menos `PORT` si quieres usar un puerto distinto del valor por defecto.
+
 ## Verificaciones posteriores
 1. Ejecuta la suite tecnica:
 
@@ -57,22 +65,22 @@ make run
 ```
 
 Resultado esperado en esta revision:
-- mensaje `Servidor disponible en http://127.0.0.1:8000`
+- mensaje `Servidor disponible en http://127.0.0.1:<PORT>` segun el valor definido en `.env`
 
 4. Verifica las rutas principales:
 
 ```bash
-curl -i http://127.0.0.1:8000/
-curl -i http://127.0.0.1:8000/api/oportunidades
-curl -i "http://127.0.0.1:8000/?palabra_clave=licencias"
-curl -i "http://127.0.0.1:8000/api/oportunidades?procedimiento=Abierto"
-curl -i "http://127.0.0.1:8000/api/oportunidades?presupuesto_min=120000&presupuesto_max=90000"
-curl -i http://127.0.0.1:8000/oportunidades/pcsp-cabildo-licencias-2026
-curl -i http://127.0.0.1:8000/api/oportunidades/pcsp-cabildo-licencias-2026
-curl -i http://127.0.0.1:8000/cobertura-fuentes
-curl -i http://127.0.0.1:8000/api/fuentes
-curl -i http://127.0.0.1:8000/clasificacion-ti
-curl -i http://127.0.0.1:8000/api/clasificacion-ti
+curl -i http://127.0.0.1:<PORT>/
+curl -i http://127.0.0.1:<PORT>/api/oportunidades
+curl -i "http://127.0.0.1:<PORT>/?palabra_clave=licencias"
+curl -i "http://127.0.0.1:<PORT>/api/oportunidades?procedimiento=Abierto"
+curl -i "http://127.0.0.1:<PORT>/api/oportunidades?presupuesto_min=120000&presupuesto_max=90000"
+curl -i http://127.0.0.1:<PORT>/oportunidades/pcsp-cabildo-licencias-2026
+curl -i http://127.0.0.1:<PORT>/api/oportunidades/pcsp-cabildo-licencias-2026
+curl -i http://127.0.0.1:<PORT>/cobertura-fuentes
+curl -i http://127.0.0.1:<PORT>/api/fuentes
+curl -i http://127.0.0.1:<PORT>/clasificacion-ti
+curl -i http://127.0.0.1:<PORT>/api/clasificacion-ti
 ```
 
 ## Que queda instalado realmente

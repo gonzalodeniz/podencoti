@@ -60,7 +60,7 @@ PYTHONPATH=src python3 -m podencoti.app
 
 Resultado verificado en esta revision:
 - 33 pruebas automatizadas en verde.
-- Servidor local disponible en `http://127.0.0.1:8000`.
+- Servidor local disponible en `http://127.0.0.1:<PORT>`, usando `PORT` desde `.env` y, por defecto, `8000` si no se define.
 
 ## Contradicciones explicitadas
 - `pyproject.toml` sigue describiendo el paquete como una release centrada solo en cobertura de fuentes, aunque la rama ya expone catalogo, filtros, detalle y clasificacion TI auditable.

@@ -19,7 +19,7 @@ endef
 help:
 	@printf "%s\n" \
 		"Objetivos disponibles:" \
-		"  make run   - Ejecuta la aplicacion local en http://127.0.0.1:8000" \
+		"  make run   - Ejecuta la aplicacion local usando PORT desde .env" \
 		"  make test  - Ejecuta la suite tecnica con unittest" \
 		"Los objetivos activan .venv automaticamente si no hay un entorno virtual ya activo."
 

@@ -11,6 +11,7 @@ En `main` existe un servicio HTTP local arrancable con `wsgiref.simple_server`. 
 - `python3` compatible con `>=3.12`.
 - Entorno virtual activo o directorio `.venv/` disponible si se va a usar `make`.
 - `make` para usar los objetivos definidos en `Makefile`.
+- Un fichero `.env` con `PORT` definido. Si no existe, puede copiarse desde [`.env.example`](/opt/apps/podencoti/.env.example).
 
 ## Arranque local reproducible
 Desde la raiz del proyecto:
@@ -26,22 +27,22 @@ make run
 
 ## Resultado esperado en esta revision
 - `make test` ejecuta 33 pruebas y termina en verde.
-- `make run` publica el mensaje `Servidor disponible en http://127.0.0.1:8000`.
+- `make run` publica el mensaje `Servidor disponible en http://127.0.0.1:<PORT>` segun el valor configurado en `.env`.
 - Mientras el proceso esta levantado, las rutas `/`, `/api/oportunidades`, `/oportunidades/pcsp-cabildo-licencias-2026`, `/api/oportunidades/pcsp-cabildo-licencias-2026`, `/cobertura-fuentes`, `/api/fuentes`, `/clasificacion-ti` y `/api/clasificacion-ti` responden `200 OK`.
 
 ## Verificaciones operativas minimas
-- Abrir `http://127.0.0.1:8000/` para revisar el catalogo inicial de oportunidades TI.
-- Abrir `http://127.0.0.1:8000/?palabra_clave=licencias` para verificar filtrado funcional en HTML.
-- Consultar `http://127.0.0.1:8000/api/oportunidades?procedimiento=Abierto` para verificar filtrado funcional en API.
-- Consultar `http://127.0.0.1:8000/api/oportunidades?presupuesto_min=120000&presupuesto_max=90000` para verificar que la API devuelve `400` con validacion explicita de rango.
-- Abrir `http://127.0.0.1:8000/oportunidades/pcsp-cabildo-licencias-2026` para revisar una ficha de detalle con rectificacion visible.
-- Abrir `http://127.0.0.1:8000/cobertura-fuentes` para revisar la cobertura inicial del MVP.
-- Abrir `http://127.0.0.1:8000/clasificacion-ti` para revisar la regla TI auditable.
+- Abrir `http://127.0.0.1:<PORT>/` para revisar el catalogo inicial de oportunidades TI.
+- Abrir `http://127.0.0.1:<PORT>/?palabra_clave=licencias` para verificar filtrado funcional en HTML.
+- Consultar `http://127.0.0.1:<PORT>/api/oportunidades?procedimiento=Abierto` para verificar filtrado funcional en API.
+- Consultar `http://127.0.0.1:<PORT>/api/oportunidades?presupuesto_min=120000&presupuesto_max=90000` para verificar que la API devuelve `400` con validacion explicita de rango.
+- Abrir `http://127.0.0.1:<PORT>/oportunidades/pcsp-cabildo-licencias-2026` para revisar una ficha de detalle con rectificacion visible.
+- Abrir `http://127.0.0.1:<PORT>/cobertura-fuentes` para revisar la cobertura inicial del MVP.
+- Abrir `http://127.0.0.1:<PORT>/clasificacion-ti` para revisar la regla TI auditable.
 - Consultar las salidas JSON para integracion basica o soporte QA:
-  - `http://127.0.0.1:8000/api/oportunidades`
-  - `http://127.0.0.1:8000/api/oportunidades/pcsp-cabildo-licencias-2026`
-  - `http://127.0.0.1:8000/api/fuentes`
-  - `http://127.0.0.1:8000/api/clasificacion-ti`
+  - `http://127.0.0.1:<PORT>/api/oportunidades`
+  - `http://127.0.0.1:<PORT>/api/oportunidades/pcsp-cabildo-licencias-2026`
+  - `http://127.0.0.1:<PORT>/api/fuentes`
+  - `http://127.0.0.1:<PORT>/api/clasificacion-ti`
 
 ## Parada controlada
 - Interrumpe el proceso con `Ctrl+C`.

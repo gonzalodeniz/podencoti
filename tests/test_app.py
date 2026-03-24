@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import io
 import json
 import unittest
@@ -150,17 +151,24 @@ class ApplicationTests(unittest.TestCase):
     def test_main_handles_keyboard_interrupt_with_controlled_shutdown(self) -> None:
         stdout = io.StringIO()
 
-        with patch("podencoti.app.make_server") as make_server_mock:
-            server = make_server_mock.return_value.__enter__.return_value
-            server.serve_forever.side_effect = KeyboardInterrupt
+        with patch.dict(os.environ, {"PORT": "8123"}, clear=False):
+            with patch("podencoti.app.make_server") as make_server_mock:
+                server = make_server_mock.return_value.__enter__.return_value
+                server.serve_forever.side_effect = KeyboardInterrupt
 
-            with redirect_stdout(stdout):
-                main()
+                with redirect_stdout(stdout):
+                    main()
 
         output = stdout.getvalue()
-        self.assertIn("Servidor disponible en http://127.0.0.1:8000", output)
+        self.assertIn("Servidor disponible en http://127.0.0.1:8123", output)
         self.assertIn("Servidor detenido de forma controlada.", output)
+        make_server_mock.assert_called_once_with("127.0.0.1", 8123, application)
         server.server_close.assert_called_once_with()
+
+    def test_main_rejects_invalid_port_configuration(self) -> None:
+        with patch.dict(os.environ, {"PORT": "not-a-number"}, clear=False):
+            with self.assertRaisesRegex(ValueError, "PORT debe ser un numero entero valido"):
+                main()
 
     def test_root_shows_empty_state_when_catalog_has_no_visible_opportunities(self) -> None:
         empty_catalog = {

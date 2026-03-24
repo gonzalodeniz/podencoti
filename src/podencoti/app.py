@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import json
+import os
 from html import escape
+from pathlib import Path
 from urllib.parse import parse_qs, quote
 from wsgiref.simple_server import make_server
 
@@ -689,6 +691,36 @@ def _respond(start_response, status: str, content_type: str, body: bytes) -> lis
     return [body]
 
 
+def _load_env_file(path: Path) -> None:
+    if not path.is_file():
+        return
+
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, value = line.split("=", 1)
+        key = key.strip()
+        if not key or key in os.environ:
+            continue
+        value = value.strip()
+        if len(value) >= 2 and value[0] == value[-1] and value[0] in {'"', "'"}:
+            value = value[1:-1]
+        os.environ[key] = value
+
+
+def _resolve_port() -> int:
+    _load_env_file(Path(__file__).resolve().parents[2] / ".env")
+    raw_port = os.environ.get("PORT", "8000").strip()
+    try:
+        port = int(raw_port)
+    except ValueError as exc:
+        raise ValueError(f"PORT debe ser un numero entero valido, no {raw_port!r}") from exc
+    if not 1 <= port <= 65535:
+        raise ValueError(f"PORT debe estar entre 1 y 65535, no {port}")
+    return port
+
+
 def application(environ, start_response):
     path = environ.get("PATH_INFO", "/")
     filters = _parse_catalog_filters(environ)
@@ -760,7 +792,7 @@ def application(environ, start_response):
 
 def main() -> None:
     host = "127.0.0.1"
-    port = 8000
+    port = _resolve_port()
     with make_server(host, port, application) as httpd:
         print(f"Servidor disponible en http://{host}:{port}")
         try:

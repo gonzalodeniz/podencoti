@@ -17,10 +17,12 @@ make test
 timeout 2s make run
 ```
 
+Si no existe `.env`, copia antes `.env.example` a `.env` y define `PORT`.
+
 ## Resultado esperado en esta revision
 - `python3 -m pip install -e .` termina correctamente.
 - `make test` ejecuta 33 pruebas en verde.
-- `make run` arranca el servidor local y queda a la escucha hasta que se interrumpe el proceso.
+- `make run` arranca el servidor local usando `PORT` desde `.env` y queda a la escucha hasta que se interrumpe el proceso.
 
 ## Conclusion operativa
 Solo debe considerarse soportado el arranque local de validacion. No hay base documental suficiente para prometer despliegue en servidor, contenedor o plataforma gestionada.

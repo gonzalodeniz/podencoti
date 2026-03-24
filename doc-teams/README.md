@@ -35,7 +35,7 @@ No existen todavia alertas tempranas, pipeline de seguimiento, autenticacion ni 
 - `main` contiene implementacion Python versionada en `src/podencoti/`, datos en `data/` y pruebas automatizadas en `tests/`.
 - `PYTHONPATH=src python3 -m unittest discover -s tests -v` ejecuta 33 pruebas y finaliza correctamente.
 - `make test` tambien funciona en un entorno con `.venv` disponible.
-- `make run` arranca un servidor WSGI local en `http://127.0.0.1:8000`.
+- `make run` arranca un servidor WSGI local usando `PORT` desde `.env` y, por defecto, `8000` si no se define.
 - Las rutas verificables hoy son `/`, `/api/oportunidades`, `/oportunidades/<id>`, `/api/oportunidades/<id>`, `/cobertura-fuentes`, `/api/fuentes`, `/clasificacion-ti` y `/api/clasificacion-ti`.
 - El catalogo visible publica 3 oportunidades TI a partir de 5 registros de origen dentro de la cobertura MVP actual.
 - El catalogo permite filtrar por `palabra_clave`, `presupuesto_min`, `presupuesto_max`, `procedimiento` y `ubicacion`.

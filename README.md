@@ -105,26 +105,30 @@ La rama `main` ya integra cinco piezas funcionales verificables del MVP inicial:
 
 ### Como ejecutar las vistas actuales
 
+Si no existe `.env`, copia `.env.example` y ajusta al menos `PORT` antes de arrancar.
+
+El arranque local usa el puerto definido en `.env` mediante `PORT`. Si no se define, la aplicacion cae al valor por defecto `8000`.
+
 ```bash
 PYTHONPATH=src python3 -m podencoti.app
 ```
 
 Luego se puede abrir:
 
-- `http://127.0.0.1:8000/` para la vista HTML del catalogo inicial de oportunidades TI, con formulario de filtros funcionales
-- `http://127.0.0.1:8000/api/oportunidades` para la salida JSON del catalogo filtrado por cobertura MVP y clasificacion TI
-- `http://127.0.0.1:8000/oportunidades/<id>` para la ficha HTML de detalle de una oportunidad visible
-- `http://127.0.0.1:8000/api/oportunidades/<id>` para la salida JSON trazable de la ficha de detalle
-- `http://127.0.0.1:8000/cobertura-fuentes` para la vista HTML de cobertura MVP
-- `http://127.0.0.1:8000/api/fuentes` para la salida JSON trazable a la configuracion
-- `http://127.0.0.1:8000/clasificacion-ti` para la vista HTML de la regla TI auditable
-- `http://127.0.0.1:8000/api/clasificacion-ti` para la salida JSON de reglas y ejemplos auditados
+- `http://127.0.0.1:<PORT>/` para la vista HTML del catalogo inicial de oportunidades TI, con formulario de filtros funcionales
+- `http://127.0.0.1:<PORT>/api/oportunidades` para la salida JSON del catalogo filtrado por cobertura MVP y clasificacion TI
+- `http://127.0.0.1:<PORT>/oportunidades/<id>` para la ficha HTML de detalle de una oportunidad visible
+- `http://127.0.0.1:<PORT>/api/oportunidades/<id>` para la salida JSON trazable de la ficha de detalle
+- `http://127.0.0.1:<PORT>/cobertura-fuentes` para la vista HTML de cobertura MVP
+- `http://127.0.0.1:<PORT>/api/fuentes` para la salida JSON trazable a la configuracion
+- `http://127.0.0.1:<PORT>/clasificacion-ti` para la vista HTML de la regla TI auditable
+- `http://127.0.0.1:<PORT>/api/clasificacion-ti` para la salida JSON de reglas y ejemplos auditados
 
 Ejemplos de filtros ya soportados:
 
-- `http://127.0.0.1:8000/?palabra_clave=licencias`
-- `http://127.0.0.1:8000/api/oportunidades?procedimiento=Abierto`
-- `http://127.0.0.1:8000/api/oportunidades?presupuesto_min=90000&presupuesto_max=120000`
+- `http://127.0.0.1:<PORT>/?palabra_clave=licencias`
+- `http://127.0.0.1:<PORT>/api/oportunidades?procedimiento=Abierto`
+- `http://127.0.0.1:<PORT>/api/oportunidades?presupuesto_min=90000&presupuesto_max=120000`
 
 ## Capacidades aun no implementadas en esta rama
 

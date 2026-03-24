@@ -4,7 +4,7 @@
 Personas usuarias internas, equipo tecnico y administracion que necesitan aclarar contradicciones entre vision, historial operativo y comportamiento real de `main`.
 
 ## La aplicacion esta disponible para arrancar en `main`?
-Si. `make run` levanta un servidor local en `http://127.0.0.1:8000`.
+Si. `make run` levanta un servidor local usando `PORT` desde `.env` y, por defecto, `8000` si no se define.
 
 ## Entonces que entrega existe realmente hoy?
 Existe una entrega minima de descubrimiento con catalogo inicial de oportunidades TI, filtros funcionales sobre ese catalogo, ficha de detalle, cobertura inicial del MVP y clasificacion TI auditable.
