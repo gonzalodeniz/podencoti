@@ -24,7 +24,7 @@ Usuario interno del proyecto que necesita interpretar de forma consistente la te
 - `Estado real observable`: comportamiento que puede comprobarse en la rama revisada mediante ficheros versionados y comandos reproducibles.
 - `Contradiccion documental`: diferencia entre lo que una fuente del repositorio afirma y lo que puede verificarse realmente en `main`.
 - `No disponible en main`: capacidad descrita por vision o backlog que no debe documentarse como funcionalidad utilizable hoy.
-- `Entrega minima ejecutable`: estado actual de `main` con servidor local, catalogo inicial, filtros funcionales, ficha de detalle, rutas de cobertura y rutas de clasificacion TI auditables, pero sin alertas, pipeline ni despliegue productivo.
+- `Entrega minima ejecutable`: estado actual de `main` con servidor local, catalogo inicial, filtros funcionales, ficha de detalle, rutas de cobertura y rutas de clasificacion TI auditables, ademas de un despliegue local en contenedor, pero sin alertas, pipeline ni despliegue productivo endurecido.
 - `Trabajo validado no integrado`: entrega que puede aparecer en `changelog/` o en una issue como validada por `qa-teams`, pero que aun no forma parte del comportamiento observable de `main` hasta su integracion efectiva.
 
 ## Contradicciones clave asociadas al glosario

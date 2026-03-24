@@ -95,19 +95,21 @@ Tambien pueden recibir opciones adicionales de `codex exec`, por ejemplo:
 
 ## Entrega tecnica actual
 
-La rama `main` ya integra cinco piezas funcionales verificables del MVP inicial:
+La rama `main` ya integra seis piezas funcionales y operativas verificables del MVP inicial:
 
 - `PB-007`: cobertura inicial visible y verificable de fuentes del MVP.
 - `PB-006`: regla de clasificacion TI auditable con ejemplos verificables.
 - `PB-001`: catalogo inicial de oportunidades TI consultable desde una app WSGI minima en Python.
 - `PB-002`: ficha de detalle navegable desde el catalogo, con tratamiento explicito de campos no informados y aplicacion del ultimo dato oficial visible cuando el expediente publica una rectificacion o modificacion.
 - `PB-003`: filtros funcionales sobre el catalogo y su API por palabra clave, rango de presupuesto, procedimiento y ubicacion, incluyendo validacion explicita de rangos invalidos.
+- Despliegue local en contenedor Docker con `Dockerfile`, `docker-compose.yml` y persistencia de `data/`.
 
 ### Como ejecutar las vistas actuales
 
 Si no existe `.env`, copia `.env.example` y ajusta al menos `PORT` antes de arrancar.
 
 El arranque local usa el puerto definido en `.env` mediante `PORT`. Si no se define, la aplicacion cae al valor por defecto `8000`.
+El servidor local escucha en `127.0.0.1` por defecto. En contenedor o Compose se usa `HOST=0.0.0.0`.
 
 ```bash
 PYTHONPATH=src python3 -m podencoti.app
@@ -129,6 +131,30 @@ Ejemplos de filtros ya soportados:
 - `http://127.0.0.1:<PORT>/?palabra_clave=licencias`
 - `http://127.0.0.1:<PORT>/api/oportunidades?procedimiento=Abierto`
 - `http://127.0.0.1:<PORT>/api/oportunidades?presupuesto_min=90000&presupuesto_max=120000`
+
+### Despliegue con Docker
+
+La imagen Docker incluye solo lo esencial de la aplicación:
+
+- `src/`
+- `data/`
+
+Quedan fuera de la imagen los manuales, `changelog/`, scripts de roles, tests y otros artefactos de coordinación.
+
+1. Revisa `.env` y ajusta `PORT` si necesitas un puerto distinto.
+2. Levanta el contenedor con `docker compose up -d --build`.
+3. `docker-compose.yml` publica el puerto definido por `PORT` y monta `./data:/app/data` para persistencia.
+4. La aplicación en contenedor escucha con `HOST=0.0.0.0`, mientras que en local mantiene `127.0.0.1`.
+
+Objetivos de `Makefile` disponibles:
+
+```bash
+make docker-build
+make docker-up
+make docker-down
+make docker-logs
+make docker-restart
+```
 
 ## Capacidades aun no implementadas en esta rama
 

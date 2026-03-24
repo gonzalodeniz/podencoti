@@ -27,39 +27,44 @@ def _page_template(
     <style>
       :root {{
         color-scheme: light;
-        --bg: #f4efe6;
-        --card: #fffdf9;
-        --ink: #1c2733;
-        --muted: #5f6b76;
-        --line: #d7c7af;
-        --accent: #a7502b;
-        --accent-soft: #f4d8c7;
-        --ok: #2f6b45;
-        --warn: #946200;
-        --risk: #9c3b2f;
+        --bg: #ece5db;
+        --card: #fffdf8;
+        --ink: #121a23;
+        --muted: #58646f;
+        --line: #cdbfae;
+        --accent: #0f4c5c;
+        --accent-strong: #16384d;
+        --accent-soft: #d9e4e6;
+        --ok: #1d5b3a;
+        --warn: #8a5b00;
+        --risk: #8a2f2a;
       }}
       body {{
         margin: 0;
-        font-family: Georgia, "Times New Roman", serif;
+        font-family: "IBM Plex Serif", Georgia, "Times New Roman", serif;
         background:
-          radial-gradient(circle at top right, #f8dfca 0, transparent 22rem),
-          linear-gradient(180deg, #f9f4ec 0%, var(--bg) 100%);
+          radial-gradient(circle at top left, rgb(15 76 92 / 0.16) 0, transparent 28rem),
+          linear-gradient(180deg, #f4eee5 0%, var(--bg) 100%);
         color: var(--ink);
       }}
       main {{
-        max-width: 1100px;
+        max-width: 1180px;
         margin: 0 auto;
-        padding: 3rem 1.5rem 4rem;
+        padding: 2.5rem 1.5rem 4rem;
       }}
       .hero, .panel, .metric, .note {{
         background: color-mix(in srgb, var(--card) 94%, white);
         border: 1px solid var(--line);
-        border-radius: 20px;
-        box-shadow: 0 18px 40px rgb(28 39 51 / 0.08);
+        border-radius: 22px;
+        box-shadow: 0 18px 40px rgb(18 26 35 / 0.08);
       }}
       .hero {{
-        padding: 2rem;
-        margin-bottom: 1.5rem;
+        padding: 2rem 2.1rem;
+        margin-bottom: 1.35rem;
+        background:
+          linear-gradient(135deg, rgb(15 76 92 / 0.08), rgb(255 255 255 / 0.96) 52%),
+          var(--card);
+        border-left: 6px solid var(--accent);
       }}
       .panel {{
         overflow: hidden;
@@ -90,6 +95,7 @@ def _page_template(
         display: block;
         font-size: 2rem;
         color: var(--accent);
+        line-height: 1.05;
       }}
       .rule-grid {{
         display: grid;
@@ -123,50 +129,70 @@ def _page_template(
       }}
       .filters {{
         display: grid;
-        gap: 1rem;
-        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 1.15rem;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
         align-items: end;
       }}
       .filters label {{
         display: block;
         font-size: 0.95rem;
         color: var(--muted);
-        margin-bottom: 0.35rem;
+        margin-bottom: 0.4rem;
       }}
       .filters input, .filters select {{
         width: 100%;
         box-sizing: border-box;
         border: 1px solid var(--line);
-        border-radius: 12px;
-        padding: 0.7rem 0.8rem;
+        border-radius: 14px;
+        padding: 0.85rem 0.95rem;
         font: inherit;
-        background: white;
+        background: #fff;
         color: var(--ink);
+        box-shadow: inset 0 1px 0 rgb(18 26 35 / 0.03);
       }}
       .filter-actions {{
         display: flex;
-        gap: 0.75rem;
+        gap: 0.85rem;
         flex-wrap: wrap;
+        justify-content: flex-end;
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--line);
       }}
       .button-link, button {{
         display: inline-block;
         border: 0;
         border-radius: 999px;
-        padding: 0.8rem 1.2rem;
+        padding: 0.86rem 1.25rem;
         font: inherit;
         text-decoration: none;
         cursor: pointer;
+        transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease, color 160ms ease, border-color 160ms ease;
       }}
       button {{
         background: var(--accent);
         color: white;
+        box-shadow: 0 10px 24px rgb(15 76 92 / 0.22);
       }}
       .button-link {{
-        background: #efe4d4;
-        color: var(--ink);
+        background: transparent;
+        color: var(--accent);
+        border: 1px solid var(--accent);
+      }}
+      .button-link:hover, button:hover {{
+        transform: translateY(-1px);
+      }}
+      .button-link:hover {{
+        background: rgb(15 76 92 / 0.06);
+      }}
+      button:hover {{
+        background: var(--accent-strong);
       }}
       .active-filters {{
         margin-top: 1rem;
+      }}
+      .table-wrap {{
+        overflow-x: auto;
       }}
       table {{
         width: 100%;
@@ -179,16 +205,45 @@ def _page_template(
         vertical-align: top;
       }}
       th {{
-        background: #f6ebdf;
+        background: #eef2f0;
       }}
       tr:last-child td {{
         border-bottom: 0;
+      }}
+      .offer-cell {{
+        display: flex;
+        flex-direction: column;
+        gap: 0.45rem;
+      }}
+      .offer-link {{
+        color: var(--accent-strong);
+        font-weight: 700;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 0.18em;
+      }}
+      .offer-action {{
+        align-self: flex-start;
+        padding: 0.38rem 0.75rem;
+        border-radius: 999px;
+        border: 1px solid var(--accent);
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.92rem;
+        background: rgb(15 76 92 / 0.04);
+      }}
+      .offer-action:hover {{
+        background: rgb(15 76 92 / 0.09);
+      }}
+      .source-link {{
+        color: var(--muted);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.16em;
       }}
       .note {{
         margin-top: 1rem;
         padding: 1rem 1.25rem;
         border-left: 4px solid var(--accent);
-        background: #fff4ea;
+        background: #f8f6f1;
       }}
       code {{
         font-size: 0.95em;
@@ -203,6 +258,9 @@ def _page_template(
         td {{
           padding-top: 0.35rem;
           padding-bottom: 0.35rem;
+        }}
+        .offer-cell {{
+          gap: 0.35rem;
         }}
         td::before {{
           content: attr(data-label);
@@ -424,14 +482,14 @@ def _catalog_html_response(filters: CatalogFilters | None = None) -> str:
         rows = "\n".join(
             (
                 "<tr>"
-                f'<td data-label="Oportunidad"><a href="{escape(_detail_url(item["id"]))}">{escape(item["titulo"])}</a></td>'
+                f'<td data-label="Oferta"><div class="offer-cell"><a class="offer-link" href="{escape(_detail_url(item["id"]))}">{escape(item["titulo"])}</a><a class="offer-action" href="{escape(_detail_url(item["id"]))}">Ver oferta concreta</a></div></td>'
                 f'<td data-label="Organismo">{escape(item["organismo"])}</td>'
                 f'<td data-label="Ubicación">{escape(item["ubicacion"])}</td>'
                 f'<td data-label="Procedimiento">{escape(item["procedimiento"] or "No informado")}</td>'
                 f'<td data-label="Presupuesto">{escape(_format_budget(item["presupuesto"]))}</td>'
                 f'<td data-label="Fecha límite">{escape(item["fecha_limite"])}</td>'
                 f'<td data-label="Estado">{escape(item["estado"])}</td>'
-                f'<td data-label="Fuente oficial"><a href="{escape(item["url_fuente_oficial"])}">{escape(item["fuente_oficial"])}</a></td>'
+                f'<td data-label="Fuente oficial"><a class="source-link" href="{escape(item["url_fuente_oficial"])}" target="_blank" rel="noopener noreferrer">{escape(item["fuente_oficial"])}</a></td>'
                 "</tr>"
             )
             for item in opportunities
@@ -449,23 +507,25 @@ def _catalog_html_response(filters: CatalogFilters | None = None) -> str:
             No representa todavía cobertura total del ecosistema canario.
           </p>
         </div>
-        <table>
-          <thead>
-            <tr>
-              <th>Oportunidad</th>
-              <th>Organismo</th>
-              <th>Ubicación</th>
-              <th>Procedimiento</th>
-              <th>Presupuesto</th>
-              <th>Fecha límite</th>
-              <th>Estado</th>
-              <th>Fuente oficial</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows}
-          </tbody>
-        </table>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Oferta</th>
+                <th>Organismo</th>
+                <th>Ubicación</th>
+                <th>Procedimiento</th>
+                <th>Presupuesto</th>
+                <th>Fecha límite</th>
+                <th>Estado</th>
+                <th>Fuente oficial</th>
+              </tr>
+            </thead>
+            <tbody>
+              {rows}
+            </tbody>
+          </table>
+        </div>
       </section>
         """
     else:
@@ -535,17 +595,19 @@ def _detail_html_response(opportunity_id: str) -> str | None:
             <article class="metric"><strong>{escape(str(detail["fecha_limite"]))}</strong>Fecha limite visible</article>
             <article class="metric"><strong>{escape(_format_budget(detail["presupuesto"]))}</strong>Presupuesto visible</article>
           </div>
-          <table>
-            <tbody>
-              <tr><th>Organismo convocante</th><td>{escape(str(detail["organismo"]))}</td></tr>
-              <tr><th>Ubicacion</th><td>{escape(str(detail["ubicacion"]))}</td></tr>
-              <tr><th>Procedimiento</th><td>{escape(str(detail["procedimiento"] or "No informado"))}</td></tr>
-              <tr><th>Presupuesto</th><td>{escape(_format_budget(detail["presupuesto"]))}</td></tr>
-              <tr><th>Fecha limite</th><td>{escape(str(detail["fecha_limite"]))}</td></tr>
-              <tr><th>Estado oficial del expediente</th><td>{escape(str(detail["estado"]))}</td></tr>
-              <tr><th>Fuente oficial</th><td><a href="{escape(str(detail["url_fuente_oficial"]))}">{escape(str(detail["fuente_oficial"]))}</a></td></tr>
-            </tbody>
-          </table>
+          <div class="table-wrap">
+            <table>
+              <tbody>
+                <tr><th>Organismo convocante</th><td>{escape(str(detail["organismo"]))}</td></tr>
+                <tr><th>Ubicacion</th><td>{escape(str(detail["ubicacion"]))}</td></tr>
+                <tr><th>Procedimiento</th><td>{escape(str(detail["procedimiento"] or "No informado"))}</td></tr>
+                <tr><th>Presupuesto</th><td>{escape(_format_budget(detail["presupuesto"]))}</td></tr>
+                <tr><th>Fecha limite</th><td>{escape(str(detail["fecha_limite"]))}</td></tr>
+                <tr><th>Estado oficial del expediente</th><td>{escape(str(detail["estado"]))}</td></tr>
+                <tr><th>Fuente oficial</th><td><a class="source-link" href="{escape(str(detail["url_fuente_oficial"]))}" target="_blank" rel="noopener noreferrer">{escape(str(detail["fuente_oficial"]))}</a></td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </section>
 
@@ -721,6 +783,12 @@ def _resolve_port() -> int:
     return port
 
 
+def _resolve_host() -> str:
+    _load_env_file(Path(__file__).resolve().parents[2] / ".env")
+    raw_host = os.environ.get("HOST", "127.0.0.1").strip()
+    return raw_host or "127.0.0.1"
+
+
 def application(environ, start_response):
     path = environ.get("PATH_INFO", "/")
     filters = _parse_catalog_filters(environ)
@@ -791,7 +859,7 @@ def application(environ, start_response):
 
 
 def main() -> None:
-    host = "127.0.0.1"
+    host = _resolve_host()
     port = _resolve_port()
     with make_server(host, port, application) as httpd:
         print(f"Servidor disponible en http://{host}:{port}")

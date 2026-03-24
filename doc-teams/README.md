@@ -4,7 +4,7 @@
 Centralizar la documentacion oficial de `PodencoTI` separando con claridad el contenido para usuario final, equipo tecnico y administracion.
 
 ## Estado documental de referencia
-Fecha de revision: `2026-03-23`.
+Fecha de revision: `2026-03-24`.
 
 Esta carpeta documenta el estado real verificable de la rama `main`. En esta revision existe una entrega minima ejecutable de descubrimiento, pero su alcance sigue siendo acotado:
 
@@ -18,8 +18,9 @@ Esta carpeta documenta el estado real verificable de la rama `main`. En esta rev
 - Vista HTML de clasificacion TI auditable (`PB-006`) en `/clasificacion-ti`.
 - API JSON de reglas y ejemplos auditados de clasificacion TI en `/api/clasificacion-ti`.
 - `PB-009` sigue priorizado en backlog e issue #9, pero su reentrega todavia no forma parte de `main`.
+- Existe un despliegue local en contenedor con `Dockerfile` y `docker-compose.yml`, con persistencia de `data/` y configuracion de `PORT` via `.env`.
 
-No existen todavia alertas tempranas, pipeline de seguimiento, autenticacion ni componentes de despliegue productivo.
+No existen todavia alertas tempranas, pipeline de seguimiento, autenticacion ni un despliegue productivo endurecido.
 
 ## Audiencias cubiertas
 - Usuario final o stakeholder funcional: [manual-usuario.md](manual-usuario.md)
@@ -33,9 +34,10 @@ No existen todavia alertas tempranas, pipeline de seguimiento, autenticacion ni 
 
 ## Hallazgos principales de esta revision
 - `main` contiene implementacion Python versionada en `src/podencoti/`, datos en `data/` y pruebas automatizadas en `tests/`.
-- `PYTHONPATH=src python3 -m unittest discover -s tests -v` ejecuta 33 pruebas y finaliza correctamente.
+- `PYTHONPATH=src python3 -m unittest discover -s tests -v` ejecuta 35 pruebas y finaliza correctamente.
 - `make test` tambien funciona en un entorno con `.venv` disponible.
 - `make run` arranca un servidor WSGI local usando `PORT` desde `.env` y, por defecto, `8000` si no se define.
+- `docker compose up -d --build` levanta la misma aplicacion en contenedor, publica el puerto configurado en `PORT` y monta `data/` como volumen persistente.
 - Las rutas verificables hoy son `/`, `/api/oportunidades`, `/oportunidades/<id>`, `/api/oportunidades/<id>`, `/cobertura-fuentes`, `/api/fuentes`, `/clasificacion-ti` y `/api/clasificacion-ti`.
 - El catalogo visible publica 3 oportunidades TI a partir de 5 registros de origen dentro de la cobertura MVP actual.
 - El catalogo permite filtrar por `palabra_clave`, `presupuesto_min`, `presupuesto_max`, `procedimiento` y `ubicacion`.

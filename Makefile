@@ -1,9 +1,12 @@
-.PHONY: help run test
+.PHONY: help run test docker-build docker-up docker-down docker-logs docker-restart
 
 SHELL := /bin/bash
 PYTHON ?= python3
 PYTHONPATH := src
 VENV_ACTIVATE := .venv/bin/activate
+DOCKER ?= docker
+COMPOSE ?= docker compose
+IMAGE_NAME ?= podencoti:latest
 
 define ENSURE_VENV
 	if [[ -z "$$VIRTUAL_ENV" ]]; then \
@@ -21,6 +24,11 @@ help:
 		"Objetivos disponibles:" \
 		"  make run   - Ejecuta la aplicacion local usando PORT desde .env" \
 		"  make test  - Ejecuta la suite tecnica con unittest" \
+		"  make docker-build  - Construye la imagen Docker minima" \
+		"  make docker-up     - Levanta el despliegue con docker compose" \
+		"  make docker-down   - Detiene el despliegue con docker compose" \
+		"  make docker-logs   - Muestra los logs del contenedor" \
+		"  make docker-restart - Recrea el despliegue Docker" \
 		"Los objetivos activan .venv automaticamente si no hay un entorno virtual ya activo."
 
 run:
@@ -30,3 +38,18 @@ run:
 test:
 	@$(ENSURE_VENV); \
 	PYTHONPATH=$(PYTHONPATH) $(PYTHON) -m unittest discover -s tests -v
+
+docker-build:
+	@$(DOCKER) build -t $(IMAGE_NAME) .
+
+docker-up:
+	@$(COMPOSE) up -d --build
+
+docker-down:
+	@$(COMPOSE) down
+
+docker-logs:
+	@$(COMPOSE) logs -f
+
+docker-restart:
+	@$(COMPOSE) down && $(COMPOSE) up -d --build

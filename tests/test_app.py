@@ -30,6 +30,7 @@ class ApplicationTests(unittest.TestCase):
         self.assertEqual("text/html; charset=utf-8", headers["Content-Type"])
         self.assertIn("Catálogo inicial de oportunidades TI de Canarias", html)
         self.assertIn("Servicio cloud para copias de seguridad", html)
+        self.assertIn("Ver oferta concreta", html)
         self.assertIn("Fuente oficial", html)
         self.assertIn('/oportunidades/govcan-backup-cloud-2026', html)
 
@@ -164,6 +165,21 @@ class ApplicationTests(unittest.TestCase):
         self.assertIn("Servidor detenido de forma controlada.", output)
         make_server_mock.assert_called_once_with("127.0.0.1", 8123, application)
         server.server_close.assert_called_once_with()
+
+    def test_main_uses_configured_host_when_present(self) -> None:
+        stdout = io.StringIO()
+
+        with patch.dict(os.environ, {"HOST": "0.0.0.0", "PORT": "8124"}, clear=False):
+            with patch("podencoti.app.make_server") as make_server_mock:
+                server = make_server_mock.return_value.__enter__.return_value
+                server.serve_forever.side_effect = KeyboardInterrupt
+
+                with redirect_stdout(stdout):
+                    main()
+
+        output = stdout.getvalue()
+        self.assertIn("Servidor disponible en http://0.0.0.0:8124", output)
+        make_server_mock.assert_called_once_with("0.0.0.0", 8124, application)
 
     def test_main_rejects_invalid_port_configuration(self) -> None:
         with patch.dict(os.environ, {"PORT": "not-a-number"}, clear=False):

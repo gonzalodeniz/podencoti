@@ -26,7 +26,8 @@ Dejar una referencia unica y accionable sobre que capacidades estan disponibles 
 | Alertas tempranas | `PB-004`, `HU-04`, `CU-04` | No existe soporte visible en vistas, API, datos o pruebas | No disponible en `main` | Usuario, producto | Sigue como backlog de Release 2. |
 | Pipeline de seguimiento | `PB-005`, `HU-05`, `CU-05` | No existe soporte visible en vistas, API, datos o pruebas | No disponible en `main` | Usuario, producto | Sigue como backlog de Release 2. |
 | Instalacion local reproducible | `README.md`, `Makefile`, `pyproject.toml` | `pyproject.toml`, `Makefile`, paquete `src/podencoti/`, suite `tests/` | Disponible | Tecnico, administracion, QA | Requiere `python3 >= 3.12`; no hay dependencias externas adicionales versionadas. |
-| Despliegue productivo | Vision general y necesidad operativa futura | Solo existe `wsgiref.simple_server` en `src/podencoti/app.py` | No soportado documentalmente | Administracion, tecnico | El repositorio no incluye `Dockerfile`, `systemd`, proxy ni healthcheck. |
+| Despliegue local en contenedor | Necesidad operativa de validacion reproducible | `Dockerfile`, `docker-compose.yml`, `src/podencoti/app.py`, `Makefile`, `tests/test_app.py` | Disponible | Administracion, tecnico | Publica la app con `HOST=0.0.0.0`, monta `data/` y excluye artefactos operativos de la imagen. |
+| Despliegue productivo | Vision general y necesidad operativa futura | Solo existe `wsgiref.simple_server` y un contenedor local reproducible | No soportado documentalmente | Administracion, tecnico | El repositorio no incluye `systemd`, proxy ni healthcheck de produccion. |
 
 ## Contradicciones documentales abiertas
 - `pyproject.toml` solo menciona cobertura de fuentes en la descripcion del paquete, aunque el codigo actual tambien incluye catalogo inicial, filtros funcionales, ficha de detalle y clasificacion TI auditable.

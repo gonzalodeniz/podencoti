@@ -4,12 +4,13 @@
 Equipo tecnico, QA o soporte que necesita preparar el proyecto en local de forma reproducible.
 
 ## Objetivo real de esta guia
-Instalar la entrega minima actual de `PodencoTI`, dejar operativo el entorno local y verificar sus rutas visibles y su suite tecnica.
+Instalar la entrega minima actual de `PodencoTI`, dejar operativo el entorno local o contenedorizado y verificar sus rutas visibles y su suite tecnica.
 
 ## Prerequisitos
 - Sistema con `python3`.
 - Version compatible: `3.12` o superior.
 - Acceso local al repositorio en `/opt/apps/podencoti`.
+- Para la ruta en contenedor, disponer de `docker` y `docker compose`.
 
 ## Preparacion local
 1. Situate en la raiz del proyecto:
@@ -38,6 +39,7 @@ cp .env.example .env
 ```
 
 Edita `.env` y ajusta al menos `PORT` si quieres usar un puerto distinto del valor por defecto.
+Si vas a ejecutar el contenedor, `PORT` sigue siendo el puerto publicado y la aplicacion usa `HOST=0.0.0.0` dentro de Compose.
 
 ## Verificaciones posteriores
 1. Ejecuta la suite tecnica:
@@ -47,7 +49,7 @@ PYTHONPATH=src python3 -m unittest discover -s tests -v
 ```
 
 Resultado esperado en esta revision:
-- 33 pruebas en verde
+- 35 pruebas en verde
 
 2. Comprueba el objetivo de pruebas del `Makefile`:
 
@@ -67,7 +69,19 @@ make run
 Resultado esperado en esta revision:
 - mensaje `Servidor disponible en http://127.0.0.1:<PORT>` segun el valor definido en `.env`
 
-4. Verifica las rutas principales:
+4. Arranca la aplicacion en contenedor:
+
+```bash
+docker compose up -d --build
+docker compose logs -f
+```
+
+Resultado esperado en esta revision:
+- el contenedor publica la app en `http://127.0.0.1:<PORT>/`
+- `data/` queda montado como volumen persistente
+- la aplicacion escucha dentro del contenedor en `HOST=0.0.0.0`
+
+5. Verifica las rutas principales:
 
 ```bash
 curl -i http://127.0.0.1:<PORT>/
@@ -87,10 +101,11 @@ curl -i http://127.0.0.1:<PORT>/api/clasificacion-ti
 - Paquete `podencoti` en modo editable.
 - Aplicacion WSGI local para catalogo inicial, filtros funcionales, ficha de detalle, cobertura y clasificacion TI auditables.
 - Acceso a datos versionados en `data/` y a la suite automatizada en `tests/`.
+- Imagen Docker minima con la misma superficie funcional, apta para despliegue local en contenedor.
 
 ## Que no queda disponible
 - Alertas o pipeline.
-- Componentes de despliegue productivo.
+- Despliegue productivo endurecido.
 
 ## Limitaciones y dependencias abiertas
 - La instalacion deja operativa una entrega minima de descubrimiento, no el MVP completo descrito en backlog.

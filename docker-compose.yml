@@ -1,0 +1,14 @@
+services:
+  podencoti:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: podencoti:latest
+    environment:
+      HOST: 0.0.0.0
+      PORT: ${PORT:-8000}
+    ports:
+      - "${PORT:-8000}:${PORT:-8000}"
+    volumes:
+      - ./data:/app/data
+    restart: unless-stopped

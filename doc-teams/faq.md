@@ -4,7 +4,7 @@
 Personas usuarias internas, equipo tecnico y administracion que necesitan aclarar contradicciones entre vision, historial operativo y comportamiento real de `main`.
 
 ## La aplicacion esta disponible para arrancar en `main`?
-Si. `make run` levanta un servidor local usando `PORT` desde `.env` y, por defecto, `8000` si no se define.
+Si. `make run` levanta un servidor local usando `PORT` desde `.env` y, por defecto, `8000` si no se define. Tambien existe una ruta de contenedor local con `docker compose up -d --build`, que publica el mismo servicio y monta `data/` como volumen persistente.
 
 ## Entonces que entrega existe realmente hoy?
 Existe una entrega minima de descubrimiento con catalogo inicial de oportunidades TI, filtros funcionales sobre ese catalogo, ficha de detalle, cobertura inicial del MVP y clasificacion TI auditable.
@@ -45,10 +45,10 @@ Porque `pyproject.toml` sigue describiendo el paquete solo como cobertura inicia
 Si. La instalacion editable deja operativa la aplicacion local y permite ejecutar las pruebas.
 
 ## Hay pruebas automatizadas disponibles?
-Si. `PYTHONPATH=src python3 -m unittest discover -s tests -v` ejecuta 33 pruebas en esta revision.
+Si. `PYTHONPATH=src python3 -m unittest discover -s tests -v` ejecuta 35 pruebas en esta revision.
 
 ## Se puede desplegar en produccion con lo que hay ahora?
-No hay base documental suficiente para afirmarlo. Solo esta verificado el arranque local con `wsgiref`.
+No hay base documental suficiente para afirmarlo. Solo esta verificado el arranque local con `wsgiref` y el despliegue local en contenedor.
 
 ## Que debe tomarse hoy como fuente de verdad?
 - Para reglas del repositorio y coordinacion: `AGENTS.md`

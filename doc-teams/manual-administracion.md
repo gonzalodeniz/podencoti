@@ -12,6 +12,7 @@ En `main` existe un servicio HTTP local arrancable con `wsgiref.simple_server`. 
 - Entorno virtual activo o directorio `.venv/` disponible si se va a usar `make`.
 - `make` para usar los objetivos definidos en `Makefile`.
 - Un fichero `.env` con `PORT` definido. Si no existe, puede copiarse desde [`.env.example`](/opt/apps/podencoti/.env.example).
+- Para el despliegue en contenedor, disponer de `docker` y `docker compose`.
 
 ## Arranque local reproducible
 Desde la raiz del proyecto:
@@ -25,9 +26,24 @@ make test
 make run
 ```
 
+## Arranque en contenedor
+Desde la raiz del proyecto:
+
+```bash
+cd /opt/apps/podencoti
+docker compose up -d --build
+docker compose logs -f
+```
+
+Resultado esperado:
+- la aplicacion responde en `http://127.0.0.1:<PORT>/`
+- `data/` persiste fuera de la imagen porque se monta como volumen
+- dentro del contenedor la aplicacion escucha en `HOST=0.0.0.0`
+
 ## Resultado esperado en esta revision
-- `make test` ejecuta 33 pruebas y termina en verde.
+- `make test` ejecuta 35 pruebas y termina en verde.
 - `make run` publica el mensaje `Servidor disponible en http://127.0.0.1:<PORT>` segun el valor configurado en `.env`.
+- `docker compose up -d --build` publica la misma aplicacion con el puerto definido por `PORT`.
 - Mientras el proceso esta levantado, las rutas `/`, `/api/oportunidades`, `/oportunidades/pcsp-cabildo-licencias-2026`, `/api/oportunidades/pcsp-cabildo-licencias-2026`, `/cobertura-fuentes`, `/api/fuentes`, `/clasificacion-ti` y `/api/clasificacion-ti` responden `200 OK`.
 
 ## Verificaciones operativas minimas
@@ -51,11 +67,10 @@ make run
 ## Operacion no disponible
 No existe en `main`:
 - servicio gestionado con `systemd`
-- contenedor o `Dockerfile`
 - proxy inverso documentado
 - observabilidad o healthcheck dedicado
 - procedimiento de backup o rollback
-- despliegue productivo validado
+- despliegue productivo endurecido
 - superficies operativas de priorizacion de fuentes reales (`/priorizacion-fuentes-reales` y `/api/fuentes-prioritarias`)
 
 ## Riesgos operativos

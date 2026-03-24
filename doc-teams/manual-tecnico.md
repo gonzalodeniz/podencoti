@@ -11,6 +11,7 @@ Equipo tecnico que necesita conocer la implementacion actual de `main`, sus ruta
 - `PB-002`: ficha resumida de detalle por oportunidad visible.
 - `PB-007`: cobertura inicial visible y verificable de fuentes.
 - `PB-006`: regla de clasificacion TI auditable con ejemplos trazables.
+- Despliegue local en contenedor con `Dockerfile` y `docker-compose.yml`.
 
 La descripcion de paquete en `pyproject.toml` sigue mencionando solo cobertura de fuentes. Esa metadata ya no resume por completo el comportamiento observable de la rama.
 
@@ -23,6 +24,7 @@ La descripcion de paquete en `pyproject.toml` sigue mencionando solo cobertura d
 - Carga y evaluacion de reglas TI: `src/podencoti/ti_classification.py`
 - Datos versionados: `data/opportunities.json`, `data/source_coverage.json`, `data/ti_classification_rules.json`
 - Suite tecnica: `tests/test_app.py`, `tests/test_opportunity_catalog.py`, `tests/test_source_coverage.py`, `tests/test_ti_classification.py`
+- Contenedorizacion local: `Dockerfile`, `docker-compose.yml`, `.dockerignore`
 
 ## Superficie HTTP vigente
 - `/`: vista HTML del catalogo inicial de oportunidades TI con formulario de filtros funcionales.
@@ -56,11 +58,13 @@ Desde la raiz del proyecto:
 ```bash
 PYTHONPATH=src python3 -m unittest discover -s tests -v
 PYTHONPATH=src python3 -m podencoti.app
+docker compose up -d --build
 ```
 
 Resultado verificado en esta revision:
-- 33 pruebas automatizadas en verde.
+- 35 pruebas automatizadas en verde.
 - Servidor local disponible en `http://127.0.0.1:<PORT>`, usando `PORT` desde `.env` y, por defecto, `8000` si no se define.
+- Contenedor accesible en `http://127.0.0.1:<PORT>` cuando `docker-compose.yml` publica la aplicacion con `HOST=0.0.0.0`.
 
 ## Contradicciones explicitadas
 - `pyproject.toml` sigue describiendo el paquete como una release centrada solo en cobertura de fuentes, aunque la rama ya expone catalogo, filtros, detalle y clasificacion TI auditable.
@@ -69,7 +73,7 @@ Resultado verificado en esta revision:
 ## Limitaciones tecnicas actuales
 - No existe persistencia de usuario ni ingestion automatizada real de licitaciones; el catalogo se alimenta desde `data/opportunities.json`.
 - No hay autenticacion, base de datos, tareas programadas ni integracion externa.
-- No hay contrato de despliegue productivo versionado, mas alla del arranque local con `wsgiref`.
+- No hay contrato de despliegue productivo versionado, mas alla del arranque local con `wsgiref` y la publicacion local en contenedor.
 - La priorizacion de fuentes reales de `PB-009` no esta expuesta en la app verificada: `/priorizacion-fuentes-reales` y `/api/fuentes-prioritarias` responden `404 Not Found`.
 - Si una entrada de `changelog/` afirma que `PB-009` ya esta validada, esa afirmacion no debe tomarse como evidencia tecnica hasta que la ruta sea reproducible en `main`.
 
