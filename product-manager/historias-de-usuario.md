@@ -172,3 +172,22 @@
 - Prioridad: P0
 - Estado: `cerrado`
 - Nota de estado: `qa-teams` valido la entrega integrada en `main` en la issue #9 el 2026-03-24. `developer-teams` dejo constancia de fusion y borrado de la rama tecnica ese mismo dia y `product-manager` cerro administrativamente la issue el 2026-03-25.
+
+## HU-10 Navegar por la aplicacion con una estructura comun adaptable
+- Backlog relacionado: PB-010
+- Caso de uso relacionado: CU-10
+- Issue relacionado: pendiente de crear
+- Historia:
+  Como usuario de PodencoTI,
+  quiero disponer de una navegacion principal clara con menu lateral de iconos y comportamiento responsive,
+  para moverme entre las opciones principales de la aplicacion sin perder contexto al cambiar el ancho de la ventana.
+- Criterios de aceptacion:
+  1. En anchos amplios la aplicacion muestra un menu lateral izquierdo persistente con iconos en vertical para las opciones principales.
+  2. La opcion activa queda destacada de forma visible.
+  3. El contenido principal se adapta al ancho disponible sin solaparse con la navegacion ni exigir scroll horizontal estructural.
+  4. En anchos reducidos el usuario sigue accediendo a las opciones principales mediante una variante responsive coherente.
+  5. Las opciones aun no disponibles no se presentan como funcionalidades operativas sin senalizar; si aparecen, quedan marcadas como `proximamente`.
+  6. El rediseño no degrada la navegacion hacia catalogo, detalle, filtros ni alertas ya disponibles.
+- Dependencias funcionales: PB-001, PB-002, PB-003
+- Prioridad: P1
+- Estado: `nuevo`

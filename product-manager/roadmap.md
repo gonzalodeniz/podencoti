@@ -9,7 +9,7 @@
 - Fecha de corte documental: 2026-03-25.
 - Estado confirmado: `PB-007` y `PB-006` ya fueron validados por `qa-teams` y sus entregas estan integradas en `main`.
 - Estado actual de trabajo tecnico: `PB-009` ya esta validado, integrado en `main` y cerrado administrativamente en la issue #9.
-- Siguiente recomendacion para `developer-teams`: tomar la issue #6, asociada a `PB-004`, como siguiente iteracion funcional prioritaria.
+- Siguiente recomendacion para `developer-teams`: preparar una nueva issue para `PB-010`, asociada a la base de navegacion principal responsive; `PB-004` queda a continuacion como siguiente modulo de negocio.
 - Las decisiones funcionales sobre expedientes mixtos y sobre oportunidades anuladas, desiertas, desistidas o modificadas quedan ya definidas para evitar bloqueo de backlog posterior.
 - En esta revision tambien quedan cerradas cuatro aclaraciones de release para reducir ambiguedad de implementacion:
   - una alerta del MVP requiere al menos un criterio funcional informado
@@ -17,7 +17,7 @@
   - `PB-008` puede refinarse documentalmente antes de disponer de instrumentacion completa
   - la recopilacion desde fuentes reales oficiales nominadas se prioriza antes que alertas y pipeline
 - `PB-009` debe ejecutarse por olas y con trazabilidad minima visible al origen oficial
-- La validacion y la integracion de `PB-009` confirman la prioridad funcional definida y liberan la siguiente iteracion de retencion
+- La validacion y la integracion de `PB-009` confirman la prioridad funcional definida y permiten abrir una nueva iteracion de base de interfaz antes de continuar con retencion
 
 ## Release 0: Delimitacion funcional del MVP
 - Objetivo: Cerrar ambiguedades criticas antes de la implementacion del catalogo.
@@ -68,7 +68,19 @@
   - `developer-teams` dejo trazabilidad explicita de integracion y borrado de rama en la issue #9 el 2026-03-24.
   - `product-manager` cerro administrativamente la issue #9 el 2026-03-25 tras reconciliar backlog, historia, caso de uso y roadmap.
 
-## Release 3: Alertas y seguimiento operativo
+## Release 3: Base de navegacion y adaptabilidad
+- Objetivo: Establecer una estructura comun de interfaz para sostener el crecimiento de modulos con una navegacion principal clara y responsive.
+- Alcance:
+  - PB-010 Navegacion principal responsive con menu lateral de iconos.
+- Criterios de salida:
+  - La aplicacion muestra una navegacion principal comun y persistente en el lateral izquierdo cuando el ancho disponible lo permite.
+  - La opcion activa queda visible y el contenido principal no se solapa con la navegacion.
+  - En anchos reducidos la aplicacion conserva acceso util a las opciones principales mediante una variante responsive.
+  - Las opciones no disponibles no se presentan como modulos operativos sin senalizacion explicita.
+- Riesgo principal:
+  - Que el producto siga creciendo por modulos sin una base de interfaz comun y se vuelva mas dificil de usar y de evolucionar.
+
+## Release 4: Alertas y seguimiento operativo
 - Objetivo: Convertir el descubrimiento en uso recurrente y gestion operativa.
 - Alcance:
   - PB-004 Configuracion de alertas tempranas.
@@ -85,7 +97,7 @@
   - El pipeline del MVP es individual por usuario; la colaboracion por empresa queda para una release posterior.
   - El alta inicial de una oportunidad en pipeline debe crear el estado `Nueva`.
 
-## Release 4: Medicion y aprendizaje
+## Release 5: Medicion y aprendizaje
 - Objetivo: Mejorar precision, cobertura y priorizacion apoyandose en indicadores.
 - Alcance:
   - PB-008 Medicion basica de valor del producto.
@@ -98,9 +110,10 @@
 - Confirmar con negocio cuando la cobertura de ayuntamientos pasa de `Posterior` a promesa comercial del producto.
 - Definir en una iteracion posterior si las oportunidades modificadas deben generar historial visible de cambios, no solo el ultimo dato oficial.
 - Decidir en una iteracion posterior si los KPIs de alertas deben exigirse ya con dato real o pueden arrancar con definicion documental y recogida manual temporal.
+- Confirmar que modulos deben formar parte de la navegacion principal visible desde la primera entrega de `PB-010` y cuales deben quedar ocultos o marcados como `proximamente`.
 
 ## Decision operativa para la siguiente iteracion
 - El siguiente paso operativo de producto es mantener sincronizados backlog, historias, roadmap e issues abiertos con la nueva prioridad funcional.
-- La siguiente issue recomendada para iniciar es la #6, asociada a `PB-004`.
+- La siguiente issue recomendada para iniciar es una nueva issue de `PB-010`, apoyada en el borrador funcional ya preparado en `product-manager/issues-github.md`.
 - `PB-009` ya reutiliza la cobertura validada de `PB-007`, la regla auditable validada de `PB-006` y la superficie ya validada de catalogo, detalle y filtros.
-- No se recomienda iniciar `PB-005` antes de `PB-004`, salvo bloqueo funcional explicito documentado.
+- No se recomienda iniciar `PB-005` antes de `PB-004`, y ambas deberian apoyarse sobre la base de navegacion definida en `PB-010`.

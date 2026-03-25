@@ -226,3 +226,30 @@
   - RB-29 La primera iteracion de recopilacion priorizada debe ordenar las fuentes por olas para evitar una implementacion simultanea difusa.
   - RB-30 Toda oportunidad recopilada desde una fuente real priorizada debe conservar trazabilidad minima al origen oficial.
   - RB-31 `PB-009` no amplía por si mismo el alcance comercial prometido ni habilita alertas o pipeline.
+
+## CU-10 Navegar por los modulos principales con una estructura responsive
+- Backlog relacionado: PB-010
+- Historias relacionadas: HU-10
+- Actor principal: Usuario registrado de PodencoTI.
+- Objetivo: Moverse entre las opciones principales de la aplicacion desde una navegacion clara, estable y adaptable al ancho disponible.
+- Disparador: El usuario accede a cualquier pantalla principal de la aplicacion.
+- Precondiciones:
+  - Existe al menos un modulo principal disponible para el usuario.
+  - La aplicacion expone una estructura comun de navegacion entre sus vistas principales.
+- Flujo principal:
+  1. El usuario abre la aplicacion.
+  2. El sistema muestra una navegacion principal persistente con iconos dispuestos verticalmente en el lateral izquierdo cuando el ancho disponible lo permite.
+  3. El usuario identifica la opcion activa y selecciona otra opcion principal.
+  4. El sistema actualiza el contenido principal manteniendo visible el contexto de navegacion.
+  5. El usuario sigue trabajando sin perder acceso a las opciones principales de la aplicacion.
+- Flujos alternativos:
+  - A1. Si el ancho disponible no permite mantener el menu lateral completo, el sistema conserva el acceso a las opciones principales mediante una variante responsive sin solapamientos ni perdida de navegacion.
+  - A2. Si una opcion principal prevista aun no esta disponible funcionalmente, el sistema no la presenta como accion lista para uso o la marca de forma explicita como `proximamente`.
+  - A3. Si el usuario vuelve a una vista ya visitada, el sistema mantiene resaltada la seccion activa correspondiente.
+- Postcondiciones:
+  - El usuario puede recorrer los modulos principales desde una estructura comun y entendible.
+- Reglas de negocio relacionadas:
+  - RB-32 La aplicacion debe ofrecer una navegacion principal consistente entre modulos con una opcion activa visible.
+  - RB-33 En anchos amplios, la navegacion principal debe mostrarse en el lateral izquierdo con disposicion vertical por iconos.
+  - RB-34 La adaptacion responsive no debe provocar perdida de acceso a opciones principales ni solapamiento del contenido.
+  - RB-35 Ninguna opcion no disponible debe inducir al usuario a pensar que ya esta operativa si aun no lo esta.
