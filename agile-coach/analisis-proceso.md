@@ -209,5 +209,16 @@ Este analisis revisa la coordinacion definida entre `product-manager`, `develope
 - `product-manager` y `doc-teams` leen fuentes distintas sobre el mismo estado operativo.
 - Se dificulta decidir si el siguiente bloqueo es de cierre administrativo o de sincronizacion documental.
 
+## Problema 21: una issue puede quedar `validado` sin evidencia visible de merge y borrado de rama
+### Evidencia
+- La issue `#6` esta en `Estado operativo: validado`, pero sigue abierta en GitHub y no existe un comentario operativo de cierre de integracion que deje visible si la fusion en `main` y el borrado de la rama ya se completaron.
+- El listado de ramas remotas sigue mostrando `origin/developer-teams/issue-6-pb-004-alertas-tempranas`, lo que impide saber de un vistazo si el cierre tecnico ya se ejecuto o solo quedo pendiente de limpieza.
+- El backlog y la issue no exponen por separado la validacion funcional y la evidencia de integracion final.
+
+### Impacto observado
+- `product-manager` puede cerrar o dejar abierta una issue sin una señal clara de que la entrega ya no depende de la rama tecnica.
+- `developer-teams` y `agile-coach` no pueden distinguir con rapidez entre "validado pero pendiente de merge" y "validado e integrado pero pendiente de cierre administrativo".
+- La revision del flujo post-QA se vuelve manual y propensa a olvidar la limpieza de rama.
+
 ## Conclusion
 El flujo base es correcto y la separacion de responsabilidades esta bien planteada. El principal problema ya no esta en definir mas roles o estados, sino en asegurar que las plantillas realmente incorporan las reglas globales que deben cumplir y que el ultimo tramo del flujo deja un cierre visible sin contradicciones. La mejora prioritaria ahora consiste en hacer copiable el prefijo `Rol:` en todos los comentarios estructurados, en fijar de forma explicita que el cierre administrativo actualiza tambien el cuerpo de la issue a `Estado operativo: cerrado` y en sincronizar el estado del backlog con la issue activa para no mezclar planificacion con ejecucion, reduciendo incumplimientos por memoria, facilitando auditoria ligera y evitando estados historicos desalineados.

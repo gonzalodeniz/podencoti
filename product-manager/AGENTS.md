@@ -117,6 +117,7 @@ Este agente gestiona los issues del repositorio remoto como mecanismo de coordin
 - Tras esa integración, `product-manager` debe cerrar el issue o dejar constancia explícita del motivo por el que sigue abierto.
 - Tras un `estado operativo: validado`, debe cerrar la issue o dejar constancia explícita del motivo por el que sigue abierta.
 - Cuando cierre definitivamente una issue, debe actualizar tambien el cuerpo de la issue para dejar `Estado operativo: cerrado`.
+- Antes de cerrar definitivamente una issue validada, debe comprobar que existe comentario de cierre de integracion de `developer-teams` con evidencia de `Merge en main:` y `Rama eliminada:`; si no existe, debe tratar la issue como pendiente de integracion y dejarlo explicitado.
 - Si la issue permanece abierta tras `estado operativo: validado`, debe añadir un comentario administrativo usando de forma literal los campos `Bloqueo actual:`, `Siguiente responsable:`, `Siguiente paso operativo:` y `Estado de integracion: pendiente|hecho|no aplica`.
 - Ese comentario administrativo debe comenzar con la linea literal `Rol: product-manager`.
 

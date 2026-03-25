@@ -77,3 +77,8 @@ Registrar los riesgos de coordinacion que siguen activos tras los ajustes de pro
 - Senal observable: una entrega ya integrada en `main` convive con documentos de producto que siguen describiendo el estado previo.
 - Impacto: `product-manager` puede planificar la siguiente iteracion sobre una fotografia desfasada y `doc-teams` puede mantener una version distinta del producto.
 - Mitigacion acordada: reconciliar backlog, refinamiento y roadmap afectados antes de abrir la siguiente issue funcional y, si la issue sigue abierta, dejar visible si la documentacion ya quedo sincronizada.
+
+## Riesgo 16: una issue validada queda abierta sin evidencia de cierre de integracion
+- Senal observable: la issue sigue abierta en `validado` sin comentario de cierre de integracion de `developer-teams` o sin comentario administrativo de `product-manager` que explique la integracion pendiente.
+- Impacto: el equipo no distingue de un vistazo entre validacion funcional completada y cierre tecnico-administrativo aun pendiente.
+- Mitigacion acordada: exigir comentario de cierre con `Merge en main:` y `Rama eliminada:` antes del cierre administrativo definitivo.

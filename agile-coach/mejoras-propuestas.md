@@ -432,3 +432,23 @@ Tras cada merge de una entrega validada, `product-manager` debe reconciliar el b
 ### Riesgos y dependencias
 - Si `product-manager` no actualiza los artefactos en el mismo ciclo, reaparece el desfase.
 - Requiere que la regla quede reflejada tambien en `AGENTS.md` de `product-manager` y en los acuerdos operativos.
+
+## Mejora 21: hacer visible el cierre tecnico de una issue validada
+### Problema detectado
+Una issue puede permanecer `validado` y abierta sin dejar una huella operativa clara de que la rama tecnica ya fue fusionada y borrada.
+
+### Propuesta
+- Exigir que, una vez completado el merge y el borrado de la rama, `developer-teams` deje un comentario adicional de cierre de integracion con `Rama:`, `Merge en main:` y `Rama eliminada:`.
+- Exigir que `product-manager` no cierre definitivamente la issue hasta ver ese comentario o dejar constancia explicita de que la integracion sigue pendiente.
+
+### Impacto esperado
+- El backlog distingue mejor entre validacion funcional y cierre tecnico-administrativo.
+- Se reduce la posibilidad de que una issue aceptada siga pareciendo trabajo en curso por falta de limpieza visible.
+- `product-manager` puede cerrar con una evidencia breve y comparable, en vez de inferirla a partir de varias fuentes.
+
+### Tradeoffs
+- Añade un comentario operativo corto mas al final del flujo.
+
+### Riesgos y dependencias
+- Si el comentario se rellena de forma mecanica y sin evidencia real, el valor de la regla baja.
+- Requiere disciplina de `developer-teams` para ejecutar el borrado de rama inmediatamente despues del merge.

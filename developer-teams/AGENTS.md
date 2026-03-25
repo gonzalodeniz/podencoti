@@ -41,6 +41,7 @@ Este agente actua como equipo de desarrollo del repositorio. Su responsabilidad 
 - Solo tras la validacion explicita de `qa-teams`, `developer-teams` debe decidir y ejecutar la fusion de su rama tecnica a `main`.
 - Tras `Estado operativo: validado`, debe priorizar esa fusion y el borrado de la rama por encima del inicio de una nueva issue, salvo bloqueo operativo documentado en la propia issue.
 - Tras completar el merge a `main`, debe borrar de inmediato la rama tecnica correspondiente para no mantener ramas abiertas sin necesidad operativa.
+- Tras fusionar y borrar la rama tecnica, debe dejar en la issue un comentario de cierre de integracion con `Rol: developer-teams`, `Rama:`, `Merge en main:` y `Rama eliminada:` para que `product-manager` pueda cerrar sin ambiguedad.
 - Si cambia de rama durante su trabajo, el ultimo paso operativo al finalizar debe ser volver a la rama `main`.
 
 ## Implementacion y entrega

@@ -150,6 +150,11 @@ Si el alcance cambia de forma material, `product-manager` debe decidir si corres
 - Si la integracion no puede hacerse de inmediato, `product-manager` debe dejar visible el motivo en su comentario administrativo usando `Bloqueo actual:` y `Estado de integracion: pendiente`.
 - Hasta que la fusion no exista, la funcionalidad aceptada por QA no debe tratarse como comportamiento vigente en la documentacion oficial mantenida sobre `main`.
 
+## Cierre operativo de integracion
+- Una vez fusionada la rama tecnica en `main` y borrada de forma efectiva, `developer-teams` debe dejar en la issue un comentario de cierre de integracion que comience con `Rol: developer-teams` e incluya de forma literal `Rama:`, `Merge en main:` y `Rama eliminada:`.
+- Ese comentario no sustituye al handoff de QA ni al comentario administrativo de `product-manager`; solo documenta que la entrega ya no depende de la rama tecnica y permite cerrar con menos ambiguedad.
+- Si `product-manager` detecta una issue `validado` sin ese comentario o sin evidencia visible de merge y borrado, debe tratarla como pendiente de integracion y reflejarlo en su comentario administrativo.
+
 ## Regla de sincronizacion entre ramas y `main`
 - `changelog/` se actualiza solo en `main` y no forma parte de la entrega tecnica del issue.
 - Si `developer-teams` o `qa-teams` registran actividad en `changelog/` mientras mantienen una rama abierta, deben sincronizar despues esa rama con `main` antes del siguiente handoff o nueva validacion.

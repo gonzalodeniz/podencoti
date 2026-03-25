@@ -53,6 +53,10 @@ Medir si el proceso entre equipos mejora en velocidad, claridad y estabilidad si
 - Definicion: numero de documentos de proceso consultados en una iteracion que reproducen una regla compartida sin enlazar o remitir a `agile-coach/acuerdos-operativos.md` o `changelog/README.md` como fuente primaria.
 - Senal que aporta: detecta riesgo de deriva documental y mide si la referencia canónica de las reglas comunes se esta adoptando de forma consistente.
 
+## 12. Issues validadas sin evidencia de cierre de integracion
+- Definicion: numero o porcentaje de issues con `Estado operativo: validado` que no tienen comentario de cierre de integracion de `developer-teams` con `Merge en main:` y `Rama eliminada:`, o que siguen abiertas sin comentario administrativo de `product-manager`.
+- Senal que aporta: detecta el limbo post-QA en el que la entrega ya paso validacion funcional pero todavia no queda claro si la rama tecnica fue fusionada y limpia.
+
 ## Regla de uso
 - Revisar estas metricas al cierre de cada iteracion relevante o cuando se acumulen varias issues cerradas.
 - Si una metrica empeora de forma sostenida, revisar primero el handoff asociado antes de cambiar responsabilidades entre equipos.
