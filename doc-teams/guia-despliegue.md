@@ -25,6 +25,7 @@ Si no existe `.env`, copia antes `.env.example` a `.env` y define `PORT`. En con
 - `make test` ejecuta 41 pruebas en verde.
 - `make run` arranca el servidor local usando `PORT` desde `.env` y queda a la escucha hasta que se interrumpe el proceso.
 - `docker compose up -d --build` publica la misma aplicacion en un contenedor y monta `data/` como volumen persistente.
+- En la superficie desplegada responden tambien `/alertas` y `/api/alertas`, que almacenan alertas internas sin notificaciones salientes.
 
 ## Conclusion operativa
 Solo debe considerarse soportado el arranque local de validacion y el despliegue local en contenedor con Compose. No hay base documental suficiente para prometer despliegue en servidor, orquestador o plataforma gestionada.
@@ -44,6 +45,7 @@ Solo debe considerarse soportado el arranque local de validacion y el despliegue
 - Revisar de nuevo esta guia cuando el alcance supere la demo local actual.
 - Si se quiere pasar de contenedor local a produccion, endurecer la imagen, definir usuario/volumenes finales y documentar supervision, observabilidad y rollback.
 - La priorizacion de fuentes reales ya puede desplegarse junto con el resto de la entrega minima, pero sigue siendo una funcionalidad de recopilacion, no una capa operativa completa.
+- Las alertas visibles son internas y no sustituyen una capa de notificacion o automatizacion de seguimiento.
 
 ## Riesgos
 - Documentar hoy un despliegue real seria inventar decisiones tecnicas no presentes en el repositorio.

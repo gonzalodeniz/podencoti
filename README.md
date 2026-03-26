@@ -95,13 +95,14 @@ Tambien pueden recibir opciones adicionales de `codex exec`, por ejemplo:
 
 ## Entrega tecnica actual
 
-La rama `main` ya integra siete piezas funcionales y operativas verificables del MVP inicial:
+La rama `main` ya integra ocho piezas funcionales y operativas verificables del MVP inicial:
 
 - `PB-007`: cobertura inicial visible y verificable de fuentes del MVP.
 - `PB-006`: regla de clasificacion TI auditable con ejemplos verificables.
 - `PB-001`: catalogo inicial de oportunidades TI consultable desde una app WSGI minima en Python.
 - `PB-002`: ficha de detalle navegable desde el catalogo, con tratamiento explicito de campos no informados y aplicacion del ultimo dato oficial visible cuando el expediente publica una rectificacion o modificacion.
 - `PB-003`: filtros funcionales sobre el catalogo y su API por palabra clave, rango de presupuesto, procedimiento y ubicacion, incluyendo validacion explicita de rangos invalidos.
+- `PB-004`: gestion de alertas tempranas con alta, edicion y desactivacion, reutilizando los filtros del catalogo y registrando coincidencias internas accionables.
 - `PB-009`: priorizacion visible de fuentes reales oficiales por olas (`BOC`, `BOP Las Palmas`, `BOE`) y refuerzo de la trazabilidad minima al origen oficial en cada oportunidad publicada.
 - Despliegue local en contenedor Docker con `Dockerfile`, `docker-compose.yml` y persistencia de `data/`.
 
@@ -122,6 +123,8 @@ Luego se puede abrir:
 - `http://127.0.0.1:<PORT>/api/oportunidades` para la salida JSON del catalogo filtrado por cobertura MVP y clasificacion TI
 - `http://127.0.0.1:<PORT>/oportunidades/<id>` para la ficha HTML de detalle de una oportunidad visible
 - `http://127.0.0.1:<PORT>/api/oportunidades/<id>` para la salida JSON trazable de la ficha de detalle
+- `http://127.0.0.1:<PORT>/alertas` para la gestion HTML de alertas tempranas del MVP
+- `http://127.0.0.1:<PORT>/api/alertas` para la salida JSON de alertas persistidas y sus coincidencias internas
 - `http://127.0.0.1:<PORT>/cobertura-fuentes` para la vista HTML de cobertura MVP
 - `http://127.0.0.1:<PORT>/api/fuentes` para la salida JSON trazable a la configuracion
 - `http://127.0.0.1:<PORT>/priorizacion-fuentes-reales` para la vista HTML de priorizacion de fuentes reales oficiales por olas
@@ -163,7 +166,6 @@ make docker-restart
 
 Aunque formen parte de la vision y del backlog, todavia no existen en esta rama:
 
-- alertas tempranas
 - pipeline de seguimiento
 
 ### Como ejecutar las pruebas tecnicas

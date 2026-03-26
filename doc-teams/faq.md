@@ -7,13 +7,15 @@ Personas usuarias internas, equipo tecnico y administracion que necesitan aclara
 Si. `make run` levanta un servidor local usando `PORT` desde `.env` y, por defecto, `8000` si no se define. Tambien existe una ruta de contenedor local con `docker compose up -d --build`, que publica el mismo servicio y monta `data/` como volumen persistente.
 
 ## Entonces que entrega existe realmente hoy?
-Existe una entrega minima de descubrimiento con catalogo inicial de oportunidades TI, filtros funcionales sobre ese catalogo, ficha de detalle, cobertura inicial del MVP, priorizacion de fuentes reales oficiales por olas y clasificacion TI auditable.
+Existe una entrega minima de descubrimiento con catalogo inicial de oportunidades TI, filtros funcionales sobre ese catalogo, ficha de detalle, gestion interna de alertas, cobertura inicial del MVP, priorizacion de fuentes reales oficiales por olas y clasificacion TI auditable.
 
 ## Que rutas estan verificadas?
 - `/`
 - `/api/oportunidades`
 - `/oportunidades/<id>`
 - `/api/oportunidades/<id>`
+- `/alertas`
+- `/api/alertas`
 - `/cobertura-fuentes`
 - `/api/fuentes`
 - `/priorizacion-fuentes-reales`
@@ -22,7 +24,7 @@ Existe una entrega minima de descubrimiento con catalogo inicial de oportunidade
 - `/api/clasificacion-ti`
 
 ## El producto ya tiene catalogo de oportunidades, filtros, alertas o pipeline?
-En `main` ya existen catalogo inicial, filtros funcionales, ficha de detalle y priorizacion de fuentes reales oficiales por olas. No existen todavia alertas ni pipeline en la superficie tecnica revisada, aunque `changelog/2026-03-25.md` los describe como entregados; esa discrepancia sigue abierta y no debe documentarse como comportamiento vigente hasta que el codigo y las pruebas la reflejen.
+En `main` ya existen catalogo inicial, filtros funcionales, ficha de detalle, alertas internas y priorizacion de fuentes reales oficiales por olas. No existe todavia pipeline en la superficie tecnica revisada.
 
 ## Que filtros existen hoy?
 Se pueden aplicar `palabra_clave`, `presupuesto_min`, `presupuesto_max`, `procedimiento` y `ubicacion` tanto en `/` como en `/api/oportunidades`.
@@ -31,10 +33,10 @@ Se pueden aplicar `palabra_clave`, `presupuesto_min`, `presupuesto_max`, `proced
 Si `presupuesto_min` es mayor que `presupuesto_max`, la vista HTML mantiene el catalogo y muestra un mensaje de correccion. La API responde `400 Bad Request` con el campo `error_validacion`.
 
 ## Sigue habiendo contradicciones documentales relevantes?
-Si. La principal contradiccion vigente es triple: `pyproject.toml` sigue describiendo el paquete como si solo cubriera cobertura de fuentes, algunos documentos de `product-manager/` todavia conservan el estado anterior a la fusion de `PB-009`, y `changelog/2026-03-25.md` atribuye `PB-004` a `main` sin que la superficie revisada muestre alertas o pipeline.
+Si. La principal contradiccion vigente es doble: `pyproject.toml` sigue describiendo el paquete como si solo cubriera cobertura de fuentes, y algunos documentos de `product-manager/` todavia conservan el estado anterior a la fusion de `PB-009` o al estado ya visible de `PB-004`.
 
 ## Por que el changelog de 2026-03-25 no coincide con esta documentacion?
-Porque esta FAQ toma como referencia el codigo, las rutas y las pruebas ejecutables en `main`. En esta revision no se observan alertas ni pipeline en `src/` o `tests/`, asi que la entrada del changelog se trata como una contradiccion operativa pendiente de conciliacion.
+Porque esta FAQ toma como referencia el codigo, las rutas y las pruebas ejecutables en `main`. En esta revision, las alertas si se observan en `src/` y `tests/`, asi que la contradiccion residual queda en algunos textos funcionales de producto que todavia no las reflejan.
 
 ## Existe ya la priorizacion de fuentes reales de `PB-009` en `main`?
 Si. En la app verificada, `/priorizacion-fuentes-reales` y `/api/fuentes-prioritarias` responden `200 OK` y muestran `BOC`, `BOP Las Palmas` y `BOE` agrupadas por olas.
@@ -61,6 +63,6 @@ No hay base documental suficiente para afirmarlo. Solo esta verificado el arranq
 - Para el estado tecnico realmente observable en `main`: los manuales actuales de `doc-teams/` y el codigo versionado
 
 ## Que dependencias siguen abiertas?
-- Implementar `PB-004` y `PB-005`.
+- Implementar `PB-005`.
 - Definir una estrategia de despliegue real cuando el alcance tecnico lo requiera.
 - Actualizar la metadata del paquete si se quiere alinearla con la superficie visible actual.

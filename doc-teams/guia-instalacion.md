@@ -91,6 +91,8 @@ curl -i "http://127.0.0.1:<PORT>/api/oportunidades?procedimiento=Abierto"
 curl -i "http://127.0.0.1:<PORT>/api/oportunidades?presupuesto_min=120000&presupuesto_max=90000"
 curl -i http://127.0.0.1:<PORT>/oportunidades/pcsp-cabildo-licencias-2026
 curl -i http://127.0.0.1:<PORT>/api/oportunidades/pcsp-cabildo-licencias-2026
+curl -i http://127.0.0.1:<PORT>/alertas
+curl -i http://127.0.0.1:<PORT>/api/alertas
 curl -i http://127.0.0.1:<PORT>/cobertura-fuentes
 curl -i http://127.0.0.1:<PORT>/api/fuentes
 curl -i http://127.0.0.1:<PORT>/priorizacion-fuentes-reales
@@ -101,16 +103,18 @@ curl -i http://127.0.0.1:<PORT>/api/clasificacion-ti
 
 ## Que queda instalado realmente
 - Paquete `podencoti` en modo editable.
-- Aplicacion WSGI local para catalogo inicial, filtros funcionales, ficha de detalle, cobertura, priorizacion de fuentes reales y clasificacion TI auditables.
+- Aplicacion WSGI local para catalogo inicial, filtros funcionales, ficha de detalle, alertas internas, cobertura, priorizacion de fuentes reales y clasificacion TI auditables.
 - Acceso a datos versionados en `data/` y a la suite automatizada en `tests/`.
 - Imagen Docker minima con la misma superficie funcional, apta para despliegue local en contenedor.
 
 ## Que no queda disponible
-- Alertas o pipeline.
+- Pipeline.
+- Notificaciones salientes de alertas.
 - Despliegue productivo endurecido.
 
 ## Limitaciones y dependencias abiertas
 - La instalacion deja operativa una entrega minima de descubrimiento, no el MVP completo descrito en backlog.
 - Los datos del catalogo son versionados y estaticos; no existe todavia rastreo automatizado en ejecucion local.
 - `pyproject.toml` sigue describiendo una release mas limitada que la realmente visible; verifica siempre contra esta guia, el codigo y las pruebas.
-- La priorizacion de fuentes reales ya forma parte de la instalacion utilizable, pero no activa alertas ni pipeline.
+- La priorizacion de fuentes reales ya forma parte de la instalacion utilizable, pero no activa pipeline.
+- Las alertas disponibles en `main` registran coincidencias internas y siguen sin emitir notificaciones salientes.

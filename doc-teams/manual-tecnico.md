@@ -4,11 +4,12 @@
 Equipo tecnico que necesita conocer la implementacion actual de `main`, sus rutas verificables y los limites funcionales todavia abiertos.
 
 ## Resumen tecnico verificable
-`PodencoTI` expone en `main` una aplicacion WSGI minima en Python con seis piezas funcionales verificables y un despliegue local en contenedor:
+`PodencoTI` expone en `main` una aplicacion WSGI minima en Python con siete piezas funcionales verificables y un despliegue local en contenedor:
 
 - `PB-001`: catalogo inicial de oportunidades TI.
 - `PB-003`: filtros funcionales aplicados sobre el catalogo HTML y la API JSON.
 - `PB-002`: ficha resumida de detalle por oportunidad visible.
+- `PB-004`: alertas tempranas con alta, edicion y desactivacion, y registro interno de coincidencias accionables.
 - `PB-007`: cobertura inicial visible y verificable de fuentes.
 - `PB-006`: regla de clasificacion TI auditable con ejemplos trazables.
 - `PB-009`: priorizacion visible de fuentes reales oficiales por olas.
@@ -20,12 +21,14 @@ La descripcion de paquete en `pyproject.toml` sigue mencionando solo cobertura d
 - Configuracion de paquete: `pyproject.toml`
 - Automatizacion local: `Makefile`
 - Aplicacion WSGI: `src/podencoti/app.py`
+- Alertas tempranas: `src/podencoti/alerts.py`
 - Catalogo y detalle de oportunidades: `src/podencoti/opportunity_catalog.py`
 - Carga de cobertura de fuentes: `src/podencoti/source_coverage.py`
 - Priorizacion de fuentes reales oficiales: `src/podencoti/real_source_prioritization.py`
 - Carga y evaluacion de reglas TI: `src/podencoti/ti_classification.py`
 - Datos versionados: `data/opportunities.json`, `data/source_coverage.json`, `data/real_source_prioritization.json`, `data/ti_classification_rules.json`
-- Suite tecnica: `tests/test_app.py`, `tests/test_opportunity_catalog.py`, `tests/test_real_source_prioritization.py`, `tests/test_source_coverage.py`, `tests/test_ti_classification.py`
+- Datos de alertas: `data/alerts.json`
+- Suite tecnica: `tests/test_app.py`, `tests/test_alerts.py`, `tests/test_opportunity_catalog.py`, `tests/test_real_source_prioritization.py`, `tests/test_source_coverage.py`, `tests/test_ti_classification.py`
 - Contenedorizacion local: `Dockerfile`, `docker-compose.yml`, `.dockerignore`
 
 ## Superficie HTTP vigente
@@ -33,6 +36,8 @@ La descripcion de paquete en `pyproject.toml` sigue mencionando solo cobertura d
 - `/api/oportunidades`: JSON del catalogo filtrado por cobertura MVP y clasificacion TI.
 - `/oportunidades/<id>`: ficha HTML de detalle de una oportunidad visible.
 - `/api/oportunidades/<id>`: JSON trazable de la ficha de detalle.
+- `/alertas`: vista HTML para crear, editar y desactivar alertas reutilizando los mismos filtros del catalogo.
+- `/api/alertas`: JSON con la referencia funcional, el resumen de alertas persistidas y sus coincidencias internas.
 - `/cobertura-fuentes`: vista HTML de cobertura inicial del MVP.
 - `/api/fuentes`: JSON con fuentes y resumen por estado.
 - `/priorizacion-fuentes-reales`: vista HTML de priorizacion de fuentes reales oficiales.
@@ -47,6 +52,7 @@ Si `presupuesto_min` es mayor que `presupuesto_max`, la API responde `400 Bad Re
 ### Campos visibles por superficie
 - `/api/oportunidades`: devuelve `referencia_funcional`, `cobertura_aplicada`, `total_registros_origen`, `total_oportunidades_visibles`, `total_oportunidades_catalogo`, `filtros_activos`, `error_validacion`, `filtros_disponibles` y `oportunidades`.
 - `/api/oportunidades/<id>`: devuelve datos criticos visibles, `actualizacion_oficial_mas_reciente` y `historial_actualizaciones`.
+- `/api/alertas`: devuelve `referencia_funcional`, `summary` y `alerts`.
 - `/api/fuentes`: devuelve `sources` y `summary`.
 - `/priorizacion-fuentes-reales`: devuelve una tabla HTML con `Ola`, `Fuente real oficial`, `Categoria`, `Alcance`, `Justificacion` y `Trazabilidad`.
 - `/api/fuentes-prioritarias`: devuelve `referencia_funcional`, `sources`, `summary` y `fuera_de_alcance`.
@@ -54,6 +60,7 @@ Si `presupuesto_min` es mayor que `presupuesto_max`, la API responde `400 Bad Re
 
 ## Estructura tecnica
 - [app.py](/opt/apps/podencoti/src/podencoti/app.py) centraliza el router WSGI, el renderizado HTML y las respuestas JSON.
+- [alerts.py](/opt/apps/podencoti/src/podencoti/alerts.py) persiste alertas internas, valida criterios funcionales y recalcula coincidencias accionables.
 - [opportunity_catalog.py](/opt/apps/podencoti/src/podencoti/opportunity_catalog.py) carga registros versionados, filtra por cobertura MVP, aplica la clasificacion TI y resuelve el ultimo dato oficial visible para ficha y catalogo.
 - [source_coverage.py](/opt/apps/podencoti/src/podencoti/source_coverage.py) valida estados de cobertura permitidos (`MVP`, `Posterior`, `Por definir`) y resume conteos.
 - [real_source_prioritization.py](/opt/apps/podencoti/src/podencoti/real_source_prioritization.py) valida las olas permitidas (`Ola 1`, `Ola 2`, `Ola 3`), ordena las fuentes por prioridad y resume la distribucion por ola.
@@ -72,10 +79,12 @@ Resultado verificado en esta revision:
 - 41 pruebas automatizadas en verde.
 - Servidor local disponible en `http://127.0.0.1:<PORT>`, usando `PORT` desde `.env` y, por defecto, `8000` si no se define.
 - Contenedor accesible en `http://127.0.0.1:<PORT>` cuando `docker-compose.yml` publica la aplicacion con `HOST=0.0.0.0`.
+- Las rutas `http://127.0.0.1:<PORT>/alertas` y `http://127.0.0.1:<PORT>/api/alertas` responden con la gestion interna de alertas tempranas del MVP.
 
 ## Contradicciones explicitadas
 - `pyproject.toml` sigue describiendo el paquete como una release centrada solo en cobertura de fuentes, aunque la rama ya expone catalogo, filtros, detalle y clasificacion TI auditable.
-- La documentacion funcional de `product-manager/` describe backlog posterior valido, pero no debe leerse como contrato tecnico ya implementado para alertas, pipeline o recopilacion real desde nuevas fuentes oficiales.
+- La documentacion funcional de `product-manager/` describe backlog posterior valido, pero no debe leerse como contrato tecnico ya implementado para pipeline o recopilacion real desde nuevas fuentes oficiales.
+- Parte de `product-manager/` sigue mostrando el estado anterior de `PB-004`; la evidencia tecnica vigente en `main` ya expone alertas, asi que esa fuente debe leerse con cautela hasta que se sincronice.
 - La documentacion funcional de `product-manager/` sigue mostrando algunos textos anteriores a la fusion de `PB-009`; cuando contradiga a `main`, la evidencia tecnica vigente debe prevalecer y esa fuente debe corregirse.
 
 ## Limitaciones tecnicas actuales
@@ -83,9 +92,9 @@ Resultado verificado en esta revision:
 - No hay autenticacion, base de datos, tareas programadas ni integracion externa.
 - No hay contrato de despliegue productivo versionado, mas alla del arranque local con `wsgiref` y la publicacion local en contenedor.
 - La priorizacion de fuentes reales de `PB-009` ya esta expuesta en la app verificada con `/priorizacion-fuentes-reales` y `/api/fuentes-prioritarias`.
-- La entrega de `PB-009` no habilita alertas ni pipeline; solo refuerza origen, trazabilidad y orden de recopilacion.
-- Aunque `changelog/2026-03-25.md` menciona una entrega de `PB-004`, en el arbol tecnico revisado no hay rutas, datos ni tests de alertas o pipeline; esta documentacion se atiene a la evidencia visible en `main`.
+- La entrega de `PB-009` no habilita pipeline; solo refuerza origen, trazabilidad y orden de recopilacion.
+- Las alertas de `PB-004` solo registran coincidencias internas y no envian notificaciones salientes.
 
 ## Dependencias abiertas
-- Implementar `PB-004` y `PB-005` para evolucionar desde el descubrimiento inicial filtrable a un MVP mas operativo.
+- Implementar `PB-005` para evolucionar desde el descubrimiento inicial filtrable y la gestion interna de alertas a un MVP mas operativo.
 - Actualizar la metadata de paquete si se quiere que describa fielmente la superficie observable de `main`.
