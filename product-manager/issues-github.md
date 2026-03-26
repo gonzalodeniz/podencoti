@@ -1,6 +1,9 @@
 # Borradores de issues de GitHub
 
-## Issue propuesta: Navegacion principal responsive con menu lateral de iconos
+## Estado actual
+- La issue de `PB-010` ya fue creada en GitHub como issue #10 el 2026-03-26.
+
+## Issue creada: Navegacion principal responsive con menu lateral de iconos
 
 Titulo sugerido: `[product-manager] PB-010 Navegacion principal responsive con menu lateral de iconos`
 

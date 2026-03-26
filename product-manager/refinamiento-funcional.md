@@ -3,9 +3,11 @@
 ## Estado actual
 La vision sigue siendo consistente con la propuesta de valor central. No se detectan contradicciones de fondo, pero si una necesidad permanente de acotar el lenguaje de "centralizacion" para no confundir cobertura progresiva con cobertura total.
 La prioridad funcional vigente ya no es solo retencion: se incorpora `PB-010` para fijar una navegacion principal responsive con menu lateral izquierdo de iconos antes de seguir ampliando modulos sin una base de interfaz comun.
+`PB-004` deja de ser una prioridad "nueva": tras la validacion explicita de `qa-teams` en la issue #6 el 2026-03-25, su estado correcto pasa a `validado` pendiente de integracion y cierre administrativo.
 
 ## Huecos de definicion detectados en esta revision
 - La inconsistencia principal detectada no es de alcance, sino de trazabilidad: varios artefactos seguian tratando `PB-009` como pendiente de integracion cuando la issue #9 ya recoge fusion en `main`, borrado de rama y validacion final sobre la entrega integrada el 2026-03-24.
+- Aparece una segunda inconsistencia de trazabilidad: la issue #6 de `PB-004` ya refleja `Estado operativo: validado`, pero backlog, historias y roadmap seguian tratandola como trabajo `nuevo`.
 - El siguiente hueco funcional relevante ya no esta en recopilacion solamente: hay que resolver una base comun de navegacion con `PB-010` y, a continuacion, concretar la siguiente iteracion ejecutable del MVP de retencion sobre `PB-004` sin mezclarla con pipeline ni con una promesa de notificacion saliente fuera de alcance.
 - Aparece un hueco de experiencia de usuario transversal: la aplicacion ya necesita una estructura comun de navegacion principal para evitar crecimiento desordenado entre catalogo, alertas, pipeline y futuras superficies.
 
@@ -16,6 +18,7 @@ La prioridad funcional vigente ya no es solo retencion: se incorpora `PB-010` pa
 - `PB-001` ya quedo validado por `qa-teams` en la issue #3 y aporta el catalogo visible inicial sobre cobertura MVP y clasificacion TI vigente.
 - `PB-002` ya quedo validado por `qa-teams` en la issue #4 y amplia el catalogo con ficha de detalle y tratamiento visible de rectificaciones o modificaciones del expediente.
 - `PB-003` ya fue revalidado por `qa-teams` en la issue #5 el 2026-03-20, integrado en `main` por `developer-teams` el 2026-03-21 y cerrado administrativamente por `product-manager`.
+- `PB-004` ya fue validado por `qa-teams` en la issue #6 el 2026-03-25 sobre la rama `developer-teams/issue-6-pb-004-alertas-tempranas`, pero no debe cerrarse administrativamente hasta que `developer-teams` complete la fusion en `main` y el borrado de la rama.
 
 ## Huecos funcionales cerrados en esta revision
 - Queda definida la regla funcional para expedientes mixtos donde TI no es el unico componente.
@@ -27,11 +30,13 @@ La prioridad funcional vigente ya no es solo retencion: se incorpora `PB-010` pa
 - Queda definido que `PB-008` puede avanzar como definicion funcional de KPIs aunque la instrumentacion completa llegue en una iteracion posterior.
 - Queda incorporada como prioridad explicita la recopilacion desde fuentes reales oficiales nominadas, ya que `PB-007` solo cerraba cobertura funcional y no orden de implementacion de fuentes reales.
 - Queda definido que el rediseño de interfaz solicitado debe materializarse como un item funcional trazable y no como una observacion informal para desarrollo.
+- Queda corregida la lectura funcional de `PB-004`: el trabajo ya no esta pendiente de desarrollo, sino pendiente de integracion y cierre administrativo.
 
 ## Incidencia operativa abierta prioritaria
 - La secuencia de trabajo ya no tiene bloqueos funcionales ni de validacion asociados a `PB-009`.
 - `qa-teams` valido la entrega integrada en `main` el 2026-03-24, `developer-teams` dejo constancia de integracion y borrado de rama ese mismo dia y `product-manager` cerro la issue #9 el 2026-03-25.
-- La siguiente pieza funcional a considerar para `developer-teams` pasa a ser `PB-010` como base de interfaz y navegacion comun; `PB-004` sigue inmediatamente detras como siguiente modulo de negocio ya preparado.
+- La incidencia operativa inmediata ya no es funcional sino de flujo: `developer-teams` debe fusionar en `main` la rama validada de `PB-004` y borrarla antes de abrir el siguiente frente.
+- La siguiente pieza funcional a considerar para `developer-teams`, una vez resuelta esa integracion, pasa a ser `PB-010` como base de interfaz y navegacion comun; `PB-005` queda inmediatamente detras como siguiente modulo de negocio no iniciado.
 
 ## Decisiones funcionales vigentes
 - El MVP de negocio se compone de dos escalones:
@@ -136,6 +141,7 @@ La prioridad funcional vigente ya no es solo retencion: se incorpora `PB-010` pa
 - Riesgo de credibilidad si el producto retrasa la recopilacion real y prioriza antes capacidades de retencion sobre fuentes oficiales verificables.
 - Riesgo de dispersion si `developer-teams` intenta abordar simultaneamente las tres fuentes prioritarias sin un orden de entrega ni un minimo comun verificable.
 - Riesgo de inconsistencia de experiencia si cada nueva vista incorpora navegacion propia en lugar de una estructura principal comun y responsive.
+- Riesgo operativo si una issue ya validada por `qa-teams` permanece abierta sin comentario administrativo ni plan explicito de integracion.
 
 ## Supuestos explicitos
 - El primer objetivo es demostrar que la centralizacion y el filtrado ahorran tiempo al usuario.
@@ -148,9 +154,10 @@ La prioridad funcional vigente ya no es solo retencion: se incorpora `PB-010` pa
 
 ## Recomendacion operativa para `developer-teams`
 - Tomar `PB-010` como siguiente pieza funcional a valorar para estabilizar la base de interfaz y navegacion comun.
-- Crear la issue correspondiente con trazabilidad a `HU-10` y `CU-10` usando el borrador funcional preparado por `product-manager`.
-- Mantener `PB-004` como siguiente pieza de negocio inmediatamente posterior o coordinar ambos trabajos si la capacidad real del equipo y el limite de ramas abiertas lo permiten sin romper el flujo del repositorio.
-- Mantener `PB-005` y `PB-008` por detras de `PB-004` salvo bloqueo funcional explicito.
+- Antes de abrir trabajo nuevo, fusionar en `main` la rama validada de `PB-004`, borrar la rama tecnica y actualizar la issue #6 con la trazabilidad de integracion.
+- Tomar la issue #10 ya creada con trazabilidad a `HU-10` y `CU-10`.
+- Mantener `PB-005` como siguiente pieza de negocio posterior a `PB-010` o coordinar su arranque solo cuando la integracion de `PB-004` ya no deje una rama tecnica abierta innecesariamente.
+- Mantener `PB-005` y `PB-008` por detras de `PB-010` salvo bloqueo funcional explicito.
 - Mantener visible en el catalogo la fuente oficial y evitar mensajes que sugieran cobertura total del ecosistema canario.
 - Garantizar como minimo por oportunidad recopilada la visibilidad de origen oficial, enlace oficial, fecha de publicacion o equivalente y estado oficial cuando exista.
 - Aplicar el filtrado solo sobre oportunidades ya visibles dentro de cobertura MVP y clasificacion final `TI`.
@@ -161,6 +168,7 @@ La prioridad funcional vigente ya no es solo retencion: se incorpora `PB-010` pa
 - `PB-006`, `HU-06` y `CU-08` resuelven la definicion de relevancia TI antes del catalogo.
 - `PB-001`, `PB-002` y `PB-003` ya quedaron validados por `qa-teams` y cerrados administrativamente; Release 1 queda funcionalmente completa.
 - `PB-009` ya quedo validado por `qa-teams` sobre la entrega integrada en `main` y queda cerrado administrativamente en la issue #9 para mantener sincronizados backlog e historial operativo.
+- `PB-004` queda validado por `qa-teams` y pendiente de integracion y cierre administrativo.
 - `PB-010` abre una nueva iteracion de base de interfaz previa a la consolidacion de nuevos modulos.
-- `PB-004` y `PB-005` quedan como modulos posteriores que deben apoyarse en esa base de navegacion comun.
+- `PB-005` queda como modulo posterior que debe apoyarse en esa base de navegacion comun.
 - `PB-008` prepara la base de decision para evolucion posterior sin bloquear el MVP.
