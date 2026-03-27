@@ -13,6 +13,11 @@ Las demas referencias del proyecto tienen este uso:
 
 Si una regla compartida cambia, primero debe actualizarse este documento y despues sincronizarse la redaccion equivalente en los documentos que la consumen.
 
+## Jerarquia de evidencia tras validacion
+- La evidencia vigente de integracion de una entrega validada es la rama `main` junto con el comentario de cierre de integracion de `developer-teams` y, si la issue sigue abierta, el comentario administrativo de `product-manager`.
+- `changelog/` conserva trazabilidad historica, pero no acredita por si solo un merge, el borrado de la rama tecnica ni el estado operativo vigente de una issue.
+- `doc-teams` y `product-manager` deben tratar cualquier discrepancia entre `changelog/`, la issue y `main` como una señal para revisar la integracion real, no como una validacion suficiente por si misma.
+
 ## Mantenimiento de la fuente canónica
 - Cualquier regla compartida nueva o modificada sobre estados operativos, handoffs, sincronizacion o cierres debe redactarse primero en este documento.
 - Los `AGENTS.md` de raiz y de rol pueden resumir la regla, pero no deben convertirse en la fuente primaria ni introducir una redaccion distinta sin actualizar esta guia en el mismo cambio.

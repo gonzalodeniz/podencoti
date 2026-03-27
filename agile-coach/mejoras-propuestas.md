@@ -453,6 +453,29 @@ Una issue puede permanecer `validado` y abierta sin dejar una huella operativa c
 - Si el comentario se rellena de forma mecanica y sin evidencia real, el valor de la regla baja.
 - Requiere disciplina de `developer-teams` para ejecutar el borrado de rama inmediatamente despues del merge.
 
+## Mejora 22: separar la trazabilidad historica del `changelog/` de la evidencia de integracion en `main`
+### Problema detectado
+Una entrada de `changelog/` puede mencionar una validacion o un avance operativo aunque la evidencia tecnica vigente en `main` siga sin mostrar la integracion completa de la entrega.
+
+### Propuesta
+Dejar explicitamente en los acuerdos operativos y en `AGENTS.md` que:
+- `main` es la referencia para saber si una entrega ya esta realmente integrada.
+- El comentario de cierre de integracion de `developer-teams` y el comentario administrativo de `product-manager` son la evidencia operativa del cierre.
+- `changelog/` solo conserva trazabilidad historica y no sustituye ni al merge ni al borrado de rama ni al cierre administrativo.
+
+### Impacto esperado
+- Evita leer una entrega como integrada solo porque aparezca asi en el `changelog/`.
+- Reduce contradicciones entre la evidencia tecnica, el estado visible de la issue y la documentacion de proceso.
+- Hace mas fiable la revision documental de `doc-teams` y la lectura de backlog por `product-manager`.
+
+### Tradeoffs
+- Obliga a revisar una fuente mas antes de dar por cerrado un trabajo validado.
+- Requiere mantener muy clara la diferencia entre historia operativa y estado vigente.
+
+### Riesgos y dependencias
+- Si los equipos siguen usando el `changelog/` como prueba de estado actual, la ambiguedad reaparecera.
+- La mejora depende de que `developer-teams` deje el comentario de cierre de integracion y de que `product-manager` no cierre la issue sin esa evidencia.
+
 ## Secuencia prioritaria de adopcion
 Las mejoras anteriores ya cubren la mayor parte de las fricciones detectadas. Para que el cambio de proceso tenga impacto rapido y no genere mas ruido del necesario, la adopcion recomendada es esta:
 

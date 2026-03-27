@@ -121,6 +121,7 @@ Si el prompt no activa uno de esos roles de forma explicita, no deben asumirse n
 - Los cambios de `changelog/` no forman parte de la entrega tecnica de una issue y no deben permanecer en ramas tecnicas ni en ramas temporales de integracion.
 - Si un rol mantiene una rama abierta y registra actividad en `changelog/` sobre `main`, debe sincronizar despues su rama abierta con `main` antes del siguiente handoff a QA o integracion.
 - `agile-coach/acuerdos-operativos.md` es la referencia canónica para estados operativos comunes, plantillas literales de handoff y checkpoints de cierre; cualquier ajuste compartido debe partir de ahi antes de propagarse al resto de documentos.
+- Para cualquier entrega ya validada, la evidencia vigente de integracion es la rama `main` junto con los comentarios de cierre correspondientes; `changelog/` conserva trazabilidad historica pero no acredita por si solo un merge ni sustituye el cierre administrativo.
 - `changelog/README.md` es la referencia canónica para el formato diario del changelog y sustituye a cualquier ejemplo historico que pueda quedar desfasado.
 - Limitar el numero de ramas abiertas para facilitar el seguimiento operativo del proyecto.
 - Todos los commits del repositorio deben comenzar con el prefijo del rol que los ejecuta en formato `[rol]`, por ejemplo `[developer-teams] Implementa clasificacion TI`.
