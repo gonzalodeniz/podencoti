@@ -4,12 +4,13 @@ import json
 from dataclasses import dataclass
 from pathlib import Path
 
+from podencoti.atom_consolidation import load_atom_opportunities
 from podencoti.source_coverage import load_source_coverage
 from podencoti.ti_classification import OpportunityCandidate, classify_opportunity, load_rule_set
 
 
 BASE_DIR = Path(__file__).resolve().parents[2]
-DEFAULT_DATA_PATH = BASE_DIR / "data" / "opportunities.json"
+DEFAULT_DATA_PATH = BASE_DIR / "data"
 
 
 @dataclass(frozen=True)
@@ -30,6 +31,7 @@ class OpportunityRecord:
     url_fuente_oficial: str
     cpvs: tuple[str, ...]
     actualizaciones_oficiales: tuple[dict[str, object], ...]
+    fichero_origen_atom: str | None = None
 
 
 @dataclass(frozen=True)
@@ -68,6 +70,7 @@ class OpportunityDetail:
     referencia_funcional: str
     actualizacion_oficial_mas_reciente: dict[str, object] | None
     historial_actualizaciones: tuple[dict[str, object], ...]
+    fichero_origen_atom: str | None
 
 
 @dataclass(frozen=True)
@@ -114,6 +117,37 @@ class CatalogFilters:
 
 
 def load_opportunity_records(path: Path = DEFAULT_DATA_PATH) -> tuple[str, list[OpportunityRecord]]:
+    if path.is_dir():
+        atom_files = sorted(path.glob("*.atom"))
+        if atom_files:
+            reference, records = load_atom_opportunities(path)
+            return reference, [
+                OpportunityRecord(
+                    id=item.id,
+                    titulo=item.titulo,
+                    descripcion=item.descripcion,
+                    organismo=item.organismo,
+                    ubicacion=item.ubicacion,
+                    procedimiento=item.procedimiento,
+                    presupuesto=item.presupuesto,
+                    fecha_publicacion_oficial=item.fecha_publicacion_oficial,
+                    fecha_limite=item.fecha_limite,
+                    estado=item.estado,
+                    solvencia_tecnica=item.solvencia_tecnica,
+                    criterios_adjudicacion=item.criterios_adjudicacion,
+                    fuente_oficial=item.fuente_oficial,
+                    url_fuente_oficial=item.url_fuente_oficial,
+                    cpvs=item.cpvs,
+                    actualizaciones_oficiales=(),
+                    fichero_origen_atom=item.fichero_origen_atom,
+                )
+                for item in records
+            ]
+
+        json_path = path / "opportunities.json"
+        if json_path.exists():
+            path = json_path
+
     payload = json.loads(path.read_text(encoding="utf-8"))
     records = [
         OpportunityRecord(
@@ -133,6 +167,7 @@ def load_opportunity_records(path: Path = DEFAULT_DATA_PATH) -> tuple[str, list[
             url_fuente_oficial=item["url_fuente_oficial"],
             cpvs=tuple(item.get("cpvs", [])),
             actualizaciones_oficiales=tuple(item.get("actualizaciones_oficiales", [])),
+            fichero_origen_atom=item.get("fichero_origen_atom"),
         )
         for item in payload["opportunities"]
     ]
@@ -176,6 +211,9 @@ def _resolve_latest_visible_snapshot(record: OpportunityRecord) -> dict[str, obj
 
 
 def _classify_record(record: OpportunityRecord, rules) -> str:
+    if record.fichero_origen_atom is not None and any(cpv.startswith(("72", "48", "302")) for cpv in record.cpvs):
+        return "TI"
+
     decision = classify_opportunity(
         OpportunityCandidate(
             titulo=record.titulo,
@@ -243,7 +281,7 @@ def build_opportunity_detail(
     for record in records:
         if record.id != opportunity_id:
             continue
-        if record.fuente_oficial not in mvp_sources:
+        if record.fichero_origen_atom is None and record.fuente_oficial not in mvp_sources:
             return None
 
         classification = _classify_record(record, rules)
@@ -271,6 +309,7 @@ def build_opportunity_detail(
             referencia_funcional=reference,
             actualizacion_oficial_mas_reciente=(dict(updates[-1]) if updates else None),
             historial_actualizaciones=tuple(dict(item) for item in updates),
+            fichero_origen_atom=record.fichero_origen_atom,
         )
         return detail.__dict__
 
@@ -286,13 +325,15 @@ def build_catalog(
     mvp_sources = {source.nombre for source in load_source_coverage() if source.estado == "MVP"}
     active_filters = (filters or CatalogFilters()).normalized()
     validation_error = active_filters.validation_error()
+    atom_sources = sorted({record.fichero_origen_atom for record in records if record.fichero_origen_atom})
+    applied_coverage = atom_sources if atom_sources else sorted(mvp_sources)
 
     opportunities: list[CatalogOpportunity] = []
     available_locations: set[str] = set()
     available_procedures: set[str] = set()
     total_visible_before_filters = 0
     for record in records:
-        if record.fuente_oficial not in mvp_sources:
+        if record.fichero_origen_atom is None and record.fuente_oficial not in mvp_sources:
             continue
 
         classification = _classify_record(record, rules)
@@ -327,7 +368,7 @@ def build_catalog(
     opportunities.sort(key=lambda opportunity: opportunity.fecha_limite)
     return {
         "referencia_funcional": reference,
-        "cobertura_aplicada": sorted(mvp_sources),
+        "cobertura_aplicada": applied_coverage,
         "total_registros_origen": len(records),
         "total_oportunidades_visibles": total_visible_before_filters,
         "total_oportunidades_catalogo": len(opportunities),

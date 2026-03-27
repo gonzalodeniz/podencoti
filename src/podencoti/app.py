@@ -586,6 +586,18 @@ def _catalog_html_response(filters: CatalogFilters | None = None, base_path: str
     active_filters = catalog["filtros_activos"]
     available_filters = catalog["filtros_disponibles"]
     validation_error = catalog.get("error_validacion")
+    uses_atom_consolidation = catalog["referencia_funcional"] == "PB-011"
+    coverage_label = "Snapshots .atom consolidados" if uses_atom_consolidation else "Fuentes oficiales MVP aplicadas"
+    coverage_note = (
+        "El catálogo consolida todos los snapshots `.atom` versionados presentes en `data/`, "
+        "aplica el criterio conjunto Canarias + CPV TI de <code>PB-011</code> y conserva trazabilidad al fichero origen vigente."
+        if uses_atom_consolidation
+        else (
+            "El catálogo reutiliza la cobertura MVP de <code>PB-007</code>, la clasificación auditable de <code>PB-006</code> "
+            "y la prioridad de fuentes reales oficiales de <code>PB-009</code>. "
+            "No representa todavía cobertura total del ecosistema canario ni habilita alertas o pipeline."
+        )
+    )
     filter_form = f"""
       <section class="panel">
         <div class="panel-body">
@@ -658,13 +670,11 @@ def _catalog_html_response(filters: CatalogFilters | None = None, base_path: str
         <div class="panel-body">
           <div class="summary">
             <article class="metric"><strong>{catalog["total_oportunidades_catalogo"]}</strong>Oportunidades TI visibles</article>
-            <article class="metric"><strong>{len(catalog["cobertura_aplicada"])}</strong>Fuentes oficiales MVP aplicadas</article>
+            <article class="metric"><strong>{len(catalog["cobertura_aplicada"])}</strong>{coverage_label}</article>
             <article class="metric"><strong>{catalog["total_oportunidades_visibles"]}</strong>Oportunidades TI antes de filtrar</article>
           </div>
           <p class="muted">
-            El catálogo reutiliza la cobertura MVP de <code>PB-007</code>, la clasificación auditable de <code>PB-006</code>
-            y la prioridad de fuentes reales oficiales de <code>PB-009</code>.
-            No representa todavía cobertura total del ecosistema canario ni habilita alertas o pipeline.
+            {coverage_note}
           </p>
         </div>
         <div class="table-wrap">
@@ -693,7 +703,11 @@ def _catalog_html_response(filters: CatalogFilters | None = None, base_path: str
         message = (
             "No hay resultados con los filtros activos."
             if active_filters and validation_error is None
-            else "No hay oportunidades TI disponibles dentro de la cobertura MVP en este momento."
+            else (
+                "No hay oportunidades TI disponibles en los snapshots `.atom` consolidados en este momento."
+                if uses_atom_consolidation
+                else "No hay oportunidades TI disponibles dentro de la cobertura MVP en este momento."
+            )
         )
         catalog_panel = f"""
       <section class="note">
@@ -718,10 +732,10 @@ def _catalog_html_response(filters: CatalogFilters | None = None, base_path: str
     return _page_template(
         "PodencoTI | Catálogo inicial de oportunidades TI",
         "Catálogo inicial de oportunidades TI de Canarias",
-        "Release 1 · PB-001 · Descubrimiento inicial verificable",
+        "Release 6 · PB-011 · Consolidacion funcional trazable",
         (
-            "PodencoTI muestra aquí un primer catálogo consultable de oportunidades TI dentro de la cobertura MVP ya delimitada. "
-            "Solo se publican registros clasificados como TI y con fuente oficial visible."
+            "PodencoTI muestra aquí un catálogo consultable obtenido a partir de todos los snapshots `.atom` versionados presentes en `data/`. "
+            "Solo se publican registros que cumplen simultáneamente criterio geográfico Canarias y criterio TI por CPV, con fuente oficial visible."
         ),
         content,
     )
@@ -960,6 +974,7 @@ def _detail_html_response(opportunity_id: str, base_path: str = "") -> str | Non
                 <tr><th>Fecha limite</th><td>{escape(str(detail["fecha_limite"]))}</td></tr>
                 <tr><th>Estado oficial del expediente</th><td>{escape(str(detail["estado"]))}</td></tr>
                 <tr><th>Fuente oficial</th><td><a class="source-link" href="{escape(str(detail["url_fuente_oficial"]))}" target="_blank" rel="noopener noreferrer">{escape(str(detail["fuente_oficial"]))}</a></td></tr>
+                <tr><th>Fichero .atom origen</th><td>{escape(str(detail["fichero_origen_atom"] or "No informado"))}</td></tr>
               </tbody>
             </table>
           </div>
