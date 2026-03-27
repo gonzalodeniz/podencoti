@@ -6,11 +6,11 @@
 - Cada release debe dejar un resultado verificable por `qa-teams` y trazable a backlog e issues.
 
 ## Estado de referencia de la iteracion
-- Fecha de corte documental: 2026-03-26.
+- Fecha de corte documental: 2026-03-27.
 - Estado confirmado: `PB-007` y `PB-006` ya fueron validados por `qa-teams` y sus entregas estan integradas en `main`.
 - Estado actual de trabajo tecnico: `PB-009` ya esta validado, integrado en `main` y cerrado administrativamente en la issue #9.
-- `PB-004` ya no esta en preparacion: `qa-teams` la valido en la issue #6 el 2026-03-25, pero sigue pendiente de integracion en `main` y borrado de la rama tecnica por `developer-teams`.
-- Siguiente recomendacion para `developer-teams`: completar primero la integracion pendiente de `PB-004` y, a continuacion, tomar la issue #11 de `PB-011` asociada a la consolidacion de los `.atom` versionados disponibles en `data/`.
+- `PB-004` ya no esta en preparacion ni pendiente de integracion: `qa-teams` la valido en la issue #6 el 2026-03-25 y `developer-teams` la integro en `main` con borrado de rama el 2026-03-26.
+- Siguiente recomendacion para `developer-teams`: tomar la issue #11 de `PB-011` asociada a la consolidacion de los `.atom` versionados disponibles en `data/` y, a continuacion, la issue #12 de `PB-012`.
 - Las decisiones funcionales sobre expedientes mixtos y sobre oportunidades anuladas, desiertas, desistidas o modificadas quedan ya definidas para evitar bloqueo de backlog posterior.
 - En esta revision tambien quedan cerradas cuatro aclaraciones de release para reducir ambiguedad de implementacion:
   - una alerta del MVP requiere al menos un criterio funcional informado
@@ -122,9 +122,8 @@
   - El pipeline del MVP es individual por usuario; la colaboracion por empresa queda para una release posterior.
   - El alta inicial de una oportunidad en pipeline debe crear el estado `Nueva`.
 - Estado operativo actual:
-  - `PB-004` ya fue validado por `qa-teams` en la issue #6 el 2026-03-25.
-  - La entrega sigue pendiente de fusion en `main` y borrado de la rama `developer-teams/issue-6-pb-004-alertas-tempranas`.
-  - `PB-005` permanece en `nuevo` y no debe iniciarse antes de resolver la integracion pendiente de `PB-004`, `PB-011` y `PB-012`, ni antes de decidir si la base de navegacion `PB-010` entra antes o despues de esta exposicion funcional.
+  - `PB-004` ya fue validado por `qa-teams` en la issue #6 el 2026-03-25, integrado en `main` por `developer-teams` el 2026-03-26 y queda cerrado administrativamente por `product-manager`.
+  - `PB-005` permanece en `nuevo` y no debe iniciarse antes de `PB-011` y `PB-012`, ni antes de decidir si la base de navegacion `PB-010` entra antes o despues de esta exposicion funcional.
 
 ## Release 7: Medicion y aprendizaje
 - Objetivo: Mejorar precision, cobertura y priorizacion apoyandose en indicadores.
@@ -144,6 +143,6 @@
 
 ## Decision operativa para la siguiente iteracion
 - El siguiente paso operativo de producto es mantener sincronizados backlog, historias, roadmap e issues abiertos con la nueva prioridad funcional.
-- El siguiente paso operativo recomendado para `developer-teams` es fusionar y cerrar administrativamente `PB-004`; inmediatamente despues, la siguiente issue recomendada para iniciar es la issue #11 de `PB-011`, seguida por la issue #12 de `PB-012`.
+- El siguiente paso operativo recomendado para `developer-teams` es iniciar la issue #11 de `PB-011`, seguida por la issue #12 de `PB-012`.
 - `PB-009` ya reutiliza la cobertura validada de `PB-007`, la regla auditable validada de `PB-006` y la superficie ya validada de catalogo, detalle y filtros.
-- No se recomienda iniciar `PB-005` antes de `PB-004`, `PB-011` y `PB-012`; la base de navegacion `PB-010` debe reevaluarse despues de dejar visible esta nueva superficie de dato consolidado.
+- No se recomienda iniciar `PB-005` antes de `PB-011` y `PB-012`; la base de navegacion `PB-010` debe reevaluarse despues de dejar visible esta nueva superficie de dato consolidado.

@@ -17,7 +17,7 @@ Traducir la vision de PodencoTI en trabajo priorizado, trazable y ejecutable par
 - `cerrado`: item validado, integrado y cerrado administrativamente por `product-manager`.
 
 ## Estado de referencia de backlog
-- Fecha de corte funcional: 2026-03-26.
+- Fecha de corte funcional: 2026-03-27.
 - `PB-002` queda cerrado administrativamente: `qa-teams` lo valido en la issue #4 y su entrega se integrara en `main` junto con `PB-001` desde la rama tecnica ya validada.
 - `PB-001` queda cerrado administrativamente: `qa-teams` lo valido en la issue #3 y su entrega base ya viene incluida en la rama validada de `PB-002`.
 - `PB-007` queda cerrado administrativamente: su alcance fue validado por `qa-teams` y esta integrado en `main`.
@@ -30,7 +30,7 @@ Traducir la vision de PodencoTI en trabajo priorizado, trazable y ejecutable par
 - `PB-009` queda cerrado administrativamente: `qa-teams` valido la entrega integrada en `main` en la issue #9 el 2026-03-24, `developer-teams` dejo constancia de fusion y borrado de rama el mismo dia y `product-manager` cerro la issue el 2026-03-25.
 - Se incorpora `PB-010` para fijar una base de navegacion principal y adaptabilidad responsive antes de seguir ampliando modulos sin una estructura comun estable.
 - Se incorporan `PB-011` y `PB-012` para convertir en prioridad ejecutable la carga desde los ficheros `.atom` presentes en `data/`, la consolidacion de snapshots versionados y la exposicion funcional alineada con el Excel `data/licitaciones_ti_canarias.xlsx`.
-- `PB-004` cambia de `nuevo` a `validado`: `qa-teams` valido la entrega en la issue #6 el 2026-03-25 sobre la rama `developer-teams/issue-6-pb-004-alertas-tempranas`, pero la issue sigue abierta porque falta la integracion en `main` y el borrado de la rama tecnica por parte de `developer-teams`.
+- `PB-004` queda cerrado administrativamente: `qa-teams` valido la entrega en la issue #6 el 2026-03-25 y `developer-teams` dejo constancia de fusion en `main` y borrado de rama el 2026-03-26.
 
 ## Backlog priorizado
 
@@ -45,7 +45,7 @@ Traducir la vision de PodencoTI en trabajo priorizado, trazable y ejecutable par
 | PB-011 | Consolidacion funcional de fuentes `.atom` versionadas para oportunidades TI Canarias | La aplicacion debe tomar todos los ficheros `.atom` presentes en `data/`, filtrar Canarias y TI con reglas estructuradas y consolidar una unica version vigente por expediente aunque los snapshots cambien de nombre por fecha y hora. | P0 | Convierte una muestra real de datos versionados en una fuente operativa trazable para el catalogo y evita depender de nombres de fichero estaticos o cargas manuales ambiguas. | 1. La aplicacion procesa todos los ficheros `.atom` de `data/` sin depender de un nombre fijo. 2. Solo se incluyen oportunidades que cumplan criterio geografico Canarias y criterio TI segun reglas estructuradas vigentes. 3. El criterio geografico usa como filtro prioritario `CountrySubentityCode` con prefijo `ES7` y como apoyo `ParentLocatedParty` o `CountrySubentity` con nombres de Canarias o islas canarias. 4. El criterio TI usa CPVs que empiecen por `72`, `48` o `302`. 5. Si un expediente aparece en varios snapshots, el sistema conserva una unica version funcional con el dato mas reciente disponible. 6. Cada registro consolidado conserva el nombre del fichero `.atom` del que procede la version vigente. | PB-009, PB-006 | `nuevo` | HU-11, CU-11, issue #11 |
 | PB-012 | Exposicion funcional en la aplicacion del dataset de licitaciones TI Canarias | La aplicacion debe mostrar la informacion consolidada de licitaciones, lotes y adjudicaciones en superficies verificables alineadas con el Excel de referencia y con trazabilidad visible al fichero origen en el detalle. | P0 | Hace verificable para usuario y QA que el producto ya muestra la informacion estructurada util derivada de los `.atom`, no solo una extraccion interna no visible. | 1. La aplicacion muestra una pestaña `Licitaciones TI Canarias`. 2. La aplicacion muestra una pestaña `Detalle Lotes`. 3. La aplicacion muestra una pestaña `Adjudicaciones`. 4. El detalle de licitacion o contrato muestra el nombre del fichero `.atom` origen de la version consolidada. 5. La muestra visible en la aplicacion se corresponde funcionalmente con `data/licitaciones_ti_canarias.xlsx` en esas tres pestañas. 6. Si un campo no viene informado en origen, se muestra como no informado o equivalente claro. | PB-011, PB-002 | `nuevo` | HU-12, CU-12, issue #12 |
 | PB-010 | Navegacion principal responsive con menu lateral de iconos | La aplicacion debe ofrecer una estructura de navegacion comun con menu lateral izquierdo de iconos y adaptacion al ancho disponible para sostener el crecimiento de modulos sin perder claridad de uso. | P1 | Mejora orientacion, reduce friccion de uso y prepara una base escalable para catalogo, alertas, pipeline y futuras vistas. | 1. En anchos amplios existe una navegacion principal persistente en el lateral izquierdo con iconos en vertical. 2. La opcion activa se distingue claramente. 3. El contenido principal y la navegacion se adaptan al ancho disponible sin solapamientos ni scroll horizontal estructural. 4. En anchos reducidos la navegacion principal sigue siendo accesible mediante una variante responsive coherente. 5. Las opciones aun no disponibles no se presentan como funcionalidades operativas sin senalizacion. 6. Existe una issue ejecutable para `developer-teams` con trazabilidad a backlog, historia y caso de uso. | PB-001, PB-002, PB-003 | `nuevo` | HU-10, CU-10, issue #10 |
-| PB-004 | Configuracion de alertas tempranas | El usuario debe poder definir alertas para recibir nuevas oportunidades relevantes sin busqueda manual recurrente. | P1 | Materializa la promesa diferencial de anticipacion y refuerza la recurrencia de uso. | 1. El usuario puede crear al menos una alerta con un criterio funcional valido entre palabra clave, presupuesto, procedimiento o ubicacion. 2. El sistema impide guardar una alerta vacia y solicita completar al menos un criterio. 3. El sistema deja visible que la alerta esta activa. 4. Cuando aparece una oportunidad que cumple los criterios, queda registrada para notificacion o consumo interno del MVP. 5. El usuario puede editar o desactivar la alerta. 6. Las oportunidades con estado oficial `anulada`, `desierta` o `desistida` no deben registrarse como nuevas coincidencias accionables. | PB-001, PB-003 | `validado` | HU-04, CU-04, issue #6 |
+| PB-004 | Configuracion de alertas tempranas | El usuario debe poder definir alertas para recibir nuevas oportunidades relevantes sin busqueda manual recurrente. | P1 | Materializa la promesa diferencial de anticipacion y refuerza la recurrencia de uso. | 1. El usuario puede crear al menos una alerta con un criterio funcional valido entre palabra clave, presupuesto, procedimiento o ubicacion. 2. El sistema impide guardar una alerta vacia y solicita completar al menos un criterio. 3. El sistema deja visible que la alerta esta activa. 4. Cuando aparece una oportunidad que cumple los criterios, queda registrada para notificacion o consumo interno del MVP. 5. El usuario puede editar o desactivar la alerta. 6. Las oportunidades con estado oficial `anulada`, `desierta` o `desistida` no deben registrarse como nuevas coincidencias accionables. | PB-001, PB-003 | `cerrado` | HU-04, CU-04, issue #6 |
 | PB-005 | Pipeline de seguimiento de oportunidades | El usuario debe poder guardar oportunidades y moverlas por estados de trabajo para coordinar su respuesta comercial o tecnica. | P1 | Favorece retencion y gestion del trabajo sobre oportunidades detectadas. | 1. El usuario puede guardar una oportunidad en su pipeline desde una superficie visible del catalogo o del detalle. 2. La oportunidad guardada entra por defecto en estado `Nueva`. 3. El usuario puede cambiarla a `Evaluando`, `Preparando oferta`, `Presentada` o `Descartada`. 4. Puede consultar su pipeline con el estado actual de cada oportunidad. 5. El cambio de estado queda reflejado de forma consistente y sin duplicados. 6. Si la fuente oficial marca la oportunidad como `anulada`, `desierta` o `desistida`, el pipeline conserva el registro del usuario y muestra una advertencia visible de estado oficial. | PB-001, PB-002 | `nuevo` | HU-05, CU-05, issue #7 |
 | PB-008 | Medicion basica de valor del producto | El producto debe definir como medir cobertura, adopcion y uso de alertas desde las primeras releases. | P2 | Permite evaluar si el producto confirma la vision y orientar iteraciones posteriores. | 1. Existen KPIs basicos definidos por release. 2. Cada KPI tiene definicion, formula, umbral inicial y decision asociada. 3. La definicion documental de KPIs puede prepararse antes de que toda la instrumentacion este disponible. 4. Los KPIs no bloquean el MVP funcional. | PB-001, PB-004 | `nuevo` | HU-08, CU-07, issue #8 |
 
@@ -72,12 +72,11 @@ Traducir la vision de PodencoTI en trabajo priorizado, trazable y ejecutable par
 - El detalle de licitacion o contrato debe mostrar el nombre del fichero `.atom` origen de la version consolidada.
 
 ## Orden recomendado para `developer-teams`
-1. Integrar en `main` la rama validada de PB-004 y borrar `developer-teams/issue-6-pb-004-alertas-tempranas`
-2. PB-011
-3. PB-012
-4. PB-010
-5. PB-005
-6. PB-008
+1. PB-011
+2. PB-012
+3. PB-010
+4. PB-005
+5. PB-008
 
 ## Notas de priorizacion
 - `PB-007` y `PB-006` ya cumplieron su objetivo y quedan cerrados administrativamente tras validacion e integracion en `main`.
@@ -86,9 +85,9 @@ Traducir la vision de PodencoTI en trabajo priorizado, trazable y ejecutable par
 - `PB-009` ya quedo validado, integrado y cerrado administrativamente; la siguiente prioridad funcional ejecutable se reordena para introducir `PB-011` y `PB-012` antes de seguir ampliando modulos de interfaz o retencion.
 - `PB-011` entra como nueva prioridad `P0` porque traslada a una fuente operativa real la muestra de ficheros `.atom` ya disponible en `data/` y resuelve la variabilidad de nombres por fecha y hora sin dependencia manual.
 - `PB-012` entra como nueva prioridad `P0` porque la utilidad del dato consolidado debe ser visible y verificable en la aplicacion y no quedarse solo en un proceso interno o en un Excel auxiliar.
-- `PB-004` ya no debe tratarse como trabajo nuevo: queda validado por `qa-teams` y pendiente solo de integracion y cierre administrativo.
+- `PB-004` ya no forma parte del trabajo pendiente: queda validado, integrado en `main` y cerrado administrativamente.
 - `PB-010` sigue siendo importante como base de experiencia, pero pasa por detras de la incorporacion operativa del dataset `.atom` y de su exposicion verificable en aplicacion.
-- `PB-005` sigue siendo valioso, pero pasa por detras de la incorporacion de fuentes reales prioritarias, de la integracion pendiente de `PB-004` y de la base de navegacion de `PB-010`.
+- `PB-005` sigue siendo valioso, pero pasa por detras de la incorporacion de fuentes reales prioritarias, de la exposicion verificable del dataset consolidado y de la base de navegacion de `PB-010`.
 - `PB-008` queda fuera del camino critico del MVP, pero debe prepararse antes de una ampliacion comercial o de cobertura.
 
 ## Riesgos y dependencias abiertas
@@ -101,7 +100,6 @@ Traducir la vision de PodencoTI en trabajo priorizado, trazable y ejecutable par
 - Existe riesgo de validacion incompleta si `qa-teams` no dispone de una correspondencia clara entre la aplicacion y el Excel `data/licitaciones_ti_canarias.xlsx`.
 - Existe riesgo de entrega funcionalmente ambigua si `PB-009` no distingue prioridad por olas ni deja claro el minimo de metadatos oficiales exigible por oportunidad recopilada.
 - Existe riesgo de navegacion fragmentada y de baja usabilidad si se siguen incorporando modulos sin una estructura principal comun y adaptable al ancho de ventana.
-- Existe riesgo operativo si `PB-004` permanece en `validado` sin integrarse en `main`, porque mantiene una rama tecnica abierta y desincroniza backlog, roadmap e issues.
 - Existe riesgo de perder foco de valor si el rediseño de interfaz desplaza indefinidamente la evolucion de alertas sin una decision explicita de prioridad.
 
 ## Preguntas abiertas para siguiente iteracion

@@ -78,8 +78,8 @@
   6. Las oportunidades con estado oficial `anulada`, `desierta` o `desistida` no se presentan como nuevas coincidencias accionables.
 - Dependencias funcionales: PB-001, PB-003
 - Prioridad: P1
-- Estado: `validado`
-- Nota de estado: `qa-teams` valido la entrega en la issue #6 el 2026-03-25 sobre la rama `developer-teams/issue-6-pb-004-alertas-tempranas`. Queda pendiente de integracion en `main`, borrado de rama tecnica y cierre administrativo posterior por `product-manager`.
+- Estado: `cerrado`
+- Nota de estado: `qa-teams` valido la entrega en la issue #6 el 2026-03-25. `developer-teams` integro la rama en `main` y la elimino el 2026-03-26; `product-manager` cierra administrativamente la issue tras verificar esa integracion.
 
 ## HU-05 Hacer seguimiento de oportunidades en pipeline
 - Backlog relacionado: PB-005

@@ -3,11 +3,10 @@
 ## Estado actual
 La vision sigue siendo consistente con la propuesta de valor central. No se detectan contradicciones de fondo, pero si una necesidad permanente de acotar el lenguaje de "centralizacion" para no confundir cobertura progresiva con cobertura total.
 La prioridad funcional vigente se desplaza ahora hacia la operativizacion del dato real disponible en `data/`: se incorporan `PB-011` y `PB-012` para cargar snapshots `.atom` versionados, consolidarlos con reglas estructuradas y exponer en aplicacion una salida verificable alineada con el Excel `data/licitaciones_ti_canarias.xlsx`.
-`PB-004` deja de ser una prioridad "nueva": tras la validacion explicita de `qa-teams` en la issue #6 el 2026-03-25, su estado correcto pasa a `validado` pendiente de integracion y cierre administrativo.
+`PB-004` deja de formar parte del trabajo abierto: tras la validacion explicita de `qa-teams` en la issue #6 el 2026-03-25, `developer-teams` integro la entrega en `main` y elimino la rama tecnica el 2026-03-26, por lo que producto debe tratarla ya como funcionalidad vigente.
 
 ## Huecos de definicion detectados en esta revision
-- La inconsistencia principal detectada no es de alcance, sino de trazabilidad: varios artefactos seguian tratando `PB-009` como pendiente de integracion cuando la issue #9 ya recoge fusion en `main`, borrado de rama y validacion final sobre la entrega integrada el 2026-03-24.
-- Aparece una segunda inconsistencia de trazabilidad: la issue #6 de `PB-004` ya refleja `Estado operativo: validado`, pero backlog, historias y roadmap seguian tratandola como trabajo `nuevo`.
+- La inconsistencia principal detectada en esta revision es de trazabilidad: varios artefactos seguian tratando `PB-004` como pendiente de integracion cuando la issue #6 ya recoge fusion en `main` y borrado de rama el 2026-03-26.
 - El siguiente hueco funcional relevante ya no es solo de interfaz: la aplicacion debe absorber los ficheros `.atom` ya presentes en `data/`, aunque cambien su fecha y hora en el nombre, y convertirlos en una base visible, trazable y verificable para usuario y QA.
 - Aparece un hueco de trazabilidad de dato: la ficha de licitacion o contrato debe mostrar el nombre del fichero `.atom` origen de la version consolidada.
 - Aparece un hueco de validacion funcional: `qa-teams` necesita una correspondencia operativa entre la aplicacion y el Excel `data/licitaciones_ti_canarias.xlsx`, al menos en `Licitaciones TI Canarias`, `Detalle Lotes` y `Adjudicaciones`.
@@ -19,28 +18,28 @@ La prioridad funcional vigente se desplaza ahora hacia la operativizacion del da
 - `PB-001` ya quedo validado por `qa-teams` en la issue #3 y aporta el catalogo visible inicial sobre cobertura MVP y clasificacion TI vigente.
 - `PB-002` ya quedo validado por `qa-teams` en la issue #4 y amplia el catalogo con ficha de detalle y tratamiento visible de rectificaciones o modificaciones del expediente.
 - `PB-003` ya fue revalidado por `qa-teams` en la issue #5 el 2026-03-20, integrado en `main` por `developer-teams` el 2026-03-21 y cerrado administrativamente por `product-manager`.
-- `PB-004` ya fue validado por `qa-teams` en la issue #6 el 2026-03-25 sobre la rama `developer-teams/issue-6-pb-004-alertas-tempranas`, pero no debe cerrarse administrativamente hasta que `developer-teams` complete la fusion en `main` y el borrado de la rama.
+- `PB-004` ya fue validado por `qa-teams` en la issue #6 el 2026-03-25, integrado en `main` por `developer-teams` el 2026-03-26 y debe tratarse ya como alcance vigente.
 
 ## Huecos funcionales cerrados en esta revision
 - Queda definida la regla funcional para expedientes mixtos donde TI no es el unico componente.
 - Queda definido el tratamiento minimo de oportunidades anuladas, desiertas, desistidas o modificadas.
 - Queda identificado como deuda de trazabilidad el formato incompleto de varios issues abiertos, que debe corregirse para cumplir las reglas del repositorio.
-- Queda despejada la dependencia funcional entre catalogo y ficha: el catalogo base, la ficha, el filtrado y la priorizacion de fuentes reales ya estan resueltos; la siguiente capa accionable combina una base de interfaz comun en `PB-010` y la posterior continuidad de negocio en `PB-004`.
+- Queda despejada la dependencia funcional entre catalogo y ficha: el catalogo base, la ficha, el filtrado, las alertas y la priorizacion de fuentes reales ya estan resueltos; la siguiente capa accionable combina consolidacion operativa visible del dato en `PB-011` y `PB-012` con una base de interfaz comun en `PB-010`.
 - Queda definido que una alerta del MVP necesita al menos un criterio funcional informado y no puede guardarse vacia.
 - Queda definido que el alta inicial en pipeline crea siempre el estado `Nueva`.
 - Queda definido que `PB-008` puede avanzar como definicion funcional de KPIs aunque la instrumentacion completa llegue en una iteracion posterior.
 - Queda incorporada como prioridad explicita la recopilacion desde fuentes reales oficiales nominadas, ya que `PB-007` solo cerraba cobertura funcional y no orden de implementacion de fuentes reales.
 - Queda definido que el rediseño de interfaz solicitado debe materializarse como un item funcional trazable y no como una observacion informal para desarrollo.
-- Queda corregida la lectura funcional de `PB-004`: el trabajo ya no esta pendiente de desarrollo, sino pendiente de integracion y cierre administrativo.
+- Queda corregida la lectura funcional de `PB-004`: el trabajo ya no esta pendiente ni de desarrollo ni de integracion; pasa a referencia funcional ya entregada.
 - Queda definida la siguiente fuente operativa inmediata para desarrollo: todos los `.atom` presentes en `data/`, sin anclar la solucion a un nombre de fichero estable.
 - Queda definida la regla estructurada de filtrado para esta iteracion: Canarias por `ES7` o jerarquia territorial, y TI por CPVs con prefijo `72`, `48` o `302`.
 - Queda definido que la salida funcional visible debe poder contrastarse con `data/licitaciones_ti_canarias.xlsx`.
 
 ## Incidencia operativa abierta prioritaria
-- La secuencia de trabajo ya no tiene bloqueos funcionales ni de validacion asociados a `PB-009`.
-- `qa-teams` valido la entrega integrada en `main` el 2026-03-24, `developer-teams` dejo constancia de integracion y borrado de rama ese mismo dia y `product-manager` cerro la issue #9 el 2026-03-25.
-- La incidencia operativa inmediata ya no es funcional sino de flujo: `developer-teams` debe fusionar en `main` la rama validada de `PB-004` y borrarla antes de abrir el siguiente frente.
-- La siguiente pieza funcional a considerar para `developer-teams`, una vez resuelta esa integracion, pasa a ser `PB-011` para consolidar los `.atom` versionados de `data/`.
+- La secuencia de trabajo ya no tiene bloqueos funcionales ni de validacion asociados a `PB-009` ni a `PB-004`.
+- `qa-teams` valido la entrega integrada en `main` de `PB-009` el 2026-03-24 y `product-manager` cerro la issue #9 el 2026-03-25.
+- `qa-teams` valido `PB-004` el 2026-03-25 y `developer-teams` dejo constancia de integracion y borrado de rama el 2026-03-26.
+- La siguiente pieza funcional a considerar para `developer-teams` pasa a ser `PB-011` para consolidar los `.atom` versionados de `data/`.
 - Inmediatamente despues, la siguiente prioridad visible pasa a ser `PB-012` para exponer en aplicacion las superficies equivalentes al Excel de referencia y mostrar el fichero origen en detalle.
 - `PB-010` permanece como necesidad de experiencia transversal, pero deja de ser la siguiente pieza funcional inmediata.
 
@@ -142,7 +141,7 @@ La prioridad funcional vigente se desplaza ahora hacia la operativizacion del da
 - Confirmar con negocio si el MVP debe cubrir tambien ayuntamientos desde la primera promesa comercial o si permanecen fuera de la comunicacion inicial.
 - Definir mas adelante si las modificaciones oficiales del expediente requieren un historial visible de cambios en lugar de mostrar solo el ultimo dato disponible.
 - Decidir si la primera captura operativa de KPIs de alertas se resolvera con medicion manual temporal o se aplazara hasta disponer de mas instrumentacion.
-- Confirmar con negocio si `PB-004` debe quedarse en registro interno de coincidencias dentro del producto o si debe exigirse ya una primera salida visible para el usuario sin llegar todavia a notificacion externa.
+- Confirmar con negocio si la siguiente evolucion de alertas debe seguir centrada en registro interno de coincidencias o exigir ya una primera salida visible adicional para el usuario sin llegar todavia a notificacion externa.
 
 ## Riesgos de producto
 - Riesgo de falsa expectativa si se comunica "todas las licitaciones canarias" sin matizar la cobertura inicial real.
@@ -156,7 +155,7 @@ La prioridad funcional vigente se desplaza ahora hacia la operativizacion del da
 - Riesgo de falsos positivos o falsos negativos si la extraccion no aplica de forma combinada los criterios estructurados de Canarias y CPV TI ya definidos para esta iteracion.
 - Riesgo de opacidad si el detalle no expone el fichero origen y `qa-teams` no puede reconciliar aplicacion con Excel y snapshots.
 - Riesgo de inconsistencia de experiencia si cada nueva vista incorpora navegacion propia en lugar de una estructura principal comun y responsive.
-- Riesgo operativo si una issue ya validada por `qa-teams` permanece abierta sin comentario administrativo ni plan explicito de integracion.
+- Riesgo operativo si la documentacion de producto no refleja con rapidez las integraciones ya realizadas en `main` y sigue guiando al equipo con prioridades desfasadas.
 
 ## Supuestos explicitos
 - El primer objetivo es demostrar que la centralizacion y el filtrado ahorran tiempo al usuario.
@@ -169,10 +168,9 @@ La prioridad funcional vigente se desplaza ahora hacia la operativizacion del da
 
 ## Recomendacion operativa para `developer-teams`
 - Tomar `PB-011` como siguiente pieza funcional para estabilizar la fuente operativa basada en los `.atom` ya presentes en `data/`.
-- Antes de abrir trabajo nuevo, fusionar en `main` la rama validada de `PB-004`, borrar la rama tecnica y actualizar la issue #6 con la trazabilidad de integracion.
 - Tomar la issue #11 ya creada con trazabilidad a `HU-11` y `CU-11`.
 - A continuacion, tomar la issue #12 para exponer las tres pestañas y la trazabilidad al fichero origen.
-- Mantener `PB-005` como siguiente pieza de negocio posterior a `PB-010` o coordinar su arranque solo cuando la integracion de `PB-004` ya no deje una rama tecnica abierta innecesariamente.
+- Mantener `PB-005` como siguiente pieza de negocio posterior a `PB-010` o coordinar su arranque cuando `PB-011` y `PB-012` ya hayan dejado visible la nueva base de dato consolidado.
 - Mantener `PB-010`, `PB-005` y `PB-008` por detras de `PB-011` y `PB-012` salvo bloqueo funcional explicito.
 - Mantener visible en el catalogo la fuente oficial y evitar mensajes que sugieran cobertura total del ecosistema canario.
 - Garantizar como minimo por oportunidad recopilada la visibilidad de origen oficial, enlace oficial, fecha de publicacion o equivalente y estado oficial cuando exista.
@@ -185,7 +183,7 @@ La prioridad funcional vigente se desplaza ahora hacia la operativizacion del da
 - `PB-006`, `HU-06` y `CU-08` resuelven la definicion de relevancia TI antes del catalogo.
 - `PB-001`, `PB-002` y `PB-003` ya quedaron validados por `qa-teams` y cerrados administrativamente; Release 1 queda funcionalmente completa.
 - `PB-009` ya quedo validado por `qa-teams` sobre la entrega integrada en `main` y queda cerrado administrativamente en la issue #9 para mantener sincronizados backlog e historial operativo.
-- `PB-004` queda validado por `qa-teams` y pendiente de integracion y cierre administrativo.
+- `PB-004` queda validado por `qa-teams`, integrado en `main` y cerrado administrativamente.
 - `PB-011` abre la nueva iteracion de consolidacion operativa desde `.atom` versionados.
 - `PB-012` completa esa iteracion haciendo visible en aplicacion la salida alineada con el Excel y la trazabilidad al fichero origen.
 - `PB-010` queda como iteracion de base de interfaz posterior a la consolidacion visible del dato.
