@@ -1,0 +1,366 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+from datetime import datetime
+from pathlib import Path
+import unicodedata
+import xml.etree.ElementTree as ET
+
+
+ATOM_NS = "http://www.w3.org/2005/Atom"
+SOURCE_NAME = "Plataforma de Contratacion del Sector Publico"
+REFERENCE = "PB-011"
+CANARIAS_KEYWORDS = (
+    "canarias",
+    "gran canaria",
+    "tenerife",
+    "fuerteventura",
+    "lanzarote",
+    "la palma",
+    "la gomera",
+    "el hierro",
+    "la graciosa",
+    "santa cruz de tenerife",
+    "las palmas",
+)
+TI_CPV_PREFIXES = ("72", "48", "302")
+STATUS_LABELS = {
+    "ADJ": "Adjudicada",
+    "AN": "Anulada",
+    "DES": "Desierta",
+    "EV": "En evaluacion",
+    "PUB": "Publicada",
+    "RES": "Resuelta",
+}
+PROCEDURE_LABELS = {
+    "1": "Abierto",
+}
+
+
+@dataclass(frozen=True)
+class ConsolidatedAtomRecord:
+    expediente_id: str
+    id: str
+    titulo: str
+    descripcion: str
+    organismo: str
+    ubicacion: str
+    procedimiento: str | None
+    presupuesto: int | None
+    fecha_publicacion_oficial: str
+    fecha_limite: str
+    estado: str
+    solvencia_tecnica: str | None
+    criterios_adjudicacion: tuple[str, ...]
+    fuente_oficial: str
+    url_fuente_oficial: str
+    cpvs: tuple[str, ...]
+    fichero_origen_atom: str
+
+
+@dataclass(frozen=True)
+class _ParsedEntry:
+    expediente_id: str
+    updated_at: datetime
+    record: ConsolidatedAtomRecord
+
+
+def load_atom_opportunities(data_dir: Path) -> tuple[str, list[ConsolidatedAtomRecord]]:
+    latest_by_expediente: dict[str, _ParsedEntry] = {}
+
+    for atom_path in sorted(data_dir.glob("*.atom")):
+        root = ET.parse(atom_path).getroot()
+        for entry in root.findall(f"{{{ATOM_NS}}}entry"):
+            parsed = _parse_entry(entry, atom_path.name)
+            if parsed is None:
+                continue
+
+            current = latest_by_expediente.get(parsed.expediente_id)
+            if current is None or _is_newer(parsed, current):
+                latest_by_expediente[parsed.expediente_id] = parsed
+
+    records = [item.record for item in latest_by_expediente.values()]
+    records.sort(key=lambda record: (record.fecha_limite, record.fecha_publicacion_oficial, record.id))
+    return REFERENCE, records
+
+
+def _is_newer(candidate: _ParsedEntry, current: _ParsedEntry) -> bool:
+    if candidate.updated_at != current.updated_at:
+        return candidate.updated_at > current.updated_at
+    return candidate.record.fichero_origen_atom > current.record.fichero_origen_atom
+
+
+def _parse_entry(entry: ET.Element, source_filename: str) -> _ParsedEntry | None:
+    contract_status = _find_first(entry, "ContractFolderStatus")
+    if contract_status is None:
+        return None
+
+    expediente_id = _find_first_text(contract_status, "ContractFolderID")
+    updated_text = entry.findtext(f"{{{ATOM_NS}}}updated")
+    if not expediente_id or not updated_text:
+        return None
+
+    procurement_project = _find_first(contract_status, "ProcurementProject")
+    if procurement_project is None:
+        return None
+
+    cpvs = tuple(_iter_texts(procurement_project, "ItemClassificationCode"))
+    if not _matches_ti(cpvs):
+        return None
+
+    geographic_context = _build_geographic_context(contract_status, procurement_project)
+    if not _matches_canarias(geographic_context):
+        return None
+
+    updated_at = datetime.fromisoformat(updated_text)
+    titulo = (_find_first_text(procurement_project, "Name") or entry.findtext(f"{{{ATOM_NS}}}title") or expediente_id).strip()
+    descripcion = (_first_non_empty((entry.findtext(f"{{{ATOM_NS}}}summary"), titulo)) or titulo).strip()
+    organismo = _find_party_name(contract_status) or "No informado"
+    ubicacion = _resolve_location_label(geographic_context)
+    presupuesto = _resolve_budget(procurement_project)
+    procedimiento = _map_procedure(_find_text_by_path(contract_status, ("TenderingProcess", "ProcedureCode")))
+    fecha_publicacion = updated_at.date().isoformat()
+    fecha_limite = _find_text_by_path(contract_status, ("TenderingProcess", "TenderSubmissionDeadlinePeriod", "EndDate")) or "No informado"
+    estado = _map_status(_find_first_text(contract_status, "ContractFolderStatusCode"))
+    solvencia = _resolve_technical_solvency(contract_status)
+    criterios = tuple(_unique_in_order(_iter_awarding_criteria(contract_status)))
+    url_fuente = _find_atom_link(entry)
+
+    record = ConsolidatedAtomRecord(
+        expediente_id=expediente_id,
+        id=_slugify(expediente_id),
+        titulo=titulo,
+        descripcion=descripcion,
+        organismo=organismo,
+        ubicacion=ubicacion,
+        procedimiento=procedimiento,
+        presupuesto=presupuesto,
+        fecha_publicacion_oficial=fecha_publicacion,
+        fecha_limite=fecha_limite,
+        estado=estado,
+        solvencia_tecnica=solvencia,
+        criterios_adjudicacion=criterios,
+        fuente_oficial=SOURCE_NAME,
+        url_fuente_oficial=url_fuente,
+        cpvs=cpvs,
+        fichero_origen_atom=source_filename,
+    )
+    return _ParsedEntry(expediente_id=expediente_id, updated_at=updated_at, record=record)
+
+
+def _build_geographic_context(contract_status: ET.Element, procurement_project: ET.Element) -> dict[str, tuple[str, ...]]:
+    located_party = _find_first(contract_status, "LocatedContractingParty")
+    parent_names: list[str] = []
+    if located_party is not None:
+        for parent in _iter_local(located_party, "ParentLocatedParty"):
+            parent_names.extend(_iter_texts(parent, "Name"))
+
+    return {
+        "codes": tuple(_iter_texts(procurement_project, "CountrySubentityCode")),
+        "subentities": tuple(_iter_texts(procurement_project, "CountrySubentity")),
+        "parent_names": tuple(parent_names),
+    }
+
+
+def _matches_canarias(geographic_context: dict[str, tuple[str, ...]]) -> bool:
+    normalized_codes = tuple(_normalize_text(value) for value in geographic_context["codes"])
+    if any(code.startswith("es7") for code in normalized_codes):
+        return True
+
+    normalized_texts = tuple(
+        _normalize_text(value)
+        for value in geographic_context["subentities"] + geographic_context["parent_names"]
+    )
+    return any(any(keyword in value for keyword in CANARIAS_KEYWORDS) for value in normalized_texts)
+
+
+def _matches_ti(cpvs: tuple[str, ...]) -> bool:
+    return any(cpv.startswith(TI_CPV_PREFIXES) for cpv in cpvs)
+
+
+def _resolve_location_label(geographic_context: dict[str, tuple[str, ...]]) -> str:
+    for value in geographic_context["subentities"]:
+        if value.strip():
+            return value.strip()
+    for value in geographic_context["codes"]:
+        if value.startswith("ES7"):
+            return "Canarias"
+    for value in geographic_context["parent_names"]:
+        if any(keyword in _normalize_text(value) for keyword in CANARIAS_KEYWORDS):
+            return value.strip()
+    return "Canarias"
+
+
+def _resolve_budget(procurement_project: ET.Element) -> int | None:
+    budget_amount = _find_first(procurement_project, "BudgetAmount")
+    if budget_amount is None:
+        return None
+
+    for field_name in ("TotalAmount", "TaxExclusiveAmount", "EstimatedOverallContractAmount"):
+        value = _find_first_text(budget_amount, field_name)
+        parsed = _parse_budget(value)
+        if parsed is not None:
+            return parsed
+    return None
+
+
+def _parse_budget(value: str | None) -> int | None:
+    if value is None:
+        return None
+    normalized = value.strip().replace(",", ".")
+    if not normalized:
+        return None
+    try:
+        return round(float(normalized))
+    except ValueError:
+        return None
+
+
+def _resolve_technical_solvency(contract_status: ET.Element) -> str | None:
+    descriptions = _iter_texts(contract_status, "Description")
+    collected: list[str] = []
+    for description in descriptions:
+        normalized = _normalize_text(description)
+        if "pliego" in normalized or "solvencia" in normalized or "capacidad" in normalized:
+            collected.append(description)
+    unique = tuple(_unique_in_order(collected))
+    if not unique:
+        return None
+    return " | ".join(unique)
+
+
+def _iter_awarding_criteria(contract_status: ET.Element) -> list[str]:
+    awarding_terms = _find_first(contract_status, "AwardingTerms")
+    if awarding_terms is None:
+        return []
+
+    criteria: list[str] = []
+    for awarding_criteria in _iter_local(awarding_terms, "AwardingCriteria"):
+        description = _find_first_text(awarding_criteria, "Description")
+        if description:
+            criteria.append(description)
+    return criteria
+
+
+def _find_party_name(contract_status: ET.Element) -> str | None:
+    located_party = _find_first(contract_status, "LocatedContractingParty")
+    if located_party is None:
+        return None
+    party = _find_first(located_party, "Party")
+    if party is None:
+        return None
+    party_name = _find_first(party, "PartyName")
+    if party_name is None:
+        return None
+    return _find_first_text(party_name, "Name")
+
+
+def _map_status(value: str | None) -> str:
+    if value is None:
+        return "No informado"
+    return STATUS_LABELS.get(value, value)
+
+
+def _map_procedure(value: str | None) -> str | None:
+    if value is None:
+        return None
+    return PROCEDURE_LABELS.get(value, f"Procedimiento {value}")
+
+
+def _find_atom_link(entry: ET.Element) -> str:
+    for child in entry:
+        if _local_name(child.tag) == "link":
+            href = child.attrib.get("href")
+            if href:
+                return href
+    return ""
+
+
+def _find_text_by_path(root: ET.Element, path: tuple[str, ...]) -> str | None:
+    current = root
+    for item in path:
+        current = _find_first(current, item)
+        if current is None:
+            return None
+    return _clean_text(current.text)
+
+
+def _find_first(root: ET.Element, local_name: str) -> ET.Element | None:
+    for child in root:
+        if _local_name(child.tag) == local_name:
+            return child
+    return None
+
+
+def _find_first_text(root: ET.Element, local_name: str) -> str | None:
+    element = _find_first(root, local_name)
+    if element is None:
+        return None
+    return _clean_text(element.text)
+
+
+def _iter_local(root: ET.Element, local_name: str) -> list[ET.Element]:
+    return [element for element in root.iter() if _local_name(element.tag) == local_name]
+
+
+def _iter_texts(root: ET.Element, local_name: str) -> list[str]:
+    values: list[str] = []
+    for element in root.iter():
+        if _local_name(element.tag) != local_name:
+            continue
+        value = _clean_text(element.text)
+        if value is not None:
+            values.append(value)
+    return values
+
+
+def _first_non_empty(values: tuple[str | None, ...]) -> str | None:
+    for value in values:
+        if value is not None and value.strip():
+            return value
+    return None
+
+
+def _clean_text(value: str | None) -> str | None:
+    if value is None:
+        return None
+    cleaned = " ".join(value.split())
+    return cleaned or None
+
+
+def _normalize_text(value: str) -> str:
+    normalized = unicodedata.normalize("NFKD", value)
+    return normalized.encode("ascii", "ignore").decode("ascii").lower().strip()
+
+
+def _slugify(value: str) -> str:
+    normalized = _normalize_text(value)
+    chunks: list[str] = []
+    current = []
+    for char in normalized:
+        if char.isalnum():
+            current.append(char)
+            continue
+        if current:
+            chunks.append("".join(current))
+            current = []
+    if current:
+        chunks.append("".join(current))
+    return "-".join(chunks) or "expediente-sin-id"
+
+
+def _local_name(tag: str) -> str:
+    if "}" not in tag:
+        return tag
+    return tag.rsplit("}", 1)[-1]
+
+
+def _unique_in_order(values: list[str]) -> list[str]:
+    seen: set[str] = set()
+    result: list[str] = []
+    for value in values:
+        if value in seen:
+            continue
+        seen.add(value)
+        result.append(value)
+    return result
