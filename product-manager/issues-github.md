@@ -2,8 +2,9 @@
 
 ## Estado actual
 - La issue de `PB-010` ya fue creada en GitHub como issue #10 el 2026-03-26.
-- La issue de `PB-011` ya fue creada en GitHub como issue #11 el 2026-03-26.
+- La issue de `PB-011` ya fue creada en GitHub como issue #11 el 2026-03-26 y `qa-teams` la valido el 2026-03-27; sigue abierta por falta de evidencia de fusion en `main` y borrado de rama.
 - La issue de `PB-012` ya fue creada en GitHub como issue #12 el 2026-03-26.
+- Los hallazgos de `quality-auditor` y `security-auditor` del 2026-03-28 quedan pendientes de que `developer-teams` los traduzca en issues tecnicas separadas para su priorizacion posterior por producto.
 
 ## Issue creada: Consolidar fuentes `.atom` versionadas de `/data` para licitaciones TI Canarias
 

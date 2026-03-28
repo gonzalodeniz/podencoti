@@ -23,9 +23,10 @@ Establecer cuando un item funcional puede considerarse terminado para pasar a va
 
 ## Criterios para cierre administrativo por `product-manager`
 1. Existe validacion explicita de `qa-teams`.
-2. El issue no mantiene dependencias abiertas que impidan su cierre administrativo.
-3. Si la rama o integracion final sigue pendiente, `product-manager` debe dejar constancia explicita del motivo por el que el issue continua abierta.
-4. Solo tras esa comprobacion el item puede pasar a estado `cerrado`.
+2. `developer-teams` ha dejado evidencia explicita de fusion en `main` y de borrado de la rama tecnica, o bien existe una razon documentada para que esa integracion siga pendiente.
+3. El issue no mantiene dependencias abiertas que impidan su cierre administrativo.
+4. Si la rama o integracion final sigue pendiente, `product-manager` debe dejar constancia explicita del motivo por el que el issue continua abierta mediante comentario administrativo.
+5. Solo tras esa comprobacion el item puede pasar a estado `cerrado`.
 
 ## Regla de cierre
 - Un item no se considera definitivamente completado hasta que `qa-teams` indique explicitamente `validado`.
@@ -41,3 +42,4 @@ Establecer cuando un item funcional puede considerarse terminado para pasar a va
 - Criterios de aceptacion.
 - Notas de dependencias, limitaciones o supuestos.
 - Resultado de validacion de `qa-teams`.
+- Evidencia de integracion en `main` y borrado de rama tecnica cuando proceda cerrar administrativamente.

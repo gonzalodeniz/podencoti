@@ -210,7 +210,8 @@
   6. Cada expediente consolidado conserva el nombre del fichero `.atom` origen de la version vigente.
 - Dependencias funcionales: PB-009, PB-006
 - Prioridad: P0
-- Estado: `nuevo`
+- Estado: `validado`
+- Nota de estado: `qa-teams` valido la entrega en la issue #11 el 2026-03-27 sobre la rama `developer-teams/pb-011-consolidacion-atom`. Queda pendiente que `developer-teams` integre la rama en `main` y deje evidencia de borrado para que `product-manager` pueda cerrar administrativamente el item.
 
 ## HU-12 Consultar licitaciones, lotes y adjudicaciones con trazabilidad al fichero origen
 - Backlog relacionado: PB-012

@@ -6,11 +6,11 @@
 - Cada release debe dejar un resultado verificable por `qa-teams` y trazable a backlog e issues.
 
 ## Estado de referencia de la iteracion
-- Fecha de corte documental: 2026-03-27.
+- Fecha de corte documental: 2026-03-28.
 - Estado confirmado: `PB-007` y `PB-006` ya fueron validados por `qa-teams` y sus entregas estan integradas en `main`.
 - Estado actual de trabajo tecnico: `PB-009` ya esta validado, integrado en `main` y cerrado administrativamente en la issue #9.
 - `PB-004` ya no esta en preparacion ni pendiente de integracion: `qa-teams` la valido en la issue #6 el 2026-03-25 y `developer-teams` la integro en `main` con borrado de rama el 2026-03-26.
-- Siguiente recomendacion para `developer-teams`: tomar la issue #11 de `PB-011` asociada a la consolidacion de los `.atom` versionados disponibles en `data/` y, a continuacion, la issue #12 de `PB-012`.
+- Siguiente recomendacion para `developer-teams`: completar la integracion en `main` de la issue #11 de `PB-011` y su cierre operativo; a continuacion, tomar la issue #12 de `PB-012`.
 - Las decisiones funcionales sobre expedientes mixtos y sobre oportunidades anuladas, desiertas, desistidas o modificadas quedan ya definidas para evitar bloqueo de backlog posterior.
 - En esta revision tambien quedan cerradas cuatro aclaraciones de release para reducir ambiguedad de implementacion:
   - una alerta del MVP requiere al menos un criterio funcional informado
@@ -19,6 +19,7 @@
   - la recopilacion desde fuentes reales oficiales nominadas se prioriza antes que alertas y pipeline
 - `PB-009` debe ejecutarse por olas y con trazabilidad minima visible al origen oficial
 - La validacion y la integracion de `PB-009` confirman la prioridad funcional definida y permiten abrir una nueva iteracion de operativizacion visible del dato real antes de continuar con retencion o con base de interfaz transversal
+- Los informes de `quality-auditor` y `security-auditor` del 2026-03-28 introducen una dependencia de priorizacion tecnica: producto debe reservar capacidad para las issues tecnicas que `developer-teams` abra a partir de esos hallazgos antes de ampliar el alcance funcional sin control.
 
 ## Release 0: Delimitacion funcional del MVP
 - Objetivo: Cerrar ambiguedades criticas antes de la implementacion del catalogo.
@@ -80,6 +81,9 @@
   - Cada registro consolidado conserva el nombre del fichero `.atom` origen de la version vigente.
 - Riesgo principal:
   - Que la aplicacion siga dependiendo de un snapshot puntual, no absorba actualizaciones de nombre y rompa la trazabilidad del dato.
+- Estado operativo actual:
+  - `qa-teams` valido `PB-011` en la issue #11 el 2026-03-27 sobre la rama `developer-teams/pb-011-consolidacion-atom`.
+  - La rama tecnica sigue abierta y no existe todavia evidencia de fusion en `main` ni de borrado de rama, por lo que la release esta validada funcionalmente pero pendiente de integracion y cierre administrativo.
 
 ## Release 4: Vistas verificables de licitaciones, lotes y adjudicaciones
 - Objetivo: Hacer visible en la aplicacion la informacion consolidada derivada de los `.atom` en una superficie contrastable con el Excel funcional de referencia.
@@ -92,6 +96,8 @@
   - Los datos no informados y los estados vacios se muestran de forma clara.
 - Riesgo principal:
   - Que el dato consolidado exista tecnicamente pero siga sin una superficie funcional verificable por usuario y QA.
+- Dependencia operativa:
+  - No debe iniciarse como nueva prioridad efectiva mientras `PB-011` siga sin integrar en `main`, porque su salida visible depende de esa base consolidada ya validada.
 
 ## Release 5: Base de navegacion y adaptabilidad
 - Objetivo: Establecer una estructura comun de interfaz para sostener el crecimiento de modulos con una navegacion principal clara y responsive.
@@ -143,6 +149,7 @@
 
 ## Decision operativa para la siguiente iteracion
 - El siguiente paso operativo de producto es mantener sincronizados backlog, historias, roadmap e issues abiertos con la nueva prioridad funcional.
-- El siguiente paso operativo recomendado para `developer-teams` es iniciar la issue #11 de `PB-011`, seguida por la issue #12 de `PB-012`.
+- El siguiente paso operativo recomendado para `developer-teams` es integrar en `main` la rama validada de `PB-011`, borrar la rama tecnica y dejar evidencia en la issue #11; despues, iniciar la issue #12 de `PB-012`.
 - `PB-009` ya reutiliza la cobertura validada de `PB-007`, la regla auditable validada de `PB-006` y la superficie ya validada de catalogo, detalle y filtros.
 - No se recomienda iniciar `PB-005` antes de `PB-011` y `PB-012`; la base de navegacion `PB-010` debe reevaluarse despues de dejar visible esta nueva superficie de dato consolidado.
+- Antes de abrir una nueva expansion funcional, producto debe recibir de `developer-teams` la traduccion a issues tecnicas de los hallazgos accionables de auditoria del 2026-03-28 para poder priorizarlos frente al roadmap vigente.
