@@ -179,13 +179,13 @@ Este analisis revisa la coordinacion definida entre `product-manager`, `develope
 
 ## Problema 18: el backlog funcional y la issue activa pueden mostrar estados distintos
 ### Evidencia
-- `product-manager/product-backlog.md` mantiene `PB-009` como `nuevo`, mientras la issue #9 ya refleja `Estado operativo: no validado` tras la revision de `qa-teams`.
-- La pagina de issues de GitHub muestra el estado operativo real de la issue, pero el backlog priorizado sigue exponiendo una fotografia de planificacion que no se ha actualizado con la reentrada operativa.
+- `product-manager/product-backlog.md` mantiene `PB-012` como `no validado`, mientras la issue #12 ya refleja `Estado operativo: validado` tras la revision de `qa-teams`.
+- La pagina de issues de GitHub muestra el estado operativo real de la issue, pero el backlog priorizado sigue exponiendo una fotografia de planificacion que se ha quedado atras respecto a la transicion operativa reciente.
 
 ### Impacto observado
-- `product-manager` puede interpretar una pieza en re-trabajo como si siguiera pendiente de arrancar.
-- `developer-teams` y `qa-teams` ven el estado real en la issue, pero el backlog visible no ayuda a priorizar reentregas ni a detectar de un vistazo trabajo ya iniciado.
-- Las metricas de flujo y la lectura del backlog mezclan planificacion y ejecucion si el estado no se sincroniza en cada transicion relevante.
+- `product-manager` puede interpretar una entrega ya aceptada como si siguiera pendiente de correccion, retrasando el cierre administrativo o la siguiente prioridad.
+- `developer-teams` y `qa-teams` ven el estado real en la issue, pero el backlog visible no ayuda a priorizar reentregas ni a detectar de un vistazo que ya existe validacion funcional.
+- Las metricas de flujo y la lectura del backlog mezclan planificacion y ejecucion si el estado no se sincroniza en cada transicion relevante, especialmente cuando el cambio ocurre entre `no validado` y `validado`.
 
 ## Problema 19: las reglas compartidas siguen duplicadas en varios documentos y facilitan la deriva
 ### Evidencia

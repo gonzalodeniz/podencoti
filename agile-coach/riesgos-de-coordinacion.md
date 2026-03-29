@@ -92,3 +92,8 @@ Registrar los riesgos de coordinacion que siguen activos tras los ajustes de pro
 - Senal observable: `doc-teams/README.md` o la documentacion de estado vigente ya describen una entrega como parte de `main`, pero `product-manager/product-backlog.md` sigue marcandola con un estado anterior.
 - Impacto: el backlog pierde fiabilidad como fotografia operativa y puede hacer que la siguiente planificacion se base en una version atrasada del estado real del producto.
 - Mitigacion acordada: en el checkpoint post-merge, `product-manager` debe contrastar backlog y documentacion de estado vigente y corregir primero el artefacto que siga desfasado antes de abrir nueva planificacion funcional.
+
+## Riesgo 19: backlog que rebaja o no actualiza una issue ya validada
+- Senal observable: la issue `#12` figura en `Estado operativo: validado` en GitHub, pero `product-manager/product-backlog.md` sigue mostrando `PB-012` como `no validado`.
+- Impacto: la entrega aceptada puede seguir pareciendo bloqueada, se retrasa el cierre administrativo y se confunde a quien consulta el backlog para decidir la siguiente accion.
+- Mitigacion acordada: cuando `qa-teams` cambie el estado de una issue a `validado`, `product-manager` debe sincronizar el backlog en el mismo ciclo operativo y no dejarlo en un estado anterior por inercia; si la issue sigue abierta, el backlog debe permanecer en `validado` hasta el cierre real.

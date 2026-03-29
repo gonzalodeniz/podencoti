@@ -177,6 +177,8 @@ Cuando un item del backlog tenga issue GitHub activa, el campo `Estado` del back
 
 Esta sincronizacion debe ejecutarse junto con la transicion operativa que la provoca, para que el backlog siga siendo una fotografia util del trabajo real y no solo un registro de planificacion inicial.
 
+Si la issue pasa a `validado` pero sigue abierta por cierre administrativo o por integracion pendiente, el backlog debe reflejar `validado` hasta que exista cierre real; no debe rebajarse a `no validado` ni mantenerse como `nuevo` por inercia.
+
 ## Disparador operativo de `doc-teams`
 `doc-teams` debe priorizar una iteracion cuando concurran estas condiciones:
 1. Existe `Estado operativo: validado` en la issue.
@@ -207,6 +209,7 @@ Al cerrar definitivamente la issue, `product-manager` debe actualizar tambien el
 ## Sincronizacion documental tras integracion
 - Cuando una issue validada se fusiona en `main`, `product-manager` debe reconciliar el backlog, el refinamiento funcional y el roadmap afectados antes de iniciar una nueva issue funcional.
 - En esa misma comprobacion, `product-manager` debe contrastar el estado visible en `product-manager/product-backlog.md` con la documentacion de estado vigente mantenida por `doc-teams` para la rama `main` y resolver cualquier contradiccion en el mismo ciclo operativo. Si la documentacion de `doc-teams` ya refleja `main` y el backlog sigue mostrando un estado anterior, el backlog se considera la copia desfasada que debe actualizarse antes de iniciar nueva planificacion funcional.
+- Si el backlog muestra un estado anterior mientras la issue ya quedo en `validado`, debe corregirse ese estado en el mismo ciclo operativo; una issue validada no puede seguir presentandose como `nuevo` o `no validado` por una copia desfasada.
 - Si la issue sigue abierta por cierre administrativo o seguimiento, el comentario debe indicar tambien si la documentacion de producto ya quedo sincronizada o sigue pendiente.
 - No debe permanecer una version de backlog que sugiera `nuevo` o pendiente de trabajo cuando la entrega ya esta integrada en `main`.
 
