@@ -29,6 +29,10 @@ En `main` ya existen catalogo consolidado, filtros funcionales, ficha de detalle
 ## PB-011 ya esta operativo en `main`?
 Si. El codigo visible en `main` consolida los snapshots `.atom` de `data/` y expone el fichero de origen en el detalle. Si algun documento de producto sigue describiendo `PB-011` como pendiente, esa nota ya queda desfasada frente a `main`.
 
+## PB-012 ya esta operativo en `main`?
+No segun la evidencia tecnica revisada en esta documentacion. El changelog de `2026-03-29` la registra como validada, pero en `main` no aparecen rutas, vistas ni pruebas para `/datos-consolidados` ni para las pestañas `Licitaciones TI Canarias`, `Detalle Lotes` y `Adjudicaciones`.
+Mientras esa desalineacion siga abierta, debe tratarse como trabajo validado no integrado o como evidencia documental contradictoria, no como funcionalidad disponible para usuario o administracion.
+
 ## Que filtros existen hoy?
 Se pueden aplicar `palabra_clave`, `presupuesto_min`, `presupuesto_max`, `procedimiento` y `ubicacion` tanto en `/` como en `/api/oportunidades`.
 
@@ -37,6 +41,7 @@ Si `presupuesto_min` es mayor que `presupuesto_max`, la vista HTML mantiene el c
 
 ## Sigue habiendo contradicciones documentales relevantes?
 Si. La principal contradiccion vigente es doble: `pyproject.toml` sigue describiendo el paquete como si solo cubriera cobertura de fuentes, y algunos documentos de `product-manager/` todavia conservan textos previos a la integracion de `PB-011` o al estado ya visible de `PB-004`.
+Ademas, el changelog de `2026-03-29` registra `PB-012` como validada sin que la superficie correspondiente aparezca en `main`, asi que esa entrada debe leerse con cautela hasta que el codigo la respalde.
 
 ## Por que algunos textos de producto no coinciden con esta documentacion?
 Porque esta FAQ toma como referencia el codigo, las rutas y las pruebas ejecutables en `main`. En esta revision, las alertas si se observan en `src/` y `tests/`, y la consolidacion `.atom` ya esta integrada, asi que la contradiccion residual queda en algunos textos funcionales de producto que todavia no se han sincronizado.

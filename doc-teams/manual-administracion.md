@@ -80,6 +80,7 @@ No existe en `main`:
 - despliegue productivo endurecido
 - pipeline de seguimiento
 - superficie funcional de `PB-012`
+- superficie documental o tecnica de `PB-012` aunque el changelog de `2026-03-29` la cite como validada; hasta ver esa evidencia en `main`, la operacion debe seguir tratandola como no disponible
 
 ## Riesgos operativos
 - Las superficies actuales son utiles para validacion temprana, pero no para explotacion operativa continua.
@@ -89,6 +90,7 @@ No existe en `main`:
 - Aunque algunos documentos de `product-manager/` sigan arrastrando estado anterior, la operacion revisada en `main` ya expone superficies funcionales para esa priorizacion.
 - Las alertas de `PB-004` ya se pueden operar localmente desde `/alertas` y `/api/alertas`; lo que sigue sin estar disponible es el pipeline.
 - La entrega administrable revisada ya consolida snapshots `.atom`; `data/opportunities.json` queda como respaldo, no como origen principal cuando hay snapshots disponibles.
+- No debe asumirse operativa la validacion de `PB-012` que aparece en el changelog de `2026-03-29` mientras `main` no exponga sus rutas y pruebas asociadas.
 
 ## Dependencias abiertas para administracion
 - Definir estrategia de despliegue productivo cuando exista una aplicacion mas alla del servidor local de demostracion.

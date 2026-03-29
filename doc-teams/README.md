@@ -4,7 +4,7 @@
 Centralizar la documentacion oficial de `PodencoTI` separando con claridad el contenido para usuario final, equipo tecnico y administracion.
 
 ## Estado documental de referencia
-Fecha de revision: `2026-03-28`.
+Fecha de revision: `2026-03-29`.
 
 Esta carpeta documenta el estado real verificable de la rama `main`. En esta revision la entrega minima ejecutable ya incluye consolidacion de snapshots `.atom` de `PB-011`, por lo que el catalogo no se apoya solo en `data/opportunities.json` cuando existen fuentes atom versionadas en `data/`.
 
@@ -26,6 +26,7 @@ Esta carpeta documenta el estado real verificable de la rama `main`. En esta rev
 - `PB-009` ya forma parte de `main` y su trazabilidad visible cubre `BOC`, `BOP Las Palmas` y `BOE` por olas.
 - `PB-011` ya forma parte de `main` y consolida todos los snapshots `.atom` versionados presentes en `data/`.
 - No se observan superficies de pipeline de seguimiento ni de `PB-012` en el codigo o en las pruebas de `main`.
+- El changelog de `2026-03-29` registra `PB-012` como validada, pero la evidencia tecnica visible en `main` no expone todavia esa superficie; esta desalineacion sigue abierta y debe documentarse como tal.
 - Existe un despliegue local en contenedor con `Dockerfile` y `docker-compose.yml`, con persistencia de `data/` y configuracion de `PORT` via `.env`.
 
 Las alertas tempranas ya estan implementadas y verificables en `main`; lo que sigue sin existir es el pipeline de seguimiento. Parte de la documentacion funcional de `product-manager/` sigue arrastrando textos anteriores a la integracion de `PB-011` o al estado ya visible de `PB-004`, asi que esa fuente debe leerse con cautela frente a la evidencia tecnica actual. Tampoco hay autenticacion ni un despliegue productivo endurecido.
@@ -58,6 +59,7 @@ Las alertas tempranas ya estan implementadas y verificables en `main`; lo que si
 - La vision y el backlog de `product-manager/` describen capacidades futuras validas como fuente funcional, pero no deben leerse como evidencia de que `PB-012`, `PB-005` o el resto de ampliaciones planificadas ya esten disponibles en `main`.
 - `pyproject.toml` sigue describiendo el paquete como "Cobertura inicial visible de fuentes del MVP de PodencoTI.", aunque `main` ya expone tambien catalogo inicial (`PB-001`), filtros funcionales (`PB-003`), ficha de detalle (`PB-002`), superficie auditable de `PB-006`, priorizacion de fuentes reales oficiales (`PB-009`) y consolidacion trazable de snapshots `.atom` (`PB-011`).
 - `PB-009` y `PB-011` ya tienen evidencia integrada en `main`; lo que sigue desalineado es parte del texto de producto y de la metadata tecnica, que todavia conservan referencias anteriores.
+- `PB-012` aparece como validada en el changelog de `2026-03-29`, pero en `main` sigue sin observarse ninguna ruta, vista o prueba que la exponga; hasta que eso cambie, debe tratarse como trabajo validado no integrado o como evidencia documental desalineada.
 
 ## Criterio documental aplicado
 - Se documenta solo lo verificable en `main`.

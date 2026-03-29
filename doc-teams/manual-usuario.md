@@ -47,6 +47,7 @@ La rama `main` expone una entrega minima navegable orientada a descubrimiento in
 - Pipeline de seguimiento.
 - Gestion de usuarios o autenticacion.
 - La superficie funcional de `PB-012` con las pestañas `Licitaciones TI Canarias`, `Detalle Lotes` y `Adjudicaciones`.
+- Aunque el changelog de `2026-03-29` la menciona como validada, esa superficie de `PB-012` no aparece todavia en las rutas ni en las pruebas visibles de `main`; no debe comunicarse como disponible para usuario final hasta que el codigo la refleje.
 
 ## Como interpretar la documentacion funcional
 Los documentos de `product-manager/` siguen siendo la fuente funcional para vision, backlog, historias y casos de uso. Deben leerse como alcance esperado del producto, no como evidencia de que esas funcionalidades ya esten disponibles en esta entrega. Cuando contradigan a `main`, prevalece la evidencia reproducible de la rama actual.
@@ -58,9 +59,10 @@ Los documentos de `product-manager/` siguen siendo la fuente funcional para visi
 - La cobertura visible sigue siendo parcial y no debe interpretarse como rastreo exhaustivo de todo el ecosistema canario.
 - La consolidacion actual toma snapshots `.atom` versionados y el detalle muestra su fichero origen; eso no implica cobertura total ni pipeline.
 - La metadata tecnica del paquete sigue describiendo una release anterior mas limitada que la visible hoy en `main`.
-- `product-manager/` sigue arrastrando algunos textos anteriores a la integracion de `PB-011`; la evidencia reproducible de `main` y el changelog de `2026-03-28` deben tomarse como referencia para el estado vigente.
+- `product-manager/` sigue arrastrando algunos textos anteriores a la integracion de `PB-011`; la evidencia reproducible de `main` y el changelog de `2026-03-29` deben tomarse como referencia para el estado vigente, salvo en `PB-012`, donde el changelog entra en contradiccion con el codigo y prevalece `main`.
 - Las alertas visibles en `main` son internas: registran coincidencias accionables, pero todavia no envian notificaciones salientes.
 - La superficie de `PB-012` sigue pendiente: no aparecen todavia las pestañas `Licitaciones TI Canarias`, `Detalle Lotes` ni `Adjudicaciones`.
+- El changelog de `2026-03-29` contradice parcialmente ese estado al registrar `PB-012` como validada; mientras esa desalineacion no se resuelva con evidencia en `main`, la referencia valida para usuario es la ausencia de la superficie.
 
 ## Recomendacion de uso
 Para demos o revision funcional temprana, utiliza el catalogo en `/`, la ficha de detalle de una oportunidad visible, la gestion de alertas en `/alertas` y, como apoyo, las vistas de cobertura y clasificacion TI. Para capacidades de negocio pendientes, toma como referencia `product-manager/roadmap.md` y `product-manager/product-backlog.md`.

@@ -92,9 +92,11 @@ Resultado verificado en esta revision:
 - La documentacion funcional de `product-manager/` describe backlog posterior valido, pero no debe leerse como contrato tecnico ya implementado para `PB-012`, pipeline o nuevas ampliaciones de cobertura.
 - Parte de `product-manager/` sigue mostrando el estado anterior de `PB-004`; la evidencia tecnica vigente en `main` ya expone alertas, asi que esa fuente debe leerse con cautela hasta que se sincronice.
 - La documentacion funcional de `product-manager/` sigue mostrando algunos textos anteriores a la integracion de `PB-011`; cuando contradiga a `main`, la evidencia tecnica vigente debe prevalecer y esa fuente debe corregirse.
+- El changelog de `2026-03-29` registra `PB-012` como validada, pero en `main` no hay rutas, vistas ni pruebas que expongan `/datos-consolidados` ni las pestañas `Licitaciones TI Canarias`, `Detalle Lotes` y `Adjudicaciones`; esa entrega sigue siendo una contradiccion documental abierta hasta que el codigo la materialice.
 
 ## Limitaciones tecnicas actuales
 - No existe persistencia de usuario ni ingestion automatizada fuera de los snapshots `.atom` versionados disponibles; el catalogo se alimenta de la consolidacion funcional de `PB-011` cuando hay `.atom` en `data/` y cae a `data/opportunities.json` solo como respaldo.
+- `PB-012` no esta expuesto en la superficie tecnica revisada, asi que no debe documentarse como disponible aunque el changelog la haya citado como validada.
 - No hay autenticacion, base de datos, tareas programadas ni integracion externa.
 - No hay contrato de despliegue productivo versionado, mas alla del arranque local con `wsgiref` y la publicacion local en contenedor.
 - La priorizacion de fuentes reales de `PB-009` ya esta expuesta en la app verificada con `/priorizacion-fuentes-reales` y `/api/fuentes-prioritarias`.
